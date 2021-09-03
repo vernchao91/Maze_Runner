@@ -11,7 +11,15 @@ During the game, users will be able to:
 ## Wireframes
 
 ## Technologies, Libraries, APIs
+* Javascript
+* HTML
+* CSS
+* The Canvas API to render the game maze
+* Webpack
+* Npm
 
+## Implementation Timeline
+* **Friday:** Initialize the 
 ## Bonus Feature
 
 ## Credits
