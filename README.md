@@ -18,6 +18,8 @@ During the game, users will be able to:
 * If gun or camera is on the item slot, then left clicking will use the item.
 
 ## Wireframes
+![Screenshot (123)](https://user-images.githubusercontent.com/85369724/131963654-92eee98c-c880-45f4-9874-9341aa589b32.png)
+
 
 ## Technologies, Libraries, APIs
 * Javascript
