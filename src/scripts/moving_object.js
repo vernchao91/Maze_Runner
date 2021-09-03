@@ -1,4 +1,4 @@
-export default class MovingObject {
+class MovingObject {
   constructor(object) {
     this.pos = object.pos;
     this.vel = object.vel;
@@ -11,6 +11,8 @@ export default class MovingObject {
   }
 
   addPlayer() {
-    
+
   }
 }
+
+export default MovingObject

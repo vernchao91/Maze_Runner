@@ -13,5 +13,4 @@ GameView.MOVES = {
 };
 
 
-
 export default GameView;

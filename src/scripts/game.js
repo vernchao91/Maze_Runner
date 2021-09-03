@@ -1,10 +1,11 @@
-import Player from './player'
-import Maze from './maze1'
+import Player from './player';
+import Maze from './maze';
 
 class Game {
   constructor(canvas) {
     this.ctx = canvas.getContext("2D")
-    this.addLevel();
+    this.addMaze = new Maze();
+    this.addPlayer = new Player();
   }
 
   addMaze() {

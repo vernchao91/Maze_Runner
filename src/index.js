@@ -6,4 +6,5 @@ document.addEventListener('DOMContentLoaded', () => {
     canvas.height = 800;
 
     const ctx = canvas.getContext
+    new Image();
 })
