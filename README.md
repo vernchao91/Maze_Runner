@@ -20,7 +20,6 @@ During the game, users will be able to:
 ## Wireframes
 ![Screenshot (123)](https://user-images.githubusercontent.com/85369724/131963654-92eee98c-c880-45f4-9874-9341aa589b32.png)
 
-
 ## Technologies, Libraries, APIs
 * Javascript
 * HTML
@@ -41,4 +40,4 @@ During the game, users will be able to:
 * Add a couple more levels for different maze maps
 * Add a difficulty option for each level
 
-## Credits
+<!-- ## Credits -->
