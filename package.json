@@ -1,0 +1,34 @@
+{
+  "name": "Maze_Project",
+  "version": "1.0.0",
+  "description": "MazeRunner is a one player game and the goal is to navigate through the maze and advance through the levels.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.15.4",
+    "@babel/preset-env": "^7.15.4",
+    "babel-loader": "^8.2.2",
+    "core-js": "^3.17.2",
+    "css-loader": "^6.2.0",
+    "mini-css-extract-plugin": "^2.2.2",
+    "regenerator-runtime": "^0.13.9",
+    "sass": "^1.39.0",
+    "sass-loader": "^12.1.0",
+    "webpack": "^5.51.2",
+    "webpack-cli": "^4.8.0"
+  }
+}
+{
+  "browserslist": [
+    "defaults"
+  ],
+  "scripts": {
+    "watch": "webpack --watch --mode=development",
+    "build": "webpack --mode=production"
+  },
+}
