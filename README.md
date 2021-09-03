@@ -2,12 +2,20 @@
 ## Overview 
 MazeRunner is a one player game and the goal is to navigate through the maze and advance through the levels.
 
+There are a few obstacles of which there is a locked door right before the exit. A key can be found and used on a locked door. There is also an enemy/ghost that is chasing you if it is encountered.
+
+The player will have limited visibility and can pickup items throughout the maze that can be used anytime.
+- keys to open locked doors
+- gas/battery to increase light radius or light duration.
+- a camera that can snap the ghost and freeze it for a few seconds
+- a gun that can shoot the enemy
+
 ## Functionality & MVPs
 During the game, users will be able to:
 * Start, Pause or Unpause the maze, Reset the Maze, Mute or Unmute the volume
 * Navigate the character by using the arrow keys
 * Use space bar to grab an item that you can use right away, or save it
-* 
+
 ## Wireframes
 
 ## Technologies, Libraries, APIs
@@ -24,6 +32,10 @@ During the game, users will be able to:
 * **Tuesday:** Finish up Monday's render and maze board for the game if needed. Now code out the physics of the player and the key/door before exiting the maze. If conceivable, code out an enemy/entity on the board that chases the player.
 * **Wednesday:** Apply CSS and design to the layout from the wireframe and any bugs still occuring.
 * **Thursday:** Deploy to Github Page.
-## Bonus Feature
+
+## Bonus Features
+* Different character selection which have unique items that can be picked up and used
+* Add a couple more levels for different maze maps
+* Add a difficulty option for each level
 
 ## Credits
