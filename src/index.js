@@ -1,11 +1,9 @@
-import Game from "./scripts/game"
+// import Game from "./scripts/game"
 
 document.addEventListener('DOMContentLoaded', () => {
     const canvas = document.getElementById("canvas");
+    canvas.width = 1500;
+    canvas.height = 800;
 
-    const game = new Game(canvas);
-
-    window.addEventListener("keydown", (e) => {
-      
-    })
+    const ctx = canvas.getContext
 })
