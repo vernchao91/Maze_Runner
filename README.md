@@ -14,7 +14,8 @@ The player will have limited visibility and can pickup items throughout the maze
 During the game, users will be able to:
 * Start, Pause or Unpause the maze, Reset the Maze, Mute or Unmute the volume
 * Navigate the character by using the arrow keys
-* Use space bar to grab an item that you can use right away, or save it
+* Use space bar to grab an item that you can use right away, or save it.
+* If gun or camera is on the item slot, then left clicking will use the item.
 
 ## Wireframes
 
