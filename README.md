@@ -19,7 +19,11 @@ During the game, users will be able to:
 * Npm
 
 ## Implementation Timeline
-* **Friday:** Initialize the 
+* **Friday:** Getting webpack running and canvas to show up on screen. Initialize the groundwork of the functions and spend time getting comfortable with canvas. Outline the maze, what the enemy could do and should do, the key/door obstacle, and the gas for the torch/lamp
+* **Monday:** Implement the maze board for the game. Make sure the walls and the player have the right physics and is rendered properly on the canvas.
+* **Tuesday:** Finish up Monday's render and maze board for the game if needed. Now code out the physics of the player and the key/door before exiting the maze. If conceivable, code out an enemy/entity on the board that chases the player.
+* **Wednesday:** Apply CSS and design to the layout from the wireframe and any bugs still occuring.
+* **Thursday:** Deploy to Github Page.
 ## Bonus Feature
 
 ## Credits
