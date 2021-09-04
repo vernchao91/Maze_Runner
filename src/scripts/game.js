@@ -1,9 +1,14 @@
 import Player from './player';
 import Maze from './maze';
 
-export default class Game {
-  constructor(canvas) {
-    this.ctx = canvas.getContext("2D")
+class Game {
+  constructor() {
+    this.canvas = document.getElementById('game-canvas')
+    this.ctx = this.canvas.getContext('2d')
+    this.items = [];
+    this.ghost = [];
+    this.player = new Player(this.ctx, this.canvas)
+
     // this.addMaze = new Maze();
     // this.addPlayer = new Player();
   }
@@ -18,8 +23,8 @@ export default class Game {
   }
 
   addPlayer() {
-    // const player = new Player();
+    const player = new Player();
   }
 }
 
-// export default Game;
+export default Game

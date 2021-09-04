@@ -1,11 +1,10 @@
 import Game from "./scripts/game";
-import Player from "./scripts/player"
+import GameView from "./scripts/game_view"
 
 document.addEventListener('DOMContentLoaded', () => {
-  const canvas = document.getElementById("canvas");
-  const newGame = new Game(canvas);
-  const player = new Player();
-  console.log(player);
+  const canvas = document.querySelector("canvas");
+  const ctx = canvas.getContext("2d");
   
-
-})
+  const game = new Game();
+  
+});

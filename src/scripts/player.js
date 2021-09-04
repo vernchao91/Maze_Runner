@@ -12,8 +12,8 @@ class Player {
     this.width = this.spriteWidth / 4;
     this.x = 0;
     this.y = 460;
-    this.playerImg = new Image();
-    this.playerImg.src = 'src/assets/hero-right1.png'
+    this.playerSprite = new Image();
+    this.playerSprite.src = './assets/hero-right1.png'
   }
 
   drawPlayer(ctx) {
@@ -25,8 +25,10 @@ class Player {
   animate(ctx) {
     this.drawPlayer(ctx)
   }
+
 }
 
-Util.inherits(Player, MovingObject)
+
+// Util.inherits(Player, MovingObject)
 
 export default Player;
