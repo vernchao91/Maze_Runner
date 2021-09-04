@@ -7,7 +7,10 @@ class Items {
     this.spriteWidth = 100;
     this.height = this.spriteHeight / 10;
     this.width = this.spriteWidth / 10;
-    this.item = new Image();
+    this.torchImg = new Image();
     this.itemImg.src = 'src/assets/torch.png'
   }
+
+
+
 }

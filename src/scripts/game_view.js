@@ -2,7 +2,6 @@ function GameView(game, ctx) {
   this.ctx = ctx;
   this.game = game;
   this.player = this.game.addPlayer();
-  
 }
 
 GameView.MOVES = {
