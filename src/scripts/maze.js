@@ -1,8 +1,9 @@
 class Maze {
   constructor(dimensions) {
     this.dimensions = dimensions
-
   }
+
+  
 
 }
 

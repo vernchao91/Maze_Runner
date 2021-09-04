@@ -2,35 +2,30 @@ import MovingObject from "./moving_object"
 import Util from "./util"
 
 class Player {
-  constructor(x, y, radius, color) {
-    this.x = x
-    this.y = y
-    this.radius = radius
-    this.color = color
+  constructor(dimensions) {
+    this.dimensions = dimensions
+    this.frameX = 0; 
+    this.frameY = 0;
+    this.spriteHeight = 625;
+    this.spriteWidth = 625;
+    this.height = this.spriteHeight / 4;
+    this.width = this.spriteWidth / 4;
+    this.x = 0;
+    this.y = 460;
     this.playerImg = new Image();
-    this.playerImg.src = 'src/assets/hero-right-1.png'
-    
+    this.playerImg.src = 'src/assets/hero-right1.png'
   }
 
   drawPlayer(ctx) {
     ctx.drawImage(this.playerImg, this.frameX * this.spriteWidth, 
       this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, 
       this.x, this.y, this.spriteWidth/4, this.spriteHeight/4);
-      this.frameY = 1;
-      if(this.counter < 7){
-          this.counter ++ 
-      }else{
-        if (this.frameX < 5) {
-      this.frameX++;
-      } else {
-        this.frameX = 0;
-      }
-    this.counter = 0; 
   }
+
+  animate(ctx) {
+    this.drawPlayer(ctx)
   }
 }
-
-Player.radius = 10
 
 Util.inherits(Player, MovingObject)
 

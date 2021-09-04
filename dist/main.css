@@ -6,7 +6,7 @@ h1 {
   font-size: 78px;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   text-align: center;
-  text-shadow: 3px 3px #a81308;
+  text-shadow: 3px 3px #5f8eb4;
   margin-top: auto;
 }
 
@@ -19,4 +19,8 @@ canvas, #bg {
   border-radius: 20px;
   width: 1200px;
   height: 700px;
+}
+
+#bg {
+  opacity: 0.5;
 }
