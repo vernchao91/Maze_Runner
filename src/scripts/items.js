@@ -14,3 +14,5 @@ class Items {
 
 
 }
+
+export default Items;
