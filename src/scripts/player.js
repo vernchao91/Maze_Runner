@@ -17,7 +17,7 @@ class Player {
   }
 
   drawPlayer(ctx) {
-    ctx.drawImage(this.playerImg, this.frameX * this.spriteWidth, 
+    ctx.drawImage(this.playerSprite, this.frameX * this.spriteWidth, 
       this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, 
       this.x, this.y, this.spriteWidth/4, this.spriteHeight/4);
   }
