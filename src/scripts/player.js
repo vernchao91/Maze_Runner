@@ -15,23 +15,23 @@ class Player {
     this.y = 29;
     this.playerSprite = new Image();
     this.playerSprite.src = './assets/hero-spritesheet.png'
-    this.playerSprite.onload = () => this.drawPlayer();
+    // this.playerSprite.onload = () => this.drawPlayer();
   }
   
   update() {
-    this.drawPlayer();
-    this.animate();
+    // this.drawPlayer(ctx);
+    this.animate(ctx);
   }
 
   drawPlayer(ctx) {
     // ctx.drawImage(playerSprite, 130, 29, 650, 650, 0, 0, 75, 75)
     ctx.beginPath();
-    ctx.arc(5, 5, 5, 0, 2 * Math.PI);
+    ctx.arc(100, 100, 50, 0, 2 * Math.PI);
     ctx.stroke(); 
   }
 
   animate(ctx) {
-    
+    this.drawPlayer(ctx)    
   }
 
 }

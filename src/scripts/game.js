@@ -11,12 +11,13 @@ class Game {
     this.wraith = new Wraith(ctx, canvas)
     this.player = new Player(ctx, canvas)
     this.maze = new Maze(ctx, canvas)
+    this.start();
   }
 
   draw(ctx) {
-    ctx.clearRect(0, 0, 400, 400);
-    ctx.fillStyle = "rgba(0, 0, 0, 0.3)"
-    ctx.fillRect(0, 0, 400, 400);
+    // ctx.clearRect(0, 0, 400, 400);
+    // ctx.fillStyle = "rgba(0, 0, 0, 0.3)"
+    // ctx.fillRect(0, 0, 400, 400);
   } 
 
   addMaze() {
@@ -24,6 +25,14 @@ class Game {
 
   addPlayer() {
     // const player = new Player();
+  }
+
+  start() {
+    this.animate();
+  }
+
+  animate() {
+    this.player.animate(this.ctx);
   }
 }
 

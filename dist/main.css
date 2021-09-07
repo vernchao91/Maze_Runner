@@ -42,8 +42,9 @@ canvas, #bg {
 }
 
 .socials {
-  position: relative;
-  margin-bottom: auto;
-  text-align: center;
-  margin-top: 675px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  width: 50px;
+  height: 40px;
 }
