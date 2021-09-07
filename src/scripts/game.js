@@ -23,7 +23,7 @@ class Game {
   }
 
   addPlayer() {
-    const player = new Player();
+    // const player = new Player();
   }
 }
 

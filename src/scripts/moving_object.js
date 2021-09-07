@@ -6,7 +6,7 @@ class MovingObject {
     this.game = object.game;
   }
 
-  move(ctx) {
+  move() {
 
   }
 

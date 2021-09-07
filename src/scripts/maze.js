@@ -1,6 +1,7 @@
 class Maze {
-  constructor(dimensions) {
-    this.dimensions = dimensions
+  constructor(ctx, canvas) {
+    this.canvas = canvas;
+    this.ctx = ctx;
   }
 
   

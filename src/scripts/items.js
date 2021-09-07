@@ -1,6 +1,7 @@
 class Items {
-  constructor(dimensions) {
-    this.dimensions = dimensions;
+  constructor(ctx, canvas) {
+    this.canvas = canvas;
+    this.ctx = ctx;
     this.x = 2;
     this.y = 0;
     this.spriteHeight = 1000;

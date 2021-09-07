@@ -17,22 +17,21 @@ class Player {
     this.playerSprite.src = './assets/hero-spritesheet.png'
   }
 
+  
+  update() {
+    // this.draw();
+    // this.animate();
+  }
+
   // drawPlayer() {
   //   ctx.drawImage(this.playerSprite, (this.frameX * this.spriteWidth), (this.frameY * this.spriteHeight), this.spriteWidth, 
   //   this.spriteHeight, this.x, this.y, this.spriteWidth/4, this.spriteHeight/4);
   // }
 
-  drawPlayer() {
-    
-  }
-
   animate() {
-    ctx.drawPlayer();
+    // ctx.drawPlayer();
   }
 
-  update() {
-    ctx.animate();
-  }
 
 
 }
