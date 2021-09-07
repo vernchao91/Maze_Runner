@@ -1,6 +1,3 @@
-import MovingObject from "./moving_object"
-import Util from "./util"
-
 class Player {
   constructor(ctx, canvas) {
     this.canvas = canvas;
@@ -18,20 +15,22 @@ class Player {
     // this.playerSprite.onload = () => this.drawPlayer();
   }
   
-  update() {
-    // this.drawPlayer(ctx);
-    this.animate(ctx);
-  }
-
+  
   drawPlayer(ctx) {
-    // ctx.drawImage(playerSprite, 130, 29, 650, 650, 0, 0, 75, 75)
-    ctx.beginPath();
-    ctx.arc(100, 100, 50, 0, 2 * Math.PI);
-    ctx.stroke(); 
+    ctx.drawImage(this.playerSprite, 130, 29, 650, 650, 0, 0, 75, 75)
+    // ctx.beginPath();
+    // ctx.arc(55, 55, 50, 0, 2 * Math.PI);
+    // ctx.stroke();
   }
 
+
+  
   animate(ctx) {
     this.drawPlayer(ctx)    
+  }
+
+  update(ctx) {
+    this.animate(ctx);
   }
 
 }

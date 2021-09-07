@@ -43,8 +43,28 @@ canvas, #bg {
 
 .socials {
   display: flex;
-  justify-content: center;
-  align-content: center;
-  width: 50px;
-  height: 40px;
+}
+
+#linkedin {
+  background-size: cover;
+  border-radius: 3px;
+  width: 40px;
+  height: 30px;
+  cursor: pointer;
+}
+
+#github {
+  background-size: cover;
+  border-radius: 15px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+#angellist {
+  background-size: cover;
+  border-radius: 15px;
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
 }

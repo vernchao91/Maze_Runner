@@ -18,13 +18,17 @@ class Game {
     // ctx.clearRect(0, 0, 400, 400);
     // ctx.fillStyle = "rgba(0, 0, 0, 0.3)"
     // ctx.fillRect(0, 0, 400, 400);
-  } 
+  }
+
+  listeners() {
+    window.addEventListener("keydown", this.player.keyDown.bind(this));
+    window.addEventListener("keyup", this.player.keyUp.bind(this));
+  }
 
   addMaze() {
   }
 
   addPlayer() {
-    // const player = new Player();
   }
 
   start() {
@@ -32,7 +36,7 @@ class Game {
   }
 
   animate() {
-    this.player.animate(this.ctx);
+    this.player.update(this.ctx);
   }
 }
 
