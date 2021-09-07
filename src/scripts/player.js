@@ -2,8 +2,9 @@ import MovingObject from "./moving_object"
 import Util from "./util"
 
 class Player {
-  constructor(dimensions) {
-    this.dimensions = dimensions
+  constructor(ctx, canvas) {
+    this.canvas = canvas;
+    this.ctx = ctx;
     this.frameX = 0; 
     this.frameY = 0;
     this.spriteHeight = 625;
@@ -16,19 +17,22 @@ class Player {
     this.playerSprite.src = './assets/hero-right1.png'
   }
 
-  drawPlayer(ctx) {
-    ctx.drawImage(this.playerSprite, this.frameX * this.spriteWidth, 
-      this.frameY * this.spriteHeight, this.spriteWidth, this.spriteHeight, 
-      this.x, this.y, this.spriteWidth/4, this.spriteHeight/4);
+  drawPlayer() {
+    ctx.drawImage(this.playerSprite, (this.frameX * this.spriteWidth), (this.frameY * this.spriteHeight), this.spriteWidth, 
+    this.spriteHeight, this.x, this.y, this.spriteWidth/4, this.spriteHeight/4);
   }
 
-  animate(ctx) {
-    this.drawPlayer(ctx)
+  animate() {
+    ctx.drawPlayer();
   }
+
+  update() {
+    ctx.animate();
+  }
+
 
 }
 
 
-// Util.inherits(Player, MovingObject)
 
 export default Player;

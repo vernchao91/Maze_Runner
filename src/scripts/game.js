@@ -4,13 +4,13 @@ import Item from './items'
 import Wraith from './wraith'
 
 class Game {
-  constructor() {
-    this.canvas = document.getElementById('game-canvas')
-    this.ctx = this.canvas.getContext('2d')
-    this.items = new Item(this.ctx, this.canvas)
-    this.wraith = new Wraith(this.ctx, this.canvas)
-    this.player = new Player(this.ctx, this.canvas)
-    this.maze = new Maze(this.ctx, this.canvas)
+  constructor(ctx, canvas) {
+    this.canvas = canvas
+    this.ctx = ctx
+    this.items = new Item(ctx, canvas)
+    this.wraith = new Wraith(ctx, canvas)
+    this.player = new Player(ctx, canvas)
+    this.maze = new Maze(ctx, canvas)
   }
 
   draw(ctx) {
