@@ -14,10 +14,33 @@ canvas, #bg {
   left: 50%;
   transform: translate(-50%, -50%);   
   border-radius: 20px; 
-  width: 1200px;
-  height: 700px;
 }
 
 #bg {
   opacity: .5;
+  width: 1200px;
+  height: 700px
+}
+
+.item {
+  position: relative;
+  text-align: right;
+  margin-right: 150px;
+}
+
+.character-information {
+  position: relative;
+  text-align: right;
+  margin-right: 80px;
+}
+
+.instructions {
+  margin-left: 115px;
+}
+
+.socials {
+  position: relative;
+  margin-bottom: auto;
+  text-align: center;
+  margin-top: 675px;
 }
