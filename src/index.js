@@ -8,8 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ctx.stroke(); 
   const playerSprite = new Image();
   playerSprite.src = 'src/assets/hero-spritesheet.png'
-  playerSprite.onload = () => {ctx.drawImage(playerSprite, 0, 0)}
+  playerSprite.onload = () => {ctx.drawImage(playerSprite, 0, 0, 100, 100)}
   
-  // const game = new Game(ctx, canvas);
+  const game = new Game(ctx, canvas);
 });
-
