@@ -14,12 +14,16 @@ class Player {
     this.x = 0;
     this.y = 460;
     this.playerSprite = new Image();
-    this.playerSprite.src = './assets/hero-right1.png'
+    this.playerSprite.src = './assets/hero-spritesheet.png'
   }
 
+  // drawPlayer() {
+  //   ctx.drawImage(this.playerSprite, (this.frameX * this.spriteWidth), (this.frameY * this.spriteHeight), this.spriteWidth, 
+  //   this.spriteHeight, this.x, this.y, this.spriteWidth/4, this.spriteHeight/4);
+  // }
+
   drawPlayer() {
-    ctx.drawImage(this.playerSprite, (this.frameX * this.spriteWidth), (this.frameY * this.spriteHeight), this.spriteWidth, 
-    this.spriteHeight, this.x, this.y, this.spriteWidth/4, this.spriteHeight/4);
+    
   }
 
   animate() {
