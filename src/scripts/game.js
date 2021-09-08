@@ -12,10 +12,10 @@ class Game {
     this.height = this.canvas.height = 700;
     // this.sounds = new this.sounds();
     this.draw = this.draw.bind(this)
-    this.items = new Item(ctx, canvas)
-    this.wraith = new Wraith(ctx, canvas)
-    this.player = new Player(ctx, canvas)
-    this.maze = new Maze(ctx, canvas)
+    this.items = new Item(ctx)
+    this.wraith = new Wraith(ctx)
+    this.player = new Player(ctx)
+    this.maze = new Maze(ctx)
     this.start();
   }
 
@@ -53,24 +53,25 @@ class Game {
 
   // }
 
+  // playerCollision() {
+  //   if ((this.player.x + this.player.width === this.maze.x) && (this.player.y + this.player.height === this.maze.y)) {
+  //     this.player.speed = 0;
+  //   }
+  // }
+
+  animate() {
+    // this.playerCollision();
+    this.player.update();
+    requestAnimationFrame(this.animate.bind(this));
+  }
+
   start() {
+    // this.playerCollision();
     this.animate();
     this.eventListeners();
     this.draw();
-    // let setFPS = setTimeout(() => {
-    //   this.ctx.clearRect(0, 0, this.width, this.height);
-    //   this.maze.update();
-    //   this.player.update();
-    //   this.items.update();
-    //   window.requestAnimationFrame(this.draw)
-    // }, 1000 / this.fps)
-    // requestAnimationFrame(this.animate.bind(this));
   }
 
-  animate() {
-    this.player.update(this.ctx);
-    requestAnimationFrame(this.animate.bind(this));
-  }
 }
 
 export default Game

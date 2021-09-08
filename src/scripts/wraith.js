@@ -1,6 +1,5 @@
 class Wraith {
-  constructor(ctx, canvas) {
-    this.canvas = canvas;
+  constructor(ctx) {
     this.ctx = ctx;
     
   }

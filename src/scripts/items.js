@@ -1,6 +1,5 @@
 class Items {
-  constructor(ctx, canvas) {
-    this.canvas = canvas;
+  constructor(ctx) {
     this.ctx = ctx;
     this.x = 2;
     this.y = 0;
