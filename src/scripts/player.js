@@ -42,10 +42,6 @@ class Player {
     this.moving = false;
   }
 
-  collisionMaze() {
-    var rect1 = {x: 5, y: 5, width: 50, height: 50}
-  }
-
   move() {
     if (this.keys[83] && this.y < 600) {
       this.y += this.speed;
