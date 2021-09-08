@@ -42,12 +42,6 @@ class Player {
     this.moving = false;
   }
 
-  // playerCollision() {
-  //   if ((this.player.x + this.player.width === this.maze.x) && (this.player.y + this.player.height === this.maze.y)) {
-  //     this.player.speed = 0;
-  //   }
-  // }
-
   collisionMaze() {
     var rect1 = {x: 5, y: 5, width: 50, height: 50}
   }
