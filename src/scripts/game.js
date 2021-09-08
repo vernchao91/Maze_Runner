@@ -12,10 +12,10 @@ class Game {
     this.height = this.canvas.height = 700;
     // this.sounds = new this.sounds();
     this.draw = this.draw.bind(this)
+    this.maze = new Maze(ctx)
     this.items = new Item(ctx)
     this.wraith = new Wraith(ctx)
-    this.player = new Player(ctx)
-    this.maze = new Maze(ctx)
+    this.player = new Player(ctx, this.maze.objects)
     this.start();
   }
 
@@ -52,12 +52,6 @@ class Game {
   // gameOver(frame, setFPS) {
 
   // }
-
-  playerCollision() {
-    if ((this.player.x + this.player.width === this.maze.x) && (this.player.y + this.player.height === this.maze.y)) {
-      this.player.speed = 0;
-    }
-  }
 
   animate() {
     // this.playerCollision();

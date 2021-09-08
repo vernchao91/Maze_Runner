@@ -1,18 +1,15 @@
-import Maze from "./maze.js"
-
 class Player {
-  constructor(ctx) {
+  constructor(ctx, mazeObjects) {
     this.ctx = ctx;
     this.frameX = 0; 
     this.frameY = 0;
-    // this.spriteHeight = 704;
-    // this.spriteWidth = 704;
+    this.mazeObjects = mazeObjects; // maze object array
     this.spriteHeight = 60;
     this.spriteWidth = 60;
     this.animationCount = 0;
     this.x = 3;
     this.y = 45;
-    this.speed = 1;
+    this.speed = 3;
     this.playerSprite = new Image();
     this.playerSprite.src = 'src/assets/full-hero.png'
     // this.playerSprite.onload = () =>this.update();
@@ -20,9 +17,7 @@ class Player {
     this.keyUp = this.keyUp.bind(this);
     this.keys = [];
     this.moving = false;
-    this.lastInput = "down"
-    this.maze = new Maze(ctx);
-    // this.ctx.drawImage(this.playerSprite, 130, 29, 650, 650, 0, 0, 75, 75)
+    this.lastInput = "down";
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
   }
   
@@ -30,6 +25,7 @@ class Player {
     this.drawPlayer();
     this.animateFrame();
     this.move();
+    // this.collissionStopper();
   }
 
   keyDown(e) {
@@ -55,13 +51,27 @@ class Player {
        this.x -= this.speed;
        this.lastInput = "left";
 
-     } else if (this.keys[68] && this.x < 1100) {
+     } else if (this.keys[68] && this.x < 1100 ) {
        this.x += this.speed;
        this.lastInput = "right";
+
      } else if (this.keys[68] && this.x > 1000 && this.y > 595) {
       this.x += this.speed;
       this.lastInput = "right";
-     }
+
+     } else if (this.keys[68]  && this.x < 350) {
+      this.x += this.speed;
+      this.lastInput = "right"
+    }
+  }
+
+  collissionStopper() {
+    arr = this.mazeObjects
+    for (let i = 0; i < arr.length; i++) {
+      if (this.y < arr[1]) {
+        this.speed = 0;
+      }
+    }
   }
 
   drawPlayer() {
