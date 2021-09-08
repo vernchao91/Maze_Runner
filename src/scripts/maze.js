@@ -11,14 +11,32 @@ class Maze {
     // this.topWall.onload = () => this.update();
     this.innerWall = new Image();
     this.innerWall.src = "src/assets/tile-sheet.png"
+    this.objects = [];
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
-    // this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, 100, 100, 60, 80) // top/bottom wall
-    // this.ctx.drawImage(this.wallImg, 775, 0, 50, 75, 150, 150, 60, 80) // side wall
+    // this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, 100, 100, 55, 80) // top/bottom wall
+    // this.ctx.drawImage(this.wallImg, 775, 0, 50, 75, 150, 150, 55, 80) // side wall
   }
 
-  update(){
+  update() {
     this.drawBorder();
     this.drawMaze();
+    this.drawWireFrame();
+  }
+
+  drawWireFrame() {
+    this.ctx.beginPath();
+    this.ctx.rect(302, 40, 15, 200);
+    this.ctx.rect(52, 228, 248, 15)
+    this.ctx.stroke();
+  }
+  
+  drawMaze() {
+    for (let y = 39; y < 200; y += 50) {
+      this.ctx.drawImage(this.innerWall, 775, 0, 50, 75, 300, y, 55, 80) // side wall
+    }
+    for (let x = 50; x < 251; x += 50) {
+     this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, 227, 55, 80) // top/bottom wall
+    }
   }
 
   drawBorder() {
@@ -40,14 +58,6 @@ class Maze {
     }
   }
 
-  drawMaze() {
-    for (let y = 39; y < 200; y += 50) {
-      this.ctx.drawImage(this.innerWall, 775, 0, 50, 75, 300, y, 60, 80) // side wall
-    }
-    for (let x = 50; x < 251; x += 50) {
-     this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, 230, 60, 80) // top/bottom wall
-    }
-  }
 
 }
 

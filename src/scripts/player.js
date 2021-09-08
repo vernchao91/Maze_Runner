@@ -48,6 +48,10 @@ class Player {
   //   }
   // }
 
+  collisionMaze() {
+    var rect1 = {x: 5, y: 5, width: 50, height: 50}
+  }
+
   move() {
     if (this.keys[83] && this.y < 600) {
       this.y += this.speed;
@@ -73,9 +77,8 @@ class Player {
   drawPlayer() {
   this.ctx.drawImage(this.playerSprite, this.spriteWidth * this.frameX, this.spriteWidth * this.frameY,
      this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteWidth)
-    // this.ctx.drawImage(this.playerSprite, 130 * this.frameX, 29 * this.frameY, this.spriteWidth, this.spriteHeight, this.x, this.y, this.width, this.height)
-    // this.ctx.drawImage(this.playerSprite, 130, 29, 704, 704, this.x, this.y, 60, 60)
   }
+
   
   animateFrame() {
     if (this.moving && this.lastInput === "down") {
@@ -100,6 +103,17 @@ class Player {
         this.frameX = 0;
         this.animationCount = 0;
       }
+    } else if (this.moving && this.lastInput === "left") {
+      this.frameY = 2;
+      if (this.animationCount < 5) {
+       this.animationCount++;
+     } else if (this.frameX < 5) {
+       this.frameX++;
+       this.animationCount = 0;
+     } else {
+      this.frameX = 0;
+      this.animationCount = 0
+     }
     } else if (this.moving && this.lastInput === "up") {
         this.frameY = 3;
       if (this.animationCount < 5) {
@@ -111,19 +125,7 @@ class Player {
         this.frameX = 0;
         this.animationCount = 0;
       }
-    } else if(this.moving && this.lastInput === "left") {
-      this.frameY = 2;
-      if (this.animationCount < 5) {
-       this.animationCount++;
-     } else if (this.frameX < 5) {
-       this.frameX++;
-       this.animationCount = 0;
-     } else {
-      this.frameX = 0;
-      this.animationCount = 0
-     }
-
-    }
+    } 
   }
 
 }

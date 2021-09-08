@@ -53,11 +53,11 @@ class Game {
 
   // }
 
-  // playerCollision() {
-  //   if ((this.player.x + this.player.width === this.maze.x) && (this.player.y + this.player.height === this.maze.y)) {
-  //     this.player.speed = 0;
-  //   }
-  // }
+  playerCollision() {
+    if ((this.player.x + this.player.width === this.maze.x) && (this.player.y + this.player.height === this.maze.y)) {
+      this.player.speed = 0;
+    }
+  }
 
   animate() {
     // this.playerCollision();

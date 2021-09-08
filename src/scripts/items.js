@@ -9,10 +9,10 @@ class Items {
     this.width = this.spriteWidth / 10;
     this.torchImg = new Image();
     this.torchImg.src = 'src/assets/tile-sheet.png'
-    this.torchImg.onload = () => this.update();
+    // this.torchImg.onload = () => this.update();
     this.keyImg = new Image();
     this.keyImg.src = 'src/assets/tile-sheet2.png'
-    this.keyImg.onload = () => this.update();
+    // this.keyImg.onload = () => this.update();
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
   }
 
