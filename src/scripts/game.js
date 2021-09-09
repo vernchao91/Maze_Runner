@@ -50,6 +50,22 @@ class Game {
 
   // }
 
+  attacking() {
+    if (this.wraith.activated === "true" && this.wraith.moving === "true" ) {
+      if (this.wraith.x - this.player.x <= 10) {
+        this.wraith.attacking = "true";
+      } else if (this.player.x - this.wraith.x <= 10) {
+        this.wraith.attacking = "true";
+      } else if (this.wraith.y - this.player.y <= 10) {
+        this.wraith.attacking = "true";
+      } else if (this.player.y - this.wraith.y <= 10) {
+        this.wraith.attacking = "true";
+      }
+    // } else if (this.wraith.x - this.player.x >= 10 || this.wraith.x - this.player.x >= 10) {
+    //   this.wraith.attacking = "false";
+    }
+  }
+
   activate() {
     if (this.player.x > 900 && this.player.y > 38 && this.player.y < 120) {
       this.wraith.activated = "true";
@@ -93,8 +109,9 @@ class Game {
 
   animate() {
     this.ctx.clearRect(0, 0, this.width, this.height);
-    this.activate();
     this.chase();
+    this.activate();
+    this.attacking();
     this.items.update();
     this.player.update();
     this.wraith.update();

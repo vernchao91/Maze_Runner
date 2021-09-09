@@ -31,6 +31,7 @@ class Items {
   update() {
     this.drawItem();
     this.drawDoor();
+    this.drawHeart();
     this.animateSwitch();
   }
 
@@ -43,6 +44,10 @@ class Items {
   drawDoor() {
     this.ctx.drawImage(this.tileImg, this.frameBlueDoorX, 0, 50, 100, 51, 194, 52, 80) //door
     this.ctx.drawImage(this.tileImg, this.frameRedDoorX, 0, 50, 100, 1103, 415, 52, 80) //door
+  }
+
+  drawHeart() {
+    this.ctx.drawImage(this.tile2Img, 115, 0, 150, 155, 925, 625, 40, 40); // heart
   }
 
   animateSwitch() {

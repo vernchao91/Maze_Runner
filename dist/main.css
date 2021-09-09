@@ -44,17 +44,16 @@ canvas, #bg {
 
 .instructions > label {
   border: 5px solid white;
-  font-weight: 500;
   font-size: x-large;
   display: flex;
   text-align: center;
-  justify-content: flex;
   background-color: rgba(245, 245, 245, 0.589);
   width: 200px;
+  margin-left: 45px;
 }
 
 .socials {
-  margin-top: 430px;
+  margin-top: 350px;
   margin-left: 875px;
 }
 

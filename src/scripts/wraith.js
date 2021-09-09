@@ -64,6 +64,28 @@ class Wraith {
         this.frameX = 0;
         this.animationCount = 0;
       }
+    } else if (this.moving === "true" && this.attacking === "true" && this.activated === "true" && this.direction === "right") {
+      this.frameY = 3;
+      if (this.animationCount < 11) {
+        this.animationCount++;
+      } else if (this.frameX < 11) {
+        this.frameX++;
+        this.animationCount = 0;
+      } else {
+        this.frameX = 0;
+        this.animationCount = 0;
+      }
+    } else if (this.moving === "true" && this.attacking === "true" && this.activated === "true" && this.direction === "left") {
+      this.frameY = 4;
+      if (this.animationCount < 11) {
+        this.animationCount++;
+      } else if (this.frameX < 11) {
+        this.frameX++;
+        this.animationCount = 0;
+      } else {
+        this.frameX = 0;
+        this.animationCount = 0;
+      }
     }
   }
 

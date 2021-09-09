@@ -42,24 +42,17 @@ canvas, #bg {
 
 .instructions > label {
   border: 5px solid white;
-  font-weight: 500;
   font-size: x-large;
   display: flex;
   text-align: center;
-  justify-content: flex;
   background-color: rgba(245, 245, 245, 0.589);
   width: 200px;
+  margin-left: 45px;
 }
 
 .socials {
-  // display: flex;
-  // bottom: auto;
-  margin-top: 430px;
-  // align-items: center;
-  // width: 150px;
+  margin-top: 350px;
   margin-left: 875px;
-  // flex-direction: row;
-  // justify-content: space-evenly;    
 }
 
 #linkedin {
