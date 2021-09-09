@@ -36,8 +36,15 @@ class Player {
     this.maze.update();
     // this.wraith.autoMove();
     this.items.update();
-    this.wraith.update();
+    // this.wraith.update();
     this.listener();
+    this.animate();
+  }
+
+  animate() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
+    this.wraith.update();
+    requestAnimationFrame(this.animate.bind(this));
   }
 
   listener () {
@@ -106,8 +113,8 @@ class Player {
   }
 
   drawPlayer() {
-  this.ctx.drawImage(this.playerSprite, this.spriteWidth * this.frameX, this.spriteWidth * this.frameY,
-     this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteWidth)
+  this.ctx.drawImage(this.playerSprite, this.spriteWidth * this.frameX, this.spriteHeight * this.frameY,
+     this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteHeight)
   }
 
   animateFrame() {
