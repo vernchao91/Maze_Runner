@@ -1,7 +1,7 @@
 import Player from './player';
-import Maze from './maze';
-import Item from './items'
-import Wraith from './wraith'
+// import Maze from './maze';
+// import Item from './items'
+// import Wraith from './wraith'
 
 class Game {
   constructor(ctx, canvas) {
@@ -10,19 +10,20 @@ class Game {
     this.fps = 60;
     this.width = this.canvas.width = 1200;
     this.height = this.canvas.height = 700;
+    // this.draw = this.draw.bind(this)
     // this.sounds = new this.sounds();
-    this.draw = this.draw.bind(this)
-    this.maze = new Maze(ctx)
-    this.wraith = new Wraith(ctx)
-    this.items = new Item(ctx)
-    this.player = new Player(ctx, this.maze, this.items.door)
+    // this.maze = new Maze(ctx)
+    // this.wraith = new Wraith(ctx)
+    // this.items = new Item(ctx)
     // this.start();
+    // console.log(this.items.door);
+    this.player = new Player(ctx)
   }
-
+  
+  
   eventListeners() {
     window.addEventListener("keydown", this.player.keyDown.bind(this));
     window.addEventListener("keyup", this.player.keyUp.bind(this));
-    window.addEventListener("keypress", this.items.keyPress.bind(this))
     // window.addEventListener("keypress", this.startPause.bind(this));
   }
 
@@ -33,35 +34,34 @@ class Game {
   //   }
   // }
 
-  draw() {
-    // this.eventListeners();
-    let setFPS = setTimeout(() => {
-      this.ctx.clearRect(0, 0, this.width, this.height);
-      this.maze.update();
+  // draw() {
+  //   // this.eventListeners();
+  //   let setFPS = setTimeout(() => {
+  //     this.ctx.clearRect(0, 0, this.width, this.height);
+  //     this.maze.update();
 
-
-
-      this.player.update(this.maze.objects);
-      this.items.update();
-      window.requestAnimationFrame(this.draw)
-    }, 1000 / this.fps)
-  }
+  //     this.items.update();
+  //     this.player.update();
+  //     window.requestAnimationFrame(this.draw)
+  //   }, 1000 / this.fps)
+  // }
 
   // gameOver(frame, setFPS) {
 
   // }
 
   animate() {
-    // this.playerCollision();
+    this.ctx.clearRect(0, 0, this.width, this.height);
+    // this.items.update();
+    // this.maze.update();
     this.player.update();
     requestAnimationFrame(this.animate.bind(this));
   }
 
   start() {
-    // this.playerCollision();
     this.animate();
     this.eventListeners();
-    this.draw();
+    // this.draw();
   }
 
 }

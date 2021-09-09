@@ -1,40 +1,46 @@
+import Maze from './maze';
+import Item from './items'
+import Wraith from './wraith'
+
 class Player {
-  constructor(ctx, maze, door) {
+  constructor(ctx, door) {
     this.ctx = ctx;
-    this.maze = maze;
     this.door = door
     this.frameX = 0; 
     this.frameY = 0;
-    // this.mazeObjects = maze.objects; // maze object array
     this.spriteHeight = 60;
     this.spriteWidth = 60;
     this.animationCount = 0;
     this.x = 3;
     this.y = 45;
     this.speed = 1;
+    this.maze = new Maze(ctx);
+    this.wraith = new Wraith(ctx);
+    this.items = new Item(ctx);
     this.playerSprite = new Image();
     this.playerSprite.src = 'src/assets/full-hero.png'
-    // this.playerSprite.onload = () =>this.update();
+    this.playerSprite.onload = () => this.update();
     this.keyDown = this.keyDown.bind(this);
     this.keyUp = this.keyUp.bind(this);
+    this.itemKeys = []
     this.keys = [];
     this.moving = false;
     this.lastInput = "down";
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
   }
   
-  update(mazeObjects) {
+  update() {
     this.drawPlayer();
     this.animateFrame();
     this.move();
-    console.log(mazeObjects);
-    this.objects = mazeObjects;
-    
-    this.wallXstart= this.objects[0][0]
-    this.wallXend= this.objects[0][0] + this.objects[0][2];
-    this.wallYstart= this.objects[0][1]
-    this.wallYend= this.objects[0][1]+this.objects[0][3];
-    // this.collissionStopper();
+    this.maze.update();
+    this.items.update();
+    this.wraith.update();
+    this.listener();
+  }
+
+  listener () {
+    window.addEventListener("keypress", this.items.keyPress.bind(this))
   }
 
   keyDown(e) {
@@ -51,20 +57,33 @@ class Player {
     console.log(this.y + "y");
   }
 
+  animateSwitch() {
+    if (this.itemKeys[32]) {
+      this.items.frameSwitchX = 430;
+      this.items.canvasSwitchY = 38;
+      this.items.canvasSwitchX = 265;
+      this.animateDoor();
+    }
+  }
+
+  animateDoor() {
+    this.items.frameBlueDoorX = 285;
+  }
+
   move() {
+    //return early and check if player.x and player.y < or > this.mazeobject
     // 1100 canvas right
     // 45 canvas left
     // 600 canvas bottom
     // 40 canvas top
-
-    if (this.keys[83] && this.y !== 600) { // bottom canvas
-      if ((this.y < 170)) { // first room
+    
+    if (this.keys[83] && this.y < 600) { // bottom canvas
+      // if ((this.y < 170) && (this.x < 251)) { // first room
         this.y += this.speed;
         this.lastInput = "down";
-      }
+      // }
       // this.y += this.speed;
       // this.lastInput = "down";
-
      } else if (this.keys[87] && this.y !== 40) { //top canvas
        this.y -= this.speed;
        this.lastInput = "up";
@@ -74,10 +93,10 @@ class Player {
        this.lastInput = "left";
 
      } else if (this.keys[68] && this.x !== 1100 ) { //right canvas
-      if (this.x !== 250) { // first room
+      // if ((this.x !== 250) && this.y < 210) { // first room
         this.x += this.speed;
         this.lastInput = "right";
-      }
+      // }
      } else if (this.keys[68] && this.x > 1000 && this.y > 595) { //bottom right to exit maze
       this.x += this.speed;
       this.lastInput = "right";

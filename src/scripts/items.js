@@ -10,7 +10,8 @@ class Items {
     this.frameSwitchX = 350; // lever pushed
     this.canvasSwitchX = 258;
     this.canvasSwitchY = 35;
-    this.frameDoorX = 217;
+    this.frameBlueDoorX = 217;
+    this.frameRedDoorX = 81;
     this.tileImg = new Image();
     this.tileImg.src = 'src/assets/tile-sheet.png'
     // this.torchImg.onload = () => this.update();
@@ -40,7 +41,8 @@ class Items {
   }
 
   drawDoor() {
-    this.ctx.drawImage(this.tileImg, this.frameDoorX, 0, 50, 100, 51, 194, 52, 80)
+    this.ctx.drawImage(this.tileImg, this.frameBlueDoorX, 0, 50, 100, 51, 194, 52, 80) //door
+    this.ctx.drawImage(this.tileImg, this.frameRedDoorX, 0, 50, 100, 1103, 415, 52, 80) //door
   }
 
   animateSwitch() {
@@ -53,8 +55,8 @@ class Items {
   }
 
   animateDoor() {
-    this.frameDoorX = 285;
-    this.door = "opened"
+    this.frameBlueDoorX = 285;
+    this.door ="opened"
   }
 
 }
