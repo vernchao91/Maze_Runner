@@ -61,8 +61,8 @@ class Game {
       } else if (this.player.y - this.wraith.y <= 10) {
         this.wraith.attacking = "true";
       }
-    // } else if (this.wraith.x - this.player.x >= 10 || this.wraith.x - this.player.x >= 10) {
-    //   this.wraith.attacking = "false";
+    } else if (this.wraith.x - this.player.x >= 10 || this.wraith.x - this.player.x >= 10) {
+      this.wraith.attacking = "false";
     }
   }
 

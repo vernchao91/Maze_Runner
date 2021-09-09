@@ -43,7 +43,7 @@ class Wraith {
         this.animationCount = 0;
       }
     } else if (this.moving === "true" && this.activated ==="true" && this.direction === "left") {
-      this.frameY = 1;
+      this.frameY = 4;
       if (this.animationCount < 11) {
         this.animationCount++;
       } else if (this.frameX < 11) {
