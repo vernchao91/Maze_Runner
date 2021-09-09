@@ -12,7 +12,7 @@ class Player {
     this.animationCount = 0;
     this.x = 3;
     this.y = 45;
-    this.speed = 2;
+    this.speed = 1;
     this.maze = new Maze(ctx);
     // this.wraith = new Wraith(ctx);
     // this.items = new Item(ctx);
@@ -78,22 +78,69 @@ class Player {
     this.items.frameBlueDoorX = 285;
   }
 
-  
-
   move() {
     //return early and check if player.x and player.y < or > this.mazeobject
     // 1100 canvas right
     // 45 canvas left
     // 600 canvas bottom
     // 40 canvas top
+
+    // this.maze.objects.forEach(wall => {
+    //   if (this.moving === true && this.x < wall.x + wall.width &&
+    //     wall.x + this.width > wall.x &&
+    //     this.y < wall.y + wall.height &&
+    //     this.y + this.height > wall.y) {
+
+    //       if (this.keys[83] && this.y < 600) { // bottom canvas
+    //         this.y += this.speed;
+    //         this.lastInput = "down";
+    //      } else if (this.keys[87] && this.y > 40) { //top canvas
+    //        this.y -= this.speed;
+    //        this.lastInput = "up";
+
+    //      } else if (this.keys[65] && this.x > 45) { //left canvas
+    //        this.x -= this.speed;
+    //        this.lastInput = "left";
     
+    //      } else if (this.keys[68] && this.x < 1100 ) { //right canvas
+    //         this.x += this.speed;
+    //         this.lastInput = "right";
+    //     }
+    //   }
+    // })
+    // this.maze.objects.forEach(wall => {
+    //   if (this.moving === true && this.x < wall.x + wall.width &&
+    //     wall.x + this.width > wall.x &&
+    //     this.y < wall.y + wall.height &&
+    //     this.y + this.height > wall.y) 
+    
+    // if (this.keys[83] && this.y < 600) { // bottom canvas
+    //   this.maze.objects.forEach(wall => {
+    //     if (this.moving === true && 
+    //       this.x < wall.x + wall.width &&
+    //       wall.x + this.width > wall.x &&
+    //       this.y < wall.y + wall.height &&
+    //       this.y + this.height > wall.y) {
+    //       this.y += this.speed;
+    //       this.lastInput = "down";
+    //     }
+    //   })
+    //  } else if (this.keys[87] && this.y > 40) { //top canvas
+    //    this.y -= this.speed;
+    //    this.lastInput = "up";
+
+    //  } else if (this.keys[65] && this.x > 40) { //left canvas
+    //    this.x -= this.speed;
+    //    this.lastInput = "left";
+
+    //  } else if (this.keys[68] && this.x < 1100 ) { //right canvas
+    //     this.x += this.speed;
+    //     this.lastInput = "right";
+    // }
+
     if (this.keys[83] && this.y < 600) { // bottom canvas
-      // if ((this.y < 170) && (this.x < 251)) { // first room
-        this.y += this.speed;
-        this.lastInput = "down";
-      // }
-      // this.y += this.speed;
-      // this.lastInput = "down";
+      this.y += this.speed;
+      this.lastInput = "down";
      } else if (this.keys[87] && this.y > 40) { //top canvas
        this.y -= this.speed;
        this.lastInput = "up";
@@ -103,15 +150,9 @@ class Player {
        this.lastInput = "left";
 
      } else if (this.keys[68] && this.x < 1100 ) { //right canvas
-      // if ((this.x !== 250) && this.y < 210) { // first room
         this.x += this.speed;
         this.lastInput = "right";
-      // }
-     } else if (this.keys[68] && this.x > 1000 && this.y > 595) { //bottom right to exit maze
-      this.x += this.speed;
-      this.lastInput = "right";
     }
-
   }
 
   drawPlayer() {

@@ -13,9 +13,9 @@ class Wraith {
     this.wraithSprite = new Image();
     this.wraithSprite.src = "src/assets/full-wraith.png"
     this.wraithSprite.onload = () => this.update();
-    this.moving = "false"
-    this.activated = "false"
-    this.attacking = "false"
+    this.moving = false
+    this.activated = false
+    this.attacking = false
     this.direction = "left"
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
   }
@@ -31,7 +31,7 @@ class Wraith {
   }
 
   animateFrame() {
-    if (this.moving === "false") {
+    if (this.moving === false) {
       this.frameY = 0;
       if (this.animationCount < 11) {
         this.animationCount++;
@@ -42,8 +42,8 @@ class Wraith {
         this.frameX = 0;
         this.animationCount = 0;
       }
-    } else if (this.moving === "true" && this.activated ==="true" && this.direction === "left") {
-      this.frameY = 4;
+    } else if (this.moving === true && this.activated === true && this.direction === "left") {
+      this.frameY = 1;
       if (this.animationCount < 11) {
         this.animationCount++;
       } else if (this.frameX < 11) {
@@ -53,7 +53,7 @@ class Wraith {
         this.frameX = 0;
         this.animationCount = 0;
       }
-    } else if (this.moving === "true" && this.activated === "true" && this.direction === "right") {
+    } else if (this.moving === true && this.activated === true && this.direction === "right") {
       this.frameY = 2;
       if (this.animationCount < 11) {
         this.animationCount++;
@@ -64,7 +64,7 @@ class Wraith {
         this.frameX = 0;
         this.animationCount = 0;
       }
-    } else if (this.moving === "true" && this.attacking === "true" && this.activated === "true" && this.direction === "right") {
+    } else if (this.moving === true && this.attacking === true && this.activated === true && this.direction === "right") {
       this.frameY = 3;
       if (this.animationCount < 11) {
         this.animationCount++;
@@ -75,7 +75,7 @@ class Wraith {
         this.frameX = 0;
         this.animationCount = 0;
       }
-    } else if (this.moving === "true" && this.attacking === "true" && this.activated === "true" && this.direction === "left") {
+    } else if (this.moving === true && this.attacking === true && this.activated === true && this.direction === "left") {
       this.frameY = 4;
       if (this.animationCount < 11) {
         this.animationCount++;
