@@ -12,7 +12,7 @@ class Player {
     this.animationCount = 0;
     this.x = 3;
     this.y = 45;
-    this.speed = 1;
+    this.speed = 3;
     this.maze = new Maze(ctx);
     // this.wraith = new Wraith(ctx);
     // this.items = new Item(ctx);
@@ -25,6 +25,7 @@ class Player {
     this.keys = [];
     this.moving = false;
     this.lastInput = "down";
+    this.health = 3;
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
   }
   
@@ -78,7 +79,19 @@ class Player {
     this.items.frameBlueDoorX = 285;
   }
 
+  collision() {
+    this.maze.objects.forEach(wall => {
+      if (this.x < wall.x + wall.width &&
+        wall.x + this.width > wall.x &&
+        this.y < wall.y + wall.height &&
+        this.y + this.height > wall.y) {
+        this.moving = false
+      }
+    });
+  }
+
   move() {
+    this.collision();
     //return early and check if player.x and player.y < or > this.mazeobject
     // 1100 canvas right
     // 45 canvas left
@@ -114,28 +127,24 @@ class Player {
     //     this.y < wall.y + wall.height &&
     //     this.y + this.height > wall.y) 
     
-    // if (this.keys[83] && this.y < 600) { // bottom canvas
-    //   this.maze.objects.forEach(wall => {
-    //     if (this.moving === true && 
-    //       this.x < wall.x + wall.width &&
-    //       wall.x + this.width > wall.x &&
-    //       this.y < wall.y + wall.height &&
-    //       this.y + this.height > wall.y) {
-    //       this.y += this.speed;
-    //       this.lastInput = "down";
-    //     }
-    //   })
-    //  } else if (this.keys[87] && this.y > 40) { //top canvas
-    //    this.y -= this.speed;
-    //    this.lastInput = "up";
+    // if (this.keys[83] && this.y < 600 && this.x < this.maze.objects[0].x + this.maze.objects[0].width &&
+    //   this.maze.objects[0].x + this.width > this.maze.objects[0].x &&
+    //   this.y < this.maze.objects[0].y + this.maze.objects[0].height &&
+    //   this.y + this.height > this.maze.objects[0].y) {
 
-    //  } else if (this.keys[65] && this.x > 40) { //left canvas
-    //    this.x -= this.speed;
-    //    this.lastInput = "left";
+    //   this.y += this.speed;
+    //   this.lastInput = "down";
+    // } else if (this.keys[87] && this.y > 40) { //top canvas
+    //   this.y -= this.speed;
+    //   this.lastInput = "up";
 
-    //  } else if (this.keys[68] && this.x < 1100 ) { //right canvas
-    //     this.x += this.speed;
-    //     this.lastInput = "right";
+    // } else if (this.keys[65] && this.x > 40) { //left canvas
+    //   this.x -= this.speed;
+    //   this.lastInput = "left";
+
+    // } else if (this.keys[68] && this.x < 1100 ) { //right canvas
+    //   this.x += this.speed;
+    //   this.lastInput = "right";
     // }
 
     if (this.keys[83] && this.y < 600) { // bottom canvas

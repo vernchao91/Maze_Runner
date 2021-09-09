@@ -13,14 +13,13 @@ class Game {
     // this.draw = this.draw.bind(this)
     // this.sounds = new this.sounds();
     this.items = new Item(ctx)
-    this.player = new Player(ctx)
     this.wraith = new Wraith(ctx)
+    this.player = new Player(ctx)
     // this.maze = new Maze(ctx)
-    // this.start();
-    // console.log(this.items.door);
     this.start();
     this.ctx.shadowBlur = 150;
     this.ctx.shadowColor = 'black';
+    this.addFogOfWar(ctx);
   }
   
   eventListeners() {
@@ -50,8 +49,18 @@ class Game {
 
   // }
 
+  addFogOfWar(ctx) {
+    ctx.fillStyle = "black";
+    ctx.fillRect(0, 0, this.width, this.height)
+    // ctx.globalCompositeOperation = "destination-out"
+  }
+
+  // clearFogOfWar() {
+
+  // }
+
   attacking() {
-    if (this.wraith.activated === true && this.wraith.moving === true ) {
+    if (this.wraith.activated === true && this.wraith.moving === true ) { // wraith attacking
       if (this.wraith.x - this.player.x <= 10) {
         this.wraith.attacking = true;
       } else if (this.player.x - this.wraith.x <= 10) {
@@ -67,13 +76,13 @@ class Game {
   }
 
   activate() {
-    if (this.player.x > 900 && this.player.y > 38 && this.player.y < 120) {
+    if (this.player.x > 900 && this.player.y > 38 && this.player.y < 120) { // wraith activating
       this.wraith.activated = true;
       this.wraith.moving = true;
     }
   }
 
-  chase() {
+  chase() {  // wraith AI chase
     if (this.wraith.activated === true) {
       if (this.wraith.x < this.player.x && this.wraith.y < this.player.y) {
         this.wraith.x += this.wraith.speed;

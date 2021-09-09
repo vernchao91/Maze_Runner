@@ -6,7 +6,7 @@ h1 {
   margin-top: auto;
 }
 
-canvas, #bg {
+#mainCanvas, #bg {
   border: 5px solid white;
   position: absolute;
   top: 50%;
@@ -51,7 +51,7 @@ canvas, #bg {
 }
 
 .socials {
-  margin-top: 350px;
+  margin-top: 200px;
   margin-left: 875px;
 }
 

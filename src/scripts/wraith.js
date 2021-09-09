@@ -31,7 +31,7 @@ class Wraith {
   }
 
   animateFrame() {
-    if (this.moving === false) {
+    if (this.moving === false) { //idle animation
       this.frameY = 0;
       if (this.animationCount < 11) {
         this.animationCount++;
@@ -42,7 +42,7 @@ class Wraith {
         this.frameX = 0;
         this.animationCount = 0;
       }
-    } else if (this.moving === true && this.activated === true && this.direction === "left") {
+    } else if (this.moving === true && this.activated === true && this.direction === "left") {  // left walk animation
       this.frameY = 1;
       if (this.animationCount < 11) {
         this.animationCount++;
@@ -53,7 +53,7 @@ class Wraith {
         this.frameX = 0;
         this.animationCount = 0;
       }
-    } else if (this.moving === true && this.activated === true && this.direction === "right") {
+    } else if (this.moving === true && this.activated === true && this.direction === "right") {  // right walk animation
       this.frameY = 2;
       if (this.animationCount < 11) {
         this.animationCount++;
@@ -64,7 +64,7 @@ class Wraith {
         this.frameX = 0;
         this.animationCount = 0;
       }
-    } else if (this.moving === true && this.attacking === true && this.activated === true && this.direction === "right") {
+    } else if (this.moving === true && this.attacking === true && this.activated === true && this.direction === "right") { // right attack animation
       this.frameY = 3;
       if (this.animationCount < 11) {
         this.animationCount++;
@@ -75,7 +75,7 @@ class Wraith {
         this.frameX = 0;
         this.animationCount = 0;
       }
-    } else if (this.moving === true && this.attacking === true && this.activated === true && this.direction === "left") {
+    } else if (this.moving === true && this.attacking === true && this.activated === true && this.direction === "left") {  // left attack animation
       this.frameY = 4;
       if (this.animationCount < 11) {
         this.animationCount++;

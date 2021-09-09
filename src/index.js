@@ -1,7 +1,11 @@
 import Game from "./scripts/game";
 
 document.addEventListener('DOMContentLoaded', () => {
-  const canvas = document.getElementById("canvas");
-  const ctx = canvas.getContext("2d");
-  const game = new Game(ctx, canvas);
+  const mainCanvas = document.getElementById("mainCanvas");
+  const fog = document.getElementById("fog")
+  const dark = document.getElementById("dark")
+
+  const ctx = mainCanvas.getContext("2d");
+  // canvas width = 1200, canvas height = 700;
+  const game = new Game(ctx, mainCanvas);
 });
