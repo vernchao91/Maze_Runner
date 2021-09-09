@@ -3,9 +3,8 @@ import Item from './items'
 import Wraith from './wraith'
 
 class Player {
-  constructor(ctx, door) {
+  constructor(ctx) {
     this.ctx = ctx;
-    this.door = door
     this.frameX = 0; 
     this.frameY = 0;
     this.spriteHeight = 60;
@@ -13,43 +12,44 @@ class Player {
     this.animationCount = 0;
     this.x = 3;
     this.y = 45;
-    this.speed = 1;
+    this.speed = 2;
     this.maze = new Maze(ctx);
-    this.wraith = new Wraith(ctx);
-    this.items = new Item(ctx);
+    // this.wraith = new Wraith(ctx);
+    // this.items = new Item(ctx);
     this.playerSprite = new Image();
     this.playerSprite.src = 'src/assets/full-hero.png'
     this.playerSprite.onload = () => this.update();
     this.keyDown = this.keyDown.bind(this);
     this.keyUp = this.keyUp.bind(this);
-    this.itemKeys = []
+    // this.itemKeys = []
     this.keys = [];
     this.moving = false;
     this.lastInput = "down";
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
   }
   
-  animate() {
-    this.ctx.clearRect(0, 0, this.width, this.height);
-    this.wraith.update();
-    requestAnimationFrame(this.animate.bind(this));
-  }
+  // animate() {
+  //   this.ctx.clearRect(0, 0, this.ctx.width, this.ctx.height);
+  //   this.wraith.update();
+  //   requestAnimationFrame(this.animate.bind(this));
+  // }
 
-  update() {    
-    this.wraith.update();
+  update() {
+    // this.ctx.clearRect(0, 0, this.ctx.width, this.ctx.height);
+    // this.wraith.update();
     this.drawPlayer();
     this.animateFrame();
     this.move();
     this.maze.update();
     // this.wraith.autoMove();
-    this.items.update();
-    this.listener();
-    this.animate();
+    // this.items.update();
+    // this.listener();
+    // this.animate();
   }
 
-  listener () {
-    window.addEventListener("keypress", this.items.keyPress.bind(this))
-  }
+  // listener () {
+  //   window.addEventListener("keypress", this.items.keyPress.bind(this))
+  // }
 
   keyDown(e) {
     this.keys[e.keyCode] = true;
@@ -61,8 +61,8 @@ class Player {
     delete this.keys[e.keyCode];
     this.moving = false;
     console.log([e.keyCode] + " released");
-    // console.log(this.x + "x");
-    // console.log(this.y + "y");
+    console.log(this.x + "x");
+    console.log(this.y + "y");
   }
 
   animateSwitch() {
@@ -78,6 +78,8 @@ class Player {
     this.items.frameBlueDoorX = 285;
   }
 
+  
+
   move() {
     //return early and check if player.x and player.y < or > this.mazeobject
     // 1100 canvas right
@@ -92,15 +94,15 @@ class Player {
       // }
       // this.y += this.speed;
       // this.lastInput = "down";
-     } else if (this.keys[87] && this.y !== 40) { //top canvas
+     } else if (this.keys[87] && this.y > 40) { //top canvas
        this.y -= this.speed;
        this.lastInput = "up";
 
-     } else if (this.keys[65] && this.x !== 40) { //left canvas
+     } else if (this.keys[65] && this.x > 40) { //left canvas
        this.x -= this.speed;
        this.lastInput = "left";
 
-     } else if (this.keys[68] && this.x !== 1100 ) { //right canvas
+     } else if (this.keys[68] && this.x < 1100 ) { //right canvas
       // if ((this.x !== 250) && this.y < 210) { // first room
         this.x += this.speed;
         this.lastInput = "right";
@@ -113,8 +115,8 @@ class Player {
   }
 
   drawPlayer() {
-  this.ctx.drawImage(this.playerSprite, this.spriteWidth * this.frameX, this.spriteHeight * this.frameY,
-     this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteHeight)
+    this.ctx.drawImage(this.playerSprite, this.spriteWidth * this.frameX, this.spriteHeight * this.frameY,
+    this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteHeight);
   }
 
   animateFrame() {
@@ -167,10 +169,5 @@ class Player {
 
 
 }
-
-// 87w, 65a, 83s, 68d
-// ctx.beginPath();
-// ctx.arc(55, 55, 50, 0, 2 * Math.PI);
-// ctx.stroke();
 
 export default Player;

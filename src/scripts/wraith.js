@@ -3,23 +3,21 @@ class Wraith {
     this.ctx = ctx;
     this.frameX = 0
     this.frameY = 0
-    this.frameXL = 11;
-    this.spriteHeight = 70;
-    this.spriteWidth = 86.916;
-    this.animateCount = 0;
-    this.x = 500;
-    this.y = 500;
+    // this.frameXL = 11;
+    this.spriteHeight = 67;
+    this.spriteWidth = 86.6166666666;
+    this.animationCount = 0;
+    this.x = 980;
+    this.y = 40;
+    this.speed = .5;
     this.wraithSprite = new Image();
     this.wraithSprite.src = "src/assets/full-wraith.png"
+    this.wraithSprite.onload = () => this.update();
     this.moving = "false"
+    this.activated = "false"
     this.attacking = "false"
+    this.direction = "left"
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
-  }
-
-  animate() {
-    this.ctx.clearRect(0, 0, this.width, this.height);
-    this.update();
-    requestAnimationFrame(this.animate.bind(this));
   }
 
   update() { 
@@ -33,19 +31,39 @@ class Wraith {
   }
 
   animateFrame() {
-    if (!this.moving) {
+    if (this.moving === "false") {
       this.frameY = 0;
       if (this.animationCount < 11) {
-        this.animationcount++;
-      } else if (this.frameXL < 11) {
+        this.animationCount++;
+      } else if (this.frameX < 11) {
         this.frameX++;
-        this.animateCount = 0
+        this.animationCount = 0
       } else {
         this.frameX = 0;
         this.animationCount = 0;
       }
-    } else if (this.moving) {
-
+    } else if (this.moving === "true" && this.activated ==="true" && this.direction === "left") {
+      this.frameY = 1;
+      if (this.animationCount < 11) {
+        this.animationCount++;
+      } else if (this.frameX < 11) {
+        this.frameX++;
+        this.animationCount = 0;
+      } else {
+        this.frameX = 0;
+        this.animationCount = 0;
+      }
+    } else if (this.moving === "true" && this.activated === "true" && this.direction === "right") {
+      this.frameY = 2;
+      if (this.animationCount < 11) {
+        this.animationCount++;
+      } else if (this.frameX < 11) {
+        this.frameX++;
+        this.animationCount = 0;
+      } else {
+        this.frameX = 0;
+        this.animationCount = 0;
+      }
     }
   }
 

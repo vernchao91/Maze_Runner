@@ -11,7 +11,7 @@ class Maze {
     // this.topWall.onload = () => this.update();
     this.innerWall = new Image();
     this.innerWall.src = "src/assets/tile-sheet.png"
-    this.objects = [[302, 40, 15, 200]];
+    this.objects = [];
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
     // this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, y, 55, 80) // top/bottom wall
     // this.ctx.drawImage(this.wallImg, 775, 0, 50, 75, x, y, 55, 80) // side wall
@@ -21,18 +21,16 @@ class Maze {
     this.drawMaze();
     this.drawBorder();
     // this.drawWireFrame();
-    // this.drawDoor();
   }
   
-  drawWireFrame() {
-    this.ctx.beginPath();
-                  //x, y, width, height
-    // this.ctx.rect(302, 40, 15, 200)
-    this.ctx.rect(302, 40, 15, 200)
-    this.ctx.rect(52, 228, 248, 15)
-    this.ctx.stroke();
-    
-  }
+  // drawWireFrame() {
+  //   this.ctx.beginPath();
+  //                 //x, y, width, height
+  //   // this.ctx.rect(302, 40, 15, 200)
+  //   this.ctx.rect(302, 40, 15, 200)
+  //   this.ctx.rect(52, 228, 248, 15)
+  //   this.ctx.stroke();
+  // }
   
   drawMaze() {
     for (let y = 37; y < 350; y += 50) {

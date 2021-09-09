@@ -4,8 +4,6 @@
 h1 {
   position: static;
   color: #000000;
-  font-size: 78px;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   text-align: center;
   text-shadow: 3px 3px #5f8eb4;
   margin-top: auto;
@@ -41,12 +39,23 @@ canvas, #bg {
 }
 
 .instructions {
-  margin-left: 115px;
-  visibility: hidden;
+  margin-left: 20px;
+}
+
+.instructions > label {
+  border: 5px solid white;
+  font-weight: 500;
+  font-size: x-large;
+  display: flex;
+  text-align: center;
+  justify-content: flex;
+  background-color: rgba(245, 245, 245, 0.589);
+  width: 200px;
 }
 
 .socials {
-  display: flex;
+  margin-top: 430px;
+  margin-left: 875px;
 }
 
 #linkedin {
@@ -55,6 +64,7 @@ canvas, #bg {
   width: 40px;
   height: 30px;
   cursor: pointer;
+  bottom: auto;
 }
 
 #github {
