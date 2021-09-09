@@ -34,17 +34,15 @@ class Game {
   //   }
   // }
 
-  // draw() {
-  //   // this.eventListeners();
-  //   let setFPS = setTimeout(() => {
-  //     this.ctx.clearRect(0, 0, this.width, this.height);
-  //     this.maze.update();
-
-  //     this.items.update();
-  //     this.player.update();
-  //     window.requestAnimationFrame(this.draw)
-  //   }, 1000 / this.fps)
-  // }
+  draw() {
+    // this.eventListeners();
+    let setFPS = setTimeout(() => {
+      this.ctx.clearRect(0, 0, this.width, this.height);
+      
+      this.player.update();
+      requestAnimationFrame(this.draw.bind(this))
+    }, 1000 / this.fps)
+  }
 
   // gameOver(frame, setFPS) {
 
@@ -52,8 +50,6 @@ class Game {
 
   animate() {
     this.ctx.clearRect(0, 0, this.width, this.height);
-    // this.items.update();
-    // this.maze.update();
     this.player.update();
     requestAnimationFrame(this.animate.bind(this));
   }
@@ -61,9 +57,8 @@ class Game {
   start() {
     this.animate();
     this.eventListeners();
-    // this.draw();
+    this.draw();
   }
 
 }
-
 export default Game

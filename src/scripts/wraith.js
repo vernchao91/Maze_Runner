@@ -3,9 +3,9 @@ class Wraith {
     this.ctx = ctx;
     this.frameX = 0
     this.frameY = 0
-    this.frameXL = 11
+    this.frameXL = 11;
     this.spriteHeight = 70;
-    this.spriteWidth = 87.33;
+    this.spriteWidth = 86.916;
     this.animateCount = 0;
     this.x = 500;
     this.y = 500;
@@ -16,32 +16,36 @@ class Wraith {
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
   }
 
+  animate() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
+    this.update();
+    requestAnimationFrame(this.animate.bind(this));
+  }
+
   update() { 
     this.drawWraith();
     this.animateFrame();
   }
 
   drawWraith() {
-    this.ctx.drawImage(this.wraithSprite, this.spriteWidth * this.frameXL, 
+    this.ctx.drawImage(this.wraithSprite, this.spriteWidth * this.frameX, 
     this.spriteHeight * this.frameY, this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteHeight)
   }
 
-  // autoMove(playerX, playerY){
-
-  // }
-
   animateFrame() {
-    if (this.moving === "false") {
-      this.frameXL = 11;
-      if (this.animationCount < 0) {
+    if (!this.moving) {
+      this.frameY = 0;
+      if (this.animationCount < 11) {
         this.animationcount++;
-      } else if (this.frameXL < 0) {
-        this.frameXL--;
+      } else if (this.frameXL < 11) {
+        this.frameX++;
         this.animateCount = 0
       } else {
-        this.frameXL = 11;
+        this.frameX = 0;
         this.animationCount = 0;
       }
+    } else if (this.moving) {
+
     }
   }
 

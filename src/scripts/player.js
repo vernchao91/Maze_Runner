@@ -29,22 +29,22 @@ class Player {
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
   }
   
-  update() {
+  animate() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
+    this.wraith.update();
+    requestAnimationFrame(this.animate.bind(this));
+  }
+
+  update() {    
+    this.wraith.update();
     this.drawPlayer();
     this.animateFrame();
     this.move();
     this.maze.update();
     // this.wraith.autoMove();
     this.items.update();
-    // this.wraith.update();
     this.listener();
     this.animate();
-  }
-
-  animate() {
-    this.ctx.clearRect(0, 0, this.width, this.height);
-    this.wraith.update();
-    requestAnimationFrame(this.animate.bind(this));
   }
 
   listener () {
@@ -61,8 +61,8 @@ class Player {
     delete this.keys[e.keyCode];
     this.moving = false;
     console.log([e.keyCode] + " released");
-    console.log(this.x + "x");
-    console.log(this.y + "y");
+    // console.log(this.x + "x");
+    // console.log(this.y + "y");
   }
 
   animateSwitch() {
@@ -164,6 +164,7 @@ class Player {
       }
     } 
   }
+
 
 }
 
