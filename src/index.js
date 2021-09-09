@@ -10,4 +10,5 @@ document.addEventListener('DOMContentLoaded', () => {
   // playerSprite.src = 'src/assets/hero-spritesheet.png'
   // playerSprite.onload = () => {ctx.drawImage(playerSprite, 130, 29, 650, 650, 0, 0, 75, 75)}
   const game = new Game(ctx, canvas);
+  game.start();
 });

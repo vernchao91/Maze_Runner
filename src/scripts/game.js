@@ -13,21 +13,16 @@ class Game {
     // this.sounds = new this.sounds();
     this.draw = this.draw.bind(this)
     this.maze = new Maze(ctx)
-    this.items = new Item(ctx)
     this.wraith = new Wraith(ctx)
-    this.player = new Player(ctx, this.maze.objects)
-    this.start();
+    this.items = new Item(ctx)
+    this.player = new Player(ctx, this.maze, this.items.door)
+    // this.start();
   }
-
-  // draw(ctx) {
-  //   ctx.clearRect(0, 0, 400, 400);
-  //   ctx.fillStyle = "rgba(0, 0, 0, 0.3)"
-  //   ctx.fillRect(0, 0, 400, 400);
-  // }
 
   eventListeners() {
     window.addEventListener("keydown", this.player.keyDown.bind(this));
     window.addEventListener("keyup", this.player.keyUp.bind(this));
+    window.addEventListener("keypress", this.items.keyPress.bind(this))
     // window.addEventListener("keypress", this.startPause.bind(this));
   }
 
@@ -43,7 +38,10 @@ class Game {
     let setFPS = setTimeout(() => {
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.maze.update();
-      this.player.update();
+
+
+
+      this.player.update(this.maze.objects);
       this.items.update();
       window.requestAnimationFrame(this.draw)
     }, 1000 / this.fps)
