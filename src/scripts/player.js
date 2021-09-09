@@ -34,6 +34,7 @@ class Player {
     this.animateFrame();
     this.move();
     this.maze.update();
+    // this.wraith.autoMove();
     this.items.update();
     this.wraith.update();
     this.listener();
@@ -109,7 +110,6 @@ class Player {
      this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteWidth)
   }
 
-  
   animateFrame() {
     if (this.moving && this.lastInput === "down") {
       this.frameY = 0;
