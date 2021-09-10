@@ -4,12 +4,14 @@ import Item from './items'
 // import Maze from './maze';
 
 class Game {
-  constructor(ctx, canvas) {
-    this.canvas = canvas
+  constructor(ctx, canvas1, canvas2, canvas3) {
+    this.main = canvas1;
+    this.fog = canvas2;
+    this.dark = canvas3;
     this.ctx = ctx
     this.fps = 60;
-    this.width = this.canvas.width = 1200;
-    this.height = this.canvas.height = 700;
+    this.width = this.main.width = 1200;
+    this.height = this.main.height = 700;
     // this.draw = this.draw.bind(this)
     // this.sounds = new this.sounds();
     this.items = new Item(ctx)
@@ -19,7 +21,7 @@ class Game {
     this.start();
     this.ctx.shadowBlur = 150;
     this.ctx.shadowColor = 'black';
-    this.addFogOfWar(ctx);
+
   }
   
   eventListeners() {
@@ -49,11 +51,11 @@ class Game {
 
   // }
 
-  addFogOfWar(ctx) {
-    ctx.fillStyle = "black";
-    ctx.fillRect(0, 0, this.width, this.height)
-    // ctx.globalCompositeOperation = "destination-out"
-  }
+  // addFogOfWar(ctx) {
+  //   ctx.fillStyle = "black";
+  //   ctx.fillRect(0, 0, this.width, this.height)
+  //   // ctx.globalCompositeOperation = "destination-out"
+  // }
 
   // clearFogOfWar() {
 
@@ -88,27 +90,34 @@ class Game {
         this.wraith.x += this.wraith.speed;
         this.wraith.y += this.wraith.speed
         this.wraith.direction = "right";
+
       } else if (this.wraith.x > this.player.x && this.wraith.y > this.player.y) {
         this.wraith.x -= this.wraith.speed;
         this.wraith.y -= this.wraith.speed;
         this.wraith.direction = "left";
+
       } else if (this.wraith.y < this.player.y && this.wraith.x > this.player.x) {
         this.wraith.y += this.wraith.speed;
         this.wraith.x -= this.wraith.speed;
         this.wraith.direction = "left";
+
       } else if (this.wraith.y > this.player.y && this.wraith.x < this.player.x) {
         this.wraith.y -= this.wraith.speed;
         this.wraith.x += this.wraith.speed;
         this.wraith.direction = "right";
+
       } else if (this.wraith.x < this.player.x) {
         this.wraith.x += this.wraith.speed;
         this.wraith.direction = "right";
+
       } else if (this.wraith.x > this.player.x) {
         this.wraith.x -= this.wraith.speed;
         this.wraith.direction = "left";
+
       } else if (this.wraith.y < this.player.y) {
         this.wraith.y += this.wraith.speed;
         this.wraith.direction = "left";
+
       } else if (this.wraith.y > this.player.y) {
         this.wraith.y -= this.wraith.speed;
         this.wraith.direction = "right";

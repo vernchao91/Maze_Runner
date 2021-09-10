@@ -79,3 +79,33 @@ h1 {
   height: 30px;
   cursor: pointer;
 }
+
+// @media only screen and (max-height: 740px) {
+
+//   canvas, #bg , .instruction{
+//     width: 400px;
+//     height: 400px;
+//     position: relative;
+//     display: block;
+//     padding: .4em .4em;
+//     @include canvasborder( 4px, #EAB464, #8D98A7 );
+//   }
+
+//   canvas, .instruction {
+//     margin-top: -433px;
+//     // @include canvasborder( 4px, #EAB464, #8D98A7 );
+//   }
+
+//   .start > p.begin {
+//   color: black;
+//   position: relative;
+//   top: 140px;
+//   left: 130px;
+//   padding: 20px;
+//   background-color: rgb(163, 163, 163);
+//   @include title( 4px,#A7754D, #FED9B7 );
+//   cursor: pointer;
+//   z-index: 3;
+//   }
+
+// }
