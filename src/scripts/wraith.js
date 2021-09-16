@@ -1,14 +1,14 @@
 class Wraith {
-  constructor(ctx) {
+  constructor(ctx, x, y) {
     this.ctx = ctx;
+    this.x = x;
+    this.y = y;
     this.frameX = 0
     this.frameY = 0
     // this.frameXL = 11;
     this.spriteHeight = 67;
     this.spriteWidth = 86.6166666666;
     this.animationCount = 0;
-    this.x = 980;
-    this.y = 40;
     this.speed = .5;
     this.wraithSprite = new Image();
     this.wraithSprite.src = "src/assets/full-wraith.png"

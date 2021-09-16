@@ -8,8 +8,6 @@ class Items {
     this.height = this.spriteHeight / 10;
     this.width = this.spriteWidth / 10;
     this.frameSwitchX = 350; // lever pushed
-    this.canvasSwitchX = 258;
-    this.canvasSwitchY = 35;
     this.frameBlueDoorX = 217;
     this.frameRedDoorX = 81;
     this.tileImg = new Image();
@@ -23,31 +21,13 @@ class Items {
     // this.tile2Img.onload = () => this.update();
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
   }
-
+  
   keyPress(e) {
     this.keys[e.keyCode] = true;
   }
-
+  
   update() {
-    this.drawItem();
-    this.drawDoor();
-    this.drawHeart();
     this.animateSwitch();
-  }
-
-  drawItem() {
-    this.ctx.drawImage(this.tileImg, 690, 5, 30, 50, 50, 630, 40, 50); // torch
-    this.ctx.drawImage(this.tile2Img, 0, 0, 120, 90, 1110, 40, 40, 40); // key
-    this.ctx.drawImage(this.tileImg, this.frameSwitchX, 0, 50, 100, this.canvasSwitchX, this.canvasSwitchY, 50, 70); // switch
-  }
-
-  drawDoor() {
-    this.ctx.drawImage(this.tileImg, this.frameBlueDoorX, 0, 50, 100, 51, 194, 52, 80) //door
-    this.ctx.drawImage(this.tileImg, this.frameRedDoorX, 0, 50, 100, 1103, 415, 52, 80) //door
-  }
-
-  drawHeart() {
-    this.ctx.drawImage(this.tile2Img, 115, 0, 150, 155, 925, 625, 40, 40); // heart
   }
 
   animateSwitch() {
@@ -55,14 +35,43 @@ class Items {
       this.frameSwitchX = 430;
       this.canvasSwitchY = 38;
       this.canvasSwitchX = 265;
-      this.animateDoor();
+      this.animateBlueDoor();
     }
   }
 
-  animateDoor() {
+  animateBlueDoor() {
     this.frameBlueDoorX = 285;
     this.door ="opened"
   }
+
+  animateRedDoor() {
+    
+  }
+
+  drawTorch(x, y) {
+    this.ctx.drawImage(this.tileImg, 690, 5, 30, 50, x, y, 40, 50); // torch
+  }
+
+  drawKey(x, y) {
+    this.ctx.drawImage(this.tile2Img, 0, 0, 120, 90, x, y, 40, 40); // key
+  }
+
+  drawSwitch(x, y) {
+    this.ctx.drawImage(this.tileImg, this.frameSwitchX, 0, 50, 100, x, y, 50, 70); // switch
+  }
+
+  drawBlueDoor(x, y) {
+    this.ctx.drawImage(this.tileImg, this.frameBlueDoorX, 0, 50, 100, x, y, 52, 80) //blue door
+  }
+
+  drawRedDoor(x, y) {
+    this.ctx.drawImage(this.tileImg, this.frameRedDoorX, 0, 50, 100, x, y, 52, 80) //red door
+  }
+
+  drawHeart(x, y) {
+    this.ctx.drawImage(this.tile2Img, 115, 0, 150, 155, x, y, 40, 40); // heart
+  }
+
 
 }
 

@@ -1,14 +1,19 @@
+import Player from './player';
+import Wraith from './wraith'
+import Item from './items'
+
 class Maze {
   constructor(ctx) {
     this.ctx = ctx;
-    // this.x = [];
-    // this.y = [];
+    this.player = new Player(ctx, 3, 40);
+    this.wraith = new Wraith(ctx, 980, 40);
+    this.items = new Item(ctx);
     this.wallImg = new Image();
     this.wallImg.src = "src/assets/tile-sheet.png"
-    // this.wallImg.onload = () => this.update();
+    this.wallImg.onload = () => this.update();
     this.topWall = new Image();
     this.topWall.src = "src/assets/tile-sheet2.png"
-    // this.topWall.onload = () => this.update();
+    this.topWall.onload = () => this.update();
     this.innerWall = new Image();
     this.innerWall.src = "src/assets/tile-sheet.png"
     this.objects = [{x: 302, y: 40, width: 15, height: 350}, {x: 52, y: 228, width: 248, height: 15}];
@@ -16,8 +21,29 @@ class Maze {
     // this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, y, 55, 80) // top/bottom wall
     // this.ctx.drawImage(this.wallImg, 775, 0, 50, 75, x, y, 55, 80) // side wall
   }
+
+  updateItems() {
+    this.items.drawRedDoor(1103, 415);
+    this.items.drawBlueDoor(51, 194);
+    this.items.drawSwitch(258, 35);
+    this.items.drawHeart(915, 625);
+    this.items.drawTorch(50, 630);
+    this.items.drawKey(1110, 40);
+    this.items.update();
+  }
+
+  updatePlayer() {
+    this.player.update();
+  }
+
+  updateWraith() {
+    this.wraith.update();
+  }
   
   update() {
+    this.updateItems();
+    this.updatePlayer();
+    this.updateWraith();
     this.drawMaze();
     this.drawBorder();
     this.drawWireFrame();

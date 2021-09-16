@@ -1,21 +1,14 @@
-import Maze from './maze';
-import Item from './items'
-import Wraith from './wraith'
-
 class Player {
-  constructor(ctx) {
+  constructor(ctx, x, y) {
     this.ctx = ctx;
+    this.x = x; // x position canvas
+    this.y = y; // y position canvas
     this.frameX = 0; 
     this.frameY = 0;
     this.spriteHeight = 60;
     this.spriteWidth = 60;
     this.animationCount = 0;
-    this.x = 3;
-    this.y = 45;
     this.speed = 3;
-    this.maze = new Maze(ctx);
-    // this.wraith = new Wraith(ctx);
-    // this.items = new Item(ctx);
     this.playerSprite = new Image();
     this.playerSprite.src = 'src/assets/full-hero.png'
     this.playerSprite.onload = () => this.update();
@@ -29,23 +22,11 @@ class Player {
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
   }
   
-  // animate() {
-  //   this.ctx.clearRect(0, 0, this.ctx.width, this.ctx.height);
-  //   this.wraith.update();
-  //   requestAnimationFrame(this.animate.bind(this));
-  // }
-
   update() {
     // this.ctx.clearRect(0, 0, this.ctx.width, this.ctx.height);
-    // this.wraith.update();
     this.drawPlayer();
     this.animateFrame();
     this.move();
-    this.maze.update();
-    // this.wraith.autoMove();
-    // this.items.update();
-    // this.listener();
-    // this.animate();
   }
 
   // listener () {
@@ -79,19 +60,19 @@ class Player {
     this.items.frameBlueDoorX = 285;
   }
 
-  collision() {
-    this.maze.objects.forEach(wall => {
-      if (this.x < wall.x + wall.width &&
-        wall.x + this.width > wall.x &&
-        this.y < wall.y + wall.height &&
-        this.y + this.height > wall.y) {
-        this.moving = false
-      }
-    });
-  }
+  // collision() {
+  //   this.maze.objects.forEach(wall => {
+  //     if (this.x < wall.x + wall.width &&
+  //       wall.x + this.width > wall.x &&
+  //       this.y < wall.y + wall.height &&
+  //       this.y + this.height > wall.y) {
+  //       this.moving = false
+  //     }
+  //   });
+  // }
 
   move() {
-    this.collision();
+    // this.collision();
     //return early and check if player.x and player.y < or > this.mazeobject
     // 1100 canvas right
     // 45 canvas left

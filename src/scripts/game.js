@@ -1,7 +1,4 @@
-import Player from './player';
-import Wraith from './wraith'
-import Item from './items'
-// import Maze from './maze';
+import Maze from './maze';
 
 class Game {
   constructor(ctx, canvas1, canvas2, canvas3) {
@@ -14,20 +11,15 @@ class Game {
     this.height = this.main.height = 700;
     // this.draw = this.draw.bind(this)
     // this.sounds = new this.sounds();
-    this.items = new Item(ctx)
-    this.wraith = new Wraith(ctx)
-    this.player = new Player(ctx)
-    // this.maze = new Maze(ctx)
-    this.start();
+    this.maze = new Maze(ctx);
     this.ctx.shadowBlur = 150;
     this.ctx.shadowColor = 'black';
-
   }
   
   eventListeners() {
-    window.addEventListener("keydown", this.player.keyDown.bind(this));
-    window.addEventListener("keyup", this.player.keyUp.bind(this));
-    window.addEventListener("keypress", this.items.keyPress.bind(this))
+    window.addEventListener("keydown", this.maze.player.keyDown.bind(this));
+    window.addEventListener("keyup", this.maze.player.keyUp.bind(this));
+    window.addEventListener("keypress", this.maze.items.keyPress.bind(this))
     // window.addEventListener("keypress", this.startPause.bind(this));
   }
 
@@ -61,85 +53,82 @@ class Game {
 
   // }
 
-  attacking() {
-    if (this.wraith.activated === true && this.wraith.moving === true ) { // wraith attacking
-      if (this.wraith.x - this.player.x <= 10) {
-        this.wraith.attacking = true;
-      } else if (this.player.x - this.wraith.x <= 10) {
-        this.wraith.attacking = true;
-      } else if (this.wraith.y - this.player.y <= 10) {
-        this.wraith.attacking = true;
-      } else if (this.player.y - this.wraith.y <= 10) {
-        this.wraith.attacking = true;
-      }
-    // } else if (this.wraith.x - this.player.x >= 10 || this.wraith.x - this.player.x >= 10) {
-    //   this.wraith.attacking = false;
-    }
-  }
+  // attacking() {
+  //   if (this.wraith.activated === true && this.wraith.moving === true ) { // wraith attacking
+  //     if (this.wraith.x - this.player.x <= 10) {
+  //       this.wraith.attacking = true;
+  //     } else if (this.player.x - this.wraith.x <= 10) {
+  //       this.wraith.attacking = true;
+  //     } else if (this.wraith.y - this.player.y <= 10) {
+  //       this.wraith.attacking = true;
+  //     } else if (this.player.y - this.wraith.y <= 10) {
+  //       this.wraith.attacking = true;
+  //     }
+  //   // } else if (this.wraith.x - this.player.x >= 10 || this.wraith.x - this.player.x >= 10) {
+  //   //   this.wraith.attacking = false;
+  //   }
+  // }
 
   activate() {
-    if (this.player.x > 900 && this.player.y > 38 && this.player.y < 120) { // wraith activating
-      this.wraith.activated = true;
-      this.wraith.moving = true;
+    if (this.maze.player.x > 900 && this.maze.player.y > 38 && this.maze.player.y < 120) { // wraith activating
+      this.maze.wraith.activated = true;
+      this.maze.wraith.moving = true;
     }
   }
 
-  chase() {  // wraith AI chase
-    if (this.wraith.activated === true) {
-      if (this.wraith.x < this.player.x && this.wraith.y < this.player.y) {
-        this.wraith.x += this.wraith.speed;
-        this.wraith.y += this.wraith.speed
-        this.wraith.direction = "right";
+  chase() {  // maze.wraith AI chase
+    if (this.maze.wraith.activated === true) {
+      if (this.maze.wraith.x < this.maze.player.x && this.maze.wraith.y < this.maze.player.y) {
+        this.maze.wraith.x += this.maze.wraith.speed;
+        this.maze.wraith.y += this.maze.wraith.speed
+        this.maze.wraith.direction = "right";
 
-      } else if (this.wraith.x > this.player.x && this.wraith.y > this.player.y) {
-        this.wraith.x -= this.wraith.speed;
-        this.wraith.y -= this.wraith.speed;
-        this.wraith.direction = "left";
+      } else if (this.maze.wraith.x > this.maze.player.x && this.maze.wraith.y > this.maze.player.y) {
+        this.maze.wraith.x -= this.maze.wraith.speed;
+        this.maze.wraith.y -= this.maze.wraith.speed;
+        this.maze.wraith.direction = "left";
 
-      } else if (this.wraith.y < this.player.y && this.wraith.x > this.player.x) {
-        this.wraith.y += this.wraith.speed;
-        this.wraith.x -= this.wraith.speed;
-        this.wraith.direction = "left";
+      } else if (this.maze.wraith.y < this.maze.player.y && this.maze.wraith.x > this.maze.player.x) {
+        this.maze.wraith.y += this.maze.wraith.speed;
+        this.maze.wraith.x -= this.maze.wraith.speed;
+        this.maze.wraith.direction = "left";
 
-      } else if (this.wraith.y > this.player.y && this.wraith.x < this.player.x) {
-        this.wraith.y -= this.wraith.speed;
-        this.wraith.x += this.wraith.speed;
-        this.wraith.direction = "right";
+      } else if (this.maze.wraith.y > this.maze.player.y && this.maze.wraith.x < this.maze.player.x) {
+        this.maze.wraith.y -= this.maze.wraith.speed;
+        this.maze.wraith.x += this.maze.wraith.speed;
+        this.maze.wraith.direction = "right";
 
-      } else if (this.wraith.x < this.player.x) {
-        this.wraith.x += this.wraith.speed;
-        this.wraith.direction = "right";
+      } else if (this.maze.wraith.x < this.maze.player.x) {
+        this.maze.wraith.x += this.maze.wraith.speed;
+        this.maze.wraith.direction = "right";
 
-      } else if (this.wraith.x > this.player.x) {
-        this.wraith.x -= this.wraith.speed;
-        this.wraith.direction = "left";
+      } else if (this.maze.wraith.x > this.maze.player.x) {
+        this.maze.wraith.x -= this.maze.wraith.speed;
+        this.maze.wraith.direction = "left";
 
-      } else if (this.wraith.y < this.player.y) {
-        this.wraith.y += this.wraith.speed;
-        this.wraith.direction = "left";
+      } else if (this.maze.wraith.y < this.maze.player.y) {
+        this.maze.wraith.y += this.maze.wraith.speed;
+        this.maze.wraith.direction = "left";
 
-      } else if (this.wraith.y > this.player.y) {
-        this.wraith.y -= this.wraith.speed;
-        this.wraith.direction = "right";
+      } else if (this.maze.wraith.y > this.maze.player.y) {
+        this.maze.wraith.y -= this.maze.wraith.speed;
+        this.maze.wraith.direction = "right";
       }
     }
   }
 
-  animate() {
+  animateMazeOne() {
     this.ctx.clearRect(0, 0, this.width, this.height);
-    this.chase();
     this.activate();
-    this.attacking();
-    this.items.update();
-    this.player.update();
-    this.wraith.update();
-    requestAnimationFrame(this.animate.bind(this));
+    this.chase();
+    // this.attacking();
+    this.maze.update();
+    requestAnimationFrame(this.animateMazeOne.bind(this));
   }
 
-  start() {
-    this.animate();
+  startMazeOne() {
+    this.animateMazeOne();
     this.eventListeners();
-    // this.draw();
   }
 
 }

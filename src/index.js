@@ -18,5 +18,5 @@ document.addEventListener('DOMContentLoaded', () => {
   //     e.preventDefault();
   //   }
   // });
-
+  game.startMazeOne();
 });
