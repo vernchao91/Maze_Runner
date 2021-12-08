@@ -10,16 +10,78 @@ class Maze {
     this.items = new Item(ctx);
     this.wallImg = new Image();
     this.wallImg.src = "src/assets/tile-sheet.png"
-    this.wallImg.onload = () => this.update();
+    // this.wallImg.onload = () => this.update();
     this.topWall = new Image();
     this.topWall.src = "src/assets/tile-sheet2.png"
-    this.topWall.onload = () => this.update();
+    // this.topWall.onload = () => this.update();
     this.innerWall = new Image();
     this.innerWall.src = "src/assets/tile-sheet.png"
     this.objects = [{x: 302, y: 40, width: 15, height: 350}, {x: 52, y: 228, width: 248, height: 15}];
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
     // this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, y, 55, 80) // top/bottom wall
     // this.ctx.drawImage(this.wallImg, 775, 0, 50, 75, x, y, 55, 80) // side wall
+  }
+
+  attacking() {
+    if (this.wraith.activated === true && this.wraith.moving === true ) { // wraith attacking
+      if (this.wraith.x - this.player.x <= 10 && this.wraith.y - this.player.y <= 10) {
+        this.wraith.attacking = true;
+      } else if (this.player.x - this.wraith.x <= 10) {
+        this.wraith.attacking = true;
+      } else if (this.wraith.y - this.player.y <= 10) {
+        this.wraith.attacking = true;
+      } else if (this.player.y - this.wraith.y <= 10) {
+        this.wraith.attacking = true;
+      }
+    }
+  }
+
+  activate() {
+    if (this.player.x > 900 && this.player.y > 38 && this.player.y < 120) { // wraith activating
+      this.wraith.activated = true;
+      this.wraith.moving = true;
+    }
+  }
+
+  chase() {  // maze.wraith AI chase
+    if (this.wraith.activated === true) {
+      if (this.wraith.x < this.player.x && this.wraith.y < this.player.y) {
+        this.wraith.x += this.wraith.speed;
+        this.wraith.y += this.wraith.speed
+        this.wraith.direction = "right";
+
+      } else if (this.wraith.x > this.player.x && this.wraith.y > this.player.y) {
+        this.wraith.x -= this.wraith.speed;
+        this.wraith.y -= this.wraith.speed;
+        this.wraith.direction = "left";
+
+      } else if (this.wraith.y < this.player.y && this.wraith.x > this.player.x) {
+        this.wraith.y += this.wraith.speed;
+        this.wraith.x -= this.wraith.speed;
+        this.wraith.direction = "left";
+
+      } else if (this.wraith.y > this.player.y && this.wraith.x < this.player.x) {
+        this.wraith.y -= this.wraith.speed;
+        this.wraith.x += this.wraith.speed;
+        this.wraith.direction = "right";
+
+      } else if (this.wraith.x < this.player.x) {
+        this.wraith.x += this.wraith.speed;
+        this.wraith.direction = "right";
+
+      } else if (this.wraith.x > this.player.x) {
+        this.wraith.x -= this.wraith.speed;
+        this.wraith.direction = "left";
+
+      } else if (this.wraith.y < this.player.y) {
+        this.wraith.y += this.wraith.speed;
+        this.wraith.direction = "left";
+
+      } else if (this.wraith.y > this.player.y) {
+        this.wraith.y -= this.wraith.speed;
+        this.wraith.direction = "right";
+      }
+    }
   }
 
   updateItems() {
@@ -31,22 +93,17 @@ class Maze {
     this.items.drawKey(1110, 40);
     this.items.update();
   }
-
-  updatePlayer() {
-    this.player.update();
-  }
-
-  updateWraith() {
-    this.wraith.update();
-  }
   
   update() {
     this.updateItems();
-    this.updatePlayer();
-    this.updateWraith();
+    this.player.update();
+    this.wraith.update();
     this.drawMaze();
     this.drawBorder();
     this.drawWireFrame();
+    this.activate();
+    this.chase();
+    this.attacking();
   }
   
   drawWireFrame() {
