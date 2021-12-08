@@ -1,84 +1,100 @@
-h1 {
-  position: static;
-  color: #000000;
-  text-align: center;
-  text-shadow: 3px 3px #5f8eb4;
-  margin-top: auto;
-}
-
-#mainCanvas, #bg {
-  border: 5px solid white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);   
-  border-radius: 10px; 
-}
-
-#bg {
-  opacity: .35;
-  width: 1200px;
-  height: 700px
-}
-
-.item {
-  position: relative;
-  text-align: right;
-  margin-right: 150px;
-  visibility: hidden;
-}
-
-.character-information {
-  position: relative;
-  text-align: right;
-  margin-right: 80px;
-  visibility: hidden;
-}
-
-.instructions {
-  margin-left: 20px;
-  // visibility: hidden;
-}
-
-.instructions > label {
-  border: 5px solid white;
-  font-size: x-large;
+body {
   display: flex;
-  text-align: center;
-  background-color: rgba(245, 245, 245, 0.589);
-  width: 200px;
-  margin-left: 45px;
+  .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 18vw;
+    min-width: 338px;
+    img {
+      width: 314px;
+      height: 83px;
+    }
+    label {
+      border: 5px solid white;
+      font-size: x-large;
+      display: flex;
+      text-align: center;
+      background-color: rgba(245, 245, 245, 0.589);
+      width: 200px;
+      margin-left: 45px;
+    }
+  }
+  
+  .middle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 1315px;
+    width: 70vw;
+  
+    .canvas-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-width: 1200px;
+      #mainCanvas {
+        border: 5px solid white;
+        position: absolute;
+        // transform: translate(-50%, -50%);
+        border-radius: 10px; 
+        min-width: 1200px;
+        height: 700px
+      }
+      #bg {
+        min-width: 1200px;
+        width: 1200px;
+        height: 700px;
+        opacity: .35;
+      }
+    }
+    .socials {
+      margin-top: 20px;
+      #linkedin {
+        background-size: cover;
+        border-radius: 3px;
+        width: 40px;
+        height: 30px;
+        cursor: pointer;
+      }
+      #github {
+        background-size: cover;
+        border-radius: 15px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+      }
+      #angellist {
+        background-size: cover;
+        border-radius: 15px;
+        width: 30px;
+        height: 30px;
+        cursor: pointer;
+      }
+    }
+  }
+  
+  .right {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 230px;
+    min-width: 12vw;
+    .item {
+      text-align: right;
+      // visibility: hidden;
+    }
+    .character-information {
+      text-align: right;
+      // visibility: hidden;
+    }
+  }
+
 }
 
-.socials {
-  margin-top: 200px;
-  margin-left: 875px;
-}
-
-#linkedin {
-  background-size: cover;
-  border-radius: 3px;
-  width: 40px;
-  height: 30px;
-  cursor: pointer;
-  bottom: auto;
-}
-
-#github {
-  background-size: cover;
-  border-radius: 15px;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
-
-#angellist {
-  background-size: cover;
-  border-radius: 15px;
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
 
 // @media only screen and (max-height: 740px) {
 

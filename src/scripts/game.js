@@ -75,7 +75,7 @@ class Game {
       this.maze.wraith.moving = true;
     }
   }
-
+  
   chase() {  // maze.wraith AI chase
     if (this.maze.wraith.activated === true) {
       if (this.maze.wraith.x < this.maze.player.x && this.maze.wraith.y < this.maze.player.y) {

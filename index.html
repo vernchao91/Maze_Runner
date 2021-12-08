@@ -11,33 +11,40 @@
 
 </head>
 <body style="background-color: rgb(53, 52, 52);">
-  
   <link rel="shortcut icon" href="src/assets/favicon.ico"/>
-  <h1><img src = "src/assets/MazeRunner.png"></h1>
-  <img id="bg" src="src\assets\background.jpg" alt="background">
-  <canvas id="mainCanvas"></canvas>
-  <canvas id="fog"></canvas>
-  <canvas id="dark"></canvas>
   
-  <div class="item">
-    <label>Item</label>
-  </div>
-  
-  <div class="instructions">
-    <img src = "src/assets/howtoplay.png">
+  <div class="left">
+    <img src="src/assets/howtoplay.png">
     <label>Use WASD to navigate through the maze.
       Use Spacebar for interactions throughout the game. Don't get too close to the ghost, he might start chasing you!</label>
   </div>
-  
-  <div class="character-information">
-    <label>Character Information</label>
+
+  <div class="middle">
+    <h1><img src = "src/assets/MazeRunner.png"></h1>
+
+    <div class="canvas-wrapper">
+      <img id="bg" src="src\assets\background.jpg" alt="background">
+      <canvas id="mainCanvas"></canvas>
+      <!-- <canvas id="fog"></canvas> -->
+      <!-- <canvas id="dark"></canvas> -->
+    </div>
+
+    <div class="socials">
+      <a href="https://www.linkedin.com/in/vern-chao-a8201a1ba/" target="_blank"><img id="linkedin" src="src\assets\linkedinlogo.png"></a>
+      <a href="https://github.com/vernchao91" target="_blank"><img id="github" src="src\assets\githublogo.png"></a>
+      <a href="https://angel.co/u/vern-chien-chao" target="_blank"><img id="angellist" src="src\assets\angellistlogo.png"></a>
+    </div>
+  </div>
+    
+  <div class="right">
+    <div class="item">
+      <label>Item</label>
+    </div>
+    <div class="character-information">
+      <label>Character Information</label>
+    </div>
   </div>
 
-  <footer class="socials">
-    <a href="https://www.linkedin.com/in/vern-chao-a8201a1ba/" target="_blank"><img id="linkedin" src="src\assets\linkedinlogo.png"></a>
-    <a href="https://github.com/vernchao91" target="_blank"><img id="github" src="src\assets\githublogo.png"></a>
-    <a href="https://angel.co/u/vern-chien-chao" target="_blank"><img id="angellist" src="src\assets\angellistlogo.png"></a>
-  </footer>
 </body>
 </html>
 
