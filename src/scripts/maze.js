@@ -1,3 +1,5 @@
+import MovingObject, { call } from "./moving_object";
+import Util from "./util";
 import Player from './player';
 import Wraith from './wraith'
 import Item from './items'
@@ -178,7 +180,8 @@ class Maze {
       this.ctx.drawImage(this.wallImg, 638, 0, 55, 80, 0, y, 60, 83)
     }
   }
-
 }
+
+// Util.inherits(Maze, MovingObject)
 
 export default Maze;

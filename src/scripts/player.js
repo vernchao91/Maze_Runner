@@ -1,3 +1,7 @@
+import MovingObject, { call } from "./moving_object";
+// import { inherits, norm as _norm, scale, dir } from "./util";
+import Util from "./util";
+
 class Player {
   constructor(ctx, x, y) {
     this.ctx = ctx;
@@ -28,10 +32,6 @@ class Player {
     this.animateFrame();
     this.move();
   }
-
-  // listener () {
-  //   window.addEventListener("keypress", this.items.keyPress.bind(this))
-  // }
 
   keyDown(e) {
     this.keys[e.keyCode] = true;
@@ -129,5 +129,7 @@ class Player {
     } 
   }
 }
+
+// Util.inherits(Player, MovingObject);
 
 export default Player;

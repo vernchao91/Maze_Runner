@@ -53,73 +53,8 @@ class Game {
 
   // }
 
-  // attacking() {
-  //   if (this.maze.wraith.activated === true && this.maze.wraith.moving === true ) { // wraith attacking
-  //     if (this.maze.wraith.x - this.maze.player.x <= 10) {
-  //       this.maze.wraith.attacking = true;
-  //     } else if (this.maze.player.x - this.maze.wraith.x <= 10) {
-  //       this.maze.wraith.attacking = true;
-  //     } else if (this.maze.wraith.y - this.maze.player.y <= 10) {
-  //       this.maze.wraith.attacking = true;
-  //     } else if (this.maze.player.y - this.maze.wraith.y <= 10) {
-  //       this.maze.wraith.attacking = true;
-  //     }
-  //   }
-  // }
-
-  // activate() {
-  //   if (this.maze.player.x > 900 && this.maze.player.y > 38 && this.maze.player.y < 120) { // wraith activating
-  //     this.maze.wraith.activated = true;
-  //     this.maze.wraith.moving = true;
-  //   }
-  // }
-
-  // chase() {  // maze.wraith AI chase
-  //   if (this.maze.wraith.activated === true) {
-  //     if (this.maze.wraith.x < this.maze.player.x && this.maze.wraith.y < this.maze.player.y) {
-  //       this.maze.wraith.x += this.maze.wraith.speed;
-  //       this.maze.wraith.y += this.maze.wraith.speed
-  //       this.maze.wraith.direction = "right";
-
-  //     } else if (this.maze.wraith.x > this.maze.player.x && this.maze.wraith.y > this.maze.player.y) {
-  //       this.maze.wraith.x -= this.maze.wraith.speed;
-  //       this.maze.wraith.y -= this.maze.wraith.speed;
-  //       this.maze.wraith.direction = "left";
-
-  //     } else if (this.maze.wraith.y < this.maze.player.y && this.maze.wraith.x > this.maze.player.x) {
-  //       this.maze.wraith.y += this.maze.wraith.speed;
-  //       this.maze.wraith.x -= this.maze.wraith.speed;
-  //       this.maze.wraith.direction = "left";
-
-  //     } else if (this.maze.wraith.y > this.maze.player.y && this.maze.wraith.x < this.maze.player.x) {
-  //       this.maze.wraith.y -= this.maze.wraith.speed;
-  //       this.maze.wraith.x += this.maze.wraith.speed;
-  //       this.maze.wraith.direction = "right";
-
-  //     } else if (this.maze.wraith.x < this.maze.player.x) {
-  //       this.maze.wraith.x += this.maze.wraith.speed;
-  //       this.maze.wraith.direction = "right";
-
-  //     } else if (this.maze.wraith.x > this.maze.player.x) {
-  //       this.maze.wraith.x -= this.maze.wraith.speed;
-  //       this.maze.wraith.direction = "left";
-
-  //     } else if (this.maze.wraith.y < this.maze.player.y) {
-  //       this.maze.wraith.y += this.maze.wraith.speed;
-  //       this.maze.wraith.direction = "left";
-
-  //     } else if (this.maze.wraith.y > this.maze.player.y) {
-  //       this.maze.wraith.y -= this.maze.wraith.speed;
-  //       this.maze.wraith.direction = "right";
-  //     }
-  //   }
-  // }
-
   animateMazeOne() {
     this.ctx.clearRect(0, 0, this.width, this.height);
-    // this.activate();
-    // this.chase();
-    // this.attacking();
     this.maze.update();
     requestAnimationFrame(this.animateMazeOne.bind(this));
   }
