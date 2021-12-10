@@ -9,11 +9,11 @@ class Player {
     this.y = y; // y position canvas
     this.frameX = 0; 
     this.frameY = 0;
-    this.spriteDimension = {x: this.x, y: this.y, w: this.spriteWidth, h: this.spriteHeight}
     this.spriteHeight = 60;
     this.spriteWidth = 60;
+    // this.spriteDimension = { x: this.x, y: this.y, w: 60, h: 60 }
     this.animationCount = 0;
-    this.speed = 3;
+    this.speed = 1;
     this.playerSprite = new Image();
     this.playerSprite.src = 'src/assets/full-hero.png'
     // this.playerSprite.onload = () => this.update();

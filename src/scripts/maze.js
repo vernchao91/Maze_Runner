@@ -32,19 +32,32 @@ class Maze {
     // window.addEventListener("keypress", this.startPause.bind(this));
   }
 
-  attacking() {
-    if (this.wraith.activated === true && this.wraith.moving === true ) { // wraith attacking
-      if (this.wraith.x - this.player.x <= 10 && this.wraith.y - this.player.y <= 10) {
-        this.wraith.attacking = true;
-      } else if (this.player.x - this.wraith.x <= 10) {
-        this.wraith.attacking = true;
-      } else if (this.wraith.y - this.player.y <= 10) {
-        this.wraith.attacking = true;
-      } else if (this.player.y - this.wraith.y <= 10) {
-        this.wraith.attacking = true;
-      }
+  attacking(player, wraith) {
+    let xDistance = wraith.x - player.x;
+    let yDistance = wraith.y - player.y;
+
+    let distance = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+
+    if (distance < 30)  {
+      this.wraith.attacking = true
+    } else if ( distance > 30) {
+      this.wraith.attacking = false
     }
   }
+
+  // attacking(player, wraith) {
+  //   if (this.wraith.activated === true && this.wraith.moving === true ) { // wraith attacking
+  //     if (this.wraith.x - this.player.x <= 10 && this.wraith.y - this.player.y <= 10) {
+  //       this.wraith.attacking = true;
+  //     } else if (this.player.x - this.wraith.x <= 10) {
+  //       this.wraith.attacking = true;
+  //     } else if (this.wraith.y - this.player.y <= 10) {
+  //       this.wraith.attacking = true;
+  //     } else if (this.player.y - this.wraith.y <= 10) {
+  //       this.wraith.attacking = true;
+  //     }
+  //   }
+  // }
 
   activate() {
     if (this.player.x > 900 && this.player.y > 38 && this.player.y < 120) { // wraith activating
@@ -113,7 +126,7 @@ class Maze {
     this.drawWireFrame();
     this.activate();
     this.chase();
-    this.attacking();
+    this.attacking(this.player, this.wraith);
     this.eventListeners();
   }
   
