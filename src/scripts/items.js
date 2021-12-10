@@ -72,7 +72,6 @@ class Items {
     this.ctx.drawImage(this.tile2Img, 115, 0, 150, 155, x, y, 40, 40); // heart
   }
 
-
 }
 
 export default Items;

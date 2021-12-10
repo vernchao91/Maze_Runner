@@ -5,6 +5,7 @@ class Wraith {
     this.y = y;
     this.frameX = 0
     this.frameY = 0
+    this.spriteDimension = {x: this.x, y: this.y, w: this.spriteWidth, h: this.spriteHeight}
     // this.frameXL = 11;
     this.spriteHeight = 67;
     this.spriteWidth = 86.6166666666;

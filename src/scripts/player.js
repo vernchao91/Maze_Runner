@@ -1,5 +1,5 @@
 import MovingObject, { call } from "./moving_object";
-// import { inherits, norm as _norm, scale, dir } from "./util";
+import { inherits, norm as _norm, scale, dir } from "./util";
 import Util from "./util";
 
 class Player {
@@ -9,6 +9,7 @@ class Player {
     this.y = y; // y position canvas
     this.frameX = 0; 
     this.frameY = 0;
+    this.spriteDimension = {x: this.x, y: this.y, w: this.spriteWidth, h: this.spriteHeight}
     this.spriteHeight = 60;
     this.spriteWidth = 60;
     this.animationCount = 0;
@@ -36,15 +37,15 @@ class Player {
   keyDown(e) {
     this.keys[e.keyCode] = true;
     this.moving = true;
-    console.log([e.keyCode] + " pressed");
+    // console.log([e.keyCode] + " pressed");
   }
 
   keyUp(e) {
     delete this.keys[e.keyCode];
     this.moving = false;
-    console.log([e.keyCode] + " released");
-    console.log(this.x + "x");
-    console.log(this.y + "y");
+    // console.log([e.keyCode] + " released");
+    // console.log(this.x + "x");
+    // console.log(this.y + "y");
   }
 
   animateSwitch() {

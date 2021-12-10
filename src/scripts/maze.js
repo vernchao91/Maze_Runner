@@ -19,9 +19,17 @@ class Maze {
     this.innerWall = new Image();
     this.innerWall.src = "src/assets/tile-sheet.png"
     this.objects = [{x: 302, y: 40, width: 15, height: 350}, {x: 52, y: 228, width: 248, height: 15}];
+    this.isColliding = false
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
     // this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, y, 55, 80) // top/bottom wall
     // this.ctx.drawImage(this.wallImg, 775, 0, 50, 75, x, y, 55, 80) // side wall
+  }
+
+  eventListeners() {
+    window.addEventListener("keydown", this.player.keyDown.bind(this));
+    window.addEventListener("keyup", this.player.keyUp.bind(this));
+    window.addEventListener("keypress", this.items.keyPress.bind(this));
+    // window.addEventListener("keypress", this.startPause.bind(this));
   }
 
   attacking() {
@@ -106,6 +114,7 @@ class Maze {
     this.activate();
     this.chase();
     this.attacking();
+    this.eventListeners();
   }
   
   drawWireFrame() {
@@ -180,6 +189,7 @@ class Maze {
       this.ctx.drawImage(this.wallImg, 638, 0, 55, 80, 0, y, 60, 83)
     }
   }
+  
 }
 
 // Util.inherits(Maze, MovingObject)
