@@ -32,16 +32,36 @@ class Maze {
     // window.addEventListener("keypress", this.startPause.bind(this));
   }
 
-  getDistance(x1, y1, x2, y2) {
+  update() {
+    this.updateItems();
+    this.player.update();
+    this.wraith.update();
+    this.drawMaze();
+    this.drawBorder();
+    this.drawWireFrame();
+    this.activate(this.player, this.wraith);
+    this.chase();
+    this.attacking(this.player, this.wraith);
+    this.eventListeners();
+  }
+
+  updateItems() {
+    this.items.drawRedDoor(1103, 415);
+    this.items.drawBlueDoor(51, 194);
+    this.items.drawSwitch(this.items.frameSwitchDestinationX, this.items.frameSwitchDestinationY);
+    this.items.drawHeart(915, 625);
+    this.items.drawTorch(50, 630);
+    this.items.drawKey(1110, 40);
+  }
+
+  getDistance(x1, y1, x2, y2) { // util function
     let xDistance = x2 - x1;
     let yDistance = y2 - y1;
-
     return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
   }
 
   attacking(player, wraith) {
-
-    let distance = this.getDistance(player.x, player.y, wraith.x, wraith.y)
+    const distance = this.getDistance(player.x, player.y, wraith.x, wraith.y)
 
     if (distance < 30)  {
       this.wraith.attacking = true
@@ -50,8 +70,10 @@ class Maze {
     }
   }
 
-  activate() {
-    if (this.player.x > 900 && this.player.y > 38 && this.player.y < 120) { // wraith activating
+  activate(player, wraith) {
+    const distance = this.getDistance(player.x, player.y, wraith.x, wraith.y)
+
+    if (distance < 100) { // wraith activating
       this.wraith.activated = true;
       this.wraith.moving = true;
     }
@@ -96,29 +118,6 @@ class Maze {
         this.wraith.direction = "right";
       }
     }
-  }
-
-  updateItems() {
-    this.items.drawRedDoor(1103, 415);
-    this.items.drawBlueDoor(51, 194);
-    this.items.drawSwitch(258, 35);
-    this.items.drawHeart(915, 625);
-    this.items.drawTorch(50, 630);
-    this.items.drawKey(1110, 40);
-    this.items.update();
-  }
-  
-  update() {
-    this.updateItems();
-    this.player.update();
-    this.wraith.update();
-    this.drawMaze();
-    this.drawBorder();
-    this.drawWireFrame();
-    this.activate();
-    this.chase();
-    this.attacking(this.player, this.wraith);
-    this.eventListeners();
   }
   
   drawWireFrame() {

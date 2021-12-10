@@ -11,7 +11,6 @@ class Player {
     this.frameY = 0;
     this.spriteHeight = 60;
     this.spriteWidth = 60;
-    // this.spriteDimension = { x: this.x, y: this.y, w: 60, h: 60 }
     this.animationCount = 0;
     this.speed = 10;
     this.playerSprite = new Image();
@@ -35,9 +34,6 @@ class Player {
   }
 
   keyDown(e) {
-    if (this.keys.length !== 0) {
-      this.keys.pop
-    }
     this.keys[e.keyCode] = true;
     this.moving = true;
   }
@@ -45,19 +41,6 @@ class Player {
   keyUp(e) {
     delete this.keys[e.keyCode];
     this.moving = false;
-  }
-
-  animateSwitch() {
-    if (this.itemKeys[32]) {
-      this.items.frameSwitchX = 430;
-      this.items.canvasSwitchY = 38;
-      this.items.canvasSwitchX = 265;
-      this.animateDoor();
-    }
-  }
-
-  animateDoor() {
-    this.items.frameBlueDoorX = 285;
   }
 
   move() {

@@ -8,7 +8,6 @@ class Wraith {
     // this.frameXL = 11;
     this.spriteHeight = 67;
     this.spriteWidth = 86.6166666666;
-    // this.spriteDimension = { x: this.x, y: this.y, w: 86.6166666666, h: 67 }
     this.animationCount = 0;
     this.speed = 1;
     this.wraithSprite = new Image();
