@@ -79,10 +79,6 @@ class Game {
     this.ctx.clearRect(0, 0, this.width, this.height);
     this.maze.update();
     this.isColliding(this.maze.player, this.maze.wraith)
-
-    // console.log(this.maze.player.x);
-    // console.log(this.maze.wraith.x);
-    // console.log(this.getDistance(this.maze.player.x , this.maze.player.y, this.maze.wraith.x, this.maze.wraith.y));
     requestAnimationFrame(this.animateMazeOne.bind(this));
   }
 

@@ -32,11 +32,16 @@ class Maze {
     // window.addEventListener("keypress", this.startPause.bind(this));
   }
 
-  attacking(player, wraith) {
-    let xDistance = wraith.x - player.x;
-    let yDistance = wraith.y - player.y;
+  getDistance(x1, y1, x2, y2) {
+    let xDistance = x2 - x1;
+    let yDistance = y2 - y1;
 
-    let distance = Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+    return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+  }
+
+  attacking(player, wraith) {
+
+    let distance = this.getDistance(player.x, player.y, wraith.x, wraith.y)
 
     if (distance < 30)  {
       this.wraith.attacking = true
@@ -44,20 +49,6 @@ class Maze {
       this.wraith.attacking = false
     }
   }
-
-  // attacking(player, wraith) {
-  //   if (this.wraith.activated === true && this.wraith.moving === true ) { // wraith attacking
-  //     if (this.wraith.x - this.player.x <= 10 && this.wraith.y - this.player.y <= 10) {
-  //       this.wraith.attacking = true;
-  //     } else if (this.player.x - this.wraith.x <= 10) {
-  //       this.wraith.attacking = true;
-  //     } else if (this.wraith.y - this.player.y <= 10) {
-  //       this.wraith.attacking = true;
-  //     } else if (this.player.y - this.wraith.y <= 10) {
-  //       this.wraith.attacking = true;
-  //     }
-  //   }
-  // }
 
   activate() {
     if (this.player.x > 900 && this.player.y > 38 && this.player.y < 120) { // wraith activating
@@ -132,7 +123,7 @@ class Maze {
   
   drawWireFrame() {
     this.ctx.beginPath();
-                  //x, y, width, height
+    //x, y, width, height
     // this.ctx.rect(302, 40, 15, 200)
     this.ctx.rect(302, 40, 15, 350);
     this.ctx.rect(52, 228, 248, 15);
@@ -204,7 +195,5 @@ class Maze {
   }
   
 }
-
-// Util.inherits(Maze, MovingObject)
 
 export default Maze;

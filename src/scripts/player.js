@@ -13,7 +13,7 @@ class Player {
     this.spriteWidth = 60;
     // this.spriteDimension = { x: this.x, y: this.y, w: 60, h: 60 }
     this.animationCount = 0;
-    this.speed = 1;
+    this.speed = 10;
     this.playerSprite = new Image();
     this.playerSprite.src = 'src/assets/full-hero.png'
     // this.playerSprite.onload = () => this.update();
@@ -35,17 +35,16 @@ class Player {
   }
 
   keyDown(e) {
+    if (this.keys.length !== 0) {
+      this.keys.pop
+    }
     this.keys[e.keyCode] = true;
     this.moving = true;
-    // console.log([e.keyCode] + " pressed");
   }
 
   keyUp(e) {
     delete this.keys[e.keyCode];
     this.moving = false;
-    // console.log([e.keyCode] + " released");
-    // console.log(this.x + "x");
-    // console.log(this.y + "y");
   }
 
   animateSwitch() {

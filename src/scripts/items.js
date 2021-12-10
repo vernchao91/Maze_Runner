@@ -17,7 +17,8 @@ class Items {
     this.tile2Img.src = 'src/assets/tile-sheet2.png'
     this.keyPress = this.keyPress.bind(this);
     this.keys = [];
-    this.door = "closed"
+    this.blueDoor = "closed"
+    this.redDoor = "closed"
     // this.tile2Img.onload = () => this.update();
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
   }
@@ -41,11 +42,12 @@ class Items {
 
   animateBlueDoor() {
     this.frameBlueDoorX = 285;
-    this.door ="opened"
+    this.blueDoor ="opened"
   }
 
   animateRedDoor() {
     
+    this.redDoor ="opened"
   }
 
   drawTorch(x, y) {
