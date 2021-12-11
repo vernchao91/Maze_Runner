@@ -45,7 +45,7 @@ class Maze {
     this.attacking(this.player, this.wraith);
     this.blueSwitchDistanceCheck(this.player, this.items.frameSwitchDestinationX, this.items.frameSwitchDestinationY);
     this.keyDistanceCheck(this.player, this.items.keyItem);
-    this.redDoorCheck(this.player)
+    this.redDoorDistanceCheck(this.player, this.items.redDoor)
   }
 
   updateItems() {
@@ -72,16 +72,16 @@ class Maze {
 
   keyDistanceCheck(player, key) {
     const distance = this.getDistance(player.x, player.y, key.x, key.y);
-    if (distance < 30 && this.items.keys[32]) {
+    if (distance < 40 && this.items.keys[32]) {
       this.items.keyGrab = true;
       key.x = player.x
       key.y = player.y
     }
   }
 
-  redDoorCheck(player) {
+  redDoorDistanceCheck(player) {
     const distance = this.getDistance(player.x, player.y, 1103, 415);
-    if (distance < 30 && this.items.keyGrab === true) {
+    if (distance < 40 && this.items.keyGrab === true) {
       this.items.animateRedDoor();
     }
   }
@@ -99,7 +99,6 @@ class Maze {
     const distance = this.getDistance(player.x, player.y, wraith.x, wraith.y)
     if (distance < 100) {
       this.wraith.activated = true;
-      this.wraith.moving = true;
     }
   }
 

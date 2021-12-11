@@ -10,7 +10,7 @@ class Items {
     this.frameSwitchDestinationY = 35; // canvas Y position for blue switch ( changing this when pressed because height on sheet is different )
     this.keyItem = { x: 1110, y: 40 };
     this.blueDoor= { x: 217, y: 82 };
-    this.redDoor = { x: 1103, y: 415}
+    this.redDoor = { x: 1103, y: 415};
     this.frameBlueDoorX = 217; 
     this.frameRedDoorX = 81;
     this.tileImg = new Image();

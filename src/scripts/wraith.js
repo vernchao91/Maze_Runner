@@ -13,7 +13,6 @@ class Wraith {
     this.wraithSprite = new Image();
     this.wraithSprite.src = "src/assets/full-wraith.png"
     // this.wraithSprite.onload = () => this.update();
-    this.moving = false
     this.activated = false
     this.attacking = false
     this.direction = "left"
@@ -31,7 +30,7 @@ class Wraith {
   }
 
   animateFrame() {
-    if (this.moving === false) { //idle animation
+    if (this.activated === false) { //idle animation
       this.frameY = 0;
       this.spriteHeight = 67;
       if (this.animationCount < 11) {
@@ -43,7 +42,7 @@ class Wraith {
         this.frameX = 0;
         this.animationCount = 0;
       }
-    } else if (this.moving === true && this.activated === true && this.direction === "left" && this.attacking == false) {  // left walk animation
+    } else if (this.activated === true && this.direction === "left" && this.attacking == false) {  // left walk animation
       this.frameY = 1;
       this.spriteHeight = 67;
       if (this.animationCount < 11) {
@@ -55,7 +54,7 @@ class Wraith {
         this.frameX = 0;
         this.animationCount = 0;
       }
-    } else if (this.moving === true && this.activated === true && this.direction === "right" && this.attacking == false) {  // right walk animation
+    } else if (this.activated === true && this.direction === "right" && this.attacking == false) {  // right walk animation
       this.frameY = 2;
       this.spriteHeight = 67;
       if (this.animationCount < 11) {
@@ -67,7 +66,7 @@ class Wraith {
         this.frameX = 0;
         this.animationCount = 0;
       }
-    } else if (this.moving === true && this.activated === true && this.direction === "right" && this.attacking == true) { // right attack animation
+    } else if (this.activated === true && this.direction === "right" && this.attacking == true) { // right attack animation
       this.frameY = 3;
       this.spriteHeight = 71;
       if (this.animationCount < 11) {
@@ -79,7 +78,7 @@ class Wraith {
         this.frameX = 0;
         this.animationCount = 0;
       }
-    } else if (this.moving === true && this.activated === true && this.direction === "left" && this.attacking === true) {  // left attack animation
+    } else if (this.activated === true && this.direction === "left" && this.attacking === true) {  // left attack animation
       this.frameY = 4;
       this.spriteHeight = 71;
       if (this.animationCount < 11) {
