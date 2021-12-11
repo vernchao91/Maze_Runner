@@ -45,7 +45,12 @@ class Maze {
     this.attacking(this.player, this.wraith);
     this.blueSwitchDistanceCheck(this.player, this.items.frameSwitchDestinationX, this.items.frameSwitchDestinationY);
     this.keyDistanceCheck(this.player, this.items.keyItem);
-    this.redDoorDistanceCheck(this.player, this.items.redDoor)
+    this.redDoorDistanceCheck(this.player, this.items.redDoor);
+    this.testFunction();
+  }
+
+  testFunction() {
+    // setTimeout(() => alert("Hello"), 3000)
   }
 
   updateItems() {

@@ -7,7 +7,7 @@ class Player {
     this.ctx = ctx;
     this.x = x; // x position canvas
     this.y = y; // y position canvas
-    this.frameX = 0; 
+    this.frameX = 0;
     this.frameY = 0;
     this.spriteHeight = 60;
     this.spriteWidth = 60;
