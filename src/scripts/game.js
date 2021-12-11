@@ -11,7 +11,7 @@ class Game {
     this.height = this.main.height = 700;
     // this.draw = this.draw.bind(this);
     // this.sounds = new this.sounds();
-    this.maze = new Maze(ctx);
+    this.maze1 = new Maze(ctx);
     this.ctx.shadowBlur = 150;
     this.ctx.shadowColor = 'black';
     this.isColliding = this.isColliding.bind(this)
@@ -19,7 +19,7 @@ class Game {
 
   isCollided(player, wraith) {
     if (this.getDistance(player.x, player.y, wraith.x, wraith.y) === 0) {
-      this.maze.player.moving = false
+      this.maze1.player.moving = false
     }
   }
 
@@ -27,12 +27,14 @@ class Game {
     if (player.x < (wraith.x + 86) &&
       (player.x + 60) > wraith.x &&
       player.y < (wraith.y + 67) &&
-      (60 + player.y) > wraith.y) {
-        return "colliding"
-      } else {
-        return "not colliding"
-      }
+      (60 + player.y) > wraith.y) 
+    {
+      console.log("colliding")
+    } else {
+      console.log("not colliding")
+    }
   }
+
   // rect1.x < rect2.x + rect2.w &&
   // rect1.x + rect1.w > rect2.x &&
   // rect1.y < rect2.y + rect2.h &&
@@ -43,15 +45,6 @@ class Game {
   //     this.canvas.style.display = "block"
   //     StartGame.style.display = "none";
   //   }
-  // }
-
-  // draw() {
-  //   // this.eventListeners();
-  //   let setFPS = setTimeout(() => {
-  //     this.ctx.clearRect(0, 0, this.width, this.height);
-  //     this.player.update();
-  //     requestAnimationFrame(this.draw.bind(this))
-  //   }, 1000 / this.fps)
   // }
 
   // gameOver(frame, setFPS) {
@@ -70,8 +63,8 @@ class Game {
 
   animateMazeOne() {
     this.ctx.clearRect(0, 0, this.width, this.height);
-    this.maze.update();
-    this.isColliding(this.maze.player, this.maze.wraith)
+    this.maze1.update();
+    // this.isColliding(this.maze1.player, this.maze1.wraith)
     requestAnimationFrame(this.animateMazeOne.bind(this));
   }
 

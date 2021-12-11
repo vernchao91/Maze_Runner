@@ -7,9 +7,9 @@ import Item from './items'
 class Maze {
   constructor(ctx) {
     this.ctx = ctx;
+    this.items = new Item(ctx);
     this.player = new Player(ctx, 3, 40);
     this.wraith = new Wraith(ctx, 980, 40);
-    this.items = new Item(ctx);
     this.wallImg = new Image();
     this.wallImg.src = "src/assets/tile-sheet.png"
     // this.wallImg.onload = () => this.update();
@@ -28,21 +28,24 @@ class Maze {
   eventListeners() {
     window.addEventListener("keydown", this.player.keyDown.bind(this));
     window.addEventListener("keyup", this.player.keyUp.bind(this));
-    window.addEventListener("keypress", this.items.keyPress.bind(this));
-    // window.addEventListener("keypress", this.startPause.bind(this));
+    window.addEventListener("keydown", this.items.keyDown.bind(this));
+    window.addEventListener("keyup", this.items.keyUp.bind(this));
   }
 
   update() {
-    this.updateItems();
-    this.player.update();
-    this.wraith.update();
+    this.eventListeners();
     this.drawMaze();
     this.drawBorder();
     this.drawWireFrame();
+    this.updateItems();
+    this.player.update();
+    this.wraith.update();
     this.activate(this.player, this.wraith);
-    this.chase();
+    this.wraithChase();
     this.attacking(this.player, this.wraith);
-    this.eventListeners();
+    this.blueSwitchDistanceCheck(this.player, this.items.frameSwitchDestinationX, this.items.frameSwitchDestinationY);
+    this.keyDistanceCheck(this.player, this.items.keyItem);
+    this.redDoorCheck(this.player)
   }
 
   updateItems() {
@@ -51,7 +54,7 @@ class Maze {
     this.items.drawSwitch(this.items.frameSwitchDestinationX, this.items.frameSwitchDestinationY);
     this.items.drawHeart(915, 625);
     this.items.drawTorch(50, 630);
-    this.items.drawKey(1110, 40);
+    this.items.drawKey(this.items.keyItem.x, this.items.keyItem.y);
   }
 
   getDistance(x1, y1, x2, y2) { // util function
@@ -60,30 +63,51 @@ class Maze {
     return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
   }
 
-  attacking(player, wraith) {
-    const distance = this.getDistance(player.x, player.y, wraith.x, wraith.y)
-
-    if (distance < 30)  {
-      this.wraith.attacking = true
-    } else if ( distance > 30) {
-      this.wraith.attacking = false
+  blueSwitchDistanceCheck(player, blueSwitchX, blueSwitchY) {
+    const distance = this.getDistance(player.x, player.y, blueSwitchX, blueSwitchY);
+    if (distance < 25 && this.items.keys[32]) {
+      this.items.animateBlueSwitch();
     }
   }
 
-  activate(player, wraith) {
-    const distance = this.getDistance(player.x, player.y, wraith.x, wraith.y)
+  keyDistanceCheck(player, key) {
+    const distance = this.getDistance(player.x, player.y, key.x, key.y);
+    if (distance < 30 && this.items.keys[32]) {
+      this.items.keyGrab = true;
+      key.x = player.x
+      key.y = player.y
+    }
+  }
 
-    if (distance < 100) { // wraith activating
+  redDoorCheck(player) {
+    const distance = this.getDistance(player.x, player.y, 1103, 415);
+    if (distance < 30 && this.items.keyGrab === true) {
+      this.items.animateRedDoor();
+    }
+  }
+
+  attacking(player, wraith) { // wraith attacking
+    const distance = this.getDistance(player.x, player.y, wraith.x, wraith.y)
+    if (distance < 30)  {
+      this.wraith.attacking = true;
+    } else if ( distance > 30) {
+      this.wraith.attacking = false;
+    }
+  }
+
+  activate(player, wraith) { // wraith activate
+    const distance = this.getDistance(player.x, player.y, wraith.x, wraith.y)
+    if (distance < 100) {
       this.wraith.activated = true;
       this.wraith.moving = true;
     }
   }
 
-  chase() {  // maze.wraith AI chase
+  wraithChase() {  // wraith AI chase
     if (this.wraith.activated === true) {
       if (this.wraith.x < this.player.x && this.wraith.y < this.player.y) {
         this.wraith.x += this.wraith.speed;
-        this.wraith.y += this.wraith.speed
+        this.wraith.y += this.wraith.speed;
         this.wraith.direction = "right";
 
       } else if (this.wraith.x > this.player.x && this.wraith.y > this.player.y) {
