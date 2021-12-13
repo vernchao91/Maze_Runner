@@ -6,7 +6,6 @@ class Game {
     this.fog = canvas2;
     this.dark = canvas3;
     this.ctx = ctx;
-    this.fps = 60;
     this.width = this.main.width = 1200;
     this.height = this.main.height = 700;
     // this.draw = this.draw.bind(this);
@@ -14,11 +13,11 @@ class Game {
     this.maze1 = new Maze(ctx);
     this.ctx.shadowBlur = 150;
     this.ctx.shadowColor = 'black';
-    this.isColliding = this.isColliding.bind(this)
+    this.isColliding = this.isColliding.bind(this);
   }
 
   isCollided(player, wraith) {
-    if (this.getDistance(player.x, player.y, wraith.x, wraith.y) === 0) {
+    if (this.maze1.getDistance(player.x, player.y, wraith.x, wraith.y) === 0) {
       this.maze1.player.moving = false
     }
   }
