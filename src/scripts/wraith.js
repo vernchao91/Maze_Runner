@@ -3,19 +3,19 @@ class Wraith {
     this.ctx = ctx;
     this.x = x;
     this.y = y;
-    this.frameX = 0
-    this.frameY = 0
+    this.frameX = 0;
+    this.frameY = 0;
     // this.frameXL = 11;
     this.spriteHeight = 67;
     this.spriteWidth = 86.6166666666;
     this.animationCount = 0;
     this.speed = 1;
     this.wraithSprite = new Image();
-    this.wraithSprite.src = "src/assets/full-wraith.png"
+    this.wraithSprite.src = "src/assets/full-wraith.png";
     // this.wraithSprite.onload = () => this.update();
-    this.activated = false
-    this.attacking = false
-    this.direction = "left"
+    this.activated = false;
+    this.attacking = false;
+    this.direction = "left";
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
   }
 

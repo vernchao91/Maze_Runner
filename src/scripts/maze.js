@@ -8,8 +8,8 @@ class Maze {
   constructor(ctx) {
     this.ctx = ctx;
     this.items = new Item(ctx);
-    this.player = new Player(ctx, 3, 40);
-    this.wraith = new Wraith(ctx, 980, 40);
+    this.player = new Player(ctx, 3, 41);
+    this.wraith = new Wraith(ctx, 980, 41);
     this.wallImg = new Image();
     this.wallImg.src = "src/assets/tile-sheet.png";
     // this.wallImg.onload = () => this.update();
@@ -35,7 +35,7 @@ class Maze {
   update() {
     this.eventListeners();
     // this.drawMaze();
-    // this.drawBorder();
+    this.drawBorder();
     this.drawWireFrame();
     this.updateItems();
     this.player.update();
@@ -100,25 +100,61 @@ class Maze {
   // }
   
   Colliding(player, objects) { //util function
-    for (let i = 0; i < objects.length; i++){
-      // console.log(player.x > object.x + object.w && player.x + player.w > object.x && player.y > object.y + object.h && player.y + player.h < object.y);
-      // console.log(player.x);
-      // console.log(object.x + object.w);
-      // if ( player.x + player.w < objects[i].x && objects[i].x + objects[i].w < player.x && player.y + player.h < objects[i].y && objects[i].y + objects[i].h < player.y ) {
-        if (player.keys[83] ) {
-          player.y += player.speed;
-          player.lastInput = "down";
-        } else if (player.keys[87] ) {
-          player.y -= player.speed;
-          player.lastInput = "up";
-        } else if (player.keys[65] ) {
-          player.x -= player.speed;
-          player.lastInput = "left";
-        } else if ( player.keys[68] ) {
-          player.x += player.speed;
-          player.lastInput = "right";
+    for (let object of objects) {
+      if (player.x < object.x + object.w &&
+        player.x + player.w > object.x &&
+        player.y < object.y + object.h &&
+        player.h + player.y > object.y
+        ) {
+          if ( player.lastInput === "up" ) {
+            if ( player.keys[87] ) {
+              this.player.speed = 0
+              player.lastInput = "up";
+              return;
+            } else if (player.keys[65] ) {
+              player.x -= player.speed;
+              player.lastInput = "left";
+            } else if (player.keys[68]) {
+              player.x += player.speed;
+              player.lastInput = "right";
+            } else if ( player.keys[83]) {
+              player.y += player.speed;
+              player.lastInput = "down";
+            }
+          }
+          if ( player.lastInput === "right" ) {
+            if ( player.keys[68] ) {
+              this.player.speed = 0
+              player.lastInput = "right";
+              this.player.speed = 0
+              return;
+            } else if (player.keys[65] ) {
+              player.x -= player.speed;
+              player.lastInput = "left";
+            } else if (player.keys[87]) {
+              player.x += player.speed;
+              player.lastInput = "up";
+            } else if ( player.keys[83]) {
+              player.y += player.speed;
+              player.lastInput = "down";
+            }
+          }
+        } else {
+          this.player.speed = 2
+          if ( player.keys[83] ) {
+              player.y += player.speed;
+              player.lastInput = "down";
+          } else if (player.keys[87] ) {
+              player.y -= player.speed;
+              player.lastInput = "up";
+          } else if (player.keys[65] ) {
+              player.x -= player.speed;
+              player.lastInput = "left";
+          } else if ( player.keys[68] ) {
+              player.x += player.speed;
+              player.lastInput = "right";
+          }
         }
-      // }
     }
   }
 
@@ -225,7 +261,7 @@ class Maze {
     this.ctx.rect(302, 40, 15, 350); // first room right wall
     this.ctx.rect(52, 228, 248, 15); // first room bottom wall
     this.ctx.rect(0, 39, 1150, 0); // top wall border
-    this.objects = [{x:0,y:39,w:1150,h:0}, {x:302,y:40,w:15,h:350}]
+    this.objects = [{x:0,y:40,w:1150,h:0}, {x:302, y:40, w:15, h:350}]
     this.ctx.stroke();
   }
   
