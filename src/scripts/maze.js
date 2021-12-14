@@ -104,21 +104,21 @@ class Maze {
       // console.log(player.x > object.x + object.w && player.x + player.w > object.x && player.y > object.y + object.h && player.y + player.h < object.y);
       // console.log(player.x);
       // console.log(object.x + object.w);
-      if ( player.x + player.w < objects[i].x && objects[i].x + objects[i].w < player.x && player.y + player.h < objects[i].y && objects[i].y + objects[i].h < player.y ) {
-        if (this.player.keys[83] ) {
-          this.player.y += this.player.speed;
-          this.player.lastInput = "down";
-        } else if (this.player.keys[87] ) {
-          this.player.y -= this.player.speed;
-          this.player.lastInput = "up";
-        } else if (this.player.keys[65] ) {
-          this.player.x -= this.player.speed;
-          this.player.lastInput = "left";
-        } else if ( this.player.keys[68] ) {
-          this.player.x += this.player.speed;
-          this.player.lastInput = "right";
+      // if ( player.x + player.w < objects[i].x && objects[i].x + objects[i].w < player.x && player.y + player.h < objects[i].y && objects[i].y + objects[i].h < player.y ) {
+        if (player.keys[83] ) {
+          player.y += player.speed;
+          player.lastInput = "down";
+        } else if (player.keys[87] ) {
+          player.y -= player.speed;
+          player.lastInput = "up";
+        } else if (player.keys[65] ) {
+          player.x -= player.speed;
+          player.lastInput = "left";
+        } else if ( player.keys[68] ) {
+          player.x += player.speed;
+          player.lastInput = "right";
         }
-      }
+      // }
     }
   }
 
