@@ -12,7 +12,7 @@ class Player {
     this.spriteHeight = 60;
     this.spriteWidth = 60;
     this.animationCount = 0;
-    this.speed = 10;
+    this.speed = 2;
     this.playerSprite = new Image();
     this.playerSprite.src = 'src/assets/full-hero.png'
     // this.playerSprite.onload = () => this.update();
@@ -30,10 +30,12 @@ class Player {
     // this.ctx.clearRect(0, 0, this.ctx.width, this.ctx.height);
     this.drawPlayer();
     this.animateFrame();
-    this.move();
   }
 
   keyDown(e) {
+    // if (this.keys.length > 1) {
+    //   this.keys.shift()
+    // }
     this.keys[e.keyCode] = true;
     this.moving = true;
   }
@@ -41,22 +43,6 @@ class Player {
   keyUp(e) {
     delete this.keys[e.keyCode];
     this.moving = false;
-  }
-
-  move() {
-    if (this.keys[83]) {
-      this.y += this.speed;
-      this.lastInput = "down";
-     } else if (this.keys[87]) {
-       this.y -= this.speed;
-       this.lastInput = "up";
-     } else if (this.keys[65]) {
-       this.x -= this.speed;
-       this.lastInput = "left";
-     } else if (this.keys[68]) {
-        this.x += this.speed;
-        this.lastInput = "right";
-    }
   }
 
   drawPlayer() {

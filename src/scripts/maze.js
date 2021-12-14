@@ -18,7 +18,7 @@ class Maze {
     // this.topWall.onload = () => this.update();
     this.innerWall = new Image();
     this.innerWall.src = "src/assets/tile-sheet.png";
-    this.objects = [{x: 302, y: 40, width: 15, height: 350}, {x: 52, y: 228, width: 248, height: 15}];
+    this.objects = [];
     this.isColliding = false;
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
     // this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, y, 55, 80) // top/bottom wall
@@ -34,8 +34,8 @@ class Maze {
 
   update() {
     this.eventListeners();
-    this.drawMaze();
-    this.drawBorder();
+    // this.drawMaze();
+    // this.drawBorder();
     this.drawWireFrame();
     this.updateItems();
     this.player.update();
@@ -46,7 +46,9 @@ class Maze {
     this.blueSwitchDistanceCheck(this.player, this.items.frameSwitchDestinationX, this.items.frameSwitchDestinationY);
     this.keyDistanceCheck(this.player, this.items.keyItem);
     this.redDoorDistanceCheck(this.player, this.items.redDoor);
-    this.testFunction();
+    // this.testFunction();
+    this.Colliding(this.player, this.objects);
+    // this.move();
   }
 
   testFunction() {
@@ -67,6 +69,74 @@ class Maze {
     let yDistance = y2 - y1;
     return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
   }
+
+  Colliding(player, objects) { //util function
+    objects.forEach( object => {
+      if (player.x < (object.x + object.w) &&
+        (player.x + 60) > object.x &&
+        player.y < (object.y + object.h) &&
+        (60 + player.y) > object.y)
+      {
+        
+      } else {
+        if ( (player.keys[83]) ) {
+          player.y += player.speed;
+          player.lastInput = "down";
+        } else if ( player.keys[87] ) {
+          player.y -= player.speed;
+          player.lastInput = "up";
+        } else if ( player.keys[65] ) {
+          player.x -= player.speed;
+          player.lastInput = "left";
+        } else if ( player.keys[68] ) {
+          player.x += player.speed;
+          player.lastInput = "right";
+        }
+      }
+    })
+  }
+  
+  // Colliding(player, array) { //util function
+  //   array.forEach( object => {
+  //     // console.log( (player.x > (object.x + object.w)) ) // first condition
+  //     // console.log( ((player.x + 62) < object.x) ) // second condition
+  //     // console.log( (player.y > (object.y + object.h)) ) // third condition
+  //     // console.log( ((62 + player.y) < object.y) ) // fourth condition
+
+  //     // console.log( ( (player.x > (object.x + object.w)) && ((player.x + 62) < object.x) && (player.y > (object.y + object.h)) && ((62 + player.y) < object.y) ) );
+  //     if ( ( (player.x > (object.x + object.w)) && ((player.x + 62) < object.x) && (player.y > (object.y + object.h)) && ((62 + player.y) < object.y) ) ) {
+  //       if ( (player.keys[83]) ) {
+  //         player.y += player.speed;
+  //         player.lastInput = "down";
+  //       } else if ( player.keys[87] ) {
+  //         player.y -= player.speed;
+  //         player.lastInput = "up";
+  //       } else if ( player.keys[65] ) {
+  //         player.x -= player.speed;
+  //         player.lastInput = "left";
+  //       } else if ( player.keys[68] ) {
+  //         player.x += player.speed;
+  //         player.lastInput = "right";
+  //       }
+  //     }
+  //   })
+  // }
+
+  // move() {
+  //   if (this.player.keys[83]) {
+  //     this.player.y += this.player.speed;
+  //     this.player.lastInput = "down";
+  //   } else if (this.player.keys[87]) {
+  //     this.player.y -= this.player.speed;
+  //     this.player.lastInput = "up";
+  //   } else if (this.player.keys[65]) {
+  //     this.player.x -= this.player.speed;
+  //     this.player.lastInput = "left";
+  //   } else if (this.player.keys[68]) {
+  //     this.player.x += this.player.speed;
+  //     this.player.lastInput = "right";
+  //   }
+  // }
 
   blueSwitchDistanceCheck(player, blueSwitchX, blueSwitchY) {
     const distance = this.getDistance(player.x, player.y, blueSwitchX, blueSwitchY);
@@ -152,8 +222,10 @@ class Maze {
     this.ctx.beginPath();
     //x, y, width, height
     // this.ctx.rect(302, 40, 15, 200)
-    this.ctx.rect(302, 40, 15, 350);
-    this.ctx.rect(52, 228, 248, 15);
+    this.ctx.rect(302, 40, 15, 350); // first room right wall
+    this.ctx.rect(52, 228, 248, 15); // first room bottom wall
+    this.ctx.rect(0, 39, 1150, 0); // top wall border
+    this.objects = [{x:0,y:39,w:1150,h:0}]
     this.ctx.stroke();
   }
   

@@ -13,26 +13,13 @@ class Game {
     this.maze1 = new Maze(ctx);
     this.ctx.shadowBlur = 150;
     this.ctx.shadowColor = 'black';
-    this.isColliding = this.isColliding.bind(this);
   }
 
-  isCollided(player, wraith) {
-    if (this.maze1.getDistance(player.x, player.y, wraith.x, wraith.y) === 0) {
-      this.maze1.player.moving = false
-    }
-  }
-
-  isColliding(player, wraith) {
-    if (player.x < (wraith.x + 86) &&
-      (player.x + 60) > wraith.x &&
-      player.y < (wraith.y + 67) &&
-      (60 + player.y) > wraith.y) 
-    {
-      console.log("colliding")
-    } else {
-      console.log("not colliding")
-    }
-  }
+  // isCollided(player, wraith) {
+  //   if (this.maze1.getDistance(player.x, player.y, wraith.x, wraith.y) === 0) {
+  //     this.maze1.player.moving = false
+  //   }
+  // }
 
   // rect1.x < rect2.x + rect2.w &&
   // rect1.x + rect1.w > rect2.x &&
@@ -63,7 +50,6 @@ class Game {
   animateMazeOne() {
     this.ctx.clearRect(0, 0, this.width, this.height);
     this.maze1.update();
-    // this.isColliding(this.maze1.player, this.maze1.wraith)
     requestAnimationFrame(this.animateMazeOne.bind(this));
   }
 
