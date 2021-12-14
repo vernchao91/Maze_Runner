@@ -10,6 +10,8 @@ class Player {
     this.frameX = 0;
     this.frameY = 0;
     this.spriteHeight = 60;
+    this.w = 60
+    this.y = 60
     this.spriteWidth = 60;
     this.animationCount = 0;
     this.speed = 2;

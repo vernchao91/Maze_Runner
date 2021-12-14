@@ -52,7 +52,7 @@ class Maze {
   }
 
   testFunction() {
-    // setTimeout(() => alert("Hello"), 3000)
+    // setTimeout(() => alert("Hello"), 3000);
   }
 
   updateItems() {
@@ -70,45 +70,22 @@ class Maze {
     return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
   }
 
-  Colliding(player, objects) { //util function
-    objects.forEach( object => {
-      if (player.x < (object.x + object.w) &&
-        (player.x + 60) > object.x &&
-        player.y < (object.y + object.h) &&
-        (60 + player.y) > object.y)
-      {
-        
-      } else {
-        if ( (player.keys[83]) ) {
-          player.y += player.speed;
-          player.lastInput = "down";
-        } else if ( player.keys[87] ) {
-          player.y -= player.speed;
-          player.lastInput = "up";
-        } else if ( player.keys[65] ) {
-          player.x -= player.speed;
-          player.lastInput = "left";
-        } else if ( player.keys[68] ) {
-          player.x += player.speed;
-          player.lastInput = "right";
-        }
-      }
-    })
-  }
-  
-  // Colliding(player, array) { //util function
-  //   array.forEach( object => {
-  //     // console.log( (player.x > (object.x + object.w)) ) // first condition
-  //     // console.log( ((player.x + 62) < object.x) ) // second condition
-  //     // console.log( (player.y > (object.y + object.h)) ) // third condition
-  //     // console.log( ((62 + player.y) < object.y) ) // fourth condition
-
-  //     // console.log( ( (player.x > (object.x + object.w)) && ((player.x + 62) < object.x) && (player.y > (object.y + object.h)) && ((62 + player.y) < object.y) ) );
-  //     if ( ( (player.x > (object.x + object.w)) && ((player.x + 62) < object.x) && (player.y > (object.y + object.h)) && ((62 + player.y) < object.y) ) ) {
+  // Colliding(player, objects) { //util function
+  //   objects.forEach( object => {
+  //     if (player.x < (object.x + object.w) &&
+  //       (player.x + 60) > object.x &&
+  //       player.y < (object.y + object.h) &&
+  //       (60 + player.y) > object.y)
+  //     {
+  //       player.speed = 0
+  //       console.log("collided");
+  //     } else {
   //       if ( (player.keys[83]) ) {
+  //         player.speed = 2
   //         player.y += player.speed;
   //         player.lastInput = "down";
   //       } else if ( player.keys[87] ) {
+  //         player.speed = 2
   //         player.y -= player.speed;
   //         player.lastInput = "up";
   //       } else if ( player.keys[65] ) {
@@ -121,6 +98,29 @@ class Maze {
   //     }
   //   })
   // }
+  
+  Colliding(player, objects) { //util function
+    for (let i = 0; i < objects.length; i++){
+      // console.log(player.x > object.x + object.w && player.x + player.w > object.x && player.y > object.y + object.h && player.y + player.h < object.y);
+      // console.log(player.x);
+      // console.log(object.x + object.w);
+      if ( player.x + player.w < objects[i].x && objects[i].x + objects[i].w < player.x && player.y + player.h < objects[i].y && objects[i].y + objects[i].h < player.y ) {
+        if (this.player.keys[83] ) {
+          this.player.y += this.player.speed;
+          this.player.lastInput = "down";
+        } else if (this.player.keys[87] ) {
+          this.player.y -= this.player.speed;
+          this.player.lastInput = "up";
+        } else if (this.player.keys[65] ) {
+          this.player.x -= this.player.speed;
+          this.player.lastInput = "left";
+        } else if ( this.player.keys[68] ) {
+          this.player.x += this.player.speed;
+          this.player.lastInput = "right";
+        }
+      }
+    }
+  }
 
   // move() {
   //   if (this.player.keys[83]) {
@@ -225,7 +225,7 @@ class Maze {
     this.ctx.rect(302, 40, 15, 350); // first room right wall
     this.ctx.rect(52, 228, 248, 15); // first room bottom wall
     this.ctx.rect(0, 39, 1150, 0); // top wall border
-    this.objects = [{x:0,y:39,w:1150,h:0}]
+    this.objects = [{x:0,y:39,w:1150,h:0}, {x:302,y:40,w:15,h:350}]
     this.ctx.stroke();
   }
   
