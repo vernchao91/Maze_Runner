@@ -1,7 +1,3 @@
-import MovingObject, { call } from "./moving_object";
-import { inherits, norm as _norm, scale, dir } from "./util";
-import Util from "./util";
-
 class Player {
   constructor(ctx, x, y) {
     this.ctx = ctx;
@@ -14,7 +10,7 @@ class Player {
     this.h = 50;
     this.spriteWidth = 60;
     this.animationCount = 0;
-    this.speed = 2;
+    this.speed = 3;
     this.playerSprite = new Image();
     this.playerSprite.src = 'src/assets/full-hero.png'
     // this.playerSprite.onload = () => this.update();

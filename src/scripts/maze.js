@@ -101,60 +101,36 @@ class Maze {
   
   Colliding(player, objects) { //util function
     for (let object of objects) {
-      if (player.x < object.x + object.w &&
+      // console.log(object);
+      if ((player.x < object.x + object.w &&
         player.x + player.w > object.x &&
         player.y < object.y + object.h &&
-        player.h + player.y > object.y
-        ) {
-          if ( player.lastInput === "up" ) {
-            if ( player.keys[87] ) {
-              this.player.speed = 0
-              player.lastInput = "up";
-              return;
-            } else if (player.keys[65] ) {
-              player.x -= player.speed;
-              player.lastInput = "left";
-            } else if (player.keys[68]) {
-              player.x += player.speed;
-              player.lastInput = "right";
-            } else if ( player.keys[83]) {
-              player.y += player.speed;
-              player.lastInput = "down";
-            }
-          }
-          if ( player.lastInput === "right" ) {
-            if ( player.keys[68] ) {
-              this.player.speed = 0
-              player.lastInput = "right";
-              this.player.speed = 0
-              return;
-            } else if (player.keys[65] ) {
-              player.x -= player.speed;
-              player.lastInput = "left";
-            } else if (player.keys[87]) {
-              player.x += player.speed;
-              player.lastInput = "up";
-            } else if ( player.keys[83]) {
-              player.y += player.speed;
-              player.lastInput = "down";
-            }
-          }
-        } else {
-          this.player.speed = 2
-          if ( player.keys[83] ) {
-              player.y += player.speed;
-              player.lastInput = "down";
-          } else if (player.keys[87] ) {
-              player.y -= player.speed;
-              player.lastInput = "up";
-          } else if (player.keys[65] ) {
-              player.x -= player.speed;
-              player.lastInput = "left";
-          } else if ( player.keys[68] ) {
-              player.x += player.speed;
-              player.lastInput = "right";
-          }
+        player.h + player.y > object.y)
+      ) {
+        if ( player.lastInput === "down" ) {
+          player.y = player.y - objects.length
+        } else if ( player.lastInput === "up" ) {
+          player.y = player.y + objects.length
+        } else if ( player.lastInput === "right" ) {
+          player.x = player.x - objects.length
+        } else if ( player.lastInput === "left" ) {
+          player.x = player.x + objects.length
         }
+      } else {
+        if (player.keys[83]) {
+          player.y += player.speed / objects.length;
+          player.lastInput = "down";
+        } else if (player.keys[87]) {
+          player.y -= player.speed / objects.length;
+          player.lastInput = "up";
+        } else if (player.keys[65]) {
+          player.x -= player.speed / objects.length;
+          player.lastInput = "left";
+        } else if (player.keys[68]) {
+          player.x += player.speed / objects.length;
+          player.lastInput = "right";
+        }
+      }
     }
   }
 
@@ -257,11 +233,28 @@ class Maze {
   drawWireFrame() {
     this.ctx.beginPath();
     //x, y, width, height
-    // this.ctx.rect(302, 40, 15, 200)
+    this.ctx.rect(0, 40, 1150, 0); // top wall border
+    this.ctx.rect(40, 110, 0, 550); // left wall border
+    this.ctx.rect(1155, 40, 0, 550); // right wall border
+    this.ctx.rect(40, 660, 1155, 0); // bottom wall border
+    let blueDoorCoordinates;
+    if (this.items.blueDoor === "closed") {
+      this.ctx.rect(52, 228, 248, 15);
+      blueDoorCoordinates = { x: 52, y: 228, w: 248, h: 15};
+    } else {
+      this.ctx.rect(102, 228, 198, 15); // first room bottom wall  // 102 for first num, 198 for third num
+      blueDoorCoordinates = { x: 102, y: 228, w: 198, h: 15};
+    }
     this.ctx.rect(302, 40, 15, 350); // first room right wall
-    this.ctx.rect(52, 228, 248, 15); // first room bottom wall
-    this.ctx.rect(0, 39, 1150, 0); // top wall border
-    this.objects = [{x:0,y:40,w:1150,h:0}, {x:302, y:40, w:15, h:350}]
+    this.objects = [
+      // { x: , y: , w: , h:  },
+      { x:0, y:40, w:1150, h:0 }, // top wall border
+      { x: 40, y: 110, w: 0, h: 550 }, // left wall border
+      { x: 1155, y: 40, w: 0, h: 550 }, // right wall border
+      { x: 40, y: 660, w: 1155, h:  0}, // bottom wall border
+      { x:302, y:40, w:15, h:350 }, // first room right wall
+      blueDoorCoordinates,
+    ]
     this.ctx.stroke();
   }
   
