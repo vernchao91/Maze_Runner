@@ -1,5 +1,3 @@
-import MovingObject, { call } from "./moving_object";
-import Util from "./util";
 import Player from './player';
 import Wraith from './wraith'
 import Item from './items'
@@ -34,7 +32,7 @@ class Maze {
 
   update() {
     this.eventListeners();
-    // this.drawMaze();
+    this.drawMaze();
     this.drawBorder();
     this.drawWireFrame();
     this.updateItems();
@@ -107,15 +105,17 @@ class Maze {
         player.h + player.y > object.y)
       ) {
         if ( player.lastInput === "down" ) {
-          player.y = player.y - objects.length
+          player.y = object.y - player.h;
         } else if ( player.lastInput === "up" ) {
-          player.y = player.y + objects.length
+          // player.y = player.y + objects.length;
+          player.y = object.y + object.h;
         } else if ( player.lastInput === "right" ) {
-          player.x = player.x - objects.length
+          player.x = object.x - player.w;
         } else if ( player.lastInput === "left" ) {
-          player.x = player.x + objects.length
+          player.x = object.x + object.w;
         }
       } else {
+        this.player.speed = 2
         if (player.keys[83]) {
           player.y += player.speed / objects.length;
           player.lastInput = "down";
@@ -245,13 +245,20 @@ class Maze {
       blueDoorCoordinates = { x: 102, y: 228, w: 198, h: 15};
     }
     this.ctx.rect(302, 40, 15, 350); // first room right wall
+    this.ctx.rect(50, 405, 155, 10); // second room second wall bottom
+    this.ctx.rect(50, 585, 195, 10); // third room third wall bottom
     this.objects = [
       // { x: , y: , w: , h:  },
       { x:0, y:40, w:1150, h:0 }, // top wall border
       { x: 0, y: 110, w: 40, h: 550 }, // left wall border
       { x: 1155, y: 40, w: 40, h: 550 }, // right wall border
-      { x: 40, y: 660, w: 1155, h:  0}, // bottom wall border
-      { x:302, y:40, w:15, h:350 }, // first room right wall
+      { x: 40, y: 655, w: 1155, h:  0 }, // bottom wall border
+      { x:302, y:40, w:5, h: 350 }, // first room right wall
+      { x: 50, y: 395, w: 150, h: 15 }, // second wall bottom
+      { x: 50, y: 575, w: 195, h: 15 }, // third room third wall bottom
+      // { x: , y: , w: , h:  },
+      // { x: , y: , w: , h:  },
+      
       blueDoorCoordinates,
     ]
     this.ctx.stroke();
