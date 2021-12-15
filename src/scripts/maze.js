@@ -101,7 +101,6 @@ class Maze {
   
   Colliding(player, objects) { //util function
     for (let object of objects) {
-      // console.log(object);
       if ((player.x < object.x + object.w &&
         player.x + player.w > object.x &&
         player.y < object.y + object.h &&
@@ -206,12 +205,12 @@ class Maze {
         this.wraith.x -= this.wraith.speed;
         this.wraith.direction = "left";
 
-      } else if (this.wraith.y > this.player.y && this.wraith.x < this.player.x) {
+      } else if (this.wraith.y > this.player.y && this.wraith.x < this.player.x && this.player.moving) { // stops wraith from facing left and right
         this.wraith.y -= this.wraith.speed;
         this.wraith.x += this.wraith.speed;
         this.wraith.direction = "right";
 
-      } else if (this.wraith.x < this.player.x) {
+      } else if (this.wraith.x < this.player.x && this.player.moving) {
         this.wraith.x += this.wraith.speed;
         this.wraith.direction = "right";
 
@@ -234,8 +233,8 @@ class Maze {
     this.ctx.beginPath();
     //x, y, width, height
     this.ctx.rect(0, 40, 1150, 0); // top wall border
-    this.ctx.rect(40, 110, 0, 550); // left wall border
-    this.ctx.rect(1155, 40, 0, 550); // right wall border
+    this.ctx.rect(0, 110, 40, 550); // left wall border
+    this.ctx.rect(1155, 40, 40, 550); // right wall border
     this.ctx.rect(40, 660, 1155, 0); // bottom wall border
     let blueDoorCoordinates;
     if (this.items.blueDoor === "closed") {
@@ -249,8 +248,8 @@ class Maze {
     this.objects = [
       // { x: , y: , w: , h:  },
       { x:0, y:40, w:1150, h:0 }, // top wall border
-      { x: 40, y: 110, w: 0, h: 550 }, // left wall border
-      { x: 1155, y: 40, w: 0, h: 550 }, // right wall border
+      { x: 0, y: 110, w: 40, h: 550 }, // left wall border
+      { x: 1155, y: 40, w: 40, h: 550 }, // right wall border
       { x: 40, y: 660, w: 1155, h:  0}, // bottom wall border
       { x:302, y:40, w:15, h:350 }, // first room right wall
       blueDoorCoordinates,

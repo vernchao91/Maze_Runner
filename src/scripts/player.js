@@ -31,9 +31,6 @@ class Player {
   }
 
   keyDown(e) {
-    // if (this.keys.length > 1) {
-    //   this.keys.shift()
-    // }
     this.keys[e.keyCode] = true;
     this.moving = true;
   }
