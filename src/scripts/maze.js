@@ -24,7 +24,7 @@ class Maze {
   }
 
   eventListeners() {
-    window.addEventListener("keydown", this.player.keyDown.bind(this));
+    window.addEventListener("keydown", this.player.keyDown);
     window.addEventListener("keyup", this.player.keyUp.bind(this));
     window.addEventListener("keydown", this.items.keyDown.bind(this));
     window.addEventListener("keyup", this.items.keyUp.bind(this));
@@ -102,12 +102,11 @@ class Maze {
       if ((player.x < object.x + object.w &&
         player.x + player.w > object.x &&
         player.y < object.y + object.h &&
-        player.h + player.y > object.y)
+        player.h + player.y > object.y )
       ) {
         if ( player.lastInput === "down" ) {
           player.y = object.y - player.h;
-        } else if ( player.lastInput === "up" ) {
-          // player.y = player.y + objects.length;
+        } else if ( player.lastInput === "up" ) {          
           player.y = object.y + object.h;
         } else if ( player.lastInput === "right" ) {
           player.x = object.x - player.w;
@@ -115,7 +114,6 @@ class Maze {
           player.x = object.x + object.w;
         }
       } else {
-        this.player.speed = 2
         if (player.keys[83]) {
           player.y += player.speed / objects.length;
           player.lastInput = "down";
@@ -247,6 +245,10 @@ class Maze {
     this.ctx.rect(302, 40, 15, 350); // first room right wall
     this.ctx.rect(50, 405, 155, 10); // second room second wall bottom
     this.ctx.rect(50, 585, 195, 10); // third room third wall bottom
+    this.ctx.rect(375, 405, 110, 10); // fourth room first wall bottom
+    this.ctx.rect(480, 120, 10, 290); // fourth room right wall bottom
+    this.ctx.rect(480, 120, 320, 10); // fourth room top bottom wall
+    this.ctx.rect(795, 40, 10, 80); // fourth room top right wall
     this.objects = [
       // { x: , y: , w: , h:  },
       { x:0, y:40, w:1150, h:0 }, // top wall border
@@ -256,9 +258,13 @@ class Maze {
       { x:302, y:40, w:5, h: 350 }, // first room right wall
       { x: 50, y: 395, w: 150, h: 15 }, // second wall bottom
       { x: 50, y: 575, w: 195, h: 15 }, // third room third wall bottom
+      { x: 375, y: 395, w: 110, h: 15 }, // fourth room right bottom wall
+      { x: 480, y: 110, w: 5, h: 290 }, // fourth room right wall
+      { x: 480, y: 110, w: 320, h: 15 }, // fourth room top bottom wall
+      // { x: 795, y: 40, w: 5, h: 15 },
       // { x: , y: , w: , h:  },
       // { x: , y: , w: , h:  },
-      
+
       blueDoorCoordinates,
     ]
     this.ctx.stroke();

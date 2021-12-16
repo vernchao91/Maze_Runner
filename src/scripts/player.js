@@ -21,7 +21,7 @@ class Player {
     this.moving = false;
     this.lastInput = "down";
     this.health = 3;
-    // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
+    // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight);
   }
   
   update() {
@@ -31,8 +31,10 @@ class Player {
   }
 
   keyDown(e) {
-    this.keys[e.keyCode] = true;
-    this.moving = true;
+    // if (this.keys.length === 1) {
+      this.keys[e.keyCode] = true;
+      this.moving = true;
+    // }
   }
 
   keyUp(e) {
