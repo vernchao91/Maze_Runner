@@ -46,7 +46,7 @@ class Maze {
     this.redDoorDistanceCheck(this.player, this.items.redDoor);
     // this.testFunction();
     this.Colliding(this.player, this.objects);
-    // this.move();
+    // this.move(this.player);
   }
 
   testFunction() {
@@ -105,25 +105,53 @@ class Maze {
         player.h + player.y > object.y )
       ) {
         if ( player.lastInput === "down" ) {
+          delete player.keys[83]
+          delete player.keys[65]
+          delete player.keys[68]
+          delete player.keys[87]
           player.y = object.y - player.h;
-        } else if ( player.lastInput === "up" ) {          
+        } else if ( player.lastInput === "up" ) {
+          delete player.keys[83]
+          delete player.keys[65]
+          delete player.keys[68]
+          delete player.keys[87]
           player.y = object.y + object.h;
         } else if ( player.lastInput === "right" ) {
+          delete player.keys[83]
+          delete player.keys[65]
+          delete player.keys[68]
+          delete player.keys[87]
           player.x = object.x - player.w;
         } else if ( player.lastInput === "left" ) {
+          delete player.keys[83]
+          delete player.keys[65]
+          delete player.keys[68]
+          delete player.keys[87]
           player.x = object.x + object.w;
         }
       } else {
         if (player.keys[83]) {
+          delete player.keys[65]
+          delete player.keys[68]
+          delete player.keys[87]
           player.y += player.speed / objects.length;
           player.lastInput = "down";
         } else if (player.keys[87]) {
+          delete player.keys[65]
+          delete player.keys[68]
+          delete player.keys[83]
           player.y -= player.speed / objects.length;
           player.lastInput = "up";
         } else if (player.keys[65]) {
+          delete player.keys[87]
+          delete player.keys[68]
+          delete player.keys[83]
           player.x -= player.speed / objects.length;
           player.lastInput = "left";
         } else if (player.keys[68]) {
+          delete player.keys[65]
+          delete player.keys[87]
+          delete player.keys[83]
           player.x += player.speed / objects.length;
           player.lastInput = "right";
         }
@@ -187,42 +215,43 @@ class Maze {
   }
 
   wraithChase() {  // wraith AI chase
-    if (this.wraith.activated === true) {
-      if (this.wraith.x < this.player.x && this.wraith.y < this.player.y) {
+    if (this.wraith.activated) {
+      if (Math.floor(this.wraith.x) < Math.floor(this.player.x) && Math.floor(this.wraith.y) < Math.floor(this.player.y)) {
+        this.wraith.direction = "right";
         this.wraith.x += this.wraith.speed;
         this.wraith.y += this.wraith.speed;
-        this.wraith.direction = "right";
 
-      } else if (this.wraith.x > this.player.x && this.wraith.y > this.player.y) {
+      } else if (Math.floor(this.wraith.x) > Math.floor(this.player.x) && Math.floor(this.wraith.y) > Math.floor(this.player.y)) {
+        this.wraith.direction = "left";
         this.wraith.x -= this.wraith.speed;
         this.wraith.y -= this.wraith.speed;
-        this.wraith.direction = "left";
 
-      } else if (this.wraith.y < this.player.y && this.wraith.x > this.player.x) {
+      } else if (Math.floor(this.wraith.y) < Math.floor(this.player.y) && Math.floor(this.wraith.x) > Math.floor(this.player.x)) {
+        this.wraith.direction = "left";
         this.wraith.y += this.wraith.speed;
         this.wraith.x -= this.wraith.speed;
-        this.wraith.direction = "left";
 
-      } else if (this.wraith.y > this.player.y && this.wraith.x < this.player.x && this.player.moving) { // stops wraith from facing left and right
+      } else if (Math.floor(this.wraith.y) > Math.floor(this.player.y) && Math.floor(this.wraith.x) < Math.floor(this.player.x)) {
+        this.wraith.direction = "right";
         this.wraith.y -= this.wraith.speed;
         this.wraith.x += this.wraith.speed;
-        this.wraith.direction = "right";
 
-      } else if (this.wraith.x < this.player.x && this.player.moving) {
+      } else if (Math.floor(this.wraith.x) < Math.floor(this.player.x)) {
+        this.wraith.direction = "right";
         this.wraith.x += this.wraith.speed;
-        this.wraith.direction = "right";
 
-      } else if (this.wraith.x > this.player.x) {
+      } else if (Math.floor(this.wraith.x) > Math.floor(this.player.x)) {
+        this.wraith.direction = "left";
         this.wraith.x -= this.wraith.speed;
-        this.wraith.direction = "left";
 
-      } else if (this.wraith.y < this.player.y) {
+      } else if (Math.floor(this.wraith.y) < Math.floor(this.player.y)) {
+        this.wraith.direction = "left";
         this.wraith.y += this.wraith.speed;
-        this.wraith.direction = "left";
 
-      } else if (this.wraith.y > this.player.y) {
-        this.wraith.y -= this.wraith.speed;
+      } else if (Math.floor(this.wraith.y) > Math.floor(this.player.y)) {
+
         this.wraith.direction = "right";
+        this.wraith.y -= this.wraith.speed;
       }
     }
   }
@@ -257,10 +286,10 @@ class Maze {
     let redDoorCoordinates;
     if ( this.items.redDoor === "closed" ) {
       this.ctx.rect(905, 450, 253, 10);
-      redDoorCoordinates = { x: 905, y: 445, w: 250, h: 10 }
+      redDoorCoordinates = { x: 905, y: 440, w: 250, h: 10 }
     } else {
       this.ctx.rect(905, 450, 200, 10);
-      redDoorCoordinates = { x: 905, y: 445, w: 185, h: 10 }
+      redDoorCoordinates = { x: 905, y: 440, w: 185, h: 10 }
     }
     this.objects = [
       // { x: , y: , w: , h:  },
@@ -269,7 +298,7 @@ class Maze {
       { x: 1155, y: 40, w: 40, h: 550 }, // right wall border
       { x: 40, y: 655, w: 1155, h:  0 }, // bottom wall border
       { x:302, y:40, w:5, h: 350 }, // first room right wall
-      { x: 50, y: 395, w: 150, h: 15 }, // second wall bottom
+      { x: 50, y: 395, w: 145, h: 15 }, // second wall bottom
       { x: 50, y: 575, w: 195, h: 15 }, // third room third wall bottom
       { x: 375, y: 395, w: 110, h: 15 }, // fourth room right bottom wall
       { x: 480, y: 110, w: 5, h: 290 }, // fourth room right wall

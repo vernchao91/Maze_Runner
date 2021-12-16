@@ -15,6 +15,8 @@ class Game {
     this.ctx.shadowColor = 'black';
   }
 
+  
+
   // startPause(e) {
   //   if (e.code === "Enter" && this.frames < 2) {
   //     this.canvas.style.display = "block"

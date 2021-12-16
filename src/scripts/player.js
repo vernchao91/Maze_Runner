@@ -6,9 +6,9 @@ class Player {
     this.frameX = 0;
     this.frameY = 0;
     this.spriteHeight = 60;
+    this.spriteWidth = 60;
     this.w = 50;
     this.h = 50;
-    this.spriteWidth = 60;
     this.animationCount = 0;
     this.speed = 3;
     this.playerSprite = new Image();
@@ -31,10 +31,29 @@ class Player {
   }
 
   keyDown(e) {
-    // if (this.keys.length === 1) {
-      this.keys[e.keyCode] = true;
-      this.moving = true;
+    this.keys[e.keyCode] = true;
+    // if (e.keyCode === 83) {
+    //   delete this.keys[87]
+    //   delete this.keys[68]
+    //   delete this.keys[65]
+    //   this.lastInput = "down";
+    // } else if (e.keyCode === 87) {
+    //   delete this.keys[65]
+    //   delete this.keys[68]
+    //   delete this.keys[83]
+    //   this.lastInput = "up";
+    // } else if (e.keyCode === 65) {
+    //   delete this.keys[87]
+    //   delete this.keys[68]
+    //   delete this.keys[83]
+    //   this.lastInput = "left";
+    // } else if (e.keyCode === 68) {
+    //   delete this.keys[87]
+    //   delete this.keys[65]
+    //   delete this.keys[83]
+    //   this.lastInput = "right";
     // }
+    this.moving = true;
   }
 
   keyUp(e) {
