@@ -235,11 +235,11 @@ class Maze {
     this.ctx.rect(1155, 40, 40, 550); // right wall border
     this.ctx.rect(40, 660, 1155, 0); // bottom wall border
     let blueDoorCoordinates;
-    if (this.items.blueDoor === "closed") {
-      this.ctx.rect(52, 228, 248, 15);
+    if ( this.items.blueDoor === "closed" ) {
+      this.ctx.rect(52, 228, 248, 15); // blue door wall closed
       blueDoorCoordinates = { x: 52, y: 228, w: 248, h: 15};
     } else {
-      this.ctx.rect(102, 228, 198, 15); // first room bottom wall  // 102 for first num, 198 for third num
+      this.ctx.rect(102, 228, 198, 15); // blue door wall opened
       blueDoorCoordinates = { x: 102, y: 228, w: 198, h: 15};
     }
     this.ctx.rect(302, 40, 15, 350); // first room right wall
@@ -249,6 +249,19 @@ class Maze {
     this.ctx.rect(480, 120, 10, 290); // fourth room right wall bottom
     this.ctx.rect(480, 120, 320, 10); // fourth room top bottom wall
     this.ctx.rect(795, 40, 10, 80); // fourth room top right wall
+    this.ctx.rect(590, 360, 10, 300); // third room right wall
+    this.ctx.rect(690, 255, 10, 245); // fifth room right wall
+    this.ctx.rect(690, 255, 380, 10); // fifth room bottom wall
+    this.ctx.rect(1055, 40, 10, 300); // fifth room top right wall
+    this.ctx.rect(905, 450, 10, 210); // last room left wall
+    let redDoorCoordinates;
+    if ( this.items.redDoor === "closed" ) {
+      this.ctx.rect(905, 450, 253, 10);
+      redDoorCoordinates = { x: 905, y: 445, w: 250, h: 10 }
+    } else {
+      this.ctx.rect(905, 450, 200, 10);
+      redDoorCoordinates = { x: 905, y: 445, w: 185, h: 10 }
+    }
     this.objects = [
       // { x: , y: , w: , h:  },
       { x:0, y:40, w:1150, h:0 }, // top wall border
@@ -261,10 +274,13 @@ class Maze {
       { x: 375, y: 395, w: 110, h: 15 }, // fourth room right bottom wall
       { x: 480, y: 110, w: 5, h: 290 }, // fourth room right wall
       { x: 480, y: 110, w: 320, h: 15 }, // fourth room top bottom wall
-      // { x: 795, y: 40, w: 5, h: 15 },
-      // { x: , y: , w: , h:  },
-      // { x: , y: , w: , h:  },
-
+      { x: 795, y: 40, w: 5, h: 80 }, // fourth room top right wall 
+      { x: 590, y: 355, w: 5, h: 300 }, // third room right wall
+      { x: 690, y: 245, w: 5, h: 255 }, // fifth room right wall
+      { x: 690, y: 245, w: 370, h: 15 }, // fifth room bottom wall
+      { x: 1055, y: 40, w: 5, h: 295 }, // fifth room top right wall
+      { x: 905, y: 440, w: 5, h: 210 }, // last room left wall
+      redDoorCoordinates,
       blueDoorCoordinates,
     ]
     this.ctx.stroke();

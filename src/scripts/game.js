@@ -15,17 +15,6 @@ class Game {
     this.ctx.shadowColor = 'black';
   }
 
-  // isCollided(player, wraith) {
-  //   if (this.maze1.getDistance(player.x, player.y, wraith.x, wraith.y) === 0) {
-  //     this.maze1.player.moving = false
-  //   }
-  // }
-
-  // rect1.x < rect2.x + rect2.w &&
-  // rect1.x + rect1.w > rect2.x &&
-  // rect1.y < rect2.y + rect2.h &&
-  // rect1.h + rect1.y > rect2.y) {
-
   // startPause(e) {
   //   if (e.code === "Enter" && this.frames < 2) {
   //     this.canvas.style.display = "block"
