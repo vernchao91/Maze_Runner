@@ -24,7 +24,7 @@ class Maze {
   }
 
   eventListeners() {
-    window.addEventListener("keydown", this.player.keyDown);
+    window.addEventListener("keydown", this.player.keyDown.bind(this));
     window.addEventListener("keyup", this.player.keyUp.bind(this));
     window.addEventListener("keydown", this.items.keyDown.bind(this));
     window.addEventListener("keyup", this.items.keyUp.bind(this));

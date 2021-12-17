@@ -10,23 +10,37 @@ class Game {
     this.height = this.main.height = 700;
     // this.draw = this.draw.bind(this);
     // this.sounds = new this.sounds();
+    this.keys = []
     this.maze1 = new Maze(ctx);
+    this.pause = false;
+    this.keyPause = this.keyPause.bind(this);
     this.ctx.shadowBlur = 150;
     this.ctx.shadowColor = 'black';
   }
-
   
+  gameEventListeners() {
+    window.addEventListener("keypause", this.keyPause);
+  }
 
-  // startPause(e) {
-  //   if (e.code === "Enter" && this.frames < 2) {
-  //     this.canvas.style.display = "block"
-  //     StartGame.style.display = "none";
-  //   }
-  // }
+  keyPause(e) {
+    this.keys[e.keyCode] = true;
+    this.togglePause()
+  }
+  
+  keyPause(e) {
+    console.log(e.keyCode);
+    if ( e.keyCode === 80 ) {
+      this.togglePause();
+    }
+  }
 
-  // gameOver(frame, setFPS) {
-
-  // }
+  togglePause() {
+    if (this.pause === false) {
+      this.pause = true
+    } else if (this.pause === true) {
+      this.pause = false
+    }
+  }
 
   // addFogOfWar(ctx) {
   //   ctx.fillStyle = "black";
@@ -40,11 +54,13 @@ class Game {
 
   animateMazeOne() {
     this.ctx.clearRect(0, 0, this.width, this.height);
+    this.pause = false;
     this.maze1.update();
     requestAnimationFrame(this.animateMazeOne.bind(this));
   }
 
   startMazeOne() {
+    this.gameEventListeners();
     this.animateMazeOne();
   }
 
