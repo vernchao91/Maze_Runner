@@ -13,32 +13,48 @@ class Game {
     this.keys = []
     this.maze1 = new Maze(ctx);
     this.pause = false;
-    this.keyPause = this.keyPause.bind(this);
+    this.music = true;
     this.ctx.shadowBlur = 150;
     this.ctx.shadowColor = 'black';
   }
   
   gameEventListeners() {
-    window.addEventListener("keypause", this.keyPause);
+    window.addEventListener("keydown", this.keyDown.bind(this));
+    window.addEventListener("keyup", this.keyUp.bind(this));
   }
 
-  keyPause(e) {
+  keyDown(e) {
     this.keys[e.keyCode] = true;
-    this.togglePause()
+  }
+
+  keyUp(e) {
+    delete this.keys[e.keyCode];
   }
   
-  keyPause(e) {
-    console.log(e.keyCode);
-    if ( e.keyCode === 80 ) {
+  pauseListener() {
+    if (this.keys[80]) {
       this.togglePause();
+    } else if (this.keys[77]) {
+      this.toggleMute();
     }
   }
 
   togglePause() {
-    if (this.pause === false) {
+    if (!this.pause) {
       this.pause = true
-    } else if (this.pause === true) {
+      console.log("paused");
+    } else {
       this.pause = false
+      this.animateMazeOne();
+      console.log("start");
+    }
+  }
+
+  toggleMute() {
+    if (this.music) {
+      this.music = false;
+    } else {
+      this.music = true;
     }
   }
 
@@ -57,12 +73,17 @@ class Game {
     this.ctx.clearRect(0, 0, this.width, this.height);
     this.pause = false;
     this.maze1.update();
+    this.pauseListener();
+    this.gameEventListeners();
     requestAnimationFrame(this.animateMazeOne.bind(this));
   }
 
   startMazeOne() {
-    this.gameEventListeners();
-    this.animateMazeOne();
+    if (!this.pause) {
+      this.animateMazeOne();
+    } else if (this.pause) {
+      return;
+    }
   }
 
 }
