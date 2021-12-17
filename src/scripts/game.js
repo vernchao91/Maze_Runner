@@ -43,6 +43,7 @@ class Game {
   }
 
   // addFogOfWar(ctx) {
+
   //   ctx.fillStyle = "black";
   //   ctx.fillRect(0, 0, this.width, this.height)
   //   // ctx.globalCompositeOperation = "destination-out"
