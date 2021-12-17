@@ -8,12 +8,13 @@ class Game {
     this.ctx = ctx;
     this.width = this.main.width = 1200;
     this.height = this.main.height = 700;
-    // this.draw = this.draw.bind(this);
-    // this.sounds = new this.sounds();
-    this.keys = []
+    this.keys = [];
     this.maze1 = new Maze(ctx);
+    this.running = false;
     this.pause = false;
     this.music = true;
+    this.keyDown = this.keyDown.bind(this);
+    this.keyUp = this.keyUp.bind(this);
     this.ctx.shadowBlur = 150;
     this.ctx.shadowColor = 'black';
   }
@@ -21,6 +22,7 @@ class Game {
   gameEventListeners() {
     window.addEventListener("keydown", this.keyDown.bind(this));
     window.addEventListener("keyup", this.keyUp.bind(this));
+    // window.addEventListener("click", this.click.bind(this));
   }
 
   keyDown(e) {
@@ -33,58 +35,51 @@ class Game {
   
   pauseListener() {
     if (this.keys[80]) {
+      // console.log(this.keys);
       this.togglePause();
+      delete this.keys[80]
     } else if (this.keys[77]) {
       this.toggleMute();
+      delete this.keys[77]
     }
   }
 
   togglePause() {
-    if (!this.pause) {
-      this.pause = true
-      console.log("paused");
-    } else {
-      this.pause = false
-      this.animateMazeOne();
-      console.log("start");
-    }
+    this.pause = !this.pause;
   }
 
   toggleMute() {
-    if (this.music) {
-      this.music = false;
-    } else {
-      this.music = true;
-    }
+    this.music = !this.music
+  }
+
+  play() {
+    this.running = true
+    this.animateMazeOne();
   }
 
   // addFogOfWar(ctx) {
-
   //   ctx.fillStyle = "black";
-  //   ctx.fillRect(0, 0, this.width, this.height)
-  //   // ctx.globalCompositeOperation = "destination-out"
+  //   ctx.fillRect(0, 0, this.width, this.height);
+  //   // ctx.globalCompositeOperation = "destination-out";
   // }
 
   // clearFogOfWar() {
-
+  
   // }
+
 
   animateMazeOne() {
     this.ctx.clearRect(0, 0, this.width, this.height);
-    this.pause = false;
-    this.maze1.update();
     this.pauseListener();
     this.gameEventListeners();
-    requestAnimationFrame(this.animateMazeOne.bind(this));
-  }
-
-  startMazeOne() {
+    
     if (!this.pause) {
-      this.animateMazeOne();
-    } else if (this.pause) {
-      return;
+      this.maze1.update();
     }
+
+    requestAnimationFrame(this.animateMazeOne.bind(this))
   }
 
 }
+
 export default Game

@@ -67,35 +67,6 @@ class Maze {
     let yDistance = y2 - y1;
     return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
   }
-
-  // Colliding(player, objects) { //util function
-  //   objects.forEach( object => {
-  //     if (player.x < (object.x + object.w) &&
-  //       (player.x + 60) > object.x &&
-  //       player.y < (object.y + object.h) &&
-  //       (60 + player.y) > object.y)
-  //     {
-  //       player.speed = 0
-  //       console.log("collided");
-  //     } else {
-  //       if ( (player.keys[83]) ) {
-  //         player.speed = 2
-  //         player.y += player.speed;
-  //         player.lastInput = "down";
-  //       } else if ( player.keys[87] ) {
-  //         player.speed = 2
-  //         player.y -= player.speed;
-  //         player.lastInput = "up";
-  //       } else if ( player.keys[65] ) {
-  //         player.x -= player.speed;
-  //         player.lastInput = "left";
-  //       } else if ( player.keys[68] ) {
-  //         player.x += player.speed;
-  //         player.lastInput = "right";
-  //       }
-  //     }
-  //   })
-  // }
   
   Colliding(player, objects) { //util function
     for (let object of objects) {
@@ -131,27 +102,27 @@ class Maze {
         }
       } else {
         if (player.keys[83]) {
-          delete player.keys[65]
-          delete player.keys[68]
-          delete player.keys[87]
+          // delete player.keys[65]
+          // delete player.keys[68]
+          // delete player.keys[87]
           player.y += player.speed / objects.length;
           player.lastInput = "down";
         } else if (player.keys[87]) {
-          delete player.keys[65]
-          delete player.keys[68]
-          delete player.keys[83]
+          // delete player.keys[65]
+          // delete player.keys[68]
+          // delete player.keys[83]
           player.y -= player.speed / objects.length;
           player.lastInput = "up";
         } else if (player.keys[65]) {
-          delete player.keys[87]
-          delete player.keys[68]
-          delete player.keys[83]
+          // delete player.keys[87]
+          // delete player.keys[68]
+          // delete player.keys[83]
           player.x -= player.speed / objects.length;
           player.lastInput = "left";
         } else if (player.keys[68]) {
-          delete player.keys[65]
-          delete player.keys[87]
-          delete player.keys[83]
+          // delete player.keys[65]
+          // delete player.keys[87]
+          // delete player.keys[83]
           player.x += player.speed / objects.length;
           player.lastInput = "right";
         }

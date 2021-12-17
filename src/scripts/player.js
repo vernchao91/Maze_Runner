@@ -10,7 +10,7 @@ class Player {
     this.w = 50;
     this.h = 50;
     this.animationCount = 0;
-    this.speed = 4;
+    this.speed = 2;
     this.playerSprite = new Image();
     this.playerSprite.src = 'src/assets/full-hero.png'
     // this.playerSprite.onload = () => this.update();
@@ -114,7 +114,5 @@ class Player {
     } 
   }
 }
-
-// Util.inherits(Player, MovingObject);
 
 export default Player;
