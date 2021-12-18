@@ -10,9 +10,9 @@ class Game {
     this.height = this.main.height = 700;
     this.keys = [];
     this.maze1 = new Maze(ctx);
-    this.pausePage = new Image();
+    // this.pausePage = new Image();
     // this.pausePage.src = "src/assets/tile-sheet.png";
-    this.running = false;
+    this.gameRunning = false;
     this.pause = false;
     this.music = true;
     this.keyDown = this.keyDown.bind(this);
@@ -20,15 +20,11 @@ class Game {
     this.clickListener = this.clickListener.bind(this);
     this.ctx.shadowBlur = 150;
     this.ctx.shadowColor = 'black';
-    this.gameEventListeners();
-  }
-  
-  gameEventListeners() {
     window.addEventListener("keydown", this.keyDown.bind(this));
     window.addEventListener("keyup", this.keyUp.bind(this));
     this.ctx.canvas.addEventListener("mousedown", this.clickListener.bind(this));
   }
-
+  
   keyDown(e) {
     e.preventDefault();
     this.keys[e.keyCode] = true;
@@ -39,7 +35,7 @@ class Game {
   }
 
   clickListener(e) {
-    if (this.running) {
+    if (this.gameRunning) {
       this.togglePause();
     }
   }
@@ -63,6 +59,7 @@ class Game {
   }
 
   play() {
+    this.gameRunning = true;
     this.animateMazeOne();
   }
 
@@ -80,11 +77,9 @@ class Game {
   animateMazeOne() {
     this.ctx.clearRect(0, 0, this.width, this.height);
     this.pauseListener();
-    
     if (!this.pause) {
       this.maze1.update();
     }
-
     requestAnimationFrame(this.animateMazeOne.bind(this))
   }
 

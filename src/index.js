@@ -11,17 +11,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // ctx.fillText("Press Enter or Left Mouse Click to Start")
 
-  window.addEventListener("keypress", (e) => {
-    if (e.key === "Enter" && !game.running) {
+  window.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !game.gameRunning) {
       game.play();
-      game.running = true;
     }
   })
   
   mainCanvas.addEventListener("click", (e) => {
-    if (!game.running) {
+    if (!game.gameRunning) {
       game.play();
-      game.running = true;
     }
   })
 
