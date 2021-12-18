@@ -102,27 +102,27 @@ class Maze {
         }
       } else {
         if (player.keys[83]) {
-          // delete player.keys[65]
-          // delete player.keys[68]
-          // delete player.keys[87]
+          delete player.keys[65]
+          delete player.keys[68]
+          delete player.keys[87]
           player.y += player.speed / objects.length;
           player.lastInput = "down";
         } else if (player.keys[87]) {
-          // delete player.keys[65]
-          // delete player.keys[68]
-          // delete player.keys[83]
+          delete player.keys[65]
+          delete player.keys[68]
+          delete player.keys[83]
           player.y -= player.speed / objects.length;
           player.lastInput = "up";
         } else if (player.keys[65]) {
-          // delete player.keys[87]
-          // delete player.keys[68]
-          // delete player.keys[83]
+          delete player.keys[87]
+          delete player.keys[68]
+          delete player.keys[83]
           player.x -= player.speed / objects.length;
           player.lastInput = "left";
         } else if (player.keys[68]) {
-          // delete player.keys[65]
-          // delete player.keys[87]
-          // delete player.keys[83]
+          delete player.keys[65]
+          delete player.keys[87]
+          delete player.keys[83]
           player.x += player.speed / objects.length;
           player.lastInput = "right";
         }
@@ -237,10 +237,10 @@ class Maze {
     let blueDoorCoordinates;
     if ( this.items.blueDoor === "closed" ) {
       this.ctx.rect(52, 228, 248, 15); // blue door wall closed
-      blueDoorCoordinates = { x: 52, y: 228, w: 248, h: 15};
+      blueDoorCoordinates = { x: 52, y: 223, w: 248, h: 15};
     } else {
       this.ctx.rect(102, 228, 198, 15); // blue door wall opened
-      blueDoorCoordinates = { x: 102, y: 228, w: 198, h: 15};
+      blueDoorCoordinates = { x: 102, y: 223, w: 198, h: 15};
     }
     this.ctx.rect(302, 40, 15, 350); // first room right wall
     this.ctx.rect(50, 405, 155, 10); // second room second wall bottom

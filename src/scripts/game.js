@@ -10,11 +10,14 @@ class Game {
     this.height = this.main.height = 700;
     this.keys = [];
     this.maze1 = new Maze(ctx);
+    this.pausePage = new Image();
+    // this.pausePage.src = "src/assets/tile-sheet.png";
     this.running = false;
     this.pause = false;
     this.music = true;
     this.keyDown = this.keyDown.bind(this);
     this.keyUp = this.keyUp.bind(this);
+    this.click = this.click.bind(this);
     this.ctx.shadowBlur = 150;
     this.ctx.shadowColor = 'black';
   }
@@ -22,7 +25,7 @@ class Game {
   gameEventListeners() {
     window.addEventListener("keydown", this.keyDown.bind(this));
     window.addEventListener("keyup", this.keyUp.bind(this));
-    // window.addEventListener("click", this.click.bind(this));
+    window.addEventListener("mousedown", this.click.bind(this));
   }
 
   keyDown(e) {
@@ -32,10 +35,13 @@ class Game {
   keyUp(e) {
     delete this.keys[e.keyCode];
   }
+
+  click() {
+    this.togglePause();
+  }
   
   pauseListener() {
     if (this.keys[80]) {
-      // console.log(this.keys);
       this.togglePause();
       delete this.keys[80]
     } else if (this.keys[77]) {
