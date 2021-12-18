@@ -17,15 +17,16 @@ class Game {
     this.music = true;
     this.keyDown = this.keyDown.bind(this);
     this.keyUp = this.keyUp.bind(this);
-    this.click = this.click.bind(this);
+    this.clickListener = this.clickListener.bind(this);
     this.ctx.shadowBlur = 150;
     this.ctx.shadowColor = 'black';
+    this.gameEventListeners();
   }
   
   gameEventListeners() {
     window.addEventListener("keydown", this.keyDown.bind(this));
     window.addEventListener("keyup", this.keyUp.bind(this));
-    window.addEventListener("mousedown", this.click.bind(this));
+    window.addEventListener("mousedown", this.clickListener.bind(this));
   }
 
   keyDown(e) {
@@ -36,8 +37,10 @@ class Game {
     delete this.keys[e.keyCode];
   }
 
-  click() {
-    this.togglePause();
+  clickListener(e) {
+    if (this.running) {
+      this.togglePause();
+    }
   }
   
   pauseListener() {
@@ -77,7 +80,6 @@ class Game {
   animateMazeOne() {
     this.ctx.clearRect(0, 0, this.width, this.height);
     this.pauseListener();
-    this.gameEventListeners();
     
     if (!this.pause) {
       this.maze1.update();
