@@ -8,16 +8,15 @@ There are a few obstacles of which there is a locked door right before the exit.
 
 The player will have limited visibility and can pickup items throughout the maze that can be used anytime.
 - keys to open locked doors
-- gas/battery to increase light radius or light duration.
-- a camera that can snap the ghost and freeze it for a few seconds
-- a gun that can shoot the enemy
+- switch to open doors
+- torch to increase light radius
 
 ## Functionality & MVPs
 During the game, users will be able to:
 * Start, Pause or Unpause the maze, Reset the Maze, Mute or Unmute the volume
 * Navigate the character by using the arrow keys
-* Use space bar to grab an item that you can use right away, or save it.
-* If gun or camera is on the item slot, then left clicking will use the item.
+* Use space bar to grab the key
+
 
 ## Wireframes
 ![Screenshot (123)](https://user-images.githubusercontent.com/85369724/131963654-92eee98c-c880-45f4-9874-9341aa589b32.png)
