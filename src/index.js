@@ -9,8 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = mainCanvas.getContext("2d");
   const game = new Game(ctx, mainCanvas, fog, dark);
 
-  // ctx.fillText("Press Enter or Left Mouse Click to Start")
-
   window.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !game.gameRunning) {
       game.play();
