@@ -8,6 +8,11 @@ class Maze {
     this.items = new Item(ctx);
     this.player = new Player(ctx, 3, 41);
     this.wraith = new Wraith(ctx, 980, 41);
+    this.keyItem = { x: 1110, y: 40 };
+    this.blueDoor = { x: 217, y: 82 };
+    this.redDoor = { x: 1103, y: 415 };
+    this.blueSwitchBefore = {x: 258, y: 35 };
+    this.blueSwitchAfter = {x: 423, y: 38 };
     this.wallImg = new Image();
     this.wallImg.src = "src/assets/tile-sheet.png";
     // this.wallImg.onload = () => this.update();
@@ -42,12 +47,12 @@ class Maze {
     this.activate(this.player, this.wraith);
     this.wraithChase();
     this.attacking(this.player, this.wraith);
-    this.blueSwitchDistanceCheck(this.player, this.items.frameSwitchDestinationX, this.items.frameSwitchDestinationY);
-    this.keyDistanceCheck(this.player, this.items.keyItem);
-    this.redDoorDistanceCheck(this.player, this.items.redDoor);
+    this.blueSwitchDistanceCheck(this.player, this.blueSwitchBefore);
+    this.keyDistanceCheck(this.player, this.keyItem);
+    this.redDoorDistanceCheck(this.player, this.redDoor);
+    this.heartDistanceCheck(this.player, )
     // this.testFunction();
     this.Colliding(this.player, this.objects);
-    // this.move(this.player);
   }
 
   testFunction() {
@@ -60,7 +65,7 @@ class Maze {
     this.items.drawSwitch(this.items.frameSwitchDestinationX, this.items.frameSwitchDestinationY);
     this.items.drawHeart(915, 625);
     this.items.drawTorch(50, 630);
-    this.items.drawKey(this.items.keyItem.x, this.items.keyItem.y);
+    this.items.drawKey(this.keyItem.x, this.keyItem.y);
   }
 
   getDistance(x1, y1, x2, y2) { // util function
@@ -151,11 +156,15 @@ class Maze {
   //   }
   // }
 
-  blueSwitchDistanceCheck(player, blueSwitchX, blueSwitchY) {
-    const distance = this.getDistance(player.x, player.y, blueSwitchX, blueSwitchY);
+  blueSwitchDistanceCheck(player, blueSwitch) {
+    const distance = this.getDistance(player.x, player.y, blueSwitch.x, blueSwitch.y);
     if (distance < 25 && this.items.keys[32]) {
       this.items.animateBlueSwitch();
     }
+  }
+
+  heartDistanceCheck(player, heart) {
+
   }
 
   keyDistanceCheck(player, key) {
@@ -171,11 +180,12 @@ class Maze {
     const distance = this.getDistance(player.x, player.y, 1103, 415);
     if (distance < 40 && this.items.keyGrab === true) {
       this.items.animateRedDoor();
+      this.keyItem = {x: 2000, y: 2000}
     }
   }
 
   attacking(player, wraith) { // wraith attacking
-    const distance = this.getDistance(player.x, player.y, wraith.x, wraith.y)
+    const distance = this.getDistance(player.x, player.y, wraith.x + 15, wraith.y)
     if (distance < 30)  {
       this.wraith.attacking = true;
     } else if ( distance > 30) {

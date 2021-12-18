@@ -8,9 +8,6 @@ class Items {
     this.frameSwitchX = 350; // lever pushed
     this.frameSwitchDestinationX = 258; // canvas X position for blue switch
     this.frameSwitchDestinationY = 35; // canvas Y position for blue switch ( changing this when pressed because height on sheet is different )
-    this.keyItem = { x: 1110, y: 40 };
-    this.blueDoor= { x: 217, y: 82 };
-    this.redDoor = { x: 1103, y: 415};
     this.frameBlueDoorX = 217; 
     this.frameRedDoorX = 81;
     this.tileImg = new Image();
@@ -40,20 +37,17 @@ class Items {
   animateBlueSwitch() {
     this.frameSwitchX = 423;
     this.frameSwitchDestinationY = 38;
-    this.canvasSwitchY = 38;
-    this.canvasSwitchX = 265;
     this.animateBlueDoor();
   }
 
   animateBlueDoor() {
     this.frameBlueDoorX = 285;
-    this.blueDoor ="opened"
+    this.blueDoor = "opened";
   }
 
   animateRedDoor() {
     this.frameRedDoorX = 149;
-    this.redDoor ="opened";
-    this.keyItem = {x: 2000, y: 2000}
+    this.redDoor = "opened";
   }
 
   drawTorch(x, y) {

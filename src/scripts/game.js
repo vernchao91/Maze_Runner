@@ -73,18 +73,19 @@ class Game {
   
   // }
 
+  pausedPage() {
+    this.ctx.globalAlpha = 0.5;
+  }
+
 
   animateMazeOne() {
     this.pauseListener();
     if (!this.pause) {
+      this.ctx.globalAlpha = 1
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.maze1.update();
-      // this.ctx.globalAlpha = 1
-    } else if (this.pause) {
-      // this.ctx.globalAlpha = 0.4
-      // this.ctx.drawImage(this.pagePause, 0, 0);
-    // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight);
-
+    } else {
+      this.pausedPage();
     }
     requestAnimationFrame(this.animateMazeOne.bind(this))
   }
