@@ -6,10 +6,12 @@ class Items {
     this.height = this.spriteHeight / 10;
     this.width = this.spriteWidth / 10;
     this.frameSwitchX = 350; // lever pushed
-    this.frameSwitchDestinationX = 258; // canvas X position for blue switch
-    this.frameSwitchDestinationY = 35; // canvas Y position for blue switch ( changing this when pressed because height on sheet is different )
+    // this.frameSwitchDestinationX = 258; // canvas X position for blue switch
+    // this.frameSwitchDestinationY = 35; // canvas Y position for blue switch ( changing this when pressed because height on sheet is different )
     this.frameBlueDoorX = 217; 
     this.frameRedDoorX = 81;
+    this.frameHeart = 115;
+    this.frameTorch = 690;
     this.tileImg = new Image();
     this.tileImg.src = 'src/assets/tile-sheet.png'
     // this.torchImg.onload = () => this.update();
@@ -36,22 +38,22 @@ class Items {
 
   animateBlueSwitch() {
     this.frameSwitchX = 423;
-    this.frameSwitchDestinationY = 38;
+    // this.frameSwitchDestinationY = 38;
     this.animateBlueDoor();
   }
 
   animateBlueDoor() {
-    this.frameBlueDoorX = 285;
+    this.frameBlueDoorX = 285; // frame for opened door
     this.blueDoor = "opened";
   }
 
   animateRedDoor() {
-    this.frameRedDoorX = 149;
+    this.frameRedDoorX = 149; // frame for opened door
     this.redDoor = "opened";
   }
 
   drawTorch(x, y) {
-    this.ctx.drawImage(this.tileImg, 690, 5, 30, 50, x, y, 40, 50); // torch
+    this.ctx.drawImage(this.tileImg, this.frameTorch, 5, 30, 50, x, y, 40, 50); // torch
   }
 
   drawKey(x, y) {
@@ -71,7 +73,7 @@ class Items {
   }
 
   drawHeart(x, y) {
-    this.ctx.drawImage(this.tile2Img, 115, 0, 150, 155, x, y, 40, 40); // heart
+    this.ctx.drawImage(this.tile2Img, this.frameHeart, 0, 150, 155, x, y, 40, 40); // heart
   }
 
 }

@@ -9,10 +9,11 @@ class Maze {
     this.player = new Player(ctx, 3, 41);
     this.wraith = new Wraith(ctx, 980, 41);
     this.keyItem = { x: 1110, y: 40 };
-    this.blueDoor = { x: 217, y: 82 };
+    this.blueDoor = { x: 51, y: 194 };
     this.redDoor = { x: 1103, y: 415 };
-    this.blueSwitchBefore = {x: 258, y: 35 };
-    this.blueSwitchAfter = {x: 423, y: 38 };
+    this.blueSwitch = { x: 258, y: 35 };
+    this.heart = { x: 915, y: 625 };
+    this.torch = { x: 50, y: 630 };
     this.wallImg = new Image();
     this.wallImg.src = "src/assets/tile-sheet.png";
     // this.wallImg.onload = () => this.update();
@@ -47,10 +48,10 @@ class Maze {
     this.activate(this.player, this.wraith);
     this.wraithChase();
     this.attacking(this.player, this.wraith);
-    this.blueSwitchDistanceCheck(this.player, this.blueSwitchBefore);
+    this.blueSwitchDistanceCheck(this.player, this.blueSwitch);
     this.keyDistanceCheck(this.player, this.keyItem);
     this.redDoorDistanceCheck(this.player, this.redDoor);
-    this.heartDistanceCheck(this.player, )
+    this.heartDistanceCheck(this.player, this.heart)
     // this.testFunction();
     this.Colliding(this.player, this.objects);
   }
@@ -60,11 +61,11 @@ class Maze {
   }
 
   updateItems() {
-    this.items.drawRedDoor(1103, 415);
-    this.items.drawBlueDoor(51, 194);
-    this.items.drawSwitch(this.items.frameSwitchDestinationX, this.items.frameSwitchDestinationY);
-    this.items.drawHeart(915, 625);
-    this.items.drawTorch(50, 630);
+    this.items.drawRedDoor(this.redDoor.x, this.redDoor.y);
+    this.items.drawBlueDoor(this.blueDoor.x, this.blueDoor.y);
+    this.items.drawSwitch(this.blueSwitch.x, this.blueSwitch.y);
+    this.items.drawHeart(this.heart.x, this.heart.y);
+    this.items.drawTorch(this.torch.x, this.torch.y);
     this.items.drawKey(this.keyItem.x, this.keyItem.y);
   }
 
@@ -160,11 +161,16 @@ class Maze {
     const distance = this.getDistance(player.x, player.y, blueSwitch.x, blueSwitch.y);
     if (distance < 25 && this.items.keys[32]) {
       this.items.animateBlueSwitch();
+      blueSwitch.y = 38
     }
   }
 
   heartDistanceCheck(player, heart) {
-
+    const distance = this.getDistance(player.x, player.y, heart.x, heart.y);
+    if (distance < 25) {
+      this.player.health += 1
+      this.heart.x = 2000
+    }
   }
 
   keyDistanceCheck(player, key) {
