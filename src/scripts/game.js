@@ -10,8 +10,8 @@ class Game {
     this.height = this.main.height = 700;
     this.keys = [];
     this.maze1 = new Maze(ctx);
-    // this.pausePage = new Image();
-    // this.pausePage.src = "src/assets/tile-sheet.png";
+    this.pausePage = new Image();
+    this.pausePage.src = "src/assets/background.jpg";
     this.gameRunning = false;
     this.pause = false;
     this.music = true;
@@ -75,10 +75,16 @@ class Game {
 
 
   animateMazeOne() {
-    this.ctx.clearRect(0, 0, this.width, this.height);
     this.pauseListener();
     if (!this.pause) {
+      this.ctx.clearRect(0, 0, this.width, this.height);
       this.maze1.update();
+      // this.ctx.globalAlpha = 1
+    } else if (this.pause) {
+      // this.ctx.globalAlpha = 0.4
+      // this.ctx.drawImage(this.pagePause, 0, 0);
+    // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight);
+
     }
     requestAnimationFrame(this.animateMazeOne.bind(this))
   }

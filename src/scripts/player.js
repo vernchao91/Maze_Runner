@@ -32,27 +32,27 @@ class Player {
 
   keyDown(e) {
     this.keys[e.keyCode] = true;
-    // if (e.keyCode === 83) {
-    //   delete this.keys[87]
-    //   delete this.keys[68]
-    //   delete this.keys[65]
-    //   this.lastInput = "down";
-    // } else if (e.keyCode === 87) {
-    //   delete this.keys[65]
-    //   delete this.keys[68]
-    //   delete this.keys[83]
-    //   this.lastInput = "up";
-    // } else if (e.keyCode === 65) {
-    //   delete this.keys[87]
-    //   delete this.keys[68]
-    //   delete this.keys[83]
-    //   this.lastInput = "left";
-    // } else if (e.keyCode === 68) {
-    //   delete this.keys[87]
-    //   delete this.keys[65]
-    //   delete this.keys[83]
-    //   this.lastInput = "right";
-    // }
+    if (e.keyCode === 83) {
+      delete this.keys[87]
+      delete this.keys[68]
+      delete this.keys[65]
+      this.lastInput = "down";
+    } else if (e.keyCode === 87) {
+      delete this.keys[65]
+      delete this.keys[68]
+      delete this.keys[83]
+      this.lastInput = "up";
+    } else if (e.keyCode === 65) {
+      delete this.keys[87]
+      delete this.keys[68]
+      delete this.keys[83]
+      this.lastInput = "left";
+    } else if (e.keyCode === 68) {
+      delete this.keys[87]
+      delete this.keys[65]
+      delete this.keys[83]
+      this.lastInput = "right";
+    }
     // this.moving = true;
   }
 

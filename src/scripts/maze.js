@@ -104,30 +104,30 @@ class Maze {
       } else {
         if (player.keys[83]) {
           player.moving = true;
-          delete player.keys[65]
-          delete player.keys[68]
-          delete player.keys[87]
+          // delete player.keys[65]
+          // delete player.keys[68]
+          // delete player.keys[87]
           player.y += player.speed / objects.length;
           player.lastInput = "down";
         } else if (player.keys[87]) {
           player.moving = true;
-          delete player.keys[65]
-          delete player.keys[68]
-          delete player.keys[83]
+          // delete player.keys[65]
+          // delete player.keys[68]
+          // delete player.keys[83]
           player.y -= player.speed / objects.length;
           player.lastInput = "up";
         } else if (player.keys[65]) {
           player.moving = true;
-          delete player.keys[87]
-          delete player.keys[68]
-          delete player.keys[83]
+          // delete player.keys[87]
+          // delete player.keys[68]
+          // delete player.keys[83]
           player.x -= player.speed / objects.length;
           player.lastInput = "left";
         } else if (player.keys[68]) {
           player.moving = true;
-          delete player.keys[65]
-          delete player.keys[87]
-          delete player.keys[83]
+          // delete player.keys[65]
+          // delete player.keys[87]
+          // delete player.keys[83]
           player.x += player.speed / objects.length;
           player.lastInput = "right";
         }
