@@ -1,5 +1,11 @@
 body {
   display: flex;
+  // background: url("../src/assets/background.jpg") no-repeat center center fixed;
+  // -webkit-background-size: cover;
+  // -moz-background-size: cover;
+  // -o-background-size: cover;
+  // background-size: cover;
+  background-color: rgb(31, 31, 31);
   .left {
     display: flex;
     flex-direction: column;
@@ -16,7 +22,7 @@ body {
       font-size: x-large;
       display: flex;
       text-align: center;
-      background-color: rgba(245, 245, 245, 0.589);
+      // background-color: rgba(245, 245, 245, 0.589);
       width: 200px;
       margin-left: 45px;
     }
@@ -48,7 +54,7 @@ body {
         min-width: 1200px;
         width: 1200px;
         height: 700px;
-        opacity: .35;
+        opacity: .75;
       }
     }
     .socials {

@@ -26,10 +26,11 @@ class Game {
   gameEventListeners() {
     window.addEventListener("keydown", this.keyDown.bind(this));
     window.addEventListener("keyup", this.keyUp.bind(this));
-    window.addEventListener("mousedown", this.clickListener.bind(this));
+    this.ctx.canvas.addEventListener("mousedown", this.clickListener.bind(this));
   }
 
   keyDown(e) {
+    e.preventDefault();
     this.keys[e.keyCode] = true;
   }
 
@@ -62,7 +63,6 @@ class Game {
   }
 
   play() {
-    this.running = true
     this.animateMazeOne();
   }
 

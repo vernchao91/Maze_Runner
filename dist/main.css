@@ -3,6 +3,7 @@
   \*************************************************************************************************************************************/
 body {
   display: flex;
+  background-color: #1f1f1f;
 }
 body .left {
   display: flex;
@@ -21,7 +22,6 @@ body .left label {
   font-size: x-large;
   display: flex;
   text-align: center;
-  background-color: rgba(245, 245, 245, 0.589);
   width: 200px;
   margin-left: 45px;
 }
@@ -51,7 +51,7 @@ body .middle .canvas-wrapper #bg {
   min-width: 1200px;
   width: 1200px;
   height: 700px;
-  opacity: 0.35;
+  opacity: 0.75;
 }
 body .middle .socials {
   margin-top: 20px;

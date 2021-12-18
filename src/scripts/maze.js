@@ -103,24 +103,28 @@ class Maze {
         }
       } else {
         if (player.keys[83]) {
+          player.moving = true;
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
           player.y += player.speed / objects.length;
           player.lastInput = "down";
         } else if (player.keys[87]) {
+          player.moving = true;
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[83]
           player.y -= player.speed / objects.length;
           player.lastInput = "up";
         } else if (player.keys[65]) {
+          player.moving = true;
           delete player.keys[87]
           delete player.keys[68]
           delete player.keys[83]
           player.x -= player.speed / objects.length;
           player.lastInput = "left";
         } else if (player.keys[68]) {
+          player.moving = true;
           delete player.keys[65]
           delete player.keys[87]
           delete player.keys[83]
@@ -231,36 +235,36 @@ class Maze {
   drawWireFrame() {
     this.ctx.beginPath();
     //x, y, width, height
-    this.ctx.rect(0, 40, 1150, 0); // top wall border
-    this.ctx.rect(0, 110, 40, 550); // left wall border
-    this.ctx.rect(1155, 40, 40, 550); // right wall border
-    this.ctx.rect(40, 660, 1155, 0); // bottom wall border
+    // this.ctx.rect(0, 40, 1150, 0); // top wall border
+    // this.ctx.rect(0, 110, 40, 550); // left wall border
+    // this.ctx.rect(1155, 40, 40, 550); // right wall border
+    // this.ctx.rect(40, 660, 1155, 0); // bottom wall border
     let blueDoorCoordinates;
     if ( this.items.blueDoor === "closed" ) {
-      this.ctx.rect(52, 228, 248, 15); // blue door wall closed
+      // this.ctx.rect(52, 228, 248, 15); // blue door wall closed
       blueDoorCoordinates = { x: 52, y: 223, w: 248, h: 15};
     } else {
-      this.ctx.rect(102, 228, 198, 15); // blue door wall opened
+      // this.ctx.rect(102, 228, 198, 15); // blue door wall opened
       blueDoorCoordinates = { x: 102, y: 223, w: 198, h: 15};
     }
-    this.ctx.rect(302, 40, 15, 350); // first room right wall
-    this.ctx.rect(50, 405, 155, 10); // second room second wall bottom
-    this.ctx.rect(50, 585, 195, 10); // third room third wall bottom
-    this.ctx.rect(375, 405, 110, 10); // fourth room first wall bottom
-    this.ctx.rect(480, 120, 10, 290); // fourth room right wall bottom
-    this.ctx.rect(480, 120, 320, 10); // fourth room top bottom wall
-    this.ctx.rect(795, 40, 10, 80); // fourth room top right wall
-    this.ctx.rect(590, 360, 10, 300); // third room right wall
-    this.ctx.rect(690, 255, 10, 245); // fifth room right wall
-    this.ctx.rect(690, 255, 380, 10); // fifth room bottom wall
-    this.ctx.rect(1055, 40, 10, 300); // fifth room top right wall
-    this.ctx.rect(905, 450, 10, 210); // last room left wall
+    // this.ctx.rect(302, 40, 15, 350); // first room right wall
+    // this.ctx.rect(50, 405, 155, 10); // second room second wall bottom
+    // this.ctx.rect(50, 585, 195, 10); // third room third wall bottom
+    // this.ctx.rect(375, 405, 110, 10); // fourth room first wall bottom
+    // this.ctx.rect(480, 120, 10, 290); // fourth room right wall bottom
+    // this.ctx.rect(480, 120, 320, 10); // fourth room top bottom wall
+    // this.ctx.rect(795, 40, 10, 80); // fourth room top right wall
+    // this.ctx.rect(590, 360, 10, 300); // third room right wall
+    // this.ctx.rect(690, 255, 10, 245); // fifth room right wall
+    // this.ctx.rect(690, 255, 380, 10); // fifth room bottom wall
+    // this.ctx.rect(1055, 40, 10, 300); // fifth room top right wall
+    // this.ctx.rect(905, 450, 10, 210); // last room left wall
     let redDoorCoordinates;
     if ( this.items.redDoor === "closed" ) {
-      this.ctx.rect(905, 450, 253, 10);
+      // this.ctx.rect(905, 450, 253, 10);
       redDoorCoordinates = { x: 905, y: 440, w: 250, h: 10 }
     } else {
-      this.ctx.rect(905, 450, 200, 10);
+      // this.ctx.rect(905, 450, 200, 10);
       redDoorCoordinates = { x: 905, y: 440, w: 185, h: 10 }
     }
     this.objects = [
