@@ -6,7 +6,7 @@ class Maze {
   constructor(ctx) {
     this.ctx = ctx;
     this.items = new Item(ctx);
-    this.player = new Player(ctx, 3, 41);
+    this.player = new Player(ctx, 5, 45);
     this.wraith = new Wraith(ctx, 980, 41);
     this.keyItem = { x: 1110, y: 40 };
     this.blueDoor = { x: 51, y: 194 };
@@ -115,7 +115,7 @@ class Maze {
           // delete player.keys[87]
           player.y += player.speed / objects.length;
           player.lastInput = "down";
-        } else if (player.keys[87]) {
+        } else if (player.keys[87] && player.y > 40) {
           player.moving = true;
           // delete player.keys[65]
           // delete player.keys[68]
@@ -194,6 +194,7 @@ class Maze {
     const distance = this.getDistance(player.x, player.y, wraith.x + 15, wraith.y)
     if (distance < 30)  {
       this.wraith.attacking = true;
+      player.attacked = true;
     } else if ( distance > 30) {
       this.wraith.attacking = false;
     }
@@ -285,7 +286,7 @@ class Maze {
     }
     this.objects = [
       // { x: , y: , w: , h:  },
-      { x:0, y:40, w:1150, h:0 }, // top wall border
+      // { x:0, y:40, w: 1150, h: 1 }, // top wall border // this object is buggy, used player.y > 40 instead in move function
       { x: 0, y: 110, w: 40, h: 550 }, // left wall border
       { x: 1155, y: 40, w: 40, h: 550 }, // right wall border
       { x: 40, y: 655, w: 1155, h:  0 }, // bottom wall border

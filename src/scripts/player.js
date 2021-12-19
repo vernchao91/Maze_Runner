@@ -16,8 +16,8 @@ class Player {
     // this.playerSprite.onload = () => this.update();
     this.keyDown = this.keyDown.bind(this);
     this.keyUp = this.keyUp.bind(this);
-    // this.itemKeys = []
     this.keys = [];
+    this.attacked = false;
     this.moving = false;
     this.lastInput = "down";
     this.health = 3;
