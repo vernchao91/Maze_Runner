@@ -27,8 +27,6 @@ class Game {
     this.keyDown = this.keyDown.bind(this);
     this.keyUp = this.keyUp.bind(this);
     this.clickListener = this.clickListener.bind(this);
-    // this.ctx.shadowBlur = 150;
-    // this.ctx.shadowColor = 'black';
     window.addEventListener("keydown", this.keyDown.bind(this));
     window.addEventListener("keyup", this.keyUp.bind(this));
     this.fogctx.canvas.addEventListener("mousedown", this.clickListener.bind(this));

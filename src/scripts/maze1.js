@@ -107,28 +107,36 @@ class Maze1 {
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
-          player.y = object.y - player.h;
+          if (Object.values(player.keypressDetect).length === 1) {
+            player.y = object.y - player.h;
+          }
         } else if ( player.lastInput === "up") {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
-          player.y = object.y + object.h;
+          if (Object.values(player.keypressDetect).length === 1) {
+            player.y = object.y + object.h;
+          }
         } else if ( player.lastInput === "right") {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
-          player.x = object.x - player.w;
+          if (Object.values(player.keypressDetect).length === 1) {
+            player.x = object.x - player.w;
+          }
         } else if ( player.lastInput === "left") {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
-          player.x = object.x + object.w;
+          if (Object.values(player.keypressDetect).length === 1) {
+            player.x = object.x + object.w;
+          }
         }
       } else {
         if (player.keys[83] && player.y < 655) {
@@ -168,14 +176,14 @@ class Maze1 {
     const distance = this.getDistance(player.x, player.y, blueSwitch.x, blueSwitch.y);
     if (distance < 25 && this.items.keys[32]) {
       this.items.animateBlueSwitch();
-      blueSwitch.y = 38
+      blueSwitch.y = 38;
     }
   }
 
   torchDistanceCheck(player, torch) {
     const distance = this.getDistance(player.x, player.y, torch.x, torch.y);
     if (distance < 35) {
-      this.lightRadius = 100
+      this.lightRadius = 100;
     }
   }
 
@@ -195,8 +203,8 @@ class Maze1 {
     const distance = this.getDistance(player.x, player.y, key.x, key.y);
     if (distance < 40 && this.items.keys[32]) {
       this.items.keyGrab = true;
-      key.x = player.x
-      key.y = player.y
+      key.x = player.x;
+      key.y = player.y;
     }
   }
 
@@ -260,7 +268,6 @@ class Maze1 {
         this.wraith.y += this.wraith.speed;
 
       } else if (Math.floor(this.wraith.y) > Math.floor(this.player.y)) {
-
         this.wraith.direction = "right";
         this.wraith.y -= this.wraith.speed;
       }
