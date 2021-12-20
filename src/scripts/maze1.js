@@ -131,7 +131,7 @@ class Maze1 {
           player.x = object.x + object.w;
         }
       } else {
-        if (player.keys[83]) {
+        if (player.keys[83] && player.y < 655) {
           player.moving = true;
           delete player.keys[65]
           delete player.keys[68]
@@ -220,7 +220,7 @@ class Maze1 {
 
   activate(player, wraith) { // wraith activate
     const distance = this.getDistance(player.x, player.y, wraith.x, wraith.y)
-    if (distance < 100) {
+    if (distance < 40) {
       this.wraith.activated = true;
     }
   }
