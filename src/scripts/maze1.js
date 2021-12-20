@@ -15,6 +15,7 @@ class Maze1 {
     this.blueSwitch = { x: 258, y: 35 };
     this.heart = { x: 915, y: 625 };
     this.torch = { x: 50, y: 630 };
+    this.lightRadius = 50;
     this.wallImg = new Image();
     this.wallImg.src = "src/assets/tile-sheet.png";
     // this.wallImg.onload = () => this.update();
@@ -46,13 +47,15 @@ class Maze1 {
     this.updateItems();
     this.player.update();
     this.wraith.update();
+    this.addFogOfWar(this.fogctx);
     this.activate(this.player, this.wraith);
     this.wraithChase();
-    this.attacking(this.player, this.wraith);
+    this.wraithAttacking(this.player, this.wraith);
     this.blueSwitchDistanceCheck(this.player, this.blueSwitch);
     this.keyDistanceCheck(this.player, this.keyItem);
     this.redDoorDistanceCheck(this.player, this.redDoor);
-    this.heartDistanceCheck(this.player, this.heart)
+    this.heartDistanceCheck(this.player, this.heart);
+    this.torchDistanceCheck(this.player, this.torch);
     // this.testFunction();
     this.Colliding(this.player, this.objects);
   }
@@ -76,16 +79,16 @@ class Maze1 {
     return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
   }
 
-  addFogOfWar(fogctx) {
+  addFogOfWar(fogctx) { // fog of war around sprite
     fogctx.fillStyle = "black";
-    fogctx.fillRect(0, 0, this.main.width, this.main.height);
+    fogctx.fillRect(0, 0, 1200, 700);
     fogctx.globalCompositeOperation = "destination-out";
-    let fogGR = fogctx.createRadialGradient(this.maze1.player.x + 30, this.maze1.player.y + 30, 100, this.maze1.player.x + 30, this.maze1.player.y + 30, 100 / 1.2);
+    let fogGR = fogctx.createRadialGradient(this.player.x + 30, this.player.y + 30, this.lightRadius, this.player.x + 30, this.player.y + 30, this.lightRadius / 1.2); // fills the circle with mainCanvas
     fogGR.addColorStop(0, "rgba(0,0,0,0)");
     fogGR.addColorStop(1, "rgba(0,0,0,1)");
     fogctx.fillStyle = fogGR;
     fogctx.beginPath();
-    fogctx.arc(this.maze1.player.x + 30, this.maze1.player.y + 30, 100, 0, 2 * Math.PI);
+    fogctx.arc(this.player.x + 30, this.player.y + 30, this.lightRadius, 0, 2 * Math.PI); // draws the circle
     fogctx.closePath();
     fogctx.fill();
     fogctx.globalCompositeOperation = "source-over";
@@ -98,25 +101,29 @@ class Maze1 {
         player.y < object.y + object.h &&
         player.h + player.y > object.y )
       ) {
-        if ( player.lastInput === "down" ) {
+        if ( player.lastInput === "down" && player.keys[83]) {
+          player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
           player.y = object.y - player.h;
-        } else if ( player.lastInput === "up" ) {
+        } else if ( player.lastInput === "up" && player.keys[87]) {
+          player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
           player.y = object.y + object.h;
-        } else if ( player.lastInput === "right" ) {
+        } else if ( player.lastInput === "right" && player.keys[68]) {
+          player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
           player.x = object.x - player.w;
-        } else if ( player.lastInput === "left" ) {
+        } else if ( player.lastInput === "left" && player.keys[65]) {
+          player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
@@ -157,22 +164,6 @@ class Maze1 {
     }
   }
 
-  // move() {
-  //   if (this.player.keys[83]) {
-  //     this.player.y += this.player.speed;
-  //     this.player.lastInput = "down";
-  //   } else if (this.player.keys[87]) {
-  //     this.player.y -= this.player.speed;
-  //     this.player.lastInput = "up";
-  //   } else if (this.player.keys[65]) {
-  //     this.player.x -= this.player.speed;
-  //     this.player.lastInput = "left";
-  //   } else if (this.player.keys[68]) {
-  //     this.player.x += this.player.speed;
-  //     this.player.lastInput = "right";
-  //   }
-  // }
-
   blueSwitchDistanceCheck(player, blueSwitch) {
     const distance = this.getDistance(player.x, player.y, blueSwitch.x, blueSwitch.y);
     if (distance < 25 && this.items.keys[32]) {
@@ -181,11 +172,22 @@ class Maze1 {
     }
   }
 
+  torchDistanceCheck(player, torch) {
+    const distance = this.getDistance(player.x, player.y, torch.x, torch.y);
+    if (distance < 30) {
+      this.lightRadius = 100
+    }
+  }
+
   heartDistanceCheck(player, heart) {
     const distance = this.getDistance(player.x, player.y, heart.x, heart.y);
     if (distance < 25) {
-      this.player.health += 1
-      this.heart.x = 2000
+      heart.x = 2000
+      if (player.health === 1) {
+        player.health = 2
+      } else if (player.health === 2) {
+        player.health = 3
+      }
     }
   }
 
@@ -206,7 +208,7 @@ class Maze1 {
     }
   }
 
-  attacking(player, wraith) { // wraith attacking
+  wraithAttacking(player, wraith) { // wraith attacking
     const distance = this.getDistance(player.x, player.y, wraith.x + 15, wraith.y)
     if (distance < 30)  {
       this.wraith.attacking = true;
@@ -387,6 +389,22 @@ class Maze1 {
       this.ctx.drawImage(this.wallImg, 638, 0, 55, 80, 0, y, 60, 83)
     }
   }
+
+    // move() {
+  //   if (this.player.keys[83]) {
+  //     this.player.y += this.player.speed;
+  //     this.player.lastInput = "down";
+  //   } else if (this.player.keys[87]) {
+  //     this.player.y -= this.player.speed;
+  //     this.player.lastInput = "up";
+  //   } else if (this.player.keys[65]) {
+  //     this.player.x -= this.player.speed;
+  //     this.player.lastInput = "left";
+  //   } else if (this.player.keys[68]) {
+  //     this.player.x += this.player.speed;
+  //     this.player.lastInput = "right";
+  //   }
+  // }
   
 }
 

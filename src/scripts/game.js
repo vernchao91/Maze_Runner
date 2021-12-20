@@ -72,23 +72,23 @@ class Game {
     this.animateMazeOne();
   }
 
-  addFogOfWar(fogctx) {
-    // fogctx.globalAlpha = .1;
-    fogctx.fillStyle = "black";
-    fogctx.fillRect(0, 0, this.main.width, this.main.height);
-    fogctx.globalCompositeOperation = "destination-out";
-    let fogGR = fogctx.createRadialGradient(this.maze1.player.x + 30, this.maze1.player.y + 30, 100, this.maze1.player.x + 30, this.maze1.player.y + 30, 100 / 1.2);
-    // let fogGR = fogctx.createRadialGradient(1, 1, 1, 1, 1, 1);
-    fogGR.addColorStop(0, "rgba(0,0,0,0)");
-    fogGR.addColorStop(1, "rgba(0,0,0,1)");
-    fogctx.fillStyle = fogGR;
-    fogctx.beginPath();
-    fogctx.arc(this.maze1.player.x + 30, this.maze1.player.y + 30, 100, 0, 2 * Math.PI);
-    // fogctx.arc(200, 200, 50, 0, 2 * Math.PI);
-    fogctx.closePath();
-    fogctx.fill();
-    fogctx.globalCompositeOperation = "source-over";
-  }
+  // addFogOfWar(fogctx) {
+  //   // fogctx.globalAlpha = .1;
+  //   fogctx.fillStyle = "black";
+  //   fogctx.fillRect(0, 0, this.main.width, this.main.height);
+  //   fogctx.globalCompositeOperation = "destination-out";
+  //   let fogGR = fogctx.createRadialGradient(this.maze1.player.x + 30, this.maze1.player.y + 30, 100, this.maze1.player.x + 30, this.maze1.player.y + 30, 100 / 1.2);
+  //   // let fogGR = fogctx.createRadialGradient(1, 1, 1, 1, 1, 1);
+  //   fogGR.addColorStop(0, "rgba(0,0,0,0)");
+  //   fogGR.addColorStop(1, "rgba(0,0,0,1)");
+  //   fogctx.fillStyle = fogGR;
+  //   fogctx.beginPath();
+  //   fogctx.arc(this.maze1.player.x + 30, this.maze1.player.y + 30, 100, 0, 2 * Math.PI);
+  //   // fogctx.arc(200, 200, 50, 0, 2 * Math.PI);
+  //   fogctx.closePath();
+  //   fogctx.fill();
+  //   fogctx.globalCompositeOperation = "source-over";
+  // }
 
   // addDarkness(ctx) {
 
@@ -113,7 +113,7 @@ class Game {
     this.pauseListener();
     if (!this.pause) {
       this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
-      this.addFogOfWar(this.fogctx);
+      // this.addFogOfWar(this.fogctx);
       this.ctx.clearRect(0, 0, this.main.width, this.main.height);
       this.maze1.update();
     } else {
