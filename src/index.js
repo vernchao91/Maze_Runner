@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   fog.addEventListener("click", (e) => {
     if (!game.gameRunning && !game.startMenu.titleAnimation) {
-      game.startMenu.titlePosition.y = 35
+      game.startMenu.finishAnimation();
     } else if (!game.gameRunning && game.startMenu.titleAnimation){
       game.play();
     }

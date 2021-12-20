@@ -53,7 +53,7 @@ class Player {
       delete this.keys[65]
       delete this.keys[83]
     }
-    // this.moving = true;
+    this.moving = true;
   }
 
   keyUp(e) {

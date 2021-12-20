@@ -101,28 +101,28 @@ class Maze1 {
         player.y < object.y + object.h &&
         player.h + player.y > object.y )
       ) {
-        if ( player.lastInput === "down" && player.keys[83]) {
+        if ( player.lastInput === "down") {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
           player.y = object.y - player.h;
-        } else if ( player.lastInput === "up" && player.keys[87]) {
+        } else if ( player.lastInput === "up") {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
           player.y = object.y + object.h;
-        } else if ( player.lastInput === "right" && player.keys[68]) {
+        } else if ( player.lastInput === "right") {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
           player.x = object.x - player.w;
-        } else if ( player.lastInput === "left" && player.keys[65]) {
+        } else if ( player.lastInput === "left") {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
@@ -145,7 +145,7 @@ class Maze1 {
           delete player.keys[83]
           player.y -= player.speed / objects.length;
           player.lastInput = "up";
-        } else if (player.keys[65]) {
+        } else if (player.keys[65] && player.x > 40) {
           player.moving = true;
           delete player.keys[87]
           delete player.keys[68]
@@ -174,7 +174,7 @@ class Maze1 {
 
   torchDistanceCheck(player, torch) {
     const distance = this.getDistance(player.x, player.y, torch.x, torch.y);
-    if (distance < 30) {
+    if (distance < 35) {
       this.lightRadius = 100
     }
   }
