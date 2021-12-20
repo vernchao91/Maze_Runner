@@ -9,14 +9,22 @@ document.addEventListener('DOMContentLoaded', () => {
   const ctx = mainCanvas.getContext("2d");
   const game = new Game(ctx, mainCanvas, fog, dark);
 
+  if (!game.gameRunning) {
+    game.animateStartMenu();
+  }
+
   window.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !game.gameRunning) {
+    if (e.key === "Enter" && !game.gameRunning && !game.startMenu.finishAnimation) {
+      game.startMenu.titlePosition.y = 35
+    } else if (!game.gameRunning && game.startMenu.finishAnimation){
       game.play();
     }
   })
   
   mainCanvas.addEventListener("click", (e) => {
-    if (!game.gameRunning) {
+    if (!game.gameRunning && !game.startMenu.finishAnimation) {
+      game.startMenu.titlePosition.y = 35
+    } else if (!game.gameRunning && game.startMenu.finishAnimation){
       game.play();
     }
   })

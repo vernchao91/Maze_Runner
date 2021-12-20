@@ -45,13 +45,12 @@ body .middle .canvas-wrapper #mainCanvas {
   position: absolute;
   border-radius: 10px;
   min-width: 1200px;
-  height: 700px;
 }
 body .middle .canvas-wrapper #bg {
   min-width: 1200px;
   width: 1200px;
   height: 700px;
-  opacity: 0.75;
+  opacity: 0.5;
 }
 body .middle .socials {
   margin-top: 20px;

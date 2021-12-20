@@ -1,8 +1,8 @@
 import Player from './player';
-import Wraith from './wraith'
-import Item from './items'
+import Wraith from './wraith';
+import Item from './items';
 
-class Maze {
+class Maze1 {
   constructor(ctx) {
     this.ctx = ctx;
     this.items = new Item(ctx);
@@ -28,7 +28,7 @@ class Maze {
     // this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, y, 55, 80) // top/bottom wall
     // this.ctx.drawImage(this.wallImg, 775, 0, 50, 75, x, y, 55, 80) // side wall
     // this.updateItems();
-  }
+  };
 
   eventListeners() {
     window.addEventListener("keydown", this.player.keyDown.bind(this));
@@ -374,4 +374,4 @@ class Maze {
   
 }
 
-export default Maze;
+export default Maze1;

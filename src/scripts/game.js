@@ -1,4 +1,6 @@
-import Maze from './maze';
+import Maze1 from './maze1';
+import StartMenu from './startmenu';
+import PauseMenu from './pausemenu';
 
 class Game {
   constructor(ctx, canvas1, canvas2, canvas3) {
@@ -9,7 +11,9 @@ class Game {
     this.width = this.main.width = 1200;
     this.height = this.main.height = 700;
     this.keys = [];
-    this.maze1 = new Maze(ctx);
+    this.startMenu = new StartMenu(ctx);
+    this.pauseMenu = new PauseMenu(ctx);
+    this.maze1 = new Maze1(ctx);
     this.pausePage = new Image();
     this.pausePage.src = "src/assets/background.jpg";
     this.gameRunning = false;
@@ -73,10 +77,16 @@ class Game {
   
   // }
 
-  pausedPage() {
+  animatePauseMenu() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
     this.ctx.globalAlpha = 0.5;
   }
 
+  animateStartMenu() {
+    this.ctx.clearRect(0, 0, this.width, this.height);
+    this.startMenu.update();
+    requestAnimationFrame(this.animateStartMenu.bind(this))
+  }
 
   animateMazeOne() {
     this.pauseListener();
@@ -85,7 +95,7 @@ class Game {
       this.ctx.clearRect(0, 0, this.width, this.height);
       this.maze1.update();
     } else {
-      this.pausedPage();
+      this.animatePauseMenu();
     }
     requestAnimationFrame(this.animateMazeOne.bind(this))
   }
