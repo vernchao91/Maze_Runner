@@ -3,27 +3,9 @@
   \*************************************************************************************************************************************/
 body {
   display: flex;
-  background-color: #1f1f1f;
-}
-body .left {
-  display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 18vw;
-  min-width: 338px;
-}
-body .left img {
-  width: 314px;
-  height: 83px;
-}
-body .left label {
-  border: 5px solid white;
-  font-size: x-large;
-  display: flex;
-  text-align: center;
-  width: 200px;
-  margin-left: 45px;
+  background-color: #1f1f1f;
 }
 body .middle {
   display: flex;
@@ -31,7 +13,7 @@ body .middle {
   align-items: center;
   justify-content: center;
   min-width: 1315px;
-  width: 70vw;
+  width: 1200px;
 }
 body .middle .canvas-wrapper {
   display: flex;
@@ -41,6 +23,18 @@ body .middle .canvas-wrapper {
   min-width: 1200px;
 }
 body .middle .canvas-wrapper #mainCanvas {
+  border: 5px solid white;
+  position: absolute;
+  border-radius: 10px;
+  min-width: 1200px;
+}
+body .middle .canvas-wrapper #fog {
+  border: 5px solid white;
+  position: absolute;
+  border-radius: 10px;
+  min-width: 1200px;
+}
+body .middle .canvas-wrapper #dark {
   border: 5px solid white;
   position: absolute;
   border-radius: 10px;
@@ -75,17 +69,4 @@ body .middle .socials #angellist {
   width: 30px;
   height: 30px;
   cursor: pointer;
-}
-body .right {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 230px;
-  min-width: 12vw;
-}
-body .right .item {
-  text-align: right;
-}
-body .right .character-information {
-  text-align: right;
 }

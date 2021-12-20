@@ -3,11 +3,11 @@ class StartMenu {
     this.ctx = ctx;
     this.title = new Image();
     this.title.src = "src/assets/MazeRunner.png";
-    this.titlePosition = { x: 300, y: -135 }
-    this.titleSpeed = .5
+    this.titlePosition = { x: 300, y: -135 };
+    this.titleSpeed = .85;
     this.canvasHeight = 700;
     this.canvasWidth = 1200;
-    this.finishAnimation = false
+    this.titleAnimation = false;
   };
 
   update() {
@@ -15,12 +15,16 @@ class StartMenu {
     this.moveTitle();
   };
 
+  finishAnimation() {
+    this.titlePosition.y = 20;
+    this.titleAnimation = true;
+  }
+
   moveTitle() {
-    if (this.titlePosition.y < 35) {
+    if (this.titlePosition.y < 20) {
       this.titlePosition.y += this.titleSpeed;
-    }
-    if (this.titlePosition.y >= 35) {
-      this.finishAnimation = true;
+    } else if (this.titlePosition.y >= 20) {
+      this.titleAnimation = true;
     }
   };
 

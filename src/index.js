@@ -6,25 +6,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const fog = document.getElementById("fog");
   const dark = document.getElementById("dark");
   
-  const ctx = mainCanvas.getContext("2d");
-  const game = new Game(ctx, mainCanvas, fog, dark);
+  const mainctx = mainCanvas.getContext("2d");
+  const fogctx = fog.getContext("2d");
+  // const darkctx = dark.getContext("2d");
+  const game = new Game(mainctx, mainCanvas, fog, dark);
 
   if (!game.gameRunning) {
     game.animateStartMenu();
   }
 
   window.addEventListener("keydown", (e) => {
-    if (e.key === "Enter" && !game.gameRunning && !game.startMenu.finishAnimation) {
-      game.startMenu.titlePosition.y = 35
-    } else if (!game.gameRunning && game.startMenu.finishAnimation){
+    if ((e.key === "Enter") && !game.gameRunning && !game.startMenu.titleAnimation) {
+      game.startMenu.finishAnimation();
+    } else if ((e.key === "Enter") && !game.gameRunning && game.startMenu.titleAnimation){
       game.play();
     }
   })
   
-  mainCanvas.addEventListener("click", (e) => {
-    if (!game.gameRunning && !game.startMenu.finishAnimation) {
+  fog.addEventListener("click", (e) => {
+    if (!game.gameRunning && !game.startMenu.titleAnimation) {
       game.startMenu.titlePosition.y = 35
-    } else if (!game.gameRunning && game.startMenu.finishAnimation){
+    } else if (!game.gameRunning && game.startMenu.titleAnimation){
       game.play();
     }
   })

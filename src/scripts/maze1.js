@@ -3,8 +3,9 @@ import Wraith from './wraith';
 import Item from './items';
 
 class Maze1 {
-  constructor(ctx) {
+  constructor(ctx, fogctx) {
     this.ctx = ctx;
+    this.fogctx = fogctx;
     this.items = new Item(ctx);
     this.player = new Player(ctx, 5, 45);
     this.wraith = new Wraith(ctx, 980, 41);
@@ -74,6 +75,21 @@ class Maze1 {
     let yDistance = y2 - y1;
     return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
   }
+
+  addFogOfWar(fogctx) {
+    fogctx.fillStyle = "black";
+    fogctx.fillRect(0, 0, this.main.width, this.main.height);
+    fogctx.globalCompositeOperation = "destination-out";
+    let fogGR = fogctx.createRadialGradient(this.maze1.player.x + 30, this.maze1.player.y + 30, 100, this.maze1.player.x + 30, this.maze1.player.y + 30, 100 / 1.2);
+    fogGR.addColorStop(0, "rgba(0,0,0,0)");
+    fogGR.addColorStop(1, "rgba(0,0,0,1)");
+    fogctx.fillStyle = fogGR;
+    fogctx.beginPath();
+    fogctx.arc(this.maze1.player.x + 30, this.maze1.player.y + 30, 100, 0, 2 * Math.PI);
+    fogctx.closePath();
+    fogctx.fill();
+    fogctx.globalCompositeOperation = "source-over";
+  }
   
   Colliding(player, objects) { //util function
     for (let object of objects) {
@@ -110,30 +126,30 @@ class Maze1 {
       } else {
         if (player.keys[83]) {
           player.moving = true;
-          // delete player.keys[65]
-          // delete player.keys[68]
-          // delete player.keys[87]
+          delete player.keys[65]
+          delete player.keys[68]
+          delete player.keys[87]
           player.y += player.speed / objects.length;
           player.lastInput = "down";
         } else if (player.keys[87] && player.y > 40) {
           player.moving = true;
-          // delete player.keys[65]
-          // delete player.keys[68]
-          // delete player.keys[83]
+          delete player.keys[65]
+          delete player.keys[68]
+          delete player.keys[83]
           player.y -= player.speed / objects.length;
           player.lastInput = "up";
         } else if (player.keys[65]) {
           player.moving = true;
-          // delete player.keys[87]
-          // delete player.keys[68]
-          // delete player.keys[83]
+          delete player.keys[87]
+          delete player.keys[68]
+          delete player.keys[83]
           player.x -= player.speed / objects.length;
           player.lastInput = "left";
         } else if (player.keys[68]) {
           player.moving = true;
-          // delete player.keys[65]
-          // delete player.keys[87]
-          // delete player.keys[83]
+          delete player.keys[65]
+          delete player.keys[87]
+          delete player.keys[83]
           player.x += player.speed / objects.length;
           player.lastInput = "right";
         }
