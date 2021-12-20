@@ -19,6 +19,7 @@ class Player {
     this.keys = [];
     this.attacked = false;
     this.moving = false;
+    this.keypressDetect = false;
     this.lastInput = "down";
     this.health = 3;
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight);
@@ -32,33 +33,34 @@ class Player {
 
   keyDown(e) {
     this.keys[e.keyCode] = true;
-    if (e.keyCode === 83) {
+    if (e.keyCode === 83 && !this.keypressDetect) {
       this.lastInput = "down";
       delete this.keys[87]
       delete this.keys[68]
       delete this.keys[65]
-    } else if (e.keyCode === 87) {
+    } else if (e.keyCode === 87 && !this.keypressDetect) {
       this.lastInput = "up";
       delete this.keys[65]
       delete this.keys[68]
       delete this.keys[83]
-    } else if (e.keyCode === 65) {
+    } else if (e.keyCode === 65 && !this.keypressDetect) {
       this.lastInput = "left";
       delete this.keys[87]
       delete this.keys[68]
       delete this.keys[83]
-    } else if (e.keyCode === 68) {
+    } else if (e.keyCode === 68 && !this.keypressDetect) {
       this.lastInput = "right";
       delete this.keys[87]
       delete this.keys[65]
       delete this.keys[83]
     }
-    this.moving = true;
+    // this.moving = true;
   }
 
   keyUp(e) {
     delete this.keys[e.keyCode];
     this.moving = false;
+    this.keypressDetect = true;
   }
 
   drawPlayer() {
