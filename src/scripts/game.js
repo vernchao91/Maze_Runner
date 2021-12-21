@@ -1,6 +1,7 @@
 import Maze1 from './maze1';
 import StartMenu from './startmenu';
 import PauseMenu from './pausemenu';
+import GameOverMenu from './gameovermenu';
 
 class Game {
   constructor(ctx, canvas1, canvas2, canvas3) {
@@ -16,15 +17,20 @@ class Game {
     this.fog.height = 700;
     // this.dark.width = 1200;
     // this.dark.height = 700;
+    this.fps = 60;
     this.keys = [];
     this.startMenu = new StartMenu(ctx);
     this.pauseMenu = new PauseMenu(ctx);
+    this.gameOverMenu = new GameOverMenu(ctx);
     this.maze1 = new Maze1(ctx, this.fogctx);
     this.maze1Win = false;
     this.gameRunning = false;
     this.gameOver = false;
     this.pause = false;
     this.music = true;
+    this.then = Date.now();
+    this.fps = 60;
+    this.interval = 1000 / this.fps;
     this.keyDown = this.keyDown.bind(this);
     this.keyUp = this.keyUp.bind(this);
     this.clickListener = this.clickListener.bind(this);
@@ -96,19 +102,22 @@ class Game {
     }
   }
 
-  animateGameOver() {
-    this.ctx.clearRect(0, 0, this.main.width, this.main.height);
-    this.gameOverMenu.update();
-    let temp = requestAnimationFrame(this.animateGameOver.bind(this))
-    if (this.gameOver) {
-      
-    }
-  }
+  // animateGameOver() {
+  //   this.ctx.clearRect(0, 0, this.main.width, this.main.height);
+  //   this.gameOverMenu.update();
+  //   let temp = requestAnimationFrame(this.animateGameOver.bind(this))
+  //   if (this.gameOver) {
+
+  //   }
+  // }
 
   animateMazeOne() {
     let temp;
+    let delta;
+    let now;
     this.pauseListener();
     this.gameOverCheck(this.maze1.player.health);
+    requestAnimationFrame(this.animateMazeOne.bind(this))
     if (!this.pause) {
       this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
       this.ctx.clearRect(0, 0, this.main.width, this.main.height);
@@ -116,14 +125,13 @@ class Game {
     } else {
       // this.animatePauseMenu();
     }
-    temp = requestAnimationFrame(this.animateMazeOne.bind(this))
     if (this.maze1Win || this.gameOver) {
       this.gameRunning = false;
       cancelAnimationFrame(temp)
     }
     
-  }
 
+  }
 }
 
 export default Game

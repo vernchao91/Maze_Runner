@@ -47,7 +47,7 @@ class Maze1 {
     this.updateItems();
     this.player.update();
     this.wraith.update();
-    // this.addFogOfWar(this.fogctx);
+    this.addFogOfWar(this.fogctx);
     this.activate(this.player, this.wraith);
     this.wraithChase();
     this.wraithAttacking(this.player, this.wraith);
@@ -225,7 +225,7 @@ class Maze1 {
     if (player.invulnerableNum <= 0) { // when timer is over, player can be attacked again
       player.attacked = false;
       player.invulnerable = false;
-      player.invulnerableNum = 400; //resets invulnerability
+      player.invulnerableNum = 400; // resets invulnerability
     } else if (player.attacked) { // timer for invulnerability
       player.invulnerableNum -= 1;
     }
