@@ -13,9 +13,9 @@ class Maze1 {
     this.blueDoor = { x: 51, y: 194 };
     this.redDoor = { x: 1103, y: 415 };
     this.blueSwitch = { x: 258, y: 35 };
-    this.heart = { x: 915, y: 625 };
+    this.heart = { x: 860, y: 625 };
     this.torch = { x: 50, y: 630 };
-    this.lightRadius = 50;
+    this.lightRadius = 100;
     this.wallImg = new Image();
     this.wallImg.src = "src/assets/tile-sheet.png";
     // this.wallImg.onload = () => this.update();
@@ -47,7 +47,7 @@ class Maze1 {
     this.updateItems();
     this.player.update();
     this.wraith.update();
-    this.addFogOfWar(this.fogctx);
+    // this.addFogOfWar(this.fogctx);
     this.activate(this.player, this.wraith);
     this.wraithChase();
     this.wraithAttacking(this.player, this.wraith);
@@ -153,7 +153,7 @@ class Maze1 {
           delete player.keys[83]
           player.y -= player.speed / objects.length;
           player.lastInput = "up";
-        } else if (player.keys[65] && player.x > 40) {
+        } else if (player.keys[65] && player.x > 41) {
           player.moving = true;
           delete player.keys[87]
           delete player.keys[68]
@@ -183,7 +183,7 @@ class Maze1 {
   torchDistanceCheck(player, torch) {
     const distance = this.getDistance(player.x, player.y, torch.x, torch.y);
     if (distance < 35) {
-      this.lightRadius = 100;
+      this.lightRadius = 125;
     }
   }
 
@@ -191,11 +191,7 @@ class Maze1 {
     const distance = this.getDistance(player.x, player.y, heart.x, heart.y);
     if (distance < 25) {
       heart.x = 2000
-      if (player.health === 1) {
-        player.health = 2
-      } else if (player.health === 2) {
-        player.health = 3
-      }
+      player.health += 1
     }
   }
 
@@ -218,17 +214,26 @@ class Maze1 {
 
   wraithAttacking(player, wraith) { // wraith attacking
     const distance = this.getDistance(player.x, player.y, wraith.x + 15, wraith.y)
-    if (distance < 30)  {
-      this.wraith.attacking = true;
+    if (distance < 30 && !player.invulnerable) {
+      player.health -= 1
+      wraith.attacking = true;
       player.attacked = true;
+      player.invulnerable = true;
     } else if ( distance > 30) {
-      this.wraith.attacking = false;
+      wraith.attacking = false;
+    }
+    if (player.invulnerableNum <= 0) { // when timer is over, player can be attacked again
+      player.attacked = false;
+      player.invulnerable = false;
+      player.invulnerableNum = 400; //resets invulnerability
+    } else if (player.attacked) { // timer for invulnerability
+      player.invulnerableNum -= 1;
     }
   }
 
   activate(player, wraith) { // wraith activate
-    const distance = this.getDistance(player.x, player.y, wraith.x, wraith.y)
-    if (distance < 40) {
+    const distance = this.getDistance(player.x, player.y, wraith.x, wraith.y);
+    if (distance < 85) {
       this.wraith.activated = true;
     }
   }

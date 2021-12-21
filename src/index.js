@@ -31,4 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   })
 
+  // if (!game.gameRunning && game.gameOver) {
+  //   game.animateGameOver();
+  // }
+
 });

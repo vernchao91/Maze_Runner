@@ -46,11 +46,10 @@ body .middle .canvas-wrapper #bg {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
   min-width: 1200px;
   width: 1200px;
   height: 700px;
-  opacity: 0.5;
+  opacity: 0.25;
 }
 body .middle .socials {
   margin-top: 20px;

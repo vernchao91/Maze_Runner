@@ -20,6 +20,8 @@ class Player {
     this.attacked = false;
     this.moving = false;
     this.keypressDetect = {};
+    this.invulnerable = false;
+    this.invulnerableNum = 400;
     this.lastInput = "down";
     this.health = 3;
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight);
@@ -29,10 +31,6 @@ class Player {
     // this.ctx.clearRect(0, 0, this.ctx.width, this.ctx.height);
     this.drawPlayer();
     this.animateFrame();
-  }
-
-  onlyUnique(value, index, self) {
-    return self.indexOf(value) === index;
   }
 
   keyDown(e) {
@@ -46,21 +44,18 @@ class Player {
         delete this.keys[65]
       } else if (e.keyCode === 87) {
         this.keypressDetect[87] = true;
-
         this.lastInput = "up";
         delete this.keys[65]
         delete this.keys[68]
         delete this.keys[83]
       } else if (e.keyCode === 65) {
         this.keypressDetect[65] = true;
-
         this.lastInput = "left";
         delete this.keys[87]
         delete this.keys[68]
         delete this.keys[83]
       } else if (e.keyCode === 68) {
         this.keypressDetect[68] = true;
-
         this.lastInput = "right";
         delete this.keys[87]
         delete this.keys[65]
@@ -78,8 +73,10 @@ class Player {
   }
 
   drawPlayer() {
-    this.ctx.drawImage(this.playerSprite, this.spriteWidth * this.frameX, this.spriteHeight * this.frameY,
-    this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteHeight);
+    if (this.invulnerableNum % 2 === 0) {
+      this.ctx.drawImage(this.playerSprite, this.spriteWidth * this.frameX, this.spriteHeight * this.frameY,
+      this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteHeight);
+    }
   }
 
   animateFrame() {

@@ -22,6 +22,7 @@ class Game {
     this.maze1 = new Maze1(ctx, this.fogctx);
     this.maze1Win = false;
     this.gameRunning = false;
+    this.gameOver = false;
     this.pause = false;
     this.music = true;
     this.keyDown = this.keyDown.bind(this);
@@ -70,27 +71,16 @@ class Game {
     this.animateMazeOne();
   }
 
-  // addFogOfWar(fogctx) {
-  //   // fogctx.globalAlpha = .1;
-  //   fogctx.fillStyle = "black";
-  //   fogctx.fillRect(0, 0, this.main.width, this.main.height);
-  //   fogctx.globalCompositeOperation = "destination-out";
-  //   let fogGR = fogctx.createRadialGradient(this.maze1.player.x + 30, this.maze1.player.y + 30, 100, this.maze1.player.x + 30, this.maze1.player.y + 30, 100 / 1.2);
-  //   // let fogGR = fogctx.createRadialGradient(1, 1, 1, 1, 1, 1);
-  //   fogGR.addColorStop(0, "rgba(0,0,0,0)");
-  //   fogGR.addColorStop(1, "rgba(0,0,0,1)");
-  //   fogctx.fillStyle = fogGR;
-  //   fogctx.beginPath();
-  //   fogctx.arc(this.maze1.player.x + 30, this.maze1.player.y + 30, 100, 0, 2 * Math.PI);
-  //   // fogctx.arc(200, 200, 50, 0, 2 * Math.PI);
-  //   fogctx.closePath();
-  //   fogctx.fill();
-  //   fogctx.globalCompositeOperation = "source-over";
-  // }
-
   // addDarkness(ctx) {
 
   // }
+
+  gameOverCheck(health) {
+    if (health === 0) {
+      this.gameOver = true
+    }
+
+  }
 
   animatePauseMenu() {
     // this.ctx.clearRect(0, 0, this.width, this.height);
@@ -106,23 +96,32 @@ class Game {
     }
   }
 
+  animateGameOver() {
+    this.ctx.clearRect(0, 0, this.main.width, this.main.height);
+    this.gameOverMenu.update();
+    let temp = requestAnimationFrame(this.animateGameOver.bind(this))
+    if (this.gameOver) {
+      
+    }
+  }
+
   animateMazeOne() {
     let temp;
     this.pauseListener();
+    this.gameOverCheck(this.maze1.player.health);
     if (!this.pause) {
       this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
-      // this.addFogOfWar(this.fogctx);
       this.ctx.clearRect(0, 0, this.main.width, this.main.height);
       this.maze1.update();
     } else {
       // this.animatePauseMenu();
     }
-    if (!this.maze1Win) {
-      temp = requestAnimationFrame(this.animateMazeOne.bind(this))
-    } else if (this.maze1Win) {
+    temp = requestAnimationFrame(this.animateMazeOne.bind(this))
+    if (this.maze1Win || this.gameOver) {
+      this.gameRunning = false;
       cancelAnimationFrame(temp)
     }
-
+    
   }
 
 }
