@@ -56,12 +56,7 @@ class Maze1 {
     this.redDoorDistanceCheck(this.player, this.redDoor);
     this.heartDistanceCheck(this.player, this.heart);
     this.torchDistanceCheck(this.player, this.torch);
-    // this.testFunction();
     this.Colliding(this.player, this.objects);
-  }
-
-  testFunction() {
-    // setTimeout(() => alert("Hello"), 3000);
   }
 
   updateItems() {

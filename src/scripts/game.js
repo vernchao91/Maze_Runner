@@ -85,7 +85,6 @@ class Game {
     if (health === 0) {
       this.gameOver = true
     }
-
   }
 
   animatePauseMenu() {
@@ -98,7 +97,7 @@ class Game {
     this.startMenu.update();
     let temp = requestAnimationFrame(this.animateStartMenu.bind(this))
     if (this.gameRunning) {
-      cancelAnimationFrame(temp)
+      cancelAnimationFrame(temp);
     }
   }
 
@@ -107,7 +106,6 @@ class Game {
   //   this.gameOverMenu.update();
   //   let temp = requestAnimationFrame(this.animateGameOver.bind(this))
   //   if (this.gameOver) {
-
   //   }
   // }
 
@@ -125,6 +123,7 @@ class Game {
     } else {
       // this.animatePauseMenu();
     }
+
     if (this.maze1Win || this.gameOver) {
       this.gameRunning = false;
       cancelAnimationFrame(temp)
