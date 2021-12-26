@@ -36,31 +36,31 @@ class Player {
   keyDown(e) {
     this.keys[e.keyCode] = true;
     // if (!this.keypressDetect) {
-      if (e.keyCode === 83) {
-        this.keypressDetect[83] = true;
-        this.lastInput = "down";
-        delete this.keys[87]
-        delete this.keys[68]
-        delete this.keys[65]
-      } else if (e.keyCode === 87) {
-        this.keypressDetect[87] = true;
-        this.lastInput = "up";
-        delete this.keys[65]
-        delete this.keys[68]
-        delete this.keys[83]
-      } else if (e.keyCode === 65) {
-        this.keypressDetect[65] = true;
-        this.lastInput = "left";
-        delete this.keys[87]
-        delete this.keys[68]
-        delete this.keys[83]
-      } else if (e.keyCode === 68) {
-        this.keypressDetect[68] = true;
-        this.lastInput = "right";
-        delete this.keys[87]
-        delete this.keys[65]
-        delete this.keys[83]
-      }
+      // if (e.keyCode === 83) {
+      //   this.keypressDetect[83] = true;
+      //   this.lastInput = "down";
+      //   delete this.keys[87]
+      //   delete this.keys[68]
+      //   delete this.keys[65]
+      // } else if (e.keyCode === 87) {
+      //   this.keypressDetect[87] = true;
+      //   this.lastInput = "up";
+      //   delete this.keys[65]
+      //   delete this.keys[68]
+      //   delete this.keys[83]
+      // } else if (e.keyCode === 65) {
+      //   this.keypressDetect[65] = true;
+      //   this.lastInput = "left";
+      //   delete this.keys[87]
+      //   delete this.keys[68]
+      //   delete this.keys[83]
+      // } else if (e.keyCode === 68) {
+      //   this.keypressDetect[68] = true;
+      //   this.lastInput = "right";
+      //   delete this.keys[87]
+      //   delete this.keys[65]
+      //   delete this.keys[83]
+      // }
     // }
     // this.moving = true;
   }

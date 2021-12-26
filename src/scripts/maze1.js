@@ -105,36 +105,28 @@ class Maze1 {
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
-          if (Object.values(player.keypressDetect).length === 1) {
-            player.y = object.y - player.h;
-          }
+          player.y = object.y - player.h;
         } else if ( player.lastInput === "up" && player.moving) {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
-          if (Object.values(player.keypressDetect).length === 1) {
-            player.y = object.y + object.h;
-          }
+          player.y = object.y + object.h;
         } else if ( player.lastInput === "right" && player.moving) {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
-          if (Object.values(player.keypressDetect).length === 1) {
-            player.x = object.x - player.w;
-          }
+          player.x = object.x - player.w;
         } else if ( player.lastInput === "left" && player.moving) {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
-          if (Object.values(player.keypressDetect).length === 1) {
-            player.x = object.x + object.w;
-          }
+          player.x = object.x + object.w;
         }
       } else {
         if (player.keys[83] && player.y < 655) {
