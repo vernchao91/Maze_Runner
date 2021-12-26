@@ -113,7 +113,7 @@ class Game {
     this.pauseListener();
     this.gameOverCheck(this.maze1.player.health);
     let rafID = requestAnimationFrame(this.animateMazeOne.bind(this))
-    if (!this.pause) {
+    if (!this.pause && !this.gameOver) {
       // this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
       this.ctx.clearRect(0, 0, this.main.width, this.main.height);
       this.maze1.update(timeDelta);

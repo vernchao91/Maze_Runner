@@ -73,7 +73,7 @@ class Player {
   }
 
   drawPlayer() {
-    if (this.invulnerableNum % 2 === 0) {
+    if (this.invulnerableNum % 4 === 0) {
       this.ctx.drawImage(this.playerSprite, this.spriteWidth * this.frameX, this.spriteHeight * this.frameY,
       this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteHeight);
     }

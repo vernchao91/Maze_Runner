@@ -90,9 +90,6 @@ class Maze1 {
   }
   
   colliding(player, objects, timeDelta) { //util function for collision correction and movement
-    const fps = 1000 / 60
-    const timeDeltaScale = timeDelta / fps;
-
     for (let object of objects) {
       if ((player.x < object.x + object.w &&
         player.x + player.w > object.x &&
