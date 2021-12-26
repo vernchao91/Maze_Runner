@@ -117,6 +117,9 @@ class Game {
       // this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
       this.ctx.clearRect(0, 0, this.main.width, this.main.height);
       this.maze1.update(timeDelta);
+      this.maze1.player.update();
+      this.maze1.wraith.update();
+      this.maze1.colliding(this.maze1.player, this.maze1.objects, timeDelta)
     } else {
       // this.animatePauseMenu();
     }

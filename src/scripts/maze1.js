@@ -39,14 +39,14 @@ class Maze1 {
     window.addEventListener("keyup", this.items.keyUp.bind(this));
   }
 
-  update(timeDelta) {
+  update() {
     this.eventListeners();
     this.drawMaze();
     this.drawBorder();
     this.drawWireFrame();
     this.updateItems();
-    this.player.update();
-    this.wraith.update();
+    // this.player.update();
+    // this.wraith.update();
     this.addFogOfWar(this.fogctx);
     this.activate(this.player, this.wraith);
     this.wraithChase();
@@ -56,7 +56,7 @@ class Maze1 {
     this.redDoorDistanceCheck(this.player, this.redDoor);
     this.heartDistanceCheck(this.player, this.heart);
     this.torchDistanceCheck(this.player, this.torch);
-    this.Colliding(this.player, this.objects, timeDelta);
+    // this.colliding(this.player, this.objects, timeDelta);
   }
 
   updateItems() {
@@ -89,7 +89,7 @@ class Maze1 {
     fogctx.globalCompositeOperation = "source-over";
   }
   
-  Colliding(player, objects, timeDelta) { //util function for collision correction and movement
+  colliding(player, objects, timeDelta) { //util function for collision correction and movement
     const fps = 1000 / 60
     const timeDeltaScale = timeDelta / fps;
 
