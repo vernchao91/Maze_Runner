@@ -93,10 +93,10 @@ class Game {
     const timeDelta = time - this.lastTime
     this.ctx.clearRect(0, 0, this.main.width, this.main.height);
     this.startMenu.update(timeDelta);
-    let temp = requestAnimationFrame(this.animateStartMenu.bind(this));
+    let rafID = requestAnimationFrame(this.animateStartMenu.bind(this));
     this.lastTime = time
     if (this.gameRunning) {
-      cancelAnimationFrame(temp);
+      cancelAnimationFrame(rafID);
     }
   }
 
@@ -109,7 +109,7 @@ class Game {
   }
 
   animateMazeOne(time) {
-    const timeDelta = time - this.lastTime
+    const timeDelta = (time - this.lastTime) / this.fps
     this.pauseListener();
     this.gameOverCheck(this.maze1.player.health);
     let rafID = requestAnimationFrame(this.animateMazeOne.bind(this))

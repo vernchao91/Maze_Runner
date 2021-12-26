@@ -99,7 +99,7 @@ class Maze1 {
         player.y < object.y + object.h &&
         player.h + player.y > object.y )
       ) {
-        if ( player.lastInput === "down") {
+        if ( player.lastInput === "down" && player.moving) {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
@@ -108,7 +108,7 @@ class Maze1 {
           if (Object.values(player.keypressDetect).length === 1) {
             player.y = object.y - player.h;
           }
-        } else if ( player.lastInput === "up") {
+        } else if ( player.lastInput === "up" && player.moving) {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
@@ -117,7 +117,7 @@ class Maze1 {
           if (Object.values(player.keypressDetect).length === 1) {
             player.y = object.y + object.h;
           }
-        } else if ( player.lastInput === "right") {
+        } else if ( player.lastInput === "right" && player.moving) {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
@@ -126,7 +126,7 @@ class Maze1 {
           if (Object.values(player.keypressDetect).length === 1) {
             player.x = object.x - player.w;
           }
-        } else if ( player.lastInput === "left") {
+        } else if ( player.lastInput === "left" && player.moving) {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
@@ -142,28 +142,28 @@ class Maze1 {
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
-          player.y += (player.speed / objects.length) * timeDeltaScale;
+          player.y += (player.speed / objects.length);
           player.lastInput = "down";
         } else if (player.keys[87] && player.y > 40) {
           player.moving = true;
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[83]
-          player.y -= (player.speed / objects.length) * timeDeltaScale;
+          player.y -= (player.speed / objects.length);
           player.lastInput = "up";
         } else if (player.keys[65] && player.x > 41) {
           player.moving = true;
           delete player.keys[87]
           delete player.keys[68]
           delete player.keys[83]
-          player.x -= (player.speed / objects.length) * timeDeltaScale;
+          player.x -= (player.speed / objects.length);
           player.lastInput = "left";
         } else if (player.keys[68]) {
           player.moving = true;
           delete player.keys[65]
           delete player.keys[87]
           delete player.keys[83]
-          player.x += (player.speed / objects.length) * timeDeltaScale;
+          player.x += (player.speed / objects.length);
           player.lastInput = "right";
         }
       }
