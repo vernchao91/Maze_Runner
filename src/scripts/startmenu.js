@@ -24,6 +24,7 @@ class StartMenu {
     if (this.titlePosition.y < 20) {
       this.titlePosition.y += this.titleSpeed;
     } else if (this.titlePosition.y >= 20) {
+      this.titlePosition.y = 20;
       this.titleAnimation = true;
     }
   };

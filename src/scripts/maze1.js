@@ -39,7 +39,7 @@ class Maze1 {
     window.addEventListener("keyup", this.items.keyUp.bind(this));
   }
 
-  update() {
+  update(timeDelta) {
     this.eventListeners();
     this.drawMaze();
     this.drawBorder();
@@ -56,7 +56,7 @@ class Maze1 {
     this.redDoorDistanceCheck(this.player, this.redDoor);
     this.heartDistanceCheck(this.player, this.heart);
     this.torchDistanceCheck(this.player, this.torch);
-    this.Colliding(this.player, this.objects);
+    this.Colliding(this.player, this.objects, timeDelta);
   }
 
   updateItems() {
@@ -68,7 +68,7 @@ class Maze1 {
     this.items.drawKey(this.keyItem.x, this.keyItem.y);
   }
 
-  getDistance(x1, y1, x2, y2) { // util function
+  getDistance(x1, y1, x2, y2) { // util function for distance between 2 objects
     let xDistance = x2 - x1;
     let yDistance = y2 - y1;
     return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
@@ -78,7 +78,7 @@ class Maze1 {
     fogctx.fillStyle = "black";
     fogctx.fillRect(0, 0, 1200, 700);
     fogctx.globalCompositeOperation = "destination-out";
-    let fogGR = fogctx.createRadialGradient(this.player.x + 30, this.player.y + 30, this.lightRadius, this.player.x + 30, this.player.y + 30, this.lightRadius / 1.2); // fills the circle with mainCanvas
+    let fogGR = fogctx.createRadialGradient(this.player.x + 30, this.player.y + 30, this.lightRadius, this.player.x + 30, this.player.y + 30, this.lightRadius / 2); // fills the circle with mainCanvas
     fogGR.addColorStop(0, "rgba(0,0,0,0)");
     fogGR.addColorStop(1, "rgba(0,0,0,1)");
     fogctx.fillStyle = fogGR;
@@ -89,7 +89,10 @@ class Maze1 {
     fogctx.globalCompositeOperation = "source-over";
   }
   
-  Colliding(player, objects) { //util function
+  Colliding(player, objects, timeDelta) { //util function for collision correction and movement
+    const fps = 1000 / 60
+    const timeDeltaScale = timeDelta / fps;
+
     for (let object of objects) {
       if ((player.x < object.x + object.w &&
         player.x + player.w > object.x &&
@@ -139,28 +142,28 @@ class Maze1 {
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
-          player.y += player.speed / objects.length;
+          player.y += (player.speed / objects.length) * timeDeltaScale;
           player.lastInput = "down";
         } else if (player.keys[87] && player.y > 40) {
           player.moving = true;
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[83]
-          player.y -= player.speed / objects.length;
+          player.y -= (player.speed / objects.length) * timeDeltaScale;
           player.lastInput = "up";
         } else if (player.keys[65] && player.x > 41) {
           player.moving = true;
           delete player.keys[87]
           delete player.keys[68]
           delete player.keys[83]
-          player.x -= player.speed / objects.length;
+          player.x -= (player.speed / objects.length) * timeDeltaScale;
           player.lastInput = "left";
         } else if (player.keys[68]) {
           player.moving = true;
           delete player.keys[65]
           delete player.keys[87]
           delete player.keys[83]
-          player.x += player.speed / objects.length;
+          player.x += (player.speed / objects.length) * timeDeltaScale;
           player.lastInput = "right";
         }
       }
