@@ -5,15 +5,44 @@ class StartMenu {
     this.title.src = "src/assets/MazeRunner.png";
     this.pressStart = new Image();
     this.pressStart.src = "src/assets/press-start.png";
+    this.control = new Image();
+    this.control.src = "src/assets/controls.png";
+    this.howToPlay = new Image();
+    this.howToPlay.src = "src/assets/how-to-play.png";
+    this.startGame = new Image();
+    this.startGame.src = "src/assets/start-game.png";
     this.titlePosition = { x: 300, y: -135 };
     this.pressStartPosition = { x: 400, y: -150 };
+    this.controlPosition = { x: 400, y: 635 };
+    this.howToPlayPosition = { x: 400, y: 600 };
+    this.startGamePosition = { x: 400, y: 565 };
+    this.selector = { x: 400, y: 605 }
     this.titleSpeed = .85;
+    this.titleAnimation = false;
+    this.titleStartReady = false;
+    this.controlsDisplay = false;
+    this.howToPlayDisplay = false;
+    this.optionsDisplay = false;
     this.canvasHeight = 700;
     this.canvasWidth = 1200;
-    this.pressStartTimer = 80;
-    this.titleAnimation = false;
+    this.pressStartTimer = 200;
+    this.pressStartBoolean = false;
     this.globalAlpha = 1;
+    window.addEventListener("keydown", this.keyDown.bind(this));
+    window.addEventListener("keyup", this.keyUp.bind(this));
   };
+
+  keyDown(e) {
+    if ((e.keyCode === 83 || e.keyCode === 40) && this.selector.y < 675) {
+      this.selector.y += 35
+    } else if ((e.keyCode === 87 || e.keyCode === 38) && this.selector.y > 610) {
+      this.selector.y -= 35
+    }
+  }
+
+  keyUp(e) {
+
+  }
 
   update() {
     this.drawTitle();
@@ -21,8 +50,20 @@ class StartMenu {
     this.moveTitle();
   };
 
-  update2() {
+  updateSelector() {
     this.drawTitle();
+    this.drawStartGame();
+    this.drawHowToPlay();
+    this.drawControl();
+    this.drawSelectorTriangle();
+  }
+
+  updateControls() {
+
+  }
+
+  updateHowToPlay() {
+
   }
 
   finishAnimation() {
@@ -38,22 +79,42 @@ class StartMenu {
       this.finishAnimation();
     }
   };
+
+  drawSelectorTriangle() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.selector.x, this.selector.y - 20);
+    this.ctx.lineTo(this.selector.x - 20, this.selector.y);
+    this.ctx.lineTo(this.selector.x - 20, this.selector.y - 40);
+    this.ctx.fillStyle = "rgba(200, 200, 200, 1)";
+    this.ctx.fill();
+  }
+
+  drawStartGame() {
+    this.ctx.drawImage(this.startGame, 0, 0, 681, 152, this.startGamePosition.x, this.startGamePosition.y, 300, 50);
+  }
+
+  drawHowToPlay() {
+    this.ctx.drawImage(this.howToPlay, 0, 0, 681, 152, this.howToPlayPosition.x, this.howToPlayPosition.y, 300, 50);
+  }
+
+  drawControl() {
+    this.ctx.drawImage(this.control, 0, 0, 485, 152, this.controlPosition.x, this.controlPosition.y, 200, 50);
+  }
   
   drawPressStart() {
-    console.log(this.globalAlpha);
-    if (this.titlePosition.y >= 20) {
-      this.pressStartTimer -= 1;
-      // this.globalAlpha -= .01
-    }
     this.ctx.save();
-    if (this.pressStartTimer <= 0) {
-      this.pressStartTimer = 200;
-      this.globalAlpha = 1;
-    } else if (this.pressStartTimer < 120) {
-      this.ctx.globalAlpha = this.globalAlpha -= .01
+    if (this.titlePosition.y >= 20 && !this.pressStartBoolean) {
+      this.pressStartTimer -= 1;
+      this.ctx.globalAlpha = this.globalAlpha -= .0075
+      if (this.pressStartTimer <= 0) {
+        this.pressStartBoolean = true
+      }
     }
-    // this.ctx.globalAlpha = 1
-    // this.ctx.globalAlpha = 1 - (this.pressStartPosition.y/350)
+    if (this.pressStartBoolean) {
+      this.ctx.globalAlpha = this.globalAlpha = 1
+      this.pressStartTimer = 200;
+      this.pressStartBoolean = false;
+    }
     this.ctx.drawImage(this.pressStart, 0, 0, 1567, 152, this.pressStartPosition.x, this.pressStartPosition.y, 400, 50)
     this.ctx.restore();
   }

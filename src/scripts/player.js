@@ -23,7 +23,7 @@ class Player {
     this.invulnerable = false;
     this.invulnerableNum = 400;
     this.lastInput = "down";
-    this.health = 3;
+    this.health = 4;
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight);
   }
   

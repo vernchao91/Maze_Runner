@@ -18,7 +18,10 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener("keydown", (e) => {
     if ((e.key === "Enter") && !game.gameRunning && !game.startMenu.titleAnimation) {
       game.startMenu.finishAnimation();
-    } else if ((e.key === "Enter") && !game.gameRunning && game.startMenu.titleAnimation){
+    } else if ((e.key === "Enter") && !game.gameRunning && game.startMenu.titleAnimation && !game.startMenu.titleStartReady) {
+      game.startMenu.titleStartReady = true;
+    } else if ((e.key === "Enter") && !game.gameRunning && game.startMenu.titleAnimation && game.startMenu.titleStartReady && game.startMenu.selector.y === 605) {
+      game.gameRunning = true
       game.play();
     }
   })
@@ -26,13 +29,12 @@ document.addEventListener('DOMContentLoaded', () => {
   fog.addEventListener("click", (e) => {
     if (!game.gameRunning && !game.startMenu.titleAnimation) {
       game.startMenu.finishAnimation();
-    } else if (!game.gameRunning && game.startMenu.titleAnimation){
+    } else if (!game.gameRunning && game.startMenu.titleAnimation && !game.startMenu.titleStartReady) {
+      game.startMenu.titleStartReady = true;
+    } else if (!game.gameRunning && game.startMenu.titleAnimation && game.startMenu.titleStartReady && game.startMenu.selector.y === 605) {
+      // game.gameRunning = true
       game.play();
     }
   })
-
-  // if (!game.gameRunning && game.gameOver) {
-  //   game.animateGameOver();
-  // }
 
 });

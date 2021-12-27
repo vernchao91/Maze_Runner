@@ -92,7 +92,11 @@ class Game {
   animateStartMenu(time) {
     const timeDelta = time - this.lastTime
     this.ctx.clearRect(0, 0, this.main.width, this.main.height);
-    this.startMenu.update(timeDelta);
+    if (!this.startMenu.titleStartReady) {
+      this.startMenu.update(timeDelta);
+    } else if (this.startMenu.titleStartReady) {
+      this.startMenu.updateSelector(timeDelta);
+    }
     let rafID = requestAnimationFrame(this.animateStartMenu.bind(this));
     this.lastTime = time
     if (this.gameRunning) {
