@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
       game.startMenu.finishAnimation();
     } else if ((e.key === "Enter") && !game.gameRunning && game.startMenu.titleAnimation && !game.startMenu.titleStartReady) {
       game.startMenu.titleStartReady = true;
-    } else if ((e.key === "Enter") && !game.gameRunning && game.startMenu.titleAnimation && game.startMenu.titleStartReady && game.startMenu.selector.y === 605) {
+    } else if ((e.key === "Enter") && !game.gameRunning && game.startMenu.titleAnimation && game.startMenu.titleStartReady && game.startMenu.selector.y === 590) {
       game.gameRunning = true
       game.play();
     }
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
       game.startMenu.finishAnimation();
     } else if (!game.gameRunning && game.startMenu.titleAnimation && !game.startMenu.titleStartReady) {
       game.startMenu.titleStartReady = true;
-    } else if (!game.gameRunning && game.startMenu.titleAnimation && game.startMenu.titleStartReady && game.startMenu.selector.y === 605) {
+    } else if (!game.gameRunning && game.startMenu.titleAnimation && game.startMenu.titleStartReady && game.startMenu.selector.y === 590) {
       // game.gameRunning = true
       game.play();
     }

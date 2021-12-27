@@ -21,7 +21,7 @@ class Player {
     this.moving = false;
     this.keypressDetect = {};
     this.invulnerable = false;
-    this.invulnerableNum = 400;
+    this.invulnerableNum = 300;
     this.lastInput = "down";
     this.health = 4;
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight);

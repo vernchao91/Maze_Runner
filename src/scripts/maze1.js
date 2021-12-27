@@ -96,34 +96,34 @@ class Maze1 {
         player.y < object.y + object.h &&
         player.h + player.y > object.y )
       ) {
-        if ( player.lastInput === "down" && player.moving) {
-          player.moving = false;
-          delete player.keys[83]
-          delete player.keys[65]
-          delete player.keys[68]
-          delete player.keys[87]
+        if ( player.lastInput === "down" && player.moving && player.frameY === 0) {
           player.y = object.y - player.h;
-        } else if ( player.lastInput === "up" && player.moving) {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
+        } else if ( player.lastInput === "up" && player.moving && player.frameY === 3) {
           player.y = object.y + object.h;
-        } else if ( player.lastInput === "right" && player.moving) {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
+        } else if ( player.lastInput === "right" && player.moving && player.frameY === 1) {
           player.x = object.x - player.w;
-        } else if ( player.lastInput === "left" && player.moving) {
           player.moving = false;
           delete player.keys[83]
           delete player.keys[65]
           delete player.keys[68]
           delete player.keys[87]
+        } else if ( player.lastInput === "left" && player.moving && player.frameY === 2) {
           player.x = object.x + object.w;
+          player.moving = false;
+          delete player.keys[83]
+          delete player.keys[65]
+          delete player.keys[68]
+          delete player.keys[87]
         }
       } else {
         if (player.keys[83] && player.y < 655) {
@@ -170,7 +170,7 @@ class Maze1 {
   torchDistanceCheck(player, torch) {
     const distance = this.getDistance(player.x, player.y, torch.x, torch.y);
     if (distance < 35) {
-      this.lightRadius = 125;
+      this.lightRadius = 150;
     }
   }
 
@@ -212,7 +212,7 @@ class Maze1 {
     if (player.invulnerableNum <= 0) { // when timer is over, player can be attacked again
       player.attacked = false;
       player.invulnerable = false;
-      player.invulnerableNum = 400; // resets invulnerability
+      player.invulnerableNum = 300; // resets invulnerability
     } else if (player.attacked) { // timer for invulnerability
       player.invulnerableNum -= 1;
     }

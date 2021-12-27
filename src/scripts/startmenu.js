@@ -11,12 +11,15 @@ class StartMenu {
     this.howToPlay.src = "src/assets/how-to-play.png";
     this.startGame = new Image();
     this.startGame.src = "src/assets/start-game.png";
+    this.options = new Image();
+    this.options.src = "src/assets/options.png";
     this.titlePosition = { x: 300, y: -135 };
     this.pressStartPosition = { x: 400, y: -150 };
-    this.controlPosition = { x: 400, y: 635 };
-    this.howToPlayPosition = { x: 400, y: 600 };
-    this.startGamePosition = { x: 400, y: 565 };
-    this.selector = { x: 400, y: 605 }
+    this.startGamePosition = { x: 450, y: 550 };
+    this.howToPlayPosition = { x: 450, y: 585 };
+    this.controlPosition = { x: 450, y: 620 };
+    this.optionsPosition = { x: 450, y: 655 };
+    this.selector = { x: 450, y: 590 };
     this.titleSpeed = .85;
     this.titleAnimation = false;
     this.titleStartReady = false;
@@ -33,16 +36,17 @@ class StartMenu {
   };
 
   keyDown(e) {
+    console.log(this.selector.y);
     if ((e.keyCode === 83 || e.keyCode === 40) && this.selector.y < 675) {
       this.selector.y += 35
     } else if ((e.keyCode === 87 || e.keyCode === 38) && this.selector.y > 610) {
       this.selector.y -= 35
     }
-  }
+  };
 
   keyUp(e) {
 
-  }
+  };
 
   update() {
     this.drawTitle();
@@ -56,21 +60,22 @@ class StartMenu {
     this.drawHowToPlay();
     this.drawControl();
     this.drawSelectorTriangle();
+    this.drawOptions();
   }
 
   updateControls() {
 
-  }
+  };
 
   updateHowToPlay() {
 
-  }
+  };
 
   finishAnimation() {
     this.titlePosition.y = 20;
     this.pressStartPosition.y = 170;
     this.titleAnimation = true;
-  }
+  };
 
   moveTitle() {
     if (this.titlePosition.y < 20) {
@@ -89,17 +94,21 @@ class StartMenu {
     this.ctx.fill();
   }
 
+  drawOptions() {
+    this.ctx.drawImage(this.options, 0, 0, 401, 152, this.optionsPosition.x, this.optionsPosition.y, 200, 50);
+  };
+
   drawStartGame() {
     this.ctx.drawImage(this.startGame, 0, 0, 681, 152, this.startGamePosition.x, this.startGamePosition.y, 300, 50);
-  }
+  };
 
   drawHowToPlay() {
     this.ctx.drawImage(this.howToPlay, 0, 0, 681, 152, this.howToPlayPosition.x, this.howToPlayPosition.y, 300, 50);
-  }
+  };
 
   drawControl() {
     this.ctx.drawImage(this.control, 0, 0, 485, 152, this.controlPosition.x, this.controlPosition.y, 200, 50);
-  }
+  };
   
   drawPressStart() {
     this.ctx.save();
@@ -117,7 +126,7 @@ class StartMenu {
     }
     this.ctx.drawImage(this.pressStart, 0, 0, 1567, 152, this.pressStartPosition.x, this.pressStartPosition.y, 400, 50)
     this.ctx.restore();
-  }
+  };
 
   drawTitle() {
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight);

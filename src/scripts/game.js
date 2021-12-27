@@ -36,7 +36,7 @@ class Game {
     this.clickListener = this.clickListener.bind(this);
     window.addEventListener("keydown", this.keyDown.bind(this));
     window.addEventListener("keyup", this.keyUp.bind(this));
-    this.fogctx.canvas.addEventListener("mousedown", this.clickListener.bind(this));
+    this.fogctx.canvas.addEventListener("click", this.clickListener.bind(this));
   }
   
   keyDown(e) {
@@ -96,6 +96,12 @@ class Game {
       this.startMenu.update(timeDelta);
     } else if (this.startMenu.titleStartReady) {
       this.startMenu.updateSelector(timeDelta);
+    } else if (this.startMenu.howToPlayDisplay) {
+
+    } else if (this.startMenu.optionsDisplay) {
+
+    } else if (this.startMenu.controlsDisplay) {
+      
     }
     let rafID = requestAnimationFrame(this.animateStartMenu.bind(this));
     this.lastTime = time
