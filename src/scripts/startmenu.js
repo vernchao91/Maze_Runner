@@ -13,22 +13,26 @@ class StartMenu {
     this.startGame.src = "src/assets/start-game.png";
     this.options = new Image();
     this.options.src = "src/assets/options.png";
+    this.pressEnter = new Image();
+    this.pressEnter.src = "src/assets/press-enter.png";
     this.pressP = new Image();
     this.pressP.src = "src/assets/press-pause.png";
-    this.pressSpace = new Image();
-    this.pressSpace.src = "src/assets/press-start.png";
     this.pressWASD = new Image();
-    this.pressWASD.src = "src/assets/press-wasd.png";
+    this.pressWASD.src = "src/assets/press-arrow-or-wasd.png";
+    this.pressSpacebar = new Image();
+    this.pressSpacebar.src = "src/assets/press-spacebar.png";
+    this.holdSpacebar = new Image();
+    this.holdSpacebar.src = "src/assets/hold-spacebar.png";
+    this.pressM = new Image();
+    this.pressM.src = "src/assets/press-m.png";
     this.volume = new Image();
     this.volume.src = "src/assets/volume.png";
-    this.holdSpace = new Image();
-    this.holdSpace.src = "src/assets/hold-space.png";
     this.titlePosition = { x: 300, y: -135 };
     this.pressStartPosition = { x: 400, y: -150 };
-    this.howToPlayPosition = { x: 450, y: 550 }; 585
-    this.controlPosition = { x: 450, y: 585 }; 550
-    this.optionsPosition = { x: 450, y: 620 }; 620
-    this.startGamePosition = { x: 450, y: 655 }; 655
+    this.howToPlayPosition = { x: 450, y: 550 };
+    this.controlPosition = { x: 450, y: 585 };
+    this.optionsPosition = { x: 450, y: 620 };
+    this.startGamePosition = { x: 450, y: 655 };
     this.selector = { x: 450, y: 590 };
     this.titleSpeed = .85;
     this.titleAnimation = false;
@@ -46,7 +50,6 @@ class StartMenu {
   };
 
   keyDown(e) {
-    console.log(this.selector.y);
     if ((e.keyCode === 87 || e.keyCode === 38) && this.selector.y > 610) {
       this.selector.y -= 35
     } else if ((e.keyCode === 83 || e.keyCode === 40) && this.selector.y < 675) {
@@ -74,12 +77,16 @@ class StartMenu {
   }
 
   updateControls() {
-    
+    this.drawControlsPage();
   };
 
   updateHowToPlay() {
-
+    this.drawHowToPlayPage();
   };
+
+  updateOptions() {
+    this.drawOptionsPage();
+  }
 
   finishAnimation() {
     this.titlePosition.y = 20;
@@ -95,7 +102,22 @@ class StartMenu {
     }
   };
 
-  draw
+  drawHowToPlayPage() {
+    this.ctx.drawImage(this.options, 0, 0, 401, 152, this.optionsPosition.x, this.optionsPosition.y, 200, 50);
+  }
+
+  drawControlsPage() {
+    this.ctx.drawImage(this.pressEnter, 0, 0, 1593, 152, 350, 200, 500, 50);
+    this.ctx.drawImage(this.pressWASD, 0, 0, 1862, 152, 350, 240, 500, 50);
+    this.ctx.drawImage(this.pressSpacebar, 0, 0, 1806, 152, 350, 280, 500, 50);
+    this.ctx.drawImage(this.holdSpacebar, 0, 0, 1905, 152, 350, 320, 500, 50);
+    this.ctx.drawImage(this.pressP, 0, 0, 1342, 152, 350, 360, 500, 50);
+    this.ctx.drawImage(this.pressM, 0, 0, 1650, 162, 350, 400, 500, 50);
+  }
+
+  drawOptionsPage() {
+
+  }
 
   drawSelectorTriangle() {
     this.ctx.beginPath();

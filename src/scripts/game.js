@@ -126,13 +126,13 @@ class Game {
       this.startMenu.update();
     } else if (this.startMenu.titleStartReady) {
       this.startMenu.updateSelector();
-    } else if (this.startMenu.howToPlayDisplay) {
-      this.startMenu.updateSelector();
+    }
+    if (this.startMenu.titleStartReady && this.startMenu.howToPlayDisplay) {
       this.startMenu.updateHowToPlay();
     } else if (this.startMenu.optionsDisplay) {
-      this.startMenu.updateSelector();
+      this.startMenu.updateOptions();
     } else if (this.startMenu.controlsDisplay) {
-      this.startMenu.updateSelector();
+      this.startMenu.updateControls();
     }
     let rafID = requestAnimationFrame(this.animateStartMenu.bind(this));
     this.lastTime = time
