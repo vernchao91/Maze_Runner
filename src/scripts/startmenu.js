@@ -51,10 +51,12 @@ class StartMenu {
     this.pressStartTimer = 200;
     this.pressStartBoolean = false;
     this.globalAlpha = 1;
+    this.mouse = { x: 0, y: 0 };
     window.addEventListener("keydown", this.keyDown.bind(this));
     window.addEventListener("keyup", this.keyUp.bind(this));
     this.fogctx.canvas.addEventListener("mousedown", this.mouseDown.bind(this));
     this.fogctx.canvas.addEventListener("mouseup", this.mouseUp.bind(this));
+    this.fogctx.canvas.addEventListener("mousemove", this.mouseMove.bind(this));
   };
 
   keyDown(e) {
@@ -70,14 +72,17 @@ class StartMenu {
   };
 
   mouseDown(e) {
-    this.volumeSelecting = true;
     if (this.ctx.isPointInPath(this.volumeSelector, e.offsetX, e.offsetY)) {
-      console.log("check");
+      this.volumeSelecting = true;
     }
   }
 
   mouseUp(e) {
     this.volumeSelecting = false;
+  }
+
+  mouseMove(e) {
+    this.mouse.x = e.clientX - 60;
   }
 
   update() {
@@ -104,7 +109,14 @@ class StartMenu {
   };
 
   updateOptions() {
+    this.volumeChecker();
     this.drawOptionsPage();
+  }
+
+  volumeChecker() {
+    if (this.volumeSelecting) {
+      this.volumeSelectorPosition.x = this.mouse.x;
+    }
   }
 
   finishAnimation() {
