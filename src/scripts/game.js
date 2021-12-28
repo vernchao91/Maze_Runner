@@ -19,6 +19,9 @@ class Game {
     // this.dark.height = 700;
     this.fps = 60;
     this.keys = [];
+    // this.gameMusic = new Audio("/src/assets/the-maze-runner.mp3");
+    // this.gameMusic.src = "/src/assets/the-maze-runner.mp3";
+    // this.gameMusic = document.getElementById("background")
     this.startMenu = new StartMenu(ctx);
     this.pauseMenu = new PauseMenu(ctx);
     this.gameOverMenu = new GameOverMenu(ctx);
@@ -46,6 +49,7 @@ class Game {
       if (!this.startMenu.titleAnimation) {
         this.startMenu.finishAnimation();
       } else if (!this.startMenu.titleStartReady) {
+        this.startMenu.gameMusic.play();
         this.startMenu.titleStartReady = true;
       } else if (this.startMenu.selector.y === 590) {
         this.startMenu.optionsDisplay = false;
@@ -77,6 +81,7 @@ class Game {
     if (!this.startMenu.titleAnimation) {
       this.startMenu.finishAnimation();
     } else if (!this.startMenu.titleStartReady) {
+      this.startMenu.gameMusic.play();
       this.startMenu.titleStartReady = true;
     } else if (this.startMenu.selector.y === 590) {
       this.startMenu.optionsDisplay = false;

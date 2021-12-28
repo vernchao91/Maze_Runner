@@ -27,6 +27,9 @@ class StartMenu {
     this.pressM.src = "src/assets/press-m.png";
     this.volume = new Image();
     this.volume.src = "src/assets/volume.png";
+    this.gameMusic = new Audio("/src/assets/the-maze-runner.mp3");
+    this.gameMusic.loop = true;
+    // this.gameMusic.src = "/src/assets/the-maze-runner.mp3";
     this.titlePosition = { x: 300, y: -135 };
     this.pressStartPosition = { x: 400, y: -150 };
     this.howToPlayPosition = { x: 450, y: 550 };
