@@ -96,13 +96,17 @@ class Maze1 {
         player.y < object.y + object.h &&
         player.h + player.y > object.y )
       ) {
-        if ( player.lastInput === "down" && player.frameY === 0 && player.keys[83]) {
+        if ( player.lastInput === "down" && player.frameY === 0) {
           player.y = object.y - player.h;
           player.moving = false;
           delete player.keys[83];
           delete player.keys[65];
           delete player.keys[68];
           delete player.keys[87];
+          delete player.keys[40];
+          delete player.keys[37];
+          delete player.keys[38];
+          delete player.keys[39];
         } else if ( player.lastInput === "up" && player.frameY === 3) {
           player.y = object.y + object.h;
           player.moving = false;
@@ -110,6 +114,10 @@ class Maze1 {
           delete player.keys[65];
           delete player.keys[68];
           delete player.keys[87];
+          delete player.keys[40];
+          delete player.keys[37];
+          delete player.keys[38];
+          delete player.keys[39];
         } else if ( player.lastInput === "right" && player.frameY === 1) {
           player.x = object.x - player.w;
           player.moving = false;
@@ -117,6 +125,10 @@ class Maze1 {
           delete player.keys[65];
           delete player.keys[68];
           delete player.keys[87];
+          delete player.keys[40];
+          delete player.keys[37];
+          delete player.keys[38];
+          delete player.keys[39];
         } else if ( player.lastInput === "left" && player.frameY === 2) {
           player.x = object.x + object.w;
           player.moving = false;
@@ -124,34 +136,50 @@ class Maze1 {
           delete player.keys[65];
           delete player.keys[68];
           delete player.keys[87];
+          delete player.keys[40];
+          delete player.keys[37];
+          delete player.keys[38];
+          delete player.keys[39];
         }
       } else {
-        if (player.keys[83] && player.y < 655) {
+        if ((player.keys[83] || player.keys[40])) {
           player.moving = true;
           delete player.keys[65];
           delete player.keys[68];
           delete player.keys[87];
+          delete player.keys[37];
+          delete player.keys[38];
+          delete player.keys[39];
           player.y += (player.speed / objects.length);
           player.lastInput = "down";
-        } else if (player.keys[87] && player.y > 40) {
+        } else if ((player.keys[87] || player.keys[38]) && player.y > 40) {
           player.moving = true;
           delete player.keys[65];
           delete player.keys[68];
           delete player.keys[83];
+          delete player.keys[40];
+          delete player.keys[37];
+          delete player.keys[39];
           player.y -= (player.speed / objects.length);
           player.lastInput = "up";
-        } else if (player.keys[65] && player.x > 41) {
+        } else if ((player.keys[65] || player.keys[37]) && player.x > 41) {
           player.moving = true;
           delete player.keys[87];
           delete player.keys[68];
           delete player.keys[83];
+          delete player.keys[40];
+          delete player.keys[38];
+          delete player.keys[39];
           player.x -= (player.speed / objects.length);
           player.lastInput = "left";
-        } else if (player.keys[68]) {
+        } else if (player.keys[68] || player.keys[39] ) {
           player.moving = true;
           delete player.keys[65];
           delete player.keys[87];
           delete player.keys[83];
+          delete player.keys[40];
+          delete player.keys[37];
+          delete player.keys[38];
           player.x += (player.speed / objects.length);
           player.lastInput = "right";
         }
