@@ -1,5 +1,5 @@
 class StartMenu {
-  constructor(ctx, fogctx) {
+  constructor(ctx, fogctx, canvas1) {
     this.ctx = ctx;
     this.fogctx = fogctx;
     this.title = new Image();
@@ -28,7 +28,8 @@ class StartMenu {
     this.pressM.src = "src/assets/press-m.png";
     this.volume = new Image();
     this.volume.src = "src/assets/volume.png";
-    this.gameMusic = new Audio("/src/assets/the-maze-runner.mp3");
+    this.gameMusic = new Audio();
+    this.gameMusic.src = "/src/assets/the-maze-runner.mp3"
     this.gameMusic.loop = true;
     this.titlePosition = { x: 300, y: -135 };
     this.pressStartPosition = { x: 400, y: -150 };
@@ -44,16 +45,19 @@ class StartMenu {
     this.howToPlayDisplay = true;
     this.optionsDisplay = false;
     this.volumeSelecting = false;
-    this.volumeSelector = new Path2D();
-    this.volumeSelectorPosition = { x: 560, y: 210}
+    // this.volumeSelector = new Path2D();
+    this.volumeSelectorPosition = { x: 560, y: 210 }
     this.canvasHeight = 700;
     this.canvasWidth = 1200;
     this.pressStartTimer = 200;
     this.pressStartBoolean = false;
     this.globalAlpha = 1;
     this.mouse = { x: 0, y: 0 };
+    this.boundClient = canvas1.getBoundingClientRect();
+    this.canvas1 = canvas1;
     window.addEventListener("keydown", this.keyDown.bind(this));
     window.addEventListener("keyup", this.keyUp.bind(this));
+    window.addEventListener("resize", this.resize.bind(this));
     this.fogctx.canvas.addEventListener("mousedown", this.mouseDown.bind(this));
     this.fogctx.canvas.addEventListener("mouseup", this.mouseUp.bind(this));
     this.fogctx.canvas.addEventListener("mousemove", this.mouseMove.bind(this));
@@ -71,10 +75,14 @@ class StartMenu {
 
   };
 
+  resize() {
+    this.boundClient = this.canvas1.getBoundingClientRect();
+  }
+
   mouseDown(e) {
-    if (this.ctx.isPointInPath(this.volumeSelector, e.offsetX, e.offsetY)) {
-      this.volumeSelecting = true;
-    }
+    // if (this.ctx.isPointInPath(this.volumeSelector, e.offsetX, e.offsetY)) {
+    this.volumeSelecting = true;
+    // }
   }
 
   mouseUp(e) {
@@ -82,7 +90,11 @@ class StartMenu {
   }
 
   mouseMove(e) {
-    this.mouse.x = e.clientX - 60;
+    // console.log(this.mouse);
+    // console.log(e.clientX);
+    // console.log(this.boundClient.x);
+    this.mouse.x = e.clientX - this.boundClient.left
+    this.mouse.y = e.clientY - this.boundClient.top
   }
 
   update() {
@@ -148,9 +160,15 @@ class StartMenu {
 
   drawOptionsPage() {
     this.ctx.drawImage(this.volume, 0, 0, 390, 152, 350, 200, 200, 50);
-    this.volumeSelector.rect(this.volumeSelectorPosition.x, this.volumeSelectorPosition.y, 10, 25);
-    this.ctx.fillStyle = "rgba(255,0,0,1)";
-    this.ctx.fill(this.volumeSelector);
+    if (!this.volumeSelecting) {
+      this.ctx.fillStyle = "rgba(255,0,0,1)";
+      this.ctx.fillRect(this.volumeSelectorPosition.x, 210, 10,25);
+    }
+    if (this.volumeSelecting) {
+      this.volumeSelectorPosition.x = this.mouse.x;
+      this.ctx.fillStyle = "rgba(255,0,0,1)";
+      this.ctx.fillRect(this.volumeSelectorPosition.x, 210, 10, 25);
+    }
   }
 
   drawSelectorTriangle() {

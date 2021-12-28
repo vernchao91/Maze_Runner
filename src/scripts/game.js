@@ -22,7 +22,7 @@ class Game {
     // this.gameMusic = new Audio("/src/assets/the-maze-runner.mp3");
     // this.gameMusic.src = "/src/assets/the-maze-runner.mp3";
     // this.gameMusic = document.getElementById("background")
-    this.startMenu = new StartMenu(ctx, this.fogctx);
+    this.startMenu = new StartMenu(ctx, this.fogctx, canvas1);
     this.pauseMenu = new PauseMenu(ctx);
     this.gameOverMenu = new GameOverMenu(ctx);
     this.maze1 = new Maze1(ctx, this.fogctx);
