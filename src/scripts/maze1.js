@@ -96,68 +96,116 @@ class Maze1 {
         player.y < object.y + object.h &&
         player.h + player.y > object.y )
       ) {
-        if ( player.lastInput === "down" && player.moving && player.frameY === 0) {
+        if ( player.lastInput === "down" && player.frameY === 0 && player.keys[83]) {
           player.y = object.y - player.h;
           player.moving = false;
-          delete player.keys[83]
-          delete player.keys[65]
-          delete player.keys[68]
-          delete player.keys[87]
-        } else if ( player.lastInput === "up" && player.moving && player.frameY === 3) {
+          delete player.keys[83];
+          delete player.keys[65];
+          delete player.keys[68];
+          delete player.keys[87];
+        } else if ( player.lastInput === "up" && player.frameY === 3) {
           player.y = object.y + object.h;
           player.moving = false;
-          delete player.keys[83]
-          delete player.keys[65]
-          delete player.keys[68]
-          delete player.keys[87]
-        } else if ( player.lastInput === "right" && player.moving && player.frameY === 1) {
+          delete player.keys[83];
+          delete player.keys[65];
+          delete player.keys[68];
+          delete player.keys[87];
+        } else if ( player.lastInput === "right" && player.frameY === 1) {
           player.x = object.x - player.w;
           player.moving = false;
-          delete player.keys[83]
-          delete player.keys[65]
-          delete player.keys[68]
-          delete player.keys[87]
-        } else if ( player.lastInput === "left" && player.moving && player.frameY === 2) {
+          delete player.keys[83];
+          delete player.keys[65];
+          delete player.keys[68];
+          delete player.keys[87];
+        } else if ( player.lastInput === "left" && player.frameY === 2) {
           player.x = object.x + object.w;
           player.moving = false;
-          delete player.keys[83]
-          delete player.keys[65]
-          delete player.keys[68]
-          delete player.keys[87]
+          delete player.keys[83];
+          delete player.keys[65];
+          delete player.keys[68];
+          delete player.keys[87];
         }
       } else {
         if (player.keys[83] && player.y < 655) {
           player.moving = true;
-          delete player.keys[65]
-          delete player.keys[68]
-          delete player.keys[87]
+          delete player.keys[65];
+          delete player.keys[68];
+          delete player.keys[87];
           player.y += (player.speed / objects.length);
           player.lastInput = "down";
         } else if (player.keys[87] && player.y > 40) {
           player.moving = true;
-          delete player.keys[65]
-          delete player.keys[68]
-          delete player.keys[83]
+          delete player.keys[65];
+          delete player.keys[68];
+          delete player.keys[83];
           player.y -= (player.speed / objects.length);
           player.lastInput = "up";
         } else if (player.keys[65] && player.x > 41) {
           player.moving = true;
-          delete player.keys[87]
-          delete player.keys[68]
-          delete player.keys[83]
+          delete player.keys[87];
+          delete player.keys[68];
+          delete player.keys[83];
           player.x -= (player.speed / objects.length);
           player.lastInput = "left";
         } else if (player.keys[68]) {
           player.moving = true;
-          delete player.keys[65]
-          delete player.keys[87]
-          delete player.keys[83]
+          delete player.keys[65];
+          delete player.keys[87];
+          delete player.keys[83];
           player.x += (player.speed / objects.length);
           player.lastInput = "right";
         }
       }
     }
   }
+
+  // colliding(player, objects, timeDelta) { //util function for collision correction and movement
+  //   let playerRight = player.x + player.w;
+  //   let playerBottom = player.y + player.h;
+  //   let playerLeft = player.y;
+  //   let playerTop = player.x;
+  //   // rectOneRight < rectTwoLeft ||
+  //   //  rectOneLeft > rectTwoRight ||
+  //   //   rectOneBottom < rectTwoTop ||
+  //   //    rectOneTop > rectTwoBottom)
+  //   for (let object of objects) {
+  //     // if ((player.x + player.w < object.y ||
+  //     //   player.y > object.x + object.w ||
+  //     //   player.y + player.h < object.y ||
+  //     //   player.x > object.y + object.h )
+  //     // ) {
+  //       if (player.keys[83] && player.y < 655) {
+  //         player.moving = true;
+  //         delete player.keys[65];
+  //         delete player.keys[68];
+  //         delete player.keys[87];
+  //         player.y += (player.speed / objects.length);
+  //         player.lastInput = "down";
+  //       } else if (player.keys[87] && player.y > 40) {
+  //         player.moving = true;
+  //         delete player.keys[65];
+  //         delete player.keys[68];
+  //         delete player.keys[83];
+  //         player.y -= (player.speed / objects.length);
+  //         player.lastInput = "up";
+  //       } else if (player.keys[65] && player.x > 41) {
+  //         player.moving = true;
+  //         delete player.keys[87];
+  //         delete player.keys[68];
+  //         delete player.keys[83];
+  //         player.x -= (player.speed / objects.length);
+  //         player.lastInput = "left";
+  //       } else if (player.keys[68] && (player.x + player.w < object.x)) {
+  //         player.moving = true;
+  //         delete player.keys[65];
+  //         delete player.keys[87];
+  //         delete player.keys[83];
+  //         player.x += (player.speed / objects.length);
+  //         player.lastInput = "right";
+  //       // }
+  //     }
+  //   }
+  // }
 
   blueSwitchDistanceCheck(player, blueSwitch) {
     const distance = this.getDistance(player.x, player.y, blueSwitch.x, blueSwitch.y);
@@ -171,14 +219,23 @@ class Maze1 {
     const distance = this.getDistance(player.x, player.y, torch.x, torch.y);
     if (distance < 35) {
       this.lightRadius = 150;
+      player.increasedLight = true;
+    } 
+    if (player.increasedLight) {
+      player.increaseLightRadiusNum -= 1;
+    } 
+    if (player.increaseLightRadiusNum === 0 && player.increasedLight) {
+      this.lightRadius = 100;
+      player.increaseLightRadiusNum = 1000;
+      player.increasedLight = false;
     }
   }
 
   heartDistanceCheck(player, heart) {
     const distance = this.getDistance(player.x, player.y, heart.x, heart.y);
     if (distance < 25) {
-      heart.x = 2000
-      player.health += 1
+      heart.x = 2000;
+      player.health += 1;
     }
   }
 

@@ -39,9 +39,20 @@ class Game {
     this.fogctx.canvas.addEventListener("click", this.clickListener.bind(this));
   }
   
+  
   keyDown(e) {
     e.preventDefault();
     this.keys[e.keyCode] = true;
+    if ((e.key === "Enter") && !this.gameRunning) {
+      if (!this.startMenu.titleAnimation) {
+        this.startMenu.finishAnimation();
+      } else if (!this.startMenu.titleStartReady) {
+        this.startMenu.titleStartReady = true;
+      } else if (!this.gameRunning && this.startMenu.titleStartReady && this.startMenu.selector.y === 695) {
+        this.gameRunning = true
+        this.play();
+      }
+    }
   }
 
   keyUp(e) {
@@ -51,6 +62,26 @@ class Game {
   clickListener(e) {
     if (this.gameRunning) {
       this.togglePause();
+    }
+    if (!this.startMenu.titleAnimation) {
+      this.startMenu.finishAnimation();
+    } else if (!this.startMenu.titleStartReady) {
+      this.startMenu.titleStartReady = true;
+    } else if (this.startMenu.selector.y === 590) {
+      this.startMenu.optionsDisplay = false;
+      this.startMenu.controlsDisplay = false;
+      this.startMenu.howToPlayDisplay = true;
+    } else if (this.startMenu.selector.y === 625) {
+      this.startMenu.howToPlayDisplay = false;
+      this.startMenu.optionsDisplay = false;
+      this.startMenu.controlsDisplay = true;
+    } else if (this.startMenu.selector.y === 660) {
+      this.startMenu.controlsDisplay = false;
+      this.startMenu.howToPlayDisplay = false;
+      this.startMenu.optionsDisplay = true;
+    } else if (!this.gameRunning && this.startMenu.titleStartReady && this.startMenu.selector.y === 695) {
+      this.gameRunning = true
+      this.play();
     }
   }
   
@@ -73,7 +104,6 @@ class Game {
   }
 
   play() {
-    this.gameRunning = true;
     this.lastTime = 0;
     this.animateMazeOne();
   }
@@ -93,15 +123,16 @@ class Game {
     const timeDelta = time - this.lastTime
     this.ctx.clearRect(0, 0, this.main.width, this.main.height);
     if (!this.startMenu.titleStartReady) {
-      this.startMenu.update(timeDelta);
+      this.startMenu.update();
     } else if (this.startMenu.titleStartReady) {
-      this.startMenu.updateSelector(timeDelta);
+      this.startMenu.updateSelector();
     } else if (this.startMenu.howToPlayDisplay) {
-
+      this.startMenu.updateSelector();
+      this.startMenu.updateHowToPlay();
     } else if (this.startMenu.optionsDisplay) {
-
+      this.startMenu.updateSelector();
     } else if (this.startMenu.controlsDisplay) {
-      
+      this.startMenu.updateSelector();
     }
     let rafID = requestAnimationFrame(this.animateStartMenu.bind(this));
     this.lastTime = time

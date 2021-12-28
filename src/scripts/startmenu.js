@@ -13,18 +13,28 @@ class StartMenu {
     this.startGame.src = "src/assets/start-game.png";
     this.options = new Image();
     this.options.src = "src/assets/options.png";
+    this.pressP = new Image();
+    this.pressP.src = "src/assets/press-pause.png";
+    this.pressSpace = new Image();
+    this.pressSpace.src = "src/assets/press-start.png";
+    this.pressWASD = new Image();
+    this.pressWASD.src = "src/assets/press-wasd.png";
+    this.volume = new Image();
+    this.volume.src = "src/assets/volume.png";
+    this.holdSpace = new Image();
+    this.holdSpace.src = "src/assets/hold-space.png";
     this.titlePosition = { x: 300, y: -135 };
     this.pressStartPosition = { x: 400, y: -150 };
-    this.startGamePosition = { x: 450, y: 550 };
-    this.howToPlayPosition = { x: 450, y: 585 };
-    this.controlPosition = { x: 450, y: 620 };
-    this.optionsPosition = { x: 450, y: 655 };
+    this.howToPlayPosition = { x: 450, y: 550 }; 585
+    this.controlPosition = { x: 450, y: 585 }; 550
+    this.optionsPosition = { x: 450, y: 620 }; 620
+    this.startGamePosition = { x: 450, y: 655 }; 655
     this.selector = { x: 450, y: 590 };
     this.titleSpeed = .85;
     this.titleAnimation = false;
     this.titleStartReady = false;
     this.controlsDisplay = false;
-    this.howToPlayDisplay = false;
+    this.howToPlayDisplay = true;
     this.optionsDisplay = false;
     this.canvasHeight = 700;
     this.canvasWidth = 1200;
@@ -37,10 +47,10 @@ class StartMenu {
 
   keyDown(e) {
     console.log(this.selector.y);
-    if ((e.keyCode === 83 || e.keyCode === 40) && this.selector.y < 675) {
-      this.selector.y += 35
-    } else if ((e.keyCode === 87 || e.keyCode === 38) && this.selector.y > 610) {
+    if ((e.keyCode === 87 || e.keyCode === 38) && this.selector.y > 610) {
       this.selector.y -= 35
+    } else if ((e.keyCode === 83 || e.keyCode === 40) && this.selector.y < 675) {
+      this.selector.y += 35
     }
   };
 
@@ -64,7 +74,7 @@ class StartMenu {
   }
 
   updateControls() {
-
+    
   };
 
   updateHowToPlay() {
@@ -84,6 +94,8 @@ class StartMenu {
       this.finishAnimation();
     }
   };
+
+  draw
 
   drawSelectorTriangle() {
     this.ctx.beginPath();
