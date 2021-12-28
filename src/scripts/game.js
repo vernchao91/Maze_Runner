@@ -38,8 +38,7 @@ class Game {
     window.addEventListener("keyup", this.keyUp.bind(this));
     this.fogctx.canvas.addEventListener("click", this.clickListener.bind(this));
   }
-  
-  
+
   keyDown(e) {
     e.preventDefault();
     this.keys[e.keyCode] = true;
@@ -48,6 +47,18 @@ class Game {
         this.startMenu.finishAnimation();
       } else if (!this.startMenu.titleStartReady) {
         this.startMenu.titleStartReady = true;
+      } else if (this.startMenu.selector.y === 590) {
+        this.startMenu.optionsDisplay = false;
+        this.startMenu.controlsDisplay = false;
+        this.startMenu.howToPlayDisplay = true;
+      } else if (this.startMenu.selector.y === 625) {
+        this.startMenu.howToPlayDisplay = false;
+        this.startMenu.optionsDisplay = false;
+        this.startMenu.controlsDisplay = true;
+      } else if (this.startMenu.selector.y === 660) {
+        this.startMenu.controlsDisplay = false;
+        this.startMenu.howToPlayDisplay = false;
+        this.startMenu.optionsDisplay = true;
       } else if (!this.gameRunning && this.startMenu.titleStartReady && this.startMenu.selector.y === 695) {
         this.gameRunning = true
         this.play();
