@@ -22,7 +22,7 @@ class Game {
     // this.gameMusic = new Audio("/src/assets/the-maze-runner.mp3");
     // this.gameMusic.src = "/src/assets/the-maze-runner.mp3";
     // this.gameMusic = document.getElementById("background")
-    this.startMenu = new StartMenu(ctx);
+    this.startMenu = new StartMenu(ctx, this.fogctx);
     this.pauseMenu = new PauseMenu(ctx);
     this.gameOverMenu = new GameOverMenu(ctx);
     this.maze1 = new Maze1(ctx, this.fogctx);
@@ -102,7 +102,7 @@ class Game {
   }
   
   pauseListener() {
-    if (this.keys[80] && !this.gameOver) {
+    if (this.keys[80] && !this.gameOver && this.gameRunning) {
       this.togglePause();
       delete this.keys[80]
     } else if (this.keys[77]) {
@@ -116,7 +116,13 @@ class Game {
   }
 
   toggleMute() {
-    this.music = !this.music
+    if (this.music) {
+      this.music = !this.music
+      this.startMenu.gameMusic.pause();
+    } else {
+      this.music = !this.music
+      this.startMenu.gameMusic.play();
+    }
   }
 
   play() {
@@ -137,6 +143,7 @@ class Game {
 
   animateStartMenu(time) {
     const timeDelta = time - this.lastTime
+    this.pauseListener();
     this.ctx.clearRect(0, 0, this.main.width, this.main.height);
     if (!this.startMenu.titleStartReady) {
       this.startMenu.update();

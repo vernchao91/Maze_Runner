@@ -1,6 +1,7 @@
 class StartMenu {
-  constructor(ctx) {
+  constructor(ctx, fogctx) {
     this.ctx = ctx;
+    this.fogctx = fogctx;
     this.title = new Image();
     this.title.src = "src/assets/MazeRunner.png";
     this.pressStart = new Image();
@@ -29,7 +30,6 @@ class StartMenu {
     this.volume.src = "src/assets/volume.png";
     this.gameMusic = new Audio("/src/assets/the-maze-runner.mp3");
     this.gameMusic.loop = true;
-    // this.gameMusic.src = "/src/assets/the-maze-runner.mp3";
     this.titlePosition = { x: 300, y: -135 };
     this.pressStartPosition = { x: 400, y: -150 };
     this.howToPlayPosition = { x: 450, y: 550 };
@@ -43,6 +43,9 @@ class StartMenu {
     this.controlsDisplay = false;
     this.howToPlayDisplay = true;
     this.optionsDisplay = false;
+    this.volumeSelecting = false;
+    this.volumeSelector = new Path2D();
+    this.volumeSelectorPosition = { x: 560, y: 210}
     this.canvasHeight = 700;
     this.canvasWidth = 1200;
     this.pressStartTimer = 200;
@@ -50,6 +53,8 @@ class StartMenu {
     this.globalAlpha = 1;
     window.addEventListener("keydown", this.keyDown.bind(this));
     window.addEventListener("keyup", this.keyUp.bind(this));
+    this.fogctx.canvas.addEventListener("mousedown", this.mouseDown.bind(this));
+    this.fogctx.canvas.addEventListener("mouseup", this.mouseUp.bind(this));
   };
 
   keyDown(e) {
@@ -63,6 +68,17 @@ class StartMenu {
   keyUp(e) {
 
   };
+
+  mouseDown(e) {
+    this.volumeSelecting = true;
+    if (this.ctx.isPointInPath(this.volumeSelector, e.offsetX, e.offsetY)) {
+      console.log("check");
+    }
+  }
+
+  mouseUp(e) {
+    this.volumeSelecting = false;
+  }
 
   update() {
     this.drawTitle();
@@ -119,7 +135,10 @@ class StartMenu {
   }
 
   drawOptionsPage() {
-
+    this.ctx.drawImage(this.volume, 0, 0, 390, 152, 350, 200, 200, 50);
+    this.volumeSelector.rect(this.volumeSelectorPosition.x, this.volumeSelectorPosition.y, 10, 25);
+    this.ctx.fillStyle = "rgba(255,0,0,1)";
+    this.ctx.fill(this.volumeSelector);
   }
 
   drawSelectorTriangle() {
