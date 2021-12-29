@@ -1,4 +1,4 @@
-class StartMenu {
+class Menu {
   constructor(ctx, fogctx, canvas1) {
     this.ctx = ctx;
     this.fogctx = fogctx;
@@ -88,10 +88,16 @@ class StartMenu {
   }
 
   mouseMove(e) {
-    this.mouse.x = e.clientX - this.boundClient.left - 10
-    this.mouse.y = e.clientY - this.boundClient.top - 10
-    if (this.volumeSelecting && this.mouse.x > 559 && this.mouse.x < 761 && this.mouse.y > 180 && this.mouse.y < 240) {
-      this.volumeSelectorPosition.x = this.mouse.x;
+    this.mouse.x = e.clientX - this.boundClient.left - 10;
+    this.mouse.y = e.clientY - this.boundClient.top - 10;
+    if (this.volumeSelecting && this.mouse.y > 180 && this.mouse.y < 240) {
+      if (this.mouse.x > 559 && this.mouse.x < 761) {
+        this.volumeSelectorPosition.x = this.mouse.x;
+      } else if (this.mouse.x < 559) {
+        this.volumeSelectorPosition.x = 560;
+      } else if (this.mouse.x > 760) {
+        this.volumeSelectorPosition.x = 760;
+      }
     }
   }
 
@@ -123,9 +129,15 @@ class StartMenu {
     this.drawOptionsPage();
   }
 
+  updatePauseScreen() {
+    this.volumeChecker();
+    this.drawOptionsPage();
+  }
+
   volumeChecker() {
-    let audioLevel = (760 - this.volumeSelectorPosition.x) / 200
-    this.gameMusic.volume = audioLevel;
+    let audioLevel = (760 - this.volumeSelectorPosition.x); // value 0 - 200
+    let audio = (200 - audioLevel) / 200; // divide by 200 to grab percent
+    this.gameMusic.volume = audio;
   }
 
   finishAnimation() {
@@ -194,15 +206,15 @@ class StartMenu {
       this.pressStartTimer -= 1;
       this.ctx.globalAlpha = this.globalAlpha -= .0075
       if (this.pressStartTimer <= 0) {
-        this.pressStartBoolean = true
+        this.pressStartBoolean = true;
       }
     }
     if (this.pressStartBoolean) {
-      this.ctx.globalAlpha = this.globalAlpha = 1
+      this.ctx.globalAlpha = this.globalAlpha = 1;
       this.pressStartTimer = 200;
       this.pressStartBoolean = false;
     }
-    this.ctx.drawImage(this.pressStart, 0, 0, 1567, 152, this.pressStartPosition.x, this.pressStartPosition.y, 400, 50)
+    this.ctx.drawImage(this.pressStart, 0, 0, 1567, 152, this.pressStartPosition.x, this.pressStartPosition.y, 400, 50);
     this.ctx.restore();
   };
 
@@ -213,4 +225,4 @@ class StartMenu {
 
 };
 
-export default StartMenu;
+export default Menu;

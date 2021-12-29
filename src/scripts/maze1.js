@@ -59,7 +59,7 @@ class Maze1 {
     // this.colliding(this.player, this.objects, timeDelta);
   }
 
-  updateItems() {
+  updateItems() { 
     this.items.drawRedDoor(this.redDoor.x, this.redDoor.y);
     this.items.drawBlueDoor(this.blueDoor.x, this.blueDoor.y);
     this.items.drawSwitch(this.blueSwitch.x, this.blueSwitch.y);

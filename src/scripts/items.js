@@ -72,8 +72,10 @@ class Items {
     this.ctx.drawImage(this.tileImg, this.frameRedDoorX, 0, 50, 100, x, y, 52, 80) //red door
   }
 
-  drawHeart(x, y) {
-    this.ctx.drawImage(this.tile2Img, this.frameHeart, 0, 150, 155, x, y, 40, 40); // heart
+  drawHeart(x, y, fogctx) {
+    if (fogctx === undefined) {
+      this.ctx.drawImage(this.tile2Img, this.frameHeart, 0, 150, 155, x, y, 40, 40); // heart
+    }
   }
 
 }
