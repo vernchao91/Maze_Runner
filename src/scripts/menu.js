@@ -30,6 +30,8 @@ class Menu {
     this.volume.src = "src/assets/volume.png";
     this.resume = new Image();
     this.resume.src = "/src/assets/resume-game.png";
+    this.restart = new Image();
+    this.restart.src = "/src/assets/restart.png";
     this.gameMusic = new Audio();
     this.gameMusic.src = "/src/assets/the-maze-runner.mp3"
     this.gameMusic.loop = true;
@@ -41,7 +43,7 @@ class Menu {
     this.optionsPosition = { x: 450, y: 620 };
     this.startGamePosition = { x: 450, y: 655 };
     this.selector = { x: 450, y: 590 };
-    this.pauseSelector = {};
+    this.pauseSelector = { x: 360, y: 285 };
     this.titleSpeed = .85;
     this.titleAnimation = false;
     this.titleStartReady = false;
@@ -71,6 +73,10 @@ class Menu {
       this.selector.y -= 35;
     } else if ((e.keyCode === 83 || e.keyCode === 40) && this.selector.y < 675) {
       this.selector.y += 35;
+    } else if ((e.keyCode === 83 || e.keyCode === 40) && this.pauseSelector.y < 675) { // not done
+      this.pauseSelector.y += 35;
+    } else if ((e.keyCode === 87 || e.keyCode === 38) && this.pauseSelector.y > 610) { // not done
+      this.pauseSelector.y -= 35;
     }
   };
 
@@ -132,13 +138,15 @@ class Menu {
 
   updateOptions() {
     this.volumeChecker();
-    this.drawOptionsPage();
+    this.drawVolumeAndSlider();
   }
 
   updatePauseScreen() {
     this.volumeChecker();
-    this.drawOptionsPage();
+    this.drawVolumeAndSlider();
     this.drawResume();
+    this.drawRestart();
+    this.drawPauseMenuSelectorTriangle();
   }
 
   volumeChecker() {
@@ -174,7 +182,7 @@ class Menu {
     this.ctx.drawImage(this.pressM, 0, 0, 1650, 162, 350, 400, 500, 50);
   }
 
-  drawOptionsPage() {
+  drawVolumeAndSlider() {
     this.ctx.drawImage(this.volume, 0, 0, 390, 152, 350, 200, 200, 50); // draws volume picture
     this.ctx.fillStyle = "rgba( 0, 0, 0,1)"; // black volume bar
     this.ctx.fillRect(560, 218, 205.5, 5);
@@ -186,11 +194,24 @@ class Menu {
     this.ctx.drawImage(this.resume, 0, 0, 674, 152, 360, 240, 250, 55);
   }
 
+  drawRestart() {
+    this.ctx.drawImage(this.restart, 0, 0, 436, 152, 360, 280, 170, 55);
+  }
+
   drawMainMenuSelectorTriangle() {
     this.ctx.beginPath();
     this.ctx.moveTo(this.selector.x, this.selector.y - 20);
     this.ctx.lineTo(this.selector.x - 20, this.selector.y);
     this.ctx.lineTo(this.selector.x - 20, this.selector.y - 40);
+    this.ctx.fillStyle = "rgba(200, 200, 200, 1)";
+    this.ctx.fill();
+  }
+
+  drawPauseMenuSelectorTriangle() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.pauseSelector.x, this.pauseSelector.y - 20);
+    this.ctx.lineTo(this.pauseSelector.x - 20, this.pauseSelector.y);
+    this.ctx.lineTo(this.pauseSelector.x - 20, this.pauseSelector.y - 40);
     this.ctx.fillStyle = "rgba(200, 200, 200, 1)";
     this.ctx.fill();
   }
