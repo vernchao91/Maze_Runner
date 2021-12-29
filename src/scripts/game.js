@@ -23,6 +23,7 @@ class Game {
     // this.gameMusic.src = "/src/assets/the-maze-runner.mp3";
     // this.gameMusic = document.getElementById("background");
     this.startMenu = new Menu(ctx, this.fogctx, canvas1);
+    this.pauseMenu = new Menu(ctx, this.fogctx, canvas1);
     this.gameOverMenu = new GameOverMenu(ctx);
     this.maze1 = new Maze1(ctx, this.fogctx);
     this.maze1Win = false;
@@ -92,20 +93,20 @@ class Game {
         this.togglePause();
       }
     }
-    if (!this.startMenu.titleAnimation) {
+    if (!this.startMenu.titleAnimation) { // start screen animation
       this.startMenu.finishAnimation();
-    } else if (!this.startMenu.titleStartReady) {
+    } else if (!this.startMenu.titleStartReady) { // plays music and goes to main menu
       this.startMenu.gameMusic.play();
       this.startMenu.titleStartReady = true;
-    } else if (this.startMenu.selector.y === 590) {
+    } else if (this.startMenu.selector.y === 590) { // 590 to set howtoplay display to true
       this.startMenu.optionsDisplay = false;
       this.startMenu.controlsDisplay = false;
       this.startMenu.howToPlayDisplay = true;
-    } else if (this.startMenu.selector.y === 625) {
+    } else if (this.startMenu.selector.y === 625) { // 625 to set howtoplay display to true
       this.startMenu.howToPlayDisplay = false;
       this.startMenu.optionsDisplay = false;
       this.startMenu.controlsDisplay = true;
-    } else if (this.startMenu.selector.y === 660) {
+    } else if (this.startMenu.selector.y === 660) { // 660 to set howtoplay display to true
       this.startMenu.controlsDisplay = false;
       this.startMenu.howToPlayDisplay = false;
       this.startMenu.optionsDisplay = true;

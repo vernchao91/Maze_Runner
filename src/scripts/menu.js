@@ -28,10 +28,12 @@ class Menu {
     this.pressM.src = "src/assets/press-m.png";
     this.volume = new Image();
     this.volume.src = "src/assets/volume.png";
+    this.resume = new Image();
+    this.resume.src = "/src/assets/resume-game.png";
     this.gameMusic = new Audio();
     this.gameMusic.src = "/src/assets/the-maze-runner.mp3"
     this.gameMusic.loop = true;
-    this.gameMusic.volume = .5;
+    this.gameMusic.volume = .25;
     this.titlePosition = { x: 300, y: -135 };
     this.pressStartPosition = { x: 400, y: -150 };
     this.howToPlayPosition = { x: 450, y: 550 };
@@ -39,6 +41,7 @@ class Menu {
     this.optionsPosition = { x: 450, y: 620 };
     this.startGamePosition = { x: 450, y: 655 };
     this.selector = { x: 450, y: 590 };
+    this.pauseSelector = {};
     this.titleSpeed = .85;
     this.titleAnimation = false;
     this.titleStartReady = false;
@@ -46,7 +49,7 @@ class Menu {
     this.howToPlayDisplay = true;
     this.optionsDisplay = false;
     this.volumeSelecting = false;
-    this.volumeSelectorPosition = { x: 660, y: 210 };
+    this.volumeSelectorPosition = { x: 610, y: 210 };
     this.canvasHeight = 700;
     this.canvasWidth = 1200;
     this.pressStartTimer = 200;
@@ -80,7 +83,10 @@ class Menu {
   }
 
   mouseDown(e) {
-    this.volumeSelecting = true;
+    if (this.mouse.x > 559 && this.mouse.x < 761 && this.mouse.y > 180 && this.mouse.y < 240) { // checks if mouse is inside volume mixer
+      this.volumeSelecting = true;
+      this.volumeSelectorPosition.x = this.mouse.x;
+    }
   }
 
   mouseUp(e) {
@@ -88,8 +94,8 @@ class Menu {
   }
 
   mouseMove(e) {
-    this.mouse.x = e.clientX - this.boundClient.left - 10;
-    this.mouse.y = e.clientY - this.boundClient.top - 10;
+    this.mouse.x = e.clientX - this.boundClient.left - 10; // - 10 to get volume bar inside mouse cursor
+    this.mouse.y = e.clientY - this.boundClient.top - 10; // - 10 to get volume bar inside mouse cursor
     if (this.volumeSelecting && this.mouse.y > 180 && this.mouse.y < 240) {
       if (this.mouse.x > 559 && this.mouse.x < 761) {
         this.volumeSelectorPosition.x = this.mouse.x;
@@ -112,7 +118,7 @@ class Menu {
     this.drawStartGame();
     this.drawHowToPlay();
     this.drawControl();
-    this.drawSelectorTriangle();
+    this.drawMainMenuSelectorTriangle();
     this.drawOptions();
   }
 
@@ -132,11 +138,12 @@ class Menu {
   updatePauseScreen() {
     this.volumeChecker();
     this.drawOptionsPage();
+    this.drawResume();
   }
 
   volumeChecker() {
     let audioLevel = (760 - this.volumeSelectorPosition.x); // value 0 - 200
-    let audio = (200 - audioLevel) / 200; // divide by 200 to grab percent
+    let audio = (200 - audioLevel) / 200; // subtract 200 from audio level then divide by 200 to grab percent
     this.gameMusic.volume = audio;
   }
 
@@ -168,14 +175,18 @@ class Menu {
   }
 
   drawOptionsPage() {
-    this.ctx.drawImage(this.volume, 0, 0, 390, 152, 350, 200, 200, 50);
-    this.ctx.fillStyle = "rgba( 0, 0, 0,1)";
+    this.ctx.drawImage(this.volume, 0, 0, 390, 152, 350, 200, 200, 50); // draws volume picture
+    this.ctx.fillStyle = "rgba( 0, 0, 0,1)"; // black volume bar
     this.ctx.fillRect(560, 218, 205.5, 5);
-    this.ctx.fillStyle = "rgba( 255, 255, 255, 1)";
+    this.ctx.fillStyle = "rgba( 255, 255, 255, 1)"; // white selector
     this.ctx.fillRect(this.volumeSelectorPosition.x, 210, 7, 25);
   }
 
-  drawSelectorTriangle() {
+  drawResume() {
+    this.ctx.drawImage(this.resume, 0, 0, 674, 152, 360, 240, 250, 55);
+  }
+
+  drawMainMenuSelectorTriangle() {
     this.ctx.beginPath();
     this.ctx.moveTo(this.selector.x, this.selector.y - 20);
     this.ctx.lineTo(this.selector.x - 20, this.selector.y);
@@ -188,6 +199,7 @@ class Menu {
     this.ctx.drawImage(this.options, 0, 0, 401, 152, this.optionsPosition.x, this.optionsPosition.y, 200, 50);
   };
 
+
   drawStartGame() {
     this.ctx.drawImage(this.startGame, 0, 0, 681, 152, this.startGamePosition.x, this.startGamePosition.y, 300, 50);
   };
@@ -199,6 +211,7 @@ class Menu {
   drawControl() {
     this.ctx.drawImage(this.control, 0, 0, 485, 152, this.controlPosition.x, this.controlPosition.y, 200, 50);
   };
+
   
   drawPressStart() {
     this.ctx.save();
