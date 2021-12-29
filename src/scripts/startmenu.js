@@ -31,6 +31,7 @@ class StartMenu {
     this.gameMusic = new Audio();
     this.gameMusic.src = "/src/assets/the-maze-runner.mp3"
     this.gameMusic.loop = true;
+    this.gameMusic.volume = .5;
     this.titlePosition = { x: 300, y: -135 };
     this.pressStartPosition = { x: 400, y: -150 };
     this.howToPlayPosition = { x: 450, y: 550 };
@@ -45,8 +46,7 @@ class StartMenu {
     this.howToPlayDisplay = true;
     this.optionsDisplay = false;
     this.volumeSelecting = false;
-    // this.volumeSelector = new Path2D();
-    this.volumeSelectorPosition = { x: 560, y: 210 }
+    this.volumeSelectorPosition = { x: 660, y: 210 };
     this.canvasHeight = 700;
     this.canvasWidth = 1200;
     this.pressStartTimer = 200;
@@ -65,9 +65,9 @@ class StartMenu {
 
   keyDown(e) {
     if ((e.keyCode === 87 || e.keyCode === 38) && this.selector.y > 610) {
-      this.selector.y -= 35
+      this.selector.y -= 35;
     } else if ((e.keyCode === 83 || e.keyCode === 40) && this.selector.y < 675) {
-      this.selector.y += 35
+      this.selector.y += 35;
     }
   };
 
@@ -80,9 +80,7 @@ class StartMenu {
   }
 
   mouseDown(e) {
-    // if (this.ctx.isPointInPath(this.volumeSelector, e.offsetX, e.offsetY)) {
     this.volumeSelecting = true;
-    // }
   }
 
   mouseUp(e) {
@@ -90,11 +88,11 @@ class StartMenu {
   }
 
   mouseMove(e) {
-    // console.log(this.mouse);
-    // console.log(e.clientX);
-    // console.log(this.boundClient.x);
-    this.mouse.x = e.clientX - this.boundClient.left
-    this.mouse.y = e.clientY - this.boundClient.top
+    this.mouse.x = e.clientX - this.boundClient.left - 10
+    this.mouse.y = e.clientY - this.boundClient.top - 10
+    if (this.volumeSelecting && this.mouse.x > 559 && this.mouse.x < 761 && this.mouse.y > 180 && this.mouse.y < 240) {
+      this.volumeSelectorPosition.x = this.mouse.x;
+    }
   }
 
   update() {
@@ -126,9 +124,9 @@ class StartMenu {
   }
 
   volumeChecker() {
-    if (this.volumeSelecting) {
-      this.volumeSelectorPosition.x = this.mouse.x;
-    }
+    let audioLevel = (760 - this.volumeSelectorPosition.x) / 200
+    this.gameMusic.volume = audioLevel;
+    console.log(audioLevel);
   }
 
   finishAnimation() {
@@ -160,15 +158,10 @@ class StartMenu {
 
   drawOptionsPage() {
     this.ctx.drawImage(this.volume, 0, 0, 390, 152, 350, 200, 200, 50);
-    if (!this.volumeSelecting) {
-      this.ctx.fillStyle = "rgba(255,0,0,1)";
-      this.ctx.fillRect(this.volumeSelectorPosition.x, 210, 10,25);
-    }
-    if (this.volumeSelecting) {
-      this.volumeSelectorPosition.x = this.mouse.x;
-      this.ctx.fillStyle = "rgba(255,0,0,1)";
-      this.ctx.fillRect(this.volumeSelectorPosition.x, 210, 10, 25);
-    }
+    this.ctx.fillStyle = "rgba( 0, 0, 0,1)";
+    this.ctx.fillRect(560, 218, 205.5, 5);
+    this.ctx.fillStyle = "rgba( 255, 255, 255, 1)";
+    this.ctx.fillRect(this.volumeSelectorPosition.x, 210, 7, 25);
   }
 
   drawSelectorTriangle() {
