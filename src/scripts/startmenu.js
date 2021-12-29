@@ -126,7 +126,6 @@ class StartMenu {
   volumeChecker() {
     let audioLevel = (760 - this.volumeSelectorPosition.x) / 200
     this.gameMusic.volume = audioLevel;
-    console.log(audioLevel);
   }
 
   finishAnimation() {
