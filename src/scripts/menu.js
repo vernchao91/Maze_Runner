@@ -87,7 +87,7 @@ class Menu {
   resize() {
     this.boundClient = this.canvas1.getBoundingClientRect();
   }
-
+  
   mouseDown(e) {
     if (this.mouse.x > 559 && this.mouse.x < 761 && this.mouse.y > 180 && this.mouse.y < 240) { // checks if mouse is inside volume mixer
       this.volumeSelecting = true;
