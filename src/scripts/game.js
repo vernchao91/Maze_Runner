@@ -18,23 +18,21 @@ class Game {
     // this.dark.height = 700;
     this.fps = 60;
     this.interval = 1000 / this.fps;
-    this.keys = [];
-    // this.gameMusic = new Audio("/src/assets/the-maze-runner.mp3");
-    // this.gameMusic.src = "/src/assets/the-maze-runner.mp3";
-    // this.gameMusic = document.getElementById("background");
-    this.startMenu = new Menu(ctx, this.fogctx, canvas1);
-    this.pauseMenu = new Menu(ctx, this.fogctx, canvas1);
+    this.menu = new Menu(ctx, this.fogctx, canvas1);
     this.gameOverMenu = new GameOverMenu(ctx);
-    this.maze1 = new Maze1(ctx, this.fogctx);
+    // this.maze1 = new Maze1(ctx, this.fogctx);
+    this.maze1;
     this.maze1Win = false;
     this.gameRunning = false;
     this.gameOver = false;
     this.pause = false;
     this.music = true;
+    this.mainMenu = false;
     this.then = Date.now();
     this.keyDown = this.keyDown.bind(this);
     this.keyUp = this.keyUp.bind(this);
     this.mouse = { x: 0, y: 0 };
+    this.keys = [];
     this.boundClient = canvas1.getBoundingClientRect();
     window.addEventListener("keydown", this.keyDown.bind(this));
     window.addEventListener("keyup", this.keyUp.bind(this));
@@ -49,74 +47,112 @@ class Game {
   }
 
   resize() {
-    this.boundClient = this.canvas1.getBoundingClientRect();
+    this.boundClient = this.main.getBoundingClientRect();
   }
 
   keyDown(e) {
     e.preventDefault();
     this.keys[e.keyCode] = true;
-    if ((e.key === "Enter") && !this.gameRunning) {
-      if (!this.startMenu.titleAnimation) {
-        this.startMenu.finishAnimation();
-      } else if (!this.startMenu.titleStartReady) {
-        this.startMenu.gameMusic.play();
-        this.startMenu.titleStartReady = true;
-      } else if (this.startMenu.selector.y === 590) {
-        this.startMenu.optionsDisplay = false;
-        this.startMenu.controlsDisplay = false;
-        this.startMenu.howToPlayDisplay = true;
-      } else if (this.startMenu.selector.y === 625) {
-        this.startMenu.howToPlayDisplay = false;
-        this.startMenu.optionsDisplay = false;
-        this.startMenu.controlsDisplay = true;
-      } else if (this.startMenu.selector.y === 660) {
-        this.startMenu.controlsDisplay = false;
-        this.startMenu.howToPlayDisplay = false;
-        this.startMenu.optionsDisplay = true;
-      } else if (!this.gameRunning && this.startMenu.titleStartReady && this.startMenu.selector.y === 695) {
+    if ((e.key === "Enter") && !this.gameRunning) { // main menu event listeners
+      if (!this.menu.titleAnimation) {
+        this.menu.finishAnimation();
+      } else if (!this.menu.titleStartReady) {
+        this.menu.gameMusic.play();
+        this.menu.titleStartReady = true;
+      } else if (this.menu.selector.y === 590) {
+        this.menu.optionsDisplay = false;
+        this.menu.controlsDisplay = false;
+        this.menu.howToPlayDisplay = true;
+      } else if (this.menu.selector.y === 625) {
+        this.menu.howToPlayDisplay = false;
+        this.menu.optionsDisplay = false;
+        this.menu.controlsDisplay = true;
+      } else if (this.menu.selector.y === 660) {
+        this.menu.controlsDisplay = false;
+        this.menu.howToPlayDisplay = false;
+        this.menu.optionsDisplay = true;
+      } else if (!this.gameRunning && this.menu.titleStartReady && this.menu.selector.y === 695) {
         this.gameRunning = true;
         this.play();
       }
     }
+    if ((e.key === "Enter") && this.gameRunning && this.pause) { // pause menu event listeners
+      if (this.menu.pauseSelector.y === 285) {
+        this.togglePause();
+      } else if (this.menu.pauseSelector.y === 325) {
+        this.restart();
+      } else if (this.menu.pauseSelector.y === 365) {
+        this.goToMainMenu();
+      }
+    }
   }
 
+  
   keyUp(e) {
     delete this.keys[e.keyCode];
   }
-
+  
   clickListener(e) {
-    console.log(this.mouse.x);
-    if (this.gameRunning && !this.pause) {
+    console.log(this.mouse.y);
+    if (this.gameRunning && this.pause === false) {
       this.togglePause();
-    } else if (this.gameRunning && this.pause) {
-      if ((this.mouse.y < 180 || this.mouse.y > 240) || (this.mouse.x > 830 || this.mouse.x < 300)) {
+    } else if (this.gameRunning && this.pause === true) {
+      if ( this.menu.pauseSelector.y === 325 && ((this.mouse.y > 240) || (this.mouse.y < 130)) ) {
+        this.restart();
+      } else if (this.menu.pauseSelector.y === 365 && ((this.mouse.y > 240) || (this.mouse.y < 130)) ) {
+        this.goToMainMenu();
+      } else if ((this.menu.pauseSelector.y === 285) && ((this.mouse.y > 240) || (this.mouse.y < 130)) ) {
         this.togglePause();
       }
     }
-    if (!this.startMenu.titleAnimation) { // start screen animation
-      this.startMenu.finishAnimation();
-    } else if (!this.startMenu.titleStartReady) { // plays music and goes to main menu
-      this.startMenu.gameMusic.play();
-      this.startMenu.titleStartReady = true;
-    } else if (this.startMenu.selector.y === 590) { // 590 to set howtoplay display to true
-      this.startMenu.optionsDisplay = false;
-      this.startMenu.controlsDisplay = false;
-      this.startMenu.howToPlayDisplay = true;
-    } else if (this.startMenu.selector.y === 625) { // 625 to set howtoplay display to true
-      this.startMenu.howToPlayDisplay = false;
-      this.startMenu.optionsDisplay = false;
-      this.startMenu.controlsDisplay = true;
-    } else if (this.startMenu.selector.y === 660) { // 660 to set howtoplay display to true
-      this.startMenu.controlsDisplay = false;
-      this.startMenu.howToPlayDisplay = false;
-      this.startMenu.optionsDisplay = true;
-    } else if (!this.gameRunning && this.startMenu.titleStartReady && this.startMenu.selector.y === 695) {
-      this.gameRunning = true
+    if (!this.menu.titleAnimation) { // start screen animation
+      this.menu.finishAnimation();
+    } else if (!this.menu.titleStartReady) { // plays music and goes to main menu
+      this.menu.gameMusic.play();
+      this.menu.titleStartReady = true;
+    } else if (this.menu.selector.y === 590) { // 590 to set howtoplay display to true
+      this.menu.optionsDisplay = false;
+      this.menu.controlsDisplay = false;
+      this.menu.howToPlayDisplay = true;
+    } else if (this.menu.selector.y === 625) { // 625 to set howtoplay display to true
+      this.menu.howToPlayDisplay = false;
+      this.menu.optionsDisplay = false;
+      this.menu.controlsDisplay = true;
+    } else if (this.menu.selector.y === 660) { // 660 to set howtoplay display to true
+      this.menu.controlsDisplay = false;
+      this.menu.howToPlayDisplay = false;
+      this.menu.optionsDisplay = true;
+    } else if (!this.gameRunning && this.menu.titleStartReady && this.menu.selector.y === 695) {
+      this.menu.selector.y = 590;
+      this.gameRunning = true;
       this.play();
     }
+    // if (this.gameRunning && this.pause && !this.gameOver) { // pause menu event listeners
+    //   if (this.menu.pauseSelector.y === 285) {
+    //     this.togglePause();
+    //   } else if (this.menu.pauseSelector.y === 325) {
+    //     this.restart();
+    //   } else if (this.menu.pauseSelector.y === 365) {
+    //     this.goToMainMenu();
+    //   }
+    // }
   }
   
-  pauseListener() {
+  goToMainMenu() {
+    this.maze1 = new Maze1(this.ctx, this.fogctx);
+    this.pause = false;
+    this.gameRunning = false;
+    this.mainMenu = true;
+    this.menu.howToPlayDisplay = true;
+    this.menu.selector.y = 590;
+  }
+
+  restart() {
+    this.maze1 = new Maze1(this.ctx, this.fogctx);
+    this.pause = false;
+  }
+
+  pauseGameOrMusicListener() {
     if (this.keys[80] && !this.gameOver && this.gameRunning) {
       this.togglePause();
       delete this.keys[80]
@@ -128,20 +164,23 @@ class Game {
 
   togglePause() {
     this.pause = !this.pause;
+    this.menu.pauseSelector.y = 285;
   }
 
   toggleMute() {
     if (this.music) {
       this.music = !this.music
-      this.startMenu.gameMusic.pause();
+      this.menu.gameMusic.pause();
     } else {
       this.music = !this.music
-      this.startMenu.gameMusic.play();
+      this.menu.gameMusic.play();
     }
   }
 
   play() {
+    this.pause = false;
     this.lastTime = 0;
+    this.maze1 = new Maze1(this.ctx, this.fogctx);
     this.animateMazeOne();
   }
 
@@ -152,24 +191,24 @@ class Game {
   }
 
   animatePauseMenu() {
-    this.startMenu.updatePauseScreen();
+    this.menu.updatePauseScreen();
   }
 
   animateStartMenu(time) {
     const timeDelta = time - this.lastTime
-    this.pauseListener();
+    this.pauseGameOrMusicListener();
     this.ctx.clearRect(0, 0, this.main.width, this.main.height);
-    if (!this.startMenu.titleStartReady) {
-      this.startMenu.update();
-    } else if (this.startMenu.titleStartReady) {
-      this.startMenu.updateSelector();
+    if (!this.menu.titleStartReady) {
+      this.menu.update();
+    } else if (this.menu.titleStartReady) {
+      this.menu.updateSelector();
     }
-    if (this.startMenu.titleStartReady && this.startMenu.howToPlayDisplay) {
-      this.startMenu.updateHowToPlay();
-    } else if (this.startMenu.optionsDisplay) {
-      this.startMenu.updateOptions();
-    } else if (this.startMenu.controlsDisplay) {
-      this.startMenu.updateControls();
+    if (this.menu.titleStartReady && this.menu.howToPlayDisplay) {
+      this.menu.updateHowToPlay();
+    } else if (this.menu.optionsDisplay) {
+      this.menu.updateOptions();
+    } else if (this.menu.controlsDisplay) {
+      this.menu.updateControls();
     }
     let rafID = requestAnimationFrame(this.animateStartMenu.bind(this));
     this.lastTime = time
@@ -178,32 +217,41 @@ class Game {
     }
   }
 
-  animateGameOver() {
-    this.pauseListener();
-    this.ctx.clearRect(0, 0, this.main.width, this.main.height);
-    this.gameOverMenu.update();
-    let temp = requestAnimationFrame(this.animateGameOver.bind(this))
-    if (this.gameOver) {
-    }
-  }
+  // animateGameOver() {
+  //   this.pauseGameOrMusicListener();
+  //   this.ctx.clearRect(0, 0, this.main.width, this.main.height);
+  //   this.gameOverMenu.update();
+  //   let temp = requestAnimationFrame(this.animateGameOver.bind(this))
+  //   if (this.gameOver) {
+  //   }
+  // }
 
   animateMazeOne(time) {
+    let rafID;
     const timeDelta = (time - this.lastTime) / this.fps
-    this.pauseListener();
+    this.pauseGameOrMusicListener();
     this.gameOverCheck(this.maze1.player.health);
-    let rafID = requestAnimationFrame(this.animateMazeOne.bind(this))
     if (!this.pause && !this.gameOver) {
+      this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
       this.ctx.clearRect(0, 0, this.main.width, this.main.height);
       this.maze1.update(timeDelta);
       this.maze1.player.update();
       this.maze1.wraith.update();
-      this.maze1.colliding(this.maze1.player, this.maze1.objects, timeDelta)
-    } else if (this.pause) {
+      this.maze1.colliding(this.maze1.player, this.maze1.objects, timeDelta);
+    } else if (this.pause && !this.gameOver) {
       this.ctx.clearRect(0, 0, this.main.width, this.main.height);
       this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
-      this.startMenu.updatePauseScreen();
+      this.menu.updatePauseScreen(this.pause);
     }
+    rafID = requestAnimationFrame(this.animateMazeOne.bind(this))
     this.lastTime = time
+    if (this.mainMenu) {
+      this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
+      this.ctx.clearRect(0, 0, this.main.width, this.main.height);
+      cancelAnimationFrame(rafID)
+      this.animateStartMenu();
+      this.mainMenu = false;
+    }
     if (this.maze1Win || this.gameOver) {
       this.gameRunning = false;
       cancelAnimationFrame(rafID)
