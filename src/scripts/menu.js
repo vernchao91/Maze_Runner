@@ -33,13 +33,13 @@ class Menu {
     this.volumeUnmuted = new Image();
     this.volumeUnmuted.src = "src/assets/volume-unmute.png";
     this.resume = new Image();
-    this.resume.src = "/src/assets/resume-game.png";
+    this.resume.src = "src/assets/resume-game.png";
     this.restart = new Image();
-    this.restart.src = "/src/assets/restart.png";
+    this.restart.src = "src/assets/restart.png";
     this.mainMenu = new Image();
     this.mainMenu.src = "src/assets/main-menu.png";
     this.gameMusic = new Audio();
-    this.gameMusic.src = "/src/assets/the-maze-runner.mp3";
+    this.gameMusic.src = "src/assets/the-maze-runner.mp3";
     this.gameMusic.loop = true;
     this.gameMusic.volume = .20;
     this.titlePosition = { x: 300, y: -135 };
