@@ -25,58 +25,58 @@ class Items {
     this.redDoor = "closed";
     // this.tile2Img.onload = () => this.update();
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
-  }
+  };
   
   keyDown(e) {
     this.keys[e.keyCode] = true;
-  }
+  };
 
   keyUp(e) {
     delete this.keys[e.keyCode];
     this.moving = false;
-  }
+  };
 
   animateBlueSwitch() {
     this.frameSwitchX = 423;
     // this.frameSwitchDestinationY = 38;
     this.animateBlueDoor();
-  }
+  };
 
   animateBlueDoor() {
     this.frameBlueDoorX = 285; // frame for opened door
     this.blueDoor = "opened";
-  }
+  };
 
   animateRedDoor() {
     this.frameRedDoorX = 149; // frame for opened door
     this.redDoor = "opened";
-  }
+  };
 
   drawTorch(x, y) {
     this.ctx.drawImage(this.tileImg, this.frameTorch, 5, 30, 50, x, y, 40, 50); // torch
-  }
+  };
 
   drawKey(x, y) {
     this.ctx.drawImage(this.tile2Img, 0, 0, 120, 90, x, y, 40, 40); // key
-  }
+  };
 
   drawSwitch(x, y) {
     this.ctx.drawImage(this.tileImg, this.frameSwitchX, 0, 50, 100, x, y, 50, 70); // switch
-  }
+  };
 
   drawBlueDoor(x, y) {
     this.ctx.drawImage(this.tileImg, this.frameBlueDoorX, 0, 50, 100, x, y, 52, 80) //blue door
-  }
+  };
 
   drawRedDoor(x, y) {
     this.ctx.drawImage(this.tileImg, this.frameRedDoorX, 0, 50, 100, x, y, 52, 80) //red door
-  }
+  };
 
   drawHeart(x, y, fogctx) {
     if (fogctx === undefined) {
       this.ctx.drawImage(this.tile2Img, this.frameHeart, 0, 150, 155, x, y, 40, 40); // heart
     }
-  }
+  };
 
 }
 

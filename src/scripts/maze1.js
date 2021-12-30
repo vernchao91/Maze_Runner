@@ -66,13 +66,13 @@ class Maze1 {
     this.items.drawHeart(this.heart.x, this.heart.y);
     this.items.drawTorch(this.torch.x, this.torch.y);
     this.items.drawKey(this.keyItem.x, this.keyItem.y);
-  }
+  };
 
   getDistance(x1, y1, x2, y2) { // util function for distance between 2 objects
     let xDistance = x2 - x1;
     let yDistance = y2 - y1;
     return Math.sqrt(Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
-  }
+  };
 
   addFogOfWar(fogctx) { // fog of war around sprite
     fogctx.fillStyle = "black";
@@ -87,7 +87,7 @@ class Maze1 {
     fogctx.closePath();
     fogctx.fill();
     fogctx.globalCompositeOperation = "source-over";
-  }
+  };
   
   colliding(player, objects, timeDelta) { //util function for collision correction and movement
     for (let object of objects) {
@@ -140,7 +140,7 @@ class Maze1 {
           delete player.keys[37];
           delete player.keys[38];
           delete player.keys[39];
-        }
+        };
       } else {
         if ((player.keys[83] || player.keys[40])) {
           player.moving = true;
@@ -182,10 +182,10 @@ class Maze1 {
           delete player.keys[38];
           player.x += (player.speed / objects.length);
           player.lastInput = "right";
-        }
-      }
-    }
-  }
+        };
+      };
+    };
+  };
 
   // colliding(player, objects, timeDelta) { //util function for collision correction and movement
   //   let playerRight = player.x + player.w;
@@ -240,32 +240,32 @@ class Maze1 {
     if (distance < 25 && this.items.keys[32]) {
       this.items.animateBlueSwitch();
       blueSwitch.y = 38;
-    }
-  }
+    };
+  };
 
   torchDistanceCheck(player, torch) {
     const distance = this.getDistance(player.x, player.y, torch.x, torch.y);
     if (distance < 35) {
       this.lightRadius = 150;
       player.increasedLight = true;
-    } 
+    };
     if (player.increasedLight) {
       player.increaseLightRadiusNum -= 1;
-    } 
+    };
     if (player.increaseLightRadiusNum === 0 && player.increasedLight) {
       this.lightRadius = 100;
       player.increaseLightRadiusNum = 1000;
       player.increasedLight = false;
-    }
-  }
+    };
+  };
 
   heartDistanceCheck(player, heart) {
     const distance = this.getDistance(player.x, player.y, heart.x, heart.y);
     if (distance < 25) {
       heart.x = 2000;
       player.health += 1;
-    }
-  }
+    };
+  };
 
   keyDistanceCheck(player, key) {
     const distance = this.getDistance(player.x, player.y, key.x, key.y);
@@ -273,16 +273,16 @@ class Maze1 {
       this.items.keyGrab = true;
       key.x = player.x;
       key.y = player.y;
-    }
-  }
+    };
+  };
 
   redDoorDistanceCheck(player) {
     const distance = this.getDistance(player.x, player.y, 1103, 415);
     if (distance < 40 && this.items.keyGrab === true) {
       this.items.animateRedDoor();
       this.keyItem = {x: 2000, y: 2000}
-    }
-  }
+    };
+  };
 
   wraithAttacking(player, wraith) { // wraith attacking
     const distance = this.getDistance(player.x, player.y, wraith.x + 15, wraith.y)
@@ -293,22 +293,22 @@ class Maze1 {
       player.invulnerable = true;
     } else if ( distance > 30) {
       wraith.attacking = false;
-    }
+    };
     if (player.invulnerableNum <= 0) { // when timer is over, player can be attacked again
       player.attacked = false;
       player.invulnerable = false;
       player.invulnerableNum = 300; // resets invulnerability
     } else if (player.attacked) { // timer for invulnerability
       player.invulnerableNum -= 1;
-    }
-  }
+    };
+  };
 
   activate(player, wraith) { // wraith activate
     const distance = this.getDistance(player.x, player.y, wraith.x, wraith.y);
     if (distance < 85) {
       this.wraith.activated = true;
-    }
-  }
+    };
+  };
 
   wraithChase() {  // wraith AI chase
     if (this.wraith.activated) {
@@ -347,9 +347,9 @@ class Maze1 {
       } else if (Math.floor(this.wraith.y) > Math.floor(this.player.y)) {
         this.wraith.direction = "right";
         this.wraith.y -= this.wraith.speed;
-      }
-    }
-  }
+      };
+    };
+  };
   
   drawWireFrame() {
     this.ctx.beginPath();
@@ -365,7 +365,7 @@ class Maze1 {
     } else {
       // this.ctx.rect(102, 228, 198, 15); // blue door wall opened
       blueDoorCoordinates = { x: 102, y: 223, w: 198, h: 15};
-    }
+    };
     // this.ctx.rect(302, 40, 15, 350); // first room right wall
     // this.ctx.rect(50, 405, 155, 10); // second room second wall bottom
     // this.ctx.rect(50, 585, 195, 10); // third room third wall bottom
@@ -385,7 +385,7 @@ class Maze1 {
     } else {
       // this.ctx.rect(905, 450, 200, 10);
       redDoorCoordinates = { x: 905, y: 440, w: 185, h: 10 }
-    }
+    };
     this.objects = [
       // { x: , y: , w: , h:  },
       // { x:0, y:40, w: 1150, h: 1 }, // top wall border // this object is buggy, used player.y > 40 instead in move function
@@ -406,54 +406,54 @@ class Maze1 {
       { x: 905, y: 440, w: 5, h: 210 }, // last room left wall
       redDoorCoordinates,
       blueDoorCoordinates,
-    ]
+    ];
     this.ctx.stroke();
-  }
+  };
   
   drawMaze() {
     for (let y = 37; y < 350; y += 50) {
       this.ctx.drawImage(this.innerWall, 775, 0, 50, 75, 300, y, 55, 80) // top to bottom wall
-    }
+    };
     for (let x = 100; x < 251; x += 50) {
       this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, 227, 55, 80) // side to side wall
-    }
+    };
     for (let y = 37; y < 300; y += 50) {
       this.ctx.drawImage(this.innerWall, 775, 0, 50, 75, 1050, y, 55, 80) // top to bottom wall
-    }
+    };
     for (let x = 50; x < 200; x += 50) {
       this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, 400, 55, 80) // side to side wall
-    }
+    };
     for (let x = 50; x < 201; x += 50) {
       this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, 580, 55, 80) // side to side wall
-    }
+    };
     for (let x = 375; x < 450; x += 50) {
       this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, 400, 55, 80) // side to side wall
-    }
+    };
     for (let y = 113; y < 400; y += 50) {
       this.ctx.drawImage(this.innerWall, 775, 0, 50, 75, 475, y, 55, 80) // top to bottom wall
-    }
+    };
     for (let x = 492; x < 750; x += 50) {
       this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, 114, 55, 80) // side to side wall
-    }
+    };
     for (let y = 28; y < 100; y += 50) {
       this.ctx.drawImage(this.innerWall, 775, 0, 50, 75, 790, y, 55, 80) // top to bottom wall
-    }
+    };
     for (let x = 700; x < 1050; x += 50) {
       this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, 250, 55, 80) // side to side wall
-    }
+    };
     for (let y = 250; y < 500; y += 50) {
       this.ctx.drawImage(this.innerWall, 775, 0, 50, 75, 685, y, 55, 80) // top to bottom wall
-    }
+    };
     for (let y = 358; y < 650; y += 50) {
       this.ctx.drawImage(this.innerWall, 775, 0, 50, 75, 585, y, 55, 80) // top to bottom wall
-    }
+    };
     for (let y = 458; y < 650; y += 50) {
       this.ctx.drawImage(this.innerWall, 775, 0, 50, 75, 900, y, 55, 80) // top to bottom wall
-    }
+    };
     for (let x = 900; x < 1100; x += 50) {
       this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, 445, 55, 80) // side to side wall
-    }
-  }
+    };
+  };
 
   drawBorder() {
     // this.ctx.drawImage(this.wallImg, 0, 0, 950, 70)
@@ -461,18 +461,18 @@ class Maze1 {
     // this.ctx.drawImage(this.wallImg, 482, 0, 50, 100, 50, 660, 60, 80)
     for (let x = 0; x < 1200; x += 50) {
       this.ctx.drawImage(this.wallImg, 482, 0, 50, 100, x, 660, 60, 80)
-    }
+    };
     for (let y = 550; y >= 0; y -= 50) {
       this.ctx.drawImage(this.wallImg, 582, 0, 55, 80, 1150, y, 60, 83)
-    }
+    };
     // this.ctx.drawImage(this.topWall, 270, 0, 50, 100, 0, 0, 60, 80)
     for (let x = 0; x < 1150; x += 50) {
       this.ctx.drawImage(this.topWall, 270, 0, 50, 100, x, 0, 60, 80)
-    }
+    };
     for (let y = 110; y < 650; y += 50) {
       this.ctx.drawImage(this.wallImg, 638, 0, 55, 80, 0, y, 60, 83)
-    }
-  }
+    };
+  };
 
     // move() {
   //   if (this.player.keys[83]) {
@@ -490,6 +490,6 @@ class Maze1 {
   //   }
   // }
   
-}
+};
 
 export default Maze1;

@@ -163,15 +163,15 @@ class Menu {
     this.drawRestart();
     this.drawMainMenu();
   };
-  
+
   volumeChecker(paused) {
     if ((this.keys[68] || this.keys[39]) && this.volumeSelectorPosition.x < 760 && this.optionsDisplay) {
       this.volumeSelectorPosition.x += 2
     } else if ((this.keys[65] || this.keys[37]) && this.volumeSelectorPosition.x > 560 && this.optionsDisplay) {
       this.volumeSelectorPosition.x -= 2
-    } else if ((this.keys[68] || this.keys[39]) && this.volumeSelectorPosition.x < 760 && paused) {
+    } else if ((this.keys[68] || this.keys[39]) && this.volumeSelectorPosition.x < 760 && paused && this.pauseSelector.y === 245) {
       this.volumeSelectorPosition.x += 2
-    } else if ((this.keys[65] || this.keys[37]) && this.volumeSelectorPosition.x > 560 && paused) {
+    } else if ((this.keys[65] || this.keys[37]) && this.volumeSelectorPosition.x > 560 && paused && this.pauseSelector.y === 245) {
       this.volumeSelectorPosition.x -= 2
     };
     let audioLevel = (760 - this.volumeSelectorPosition.x); // value 0 - 200
@@ -212,7 +212,7 @@ class Menu {
   };
 
   drawVolumeIcon(muted) {
-    if (!muted) {
+    if (!muted || this.gameMusic.volume === 0) {
       this.ctx.drawImage(this.volumeMuted, 0, 0, 512, 512, 518, 202, 40, 38);
     } else {
       this.ctx.drawImage(this.volumeUnmuted, 0, 0, 512, 512, 520, 205, 59, 55);
@@ -222,7 +222,7 @@ class Menu {
   drawVolumeAndSlider() {
     this.ctx.drawImage(this.volume, 0, 0, 390, 152, 355, 200, 170, 50); // draws volume picture
     this.ctx.fillStyle = "rgba( 0, 0, 0,1)"; // black volume bar
-    this.ctx.fillRect(560, 218, 205.5, 5);
+    this.ctx.fillRect(560, 219, 205.5, 5);
     this.ctx.fillStyle = "rgba( 255, 255, 255, 1)"; // white selector
     this.ctx.fillRect(this.volumeSelectorPosition.x, 210, 7, 25);
   };

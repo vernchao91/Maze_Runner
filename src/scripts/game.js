@@ -39,16 +39,16 @@ class Game {
     window.addEventListener("resize", this.resize.bind(this));
     this.fogctx.canvas.addEventListener("click", this.clickListener.bind(this));
     this.fogctx.canvas.addEventListener("mousemove", this.mouseMove.bind(this));
-  }
+  };
 
   mouseMove(e) {
     this.mouse.x = e.clientX - this.boundClient.left - 10;
     this.mouse.y = e.clientY - this.boundClient.top - 10;
-  }
+  };
 
   resize() {
     this.boundClient = this.main.getBoundingClientRect();
-  }
+  };
 
   keyDown(e) {
     e.preventDefault();
@@ -74,8 +74,8 @@ class Game {
       } else if (!this.gameRunning && this.menu.titleStartReady && this.menu.selector.y === 695) {
         this.gameRunning = true;
         this.play();
-      }
-    }
+      };
+    };
     if ((e.key === "Enter") && this.gameRunning && this.pause) { // pause menu event listeners
       if (this.menu.pauseSelector.y === 285) {
         this.togglePause();
@@ -83,14 +83,13 @@ class Game {
         this.restart();
       } else if (this.menu.pauseSelector.y === 365) {
         this.goToMainMenu();
-      }
-    }
-  }
+      };
+    };
+  };
 
-  
   keyUp(e) {
     delete this.keys[e.keyCode];
-  }
+  };
   
   clickListener(e) {
     if (this.gameRunning && this.pause === false) {
@@ -102,8 +101,8 @@ class Game {
         this.goToMainMenu();
       } else if ((this.menu.pauseSelector.y === 285) && ((this.mouse.y > 240) || (this.mouse.y < 130)) ) {
         this.togglePause();
-      }
-    }
+      };
+    };
     if (!this.menu.titleAnimation) { // start screen animation
       this.menu.finishAnimation();
     } else if (!this.menu.titleStartReady) { // plays music and goes to main menu
@@ -125,7 +124,7 @@ class Game {
       this.menu.selector.y = 590; // resets selector
       this.gameRunning = true; // sets game running to true to cancel other effects
       this.play(); // animates the maze
-    }
+    };
     // if (this.gameRunning && this.pause && !this.gameOver) { // pause menu event listeners
     //   if (this.menu.pauseSelector.y === 285) {
     //     this.togglePause();
@@ -135,7 +134,7 @@ class Game {
     //     this.goToMainMenu();
     //   }
     // }
-  }
+  };
   
   goToMainMenu() {
     this.maze1 = new Maze1(this.ctx, this.fogctx);
@@ -144,33 +143,31 @@ class Game {
     this.mainMenu = true;
     this.menu.howToPlayDisplay = true;
     this.menu.selector.y = 590;
-  }
+  };
 
   restart() {
     this.maze1 = new Maze1(this.ctx, this.fogctx);
     this.pause = false;
-  }
+  };
 
   pauseGameOrMusicListener() {
-  // 68 65 37 39
-
     if (this.keys[80] && !this.gameOver && this.gameRunning) {
       this.togglePause();
       delete this.keys[80]
-      delete this.menu.keys[68]
-      delete this.menu.keys[65]
-      delete this.menu.keys[37]
-      delete this.menu.keys[39]
+      // delete this.menu.keys[68]
+      // delete this.menu.keys[65]
+      // delete this.menu.keys[37]
+      // delete this.menu.keys[39]
     } else if (this.keys[77]) {
       this.toggleMute();
       delete this.keys[77]
-    }
-  }
+    };
+  };
 
   togglePause() {
     this.pause = !this.pause;
     this.menu.pauseSelector.y = 285;
-  }
+  };
 
   toggleMute() {
     if (this.music) {
@@ -179,35 +176,35 @@ class Game {
     } else {
       this.music = !this.music
       this.menu.gameMusic.play();
-    }
-  }
+    };
+  };
 
   play() {
     this.pause = false;
     this.lastTime = 0;
     this.maze1 = new Maze1(this.ctx, this.fogctx);
     this.animateMazeOne();
-  }
+  };
 
   gameOverCheck(health) {
     if (health === 0) {
       this.gameOver = true;
-    }
-  }
+    };
+  };
 
   animatePauseMenu() {
     this.menu.updatePauseScreen();
   }
 
   animateStartMenu(time) {
-    const timeDelta = time - this.lastTime
+    const timeDelta = time - this.lastTime;
     this.pauseGameOrMusicListener();
     this.ctx.clearRect(0, 0, this.main.width, this.main.height);
     if (!this.menu.titleStartReady) {
       this.menu.update();
     } else if (this.menu.titleStartReady) {
       this.menu.updateSelector();
-    }
+    };
     if (this.menu.titleStartReady && this.menu.howToPlayDisplay) {
       this.menu.updateHowToPlay();
     } else if (this.menu.optionsDisplay) {
@@ -216,11 +213,11 @@ class Game {
       this.menu.updateControls();
     }
     let rafID = requestAnimationFrame(this.animateStartMenu.bind(this));
-    this.lastTime = time
+    this.lastTime = time;
     if (this.gameRunning) {
       cancelAnimationFrame(rafID);
-    }
-  }
+    };
+  };
 
   // animateGameOver() {
   //   this.pauseGameOrMusicListener();
@@ -248,23 +245,22 @@ class Game {
       this.ctx.clearRect(0, 0, this.main.width, this.main.height);
       this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
       this.menu.updatePauseScreen(this.pause, this.music);
-    }
-    rafID = requestAnimationFrame(this.animateMazeOne.bind(this))
-    this.lastTime = time
+    };
+    rafID = requestAnimationFrame(this.animateMazeOne.bind(this));
+    this.lastTime = time;
     if (this.mainMenu) {
       this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
       this.ctx.clearRect(0, 0, this.main.width, this.main.height);
       cancelAnimationFrame(rafID)
       this.animateStartMenu();
       this.mainMenu = false;
-    }
+    };
     if (this.maze1Win || this.gameOver) {
       this.gameRunning = false;
       cancelAnimationFrame(rafID)
       this.animateGameOver();
-    }
-    
-  }
-}
+    };
+  };
+};
 
 export default Game

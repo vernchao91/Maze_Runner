@@ -13,5 +13,5 @@ document.addEventListener('DOMContentLoaded', () => {
   
   if (!game.gameRunning) {
     game.animateStartMenu();
-  }
+  };
 });
