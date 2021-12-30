@@ -29,7 +29,7 @@ class Menu {
     this.volume = new Image();
     this.volume.src = "src/assets/volume.png";
     this.volumeMuted = new Image();
-    this.volumeMuted = "src/assets/volume-mute.png";
+    this.volumeMuted.src = "src/assets/volume-mute.png";
     this.volumeUnmuted = new Image();
     this.volumeUnmuted.src = "src/assets/volume-unmute.png";
     this.resume = new Image();
@@ -41,7 +41,7 @@ class Menu {
     this.gameMusic = new Audio();
     this.gameMusic.src = "/src/assets/the-maze-runner.mp3";
     this.gameMusic.loop = true;
-    this.gameMusic.volume = .25;
+    this.gameMusic.volume = .20;
     this.titlePosition = { x: 300, y: -135 };
     this.pressStartPosition = { x: 400, y: -150 };
     this.howToPlayPosition = { x: 450, y: 550 };
@@ -60,7 +60,7 @@ class Menu {
     this.resumeGameSelected = true;
     this.restartGameSelected = false;
     this.mainMenuSelected = false;
-    this.volumeSelectorPosition = { x: 610, y: 210 };
+    this.volumeSelectorPosition = { x: 600, y: 210 };
     this.canvasHeight = 700;
     this.canvasWidth = 1200;
     this.pressStartTimer = 200;
@@ -90,10 +90,6 @@ class Menu {
     } else if ((e.keyCode === 83 || e.keyCode === 40) && this.pauseSelector.y < 330) {
       this.pauseSelector.y += 40;
     };
-  };
-
-  selectorListener() {
-
   };
 
   keyUp(e) {
@@ -152,20 +148,22 @@ class Menu {
     this.drawHowToPlayPage();
   };
 
-  updateOptions() {
+  updateOptions(muted) {
     this.volumeChecker();
     this.drawVolumeAndSlider();
+    this.drawVolumeIcon(muted);
   };
 
-  updatePauseScreen(paused) {
+  updatePauseScreen(paused, muted) {
     this.drawPauseMenuSelectorTriangle();
     this.volumeChecker(paused);
+    this.drawVolumeIcon(muted);
     this.drawVolumeAndSlider();
     this.drawResume();
     this.drawRestart();
     this.drawMainMenu();
   };
-
+  
   volumeChecker(paused) {
     if ((this.keys[68] || this.keys[39]) && this.volumeSelectorPosition.x < 760 && this.optionsDisplay) {
       this.volumeSelectorPosition.x += 2
@@ -211,6 +209,14 @@ class Menu {
     this.ctx.drawImage(this.holdSpacebar, 0, 0, 1905, 152, 350, 320, 500, 50);
     this.ctx.drawImage(this.pressP, 0, 0, 1342, 152, 350, 360, 500, 50);
     this.ctx.drawImage(this.pressM, 0, 0, 1650, 162, 350, 400, 500, 50);
+  };
+
+  drawVolumeIcon(muted) {
+    if (!muted) {
+      this.ctx.drawImage(this.volumeMuted, 0, 0, 512, 512, 518, 202, 40, 38);
+    } else {
+      this.ctx.drawImage(this.volumeUnmuted, 0, 0, 512, 512, 520, 205, 59, 55);
+    }
   };
   
   drawVolumeAndSlider() {

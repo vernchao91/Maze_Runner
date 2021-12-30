@@ -93,7 +93,6 @@ class Game {
   }
   
   clickListener(e) {
-    console.log(this.mouse.y);
     if (this.gameRunning && this.pause === false) {
       this.togglePause();
     } else if (this.gameRunning && this.pause === true) {
@@ -110,22 +109,22 @@ class Game {
     } else if (!this.menu.titleStartReady) { // plays music and goes to main menu
       this.menu.gameMusic.play();
       this.menu.titleStartReady = true;
-    } else if (this.menu.selector.y === 590) { // 590 to set howtoplay display to true
+    } else if (this.menu.selector.y === 590 && ((this.mouse.y > 240) || (this.mouse.y < 130))) { // 590 to set howtoplay display to true
       this.menu.optionsDisplay = false;
       this.menu.controlsDisplay = false;
       this.menu.howToPlayDisplay = true;
-    } else if (this.menu.selector.y === 625) { // 625 to set howtoplay display to true
+    } else if (this.menu.selector.y === 625 && ((this.mouse.y > 240) || (this.mouse.y < 130))) { // 625 to set howtoplay display to true
       this.menu.howToPlayDisplay = false;
       this.menu.optionsDisplay = false;
       this.menu.controlsDisplay = true;
-    } else if (this.menu.selector.y === 660) { // 660 to set howtoplay display to true
+    } else if (this.menu.selector.y === 660 && ((this.mouse.y > 240) || (this.mouse.y < 130))) { // 660 to set howtoplay display to true
       this.menu.controlsDisplay = false;
       this.menu.howToPlayDisplay = false;
       this.menu.optionsDisplay = true;
-    } else if (!this.gameRunning && this.menu.titleStartReady && this.menu.selector.y === 695) {
-      this.menu.selector.y = 590;
-      this.gameRunning = true;
-      this.play();
+    } else if (!this.gameRunning && this.menu.titleStartReady && this.menu.selector.y === 695 && ((this.mouse.y > 240) || (this.mouse.y < 130))) { // 695 to start game
+      this.menu.selector.y = 590; // resets selector
+      this.gameRunning = true; // sets game running to true to cancel other effects
+      this.play(); // animates the maze
     }
     // if (this.gameRunning && this.pause && !this.gameOver) { // pause menu event listeners
     //   if (this.menu.pauseSelector.y === 285) {
@@ -153,9 +152,15 @@ class Game {
   }
 
   pauseGameOrMusicListener() {
+  // 68 65 37 39
+
     if (this.keys[80] && !this.gameOver && this.gameRunning) {
       this.togglePause();
       delete this.keys[80]
+      delete this.menu.keys[68]
+      delete this.menu.keys[65]
+      delete this.menu.keys[37]
+      delete this.menu.keys[39]
     } else if (this.keys[77]) {
       this.toggleMute();
       delete this.keys[77]
@@ -206,7 +211,7 @@ class Game {
     if (this.menu.titleStartReady && this.menu.howToPlayDisplay) {
       this.menu.updateHowToPlay();
     } else if (this.menu.optionsDisplay) {
-      this.menu.updateOptions();
+      this.menu.updateOptions(this.music);
     } else if (this.menu.controlsDisplay) {
       this.menu.updateControls();
     }
@@ -239,9 +244,10 @@ class Game {
       this.maze1.wraith.update();
       this.maze1.colliding(this.maze1.player, this.maze1.objects, timeDelta);
     } else if (this.pause && !this.gameOver) {
+      // this.keys[]
       this.ctx.clearRect(0, 0, this.main.width, this.main.height);
       this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
-      this.menu.updatePauseScreen(this.pause);
+      this.menu.updatePauseScreen(this.pause, this.music);
     }
     rafID = requestAnimationFrame(this.animateMazeOne.bind(this))
     this.lastTime = time
