@@ -164,6 +164,14 @@ class Menu {
     this.drawMainMenu();
   };
 
+  updateGameOverScreen() {
+    
+  };
+
+  updateVictoryScreen() {
+
+  };
+
   volumeChecker(paused) {
     if ((this.keys[68] || this.keys[39]) && this.volumeSelectorPosition.x < 760 && this.optionsDisplay) {
       this.volumeSelectorPosition.x += 2

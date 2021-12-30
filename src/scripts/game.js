@@ -1,26 +1,19 @@
 import Maze1 from './maze1';
 import Menu from './menu';
-import GameOverMenu from './gameovermenu';
 
 class Game {
   constructor(ctx, canvas1, canvas2, canvas3) {
     this.main = canvas1;
     this.fog = canvas2;
-    // this.dark = canvas3;
     this.ctx = ctx;
     this.fogctx = canvas2.getContext("2d");
-    // this.darkctx = canvas3.getContext("2d");
     this.main.width = 1200;
     this.main.height = 700;
     this.fog.width = 1200;
     this.fog.height = 700;
-    // this.dark.width = 1200;
-    // this.dark.height = 700;
     this.fps = 60;
     this.interval = 1000 / this.fps;
     this.menu = new Menu(ctx, this.fogctx, canvas1);
-    this.gameOverMenu = new GameOverMenu(ctx);
-    // this.maze1 = new Maze1(ctx, this.fogctx);
     this.maze1;
     this.maze1Win = false;
     this.gameRunning = false;
@@ -28,7 +21,6 @@ class Game {
     this.pause = false;
     this.music = true;
     this.mainMenu = false;
-    this.then = Date.now();
     this.keyDown = this.keyDown.bind(this);
     this.keyUp = this.keyUp.bind(this);
     this.mouse = { x: 0, y: 0 };
@@ -125,15 +117,6 @@ class Game {
       this.gameRunning = true; // sets game running to true to cancel other effects
       this.play(); // animates the maze
     };
-    // if (this.gameRunning && this.pause && !this.gameOver) { // pause menu event listeners
-    //   if (this.menu.pauseSelector.y === 285) {
-    //     this.togglePause();
-    //   } else if (this.menu.pauseSelector.y === 325) {
-    //     this.restart();
-    //   } else if (this.menu.pauseSelector.y === 365) {
-    //     this.goToMainMenu();
-    //   }
-    // }
   };
   
   goToMainMenu() {
@@ -153,14 +136,10 @@ class Game {
   pauseGameOrMusicListener() {
     if (this.keys[80] && !this.gameOver && this.gameRunning) {
       this.togglePause();
-      delete this.keys[80]
-      // delete this.menu.keys[68]
-      // delete this.menu.keys[65]
-      // delete this.menu.keys[37]
-      // delete this.menu.keys[39]
+      delete this.keys[80];
     } else if (this.keys[77]) {
       this.toggleMute();
-      delete this.keys[77]
+      delete this.keys[77];
     };
   };
 
@@ -180,6 +159,7 @@ class Game {
   };
 
   play() {
+    this.mainMenu = false;
     this.pause = false;
     this.lastTime = 0;
     this.maze1 = new Maze1(this.ctx, this.fogctx);
@@ -191,10 +171,6 @@ class Game {
       this.gameOver = true;
     };
   };
-
-  animatePauseMenu() {
-    this.menu.updatePauseScreen();
-  }
 
   animateStartMenu(time) {
     const timeDelta = time - this.lastTime;
@@ -219,15 +195,6 @@ class Game {
     };
   };
 
-  // animateGameOver() {
-  //   this.pauseGameOrMusicListener();
-  //   this.ctx.clearRect(0, 0, this.main.width, this.main.height);
-  //   this.gameOverMenu.update();
-  //   let temp = requestAnimationFrame(this.animateGameOver.bind(this))
-  //   if (this.gameOver) {
-  //   }
-  // }
-
   animateMazeOne(time) {
     let rafID;
     const timeDelta = (time - this.lastTime) / this.fps
@@ -248,17 +215,19 @@ class Game {
     };
     rafID = requestAnimationFrame(this.animateMazeOne.bind(this));
     this.lastTime = time;
+    if (this.gameOver) {
+      this.gameRunning = false;
+      this.menu.updateGameOverScreen();
+    } else if (this.maze1Win) {
+      this.gameRunning = false;
+      this.menu.updateVictoryScreen();
+    }
     if (this.mainMenu) {
       this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
       this.ctx.clearRect(0, 0, this.main.width, this.main.height);
       cancelAnimationFrame(rafID)
       this.animateStartMenu();
       this.mainMenu = false;
-    };
-    if (this.maze1Win || this.gameOver) {
-      this.gameRunning = false;
-      cancelAnimationFrame(rafID)
-      this.animateGameOver();
     };
   };
 };

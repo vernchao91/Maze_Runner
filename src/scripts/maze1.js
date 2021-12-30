@@ -142,7 +142,7 @@ class Maze1 {
           delete player.keys[39];
         };
       } else {
-        if ((player.keys[83] || player.keys[40])) {
+        if ((player.keys[83] || player.keys[40]) && player.y < 655) {
           player.moving = true;
           delete player.keys[65];
           delete player.keys[68];
