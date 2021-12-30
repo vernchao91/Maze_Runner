@@ -38,6 +38,10 @@ class Menu {
     this.restart.src = "src/assets/restart.png";
     this.mainMenu = new Image();
     this.mainMenu.src = "src/assets/main-menu.png";
+    this.gameOver = new Image();
+    this.gameOver.src = "src/assets/game-over.png";
+    this.victory = new Image();
+    this.victory.src = "src/assets/victory.png";
     this.gameMusic = new Audio();
     this.gameMusic.src = "src/assets/the-maze-runner.mp3";
     this.gameMusic.loop = true;
@@ -165,11 +169,15 @@ class Menu {
   };
 
   updateGameOverScreen() {
-    
+    this.drawGameOver();
+    this.drawRestart();
+    this.drawMainMenu();
   };
 
   updateVictoryScreen() {
-
+    this.drawVictory();
+    this.drawRestart();
+    this.drawMainMenu();
   };
 
   volumeChecker(paused) {
@@ -224,7 +232,7 @@ class Menu {
       this.ctx.drawImage(this.volumeMuted, 0, 0, 512, 512, 518, 202, 40, 38);
     } else {
       this.ctx.drawImage(this.volumeUnmuted, 0, 0, 512, 512, 520, 205, 59, 55);
-    }
+    };
   };
   
   drawVolumeAndSlider() {
@@ -269,6 +277,13 @@ class Menu {
     this.ctx.drawImage(this.options, 0, 0, 401, 152, this.optionsPosition.x, this.optionsPosition.y, 200, 50);
   };
 
+  drawGameOver() {
+    this.ctx.drawImage(this.gameOver, 0, 0, 631, 152, 360, 200, 200, 50);
+  };
+
+  drawVictory() {
+    this.ctx.drawImage(this.victory, 0, 0, 631, 152, 360, 200, 200, 50);
+  };
 
   drawStartGame() {
     this.ctx.drawImage(this.startGame, 0, 0, 681, 152, this.startGamePosition.x, this.startGamePosition.y, 300, 50);
@@ -281,7 +296,6 @@ class Menu {
   drawControl() {
     this.ctx.drawImage(this.control, 0, 0, 485, 152, this.controlPosition.x, this.controlPosition.y, 200, 50);
   };
-
   
   drawPressStart() {
     this.ctx.save();

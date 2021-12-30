@@ -116,14 +116,17 @@ class Game {
       this.menu.selector.y = 590; // resets selector
       this.gameRunning = true; // sets game running to true to cancel other effects
       this.play(); // animates the maze
+      this.mainMenu = false; // boolean sets to false if navigated into mainMenu
     };
   };
   
-  goToMainMenu() {
+  goToMainMenu() { // goes to main menu and resets all booleans
     this.maze1 = new Maze1(this.ctx, this.fogctx);
     this.pause = false;
     this.gameRunning = false;
     this.mainMenu = true;
+    this.maze1Win = false;
+    this.gameOver = false;
     this.menu.howToPlayDisplay = true;
     this.menu.selector.y = 590;
   };
@@ -172,6 +175,12 @@ class Game {
     };
   };
 
+  maze1EscapeCheck(player) {
+    if (player.x > 1175 && player.y > 590) {
+      this.maze1Win = true;
+    }
+  }
+
   animateStartMenu(time) {
     const timeDelta = time - this.lastTime;
     this.pauseGameOrMusicListener();
@@ -197,9 +206,10 @@ class Game {
 
   animateMazeOne(time) {
     let rafID;
-    const timeDelta = (time - this.lastTime) / this.fps
+    const timeDelta = (time - this.lastTime) / this.fps;
     this.pauseGameOrMusicListener();
     this.gameOverCheck(this.maze1.player.health);
+    this.maze1EscapeCheck();
     if (!this.pause && !this.gameOver) {
       this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
       this.ctx.clearRect(0, 0, this.main.width, this.main.height);
@@ -208,7 +218,6 @@ class Game {
       this.maze1.wraith.update();
       this.maze1.colliding(this.maze1.player, this.maze1.objects, timeDelta);
     } else if (this.pause && !this.gameOver) {
-      // this.keys[]
       this.ctx.clearRect(0, 0, this.main.width, this.main.height);
       this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
       this.menu.updatePauseScreen(this.pause, this.music);
@@ -216,9 +225,11 @@ class Game {
     rafID = requestAnimationFrame(this.animateMazeOne.bind(this));
     this.lastTime = time;
     if (this.gameOver) {
+      this.pause = false;
       this.gameRunning = false;
       this.menu.updateGameOverScreen();
     } else if (this.maze1Win) {
+      this.pause = false;
       this.gameRunning = false;
       this.menu.updateVictoryScreen();
     }
