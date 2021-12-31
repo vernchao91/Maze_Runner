@@ -205,7 +205,6 @@ class Game {
     this.lastTime = 0;
     this.maze1 = new Maze1(this.ctx, this.fogctx);
     this.animateMazeOne();
-    console.log("check");
   };
 
   gameOverCheck(health) {
