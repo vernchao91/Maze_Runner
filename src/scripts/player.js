@@ -13,7 +13,7 @@ class Player {
     this.speed = 2;
     this.playerSprite = new Image();
     this.playerSprite.src = 'src/assets/full-hero.png'
-    // this.playerSprite.onload = () => this.update();
+    this.playerSprite.onload = () => this.update();
     this.keyDown = this.keyDown.bind(this);
     this.keyUp = this.keyUp.bind(this);
     this.keys = [];
@@ -47,6 +47,7 @@ class Player {
 
   drawPlayer() {
     if (this.invulnerableNum % 4 === 0) {
+      this.ctx.beginPath();
       this.ctx.drawImage(this.playerSprite, this.spriteWidth * this.frameX, this.spriteHeight * this.frameY,
       this.spriteWidth, this.spriteHeight, this.x, this.y, this.spriteWidth, this.spriteHeight);
     }
