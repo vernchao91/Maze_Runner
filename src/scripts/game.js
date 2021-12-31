@@ -45,12 +45,12 @@ class Game {
   keyDown(e) {
     e.preventDefault();
     this.keys[e.keyCode] = true;
-    if (e.keyCode === 90) {
-      this.gameOver = true;
-    }
-    if (e.keyCode === 88) {
-      this.maze1Win = true;
-    }
+    // if (e.keyCode === 90) { // testing gameover menu
+    //   this.gameOver = true;
+    // }
+    // if (e.keyCode === 88) { // testing victory menu
+    //   this.maze1Win = true;
+    // }
     if ((e.key === "Enter") && this.mainMenu && !this.pause) { // main menu event listeners
       if (!this.menu.titleAnimation) {
         this.menu.finishAnimation();
