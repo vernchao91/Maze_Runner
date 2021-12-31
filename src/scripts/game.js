@@ -54,7 +54,7 @@ class Game {
     if ((e.key === "Enter") && this.mainMenu && !this.pause) { // main menu event listeners
       if (!this.menu.titleAnimation) {
         this.menu.finishAnimation();
-      } else if (!this.menu.titleStartReady) {
+      } else if (!this.menu.titleStartReady) { // plays audio and sets beginning startready to true
         this.menu.gameMusic.play();
         this.menu.titleStartReady = true;
       } else if (this.menu.selector.y === 590) {

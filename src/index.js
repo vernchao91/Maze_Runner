@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   const mainCanvas = document.getElementById("mainCanvas");
   const fog = document.getElementById("fog");
-  const dark = document.getElementById("dark");
+  // const dark = document.getElementById("dark");
   
   const mainctx = mainCanvas.getContext("2d");
   const fogctx = fog.getContext("2d");
