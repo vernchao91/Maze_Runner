@@ -85,7 +85,6 @@ class Game {
     };
     if ((e.key === "Enter") && this.gameOver && !this.mainMenu) { // gameover menu event listeners
       if (this.menu.gameOverSelector.y === 325) {
-        console.log("check");
         this.gameRunning = true;
         this.play(); // animates the maze
       } else if (this.menu.gameOverSelector.y === 365) {
@@ -139,7 +138,6 @@ class Game {
     };
     if (this.gameOver) { // gameover menu event listeners
       if (this.menu.gameOverSelector.y === 325) {
-        console.log("check");
         this.gameRunning = true;
         this.play(); // animates the maze
       } else if (this.menu.gameOverSelector.y === 365) {
@@ -148,7 +146,6 @@ class Game {
     }
     if (this.maze1Win) { // victory menu event listeners
       if (this.menu.victorySelector.y === 325) {
-        console.log("check");
         this.play(); // animates the maze
       } else if (this.menu.victorySelector.y === 365) {
         this.goToMainMenu();
@@ -201,6 +198,8 @@ class Game {
   play() { // animates maze 1 and resets booleans
     this.gameRunning = true;
     this.mainMenu = false;
+    this.maze1Win = false;
+    this.gameOver = false;
     this.pause = false;
     this.lastTime = 0;
     this.maze1 = new Maze1(this.ctx, this.fogctx);
