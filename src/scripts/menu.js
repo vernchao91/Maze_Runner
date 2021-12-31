@@ -54,6 +54,8 @@ class Menu {
     this.startGamePosition = { x: 450, y: 655 };
     this.selector = { x: 450, y: 590 };
     this.pauseSelector = { x: 360, y: 285 };
+    this.victorySelector = { x: 360, y: 285 };
+    this.gameOverSelector = { x: 360, y: 285 };
     this.titleSpeed = .85;
     this.titleAnimation = false;
     this.titleStartReady = false;
@@ -94,6 +96,16 @@ class Menu {
     } else if ((e.keyCode === 83 || e.keyCode === 40) && this.pauseSelector.y < 330) {
       this.pauseSelector.y += 40;
     };
+    if ((e.keyCode === 87 || e.keyCode === 38) && this.victorySelector.y > 325) {
+      this.victorySelector.y -= 40;
+    } else if ((e.keyCode === 83 || e.keyCode === 40) && this.victorySelector.y < 365) {
+      this.victorySelector.y += 40;
+    };
+    if ((e.keyCode === 87 || e.keyCode === 38) && this.gameOverSelector.y > 325) {
+      this.gameOverSelector.y -= 40;
+    } else if ((e.keyCode === 83 || e.keyCode === 40) && this.gameOverSelector.y < 365) {
+      this.gameOverSelector.y += 40;
+    };
   };
 
   keyUp(e) {
@@ -129,13 +141,13 @@ class Menu {
     };
   };
 
-  update() {
+  update() { // animation before menu
     this.drawTitle();
     this.drawPressStart();
     this.moveTitle();
   };
 
-  updateSelector() {
+  updateSelector() { // animate selector and choices
     this.drawMainMenuSelectorTriangle();
     this.drawTitle();
     this.drawStartGame();
@@ -144,21 +156,21 @@ class Menu {
     this.drawOptions();
   };
 
-  updateControls() {
-    this.drawControlsPage();
-  };
-
-  updateHowToPlay() {
+  updateHowToPlay() { // draws how to play page
     this.drawHowToPlayPage();
   };
 
-  updateOptions(muted) {
+  updateControls() { // draws control page
+    this.drawControlsPage();
+  };
+
+  updateOptions(muted) { // draws options page
     this.volumeChecker();
     this.drawVolumeAndSlider();
     this.drawVolumeIcon(muted);
   };
 
-  updatePauseScreen(paused, muted) {
+  updatePauseScreen(paused, muted) { // draws pause screen
     this.drawPauseMenuSelectorTriangle();
     this.volumeChecker(paused);
     this.drawVolumeIcon(muted);
@@ -168,27 +180,29 @@ class Menu {
     this.drawMainMenu();
   };
 
-  updateGameOverScreen() {
+  updateGameOverScreen() { // draws game over screen
     this.drawGameOver();
     this.drawRestart();
     this.drawMainMenu();
+    this.drawGameOverSelectorTriangle();
   };
 
-  updateVictoryScreen() {
+  updateVictoryScreen() { // draws victory screen
     this.drawVictory();
     this.drawRestart();
     this.drawMainMenu();
+    this.drawVictorySelectorTriangle();
   };
 
-  volumeChecker(paused) {
+  volumeChecker(paused) { 
     if ((this.keys[68] || this.keys[39]) && this.volumeSelectorPosition.x < 760 && this.optionsDisplay) {
-      this.volumeSelectorPosition.x += 2
+      this.volumeSelectorPosition.x += 1
     } else if ((this.keys[65] || this.keys[37]) && this.volumeSelectorPosition.x > 560 && this.optionsDisplay) {
-      this.volumeSelectorPosition.x -= 2
+      this.volumeSelectorPosition.x -= 1
     } else if ((this.keys[68] || this.keys[39]) && this.volumeSelectorPosition.x < 760 && paused && this.pauseSelector.y === 245) {
-      this.volumeSelectorPosition.x += 2
+      this.volumeSelectorPosition.x += 1
     } else if ((this.keys[65] || this.keys[37]) && this.volumeSelectorPosition.x > 560 && paused && this.pauseSelector.y === 245) {
-      this.volumeSelectorPosition.x -= 2
+      this.volumeSelectorPosition.x -= 1
     };
     let audioLevel = (760 - this.volumeSelectorPosition.x); // value 0 - 200
     let audio = (200 - audioLevel) / 200; // subtract 200 from audio level then divide by 200 to grab percent
@@ -269,6 +283,24 @@ class Menu {
     this.ctx.moveTo(this.pauseSelector.x, this.pauseSelector.y - 20);
     this.ctx.lineTo(this.pauseSelector.x - 20, this.pauseSelector.y);
     this.ctx.lineTo(this.pauseSelector.x - 20, this.pauseSelector.y - 40);
+    this.ctx.fillStyle = "rgba(200, 200, 200, 1)";
+    this.ctx.fill();
+  };
+
+  drawGameOverSelectorTriangle() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.gameOverSelector.x, this.gameOverSelector.y - 20);
+    this.ctx.lineTo(this.gameOverSelector.x - 20, this.gameOverSelector.y);
+    this.ctx.lineTo(this.gameOverSelector.x - 20, this.gameOverSelector.y - 40);
+    this.ctx.fillStyle = "rgba(200, 200, 200, 1)";
+    this.ctx.fill();
+  };
+
+  drawVictorySelectorTriangle() {
+    this.ctx.beginPath();
+    this.ctx.moveTo(this.victorySelector.x, this.victorySelector.y - 20);
+    this.ctx.lineTo(this.victorySelector.x - 20, this.victorySelector.y);
+    this.ctx.lineTo(this.victorySelector.x - 20, this.victorySelector.y - 40);
     this.ctx.fillStyle = "rgba(200, 200, 200, 1)";
     this.ctx.fill();
   };
