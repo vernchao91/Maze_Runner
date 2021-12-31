@@ -51,7 +51,7 @@ class Game {
     if (e.keyCode === 88) {
       this.maze1Win = true;
     }
-    if ((e.key === "Enter") && !this.gameRunning && this.mainMenu) { // main menu event listeners
+    if ((e.key === "Enter") && this.mainMenu && !this.pause) { // main menu event listeners
       if (!this.menu.titleAnimation) {
         this.menu.finishAnimation();
       } else if (!this.menu.titleStartReady) {
@@ -69,12 +69,11 @@ class Game {
         this.menu.controlsDisplay = false;
         this.menu.howToPlayDisplay = false;
         this.menu.optionsDisplay = true;
-      } else if (!this.gameRunning && this.menu.titleStartReady && this.menu.selector.y === 695) {
+      } else if (!this.gameRunning && this.menu.titleStartReady && this.menu.selector.y === 695 && !this.gameOver && !this.maze1Win) {
         this.gameRunning = true;
         this.play();
       };
-    };
-    if ((e.key === "Enter") && this.gameRunning && this.pause && !this.gamOver && !this.maze1Win) { // pause menu event listeners
+    } else if ((e.key === "Enter") && this.pause) { // pause menu event listeners
       if (this.menu.pauseSelector.y === 285) {
         this.togglePause();
       } else if (this.menu.pauseSelector.y === 325) {
@@ -82,19 +81,19 @@ class Game {
       } else if (this.menu.pauseSelector.y === 365) {
         this.goToMainMenu();
       };
-    };
-    if ((e.key === "Enter") && this.gameOver && !this.mainMenu) { // gameover menu event listeners
+    } else if ((e.key === "Enter") && this.gameOver && !this.mainMenu) { // gameover menu event listeners
       if (this.menu.gameOverSelector.y === 325) {
         this.gameRunning = true;
         this.play(); // animates the maze
       } else if (this.menu.gameOverSelector.y === 365) {
+        this.mainMenu = true;
         this.goToMainMenu();
       };
-    }
-    if ((e.key === "Enter") && this.maze1Win && !this.mainMenu) { // victory menu event listeners
+    } else if ((e.key === "Enter") && this.maze1Win && !this.mainMenu) { // victory menu event listeners
       if (this.menu.victorySelector.y === 325) {
         this.play(); // animates the maze
       } else if (this.menu.victorySelector.y === 365) {
+        this.mainMenu = true;
         this.goToMainMenu();
       };
     }
@@ -105,20 +104,20 @@ class Game {
   };
   
   clickListener(e) {
-    if (this.gameRunning && !this.pause) {
+    if (this.gameRunning && !this.pause && !this.gameOver && !this.maze1Win) { // pauses
       this.togglePause();
-    } else if (this.gameRunning && this.pause) { // selects pause selector
-      if ( this.menu.pauseSelector.y === 325 && ((this.mouse.y > 240) || (this.mouse.y < 130)) ) {
+    } else if (this.gameRunning && this.pause && !this.gameOver) { // selects pause selector
+      if ( this.menu.pauseSelector.y === 325 && ((this.mouse.y > 240) || (this.mouse.y < 130)) ) { // restart
         this.restart();
-      } else if (this.menu.pauseSelector.y === 365 && ((this.mouse.y > 240) || (this.mouse.y < 130)) ) {
+      } else if (this.menu.pauseSelector.y === 365 && ((this.mouse.y > 240) || (this.mouse.y < 130)) ) { // main menu
         this.goToMainMenu();
-      } else if ((this.menu.pauseSelector.y === 285) && ((this.mouse.y > 240) || (this.mouse.y < 130)) ) {
+      } else if ((this.menu.pauseSelector.y === 285) && ((this.mouse.y > 240) || (this.mouse.y < 130)) ) { // unpause
         this.togglePause();
       };
     };
-    if (!this.menu.titleAnimation) { // start screen animation
+    if (!this.menu.titleAnimation && !this.gameRunning && this.mainMenu && !this.gameOver) { // start screen animation
       this.menu.finishAnimation();
-    } else if (!this.menu.titleStartReady) { // plays music and goes to main menu
+    } else if (!this.menu.titleStartReady && this.mainMenu) { // plays music and goes to main menu
       this.menu.gameMusic.play();
       this.menu.titleStartReady = true;
     } else if (this.menu.selector.y === 590 && ((this.mouse.y > 240) || (this.mouse.y < 130))) { // 590 to set howtoplay display to true
@@ -133,10 +132,10 @@ class Game {
       this.menu.controlsDisplay = false;
       this.menu.howToPlayDisplay = false;
       this.menu.optionsDisplay = true;
-    } else if (!this.gameRunning && this.menu.titleStartReady && this.menu.selector.y === 695 && ((this.mouse.y > 240) || (this.mouse.y < 130) || !this.menu.optionsDisplay) ) { // 695 to start game
+    } else if (!this.gameRunning && !this.maze1Win && !this.gameOver && this.menu.titleStartReady && this.menu.selector.y === 695 && ((this.mouse.y > 240) || (this.mouse.y < 130) || !this.menu.optionsDisplay) ) { // 695 to start game
       this.play(); // animates the maze
     };
-    if (this.gameOver) { // gameover menu event listeners
+    if (this.gameOver && !this.mainMenu) { // gameover menu event listeners
       if (this.menu.gameOverSelector.y === 325) {
         this.gameRunning = true;
         this.play(); // animates the maze
@@ -144,10 +143,10 @@ class Game {
         this.goToMainMenu();
       };
     }
-    if (this.maze1Win) { // victory menu event listeners
+    if (this.maze1Win && !this.mainMenu) { // victory menu event listeners
       if (this.menu.victorySelector.y === 325) {
         this.play(); // animates the maze
-      } else if (this.menu.victorySelector.y === 365) {
+      } else {
         this.goToMainMenu();
       };
     }
@@ -155,9 +154,9 @@ class Game {
   
   goToMainMenu() { // goes to main menu and resets all booleans
     this.maze1 = new Maze1(this.ctx, this.fogctx);
+    this.mainMenu = true;
     this.pause = false;
     this.gameRunning = false;
-    this.mainMenu = true;
     this.maze1Win = false;
     this.gameOver = false;
     this.menu.howToPlayDisplay = true;
@@ -209,19 +208,24 @@ class Game {
   gameOverCheck(health) {
     if (health === 0) {
       this.gameOver = true;
+      this.pause = false;
+      this.mainMenu = false;
+      this.maze1Win = false;
     };
   };
 
   maze1EscapeCheck(player) {
     if (player.x > 1175 && player.y > 590) {
       this.maze1Win = true;
+      this.pause = false;
+      this.mainMenu = false;
+      this.gameOver = false;
     }
   }
 
   mainMenuCheck(mainMenu, rafID) {
     if (mainMenu) {
       this.gameRunning = false;
-      this.mainMenu = false;
       this.pause = false;
       cancelAnimationFrame(rafID)
       this.animateStartMenu();
@@ -279,12 +283,14 @@ class Game {
       this.pause = false;
       this.gameRunning = false;
       cancelAnimationFrame(rafID);
+      this.menu.gameOverSelector.y = 325;
       this.animateGameOver();
     } else if (this.maze1Win) {
       this.ctx.clearRect(0, 0, this.main.width, this.main.height);
       this.fogctx.clearRect(0, 0, this.main.width, this.main.height);
       this.pause = false;
       this.gameRunning = false;
+      this.menu.victorySelector.y = 325;
       cancelAnimationFrame(rafID);
       this.animateVictory();
     }
@@ -313,7 +319,7 @@ class Game {
     rafID = requestAnimationFrame(this.animateVictory.bind(this));
     this.mainMenuCheck(this.mainMenu, rafID);
     if (this.gameRunning) {
-      window.cancelAnimationFrame(rafID);
+      cancelAnimationFrame(rafID);
     };
   };
 
