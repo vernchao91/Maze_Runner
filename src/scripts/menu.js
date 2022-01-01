@@ -69,8 +69,8 @@ class Menu {
     this.selector = { x: 450, y: 590 };
     this.pauseSelector = { x: 360, y: 285 };
     this.volumeSelectorPosition = { x: 600, y: 210 };
-    this.victorySelector = { x: 360, y: 285 };
-    this.gameOverSelector = { x: 360, y: 285 };
+    this.victorySelector = { x: 450, y: 285 };
+    this.gameOverSelector = { x: 450, y: 285 };
     this.titleSpeed = .85;
     this.titleAnimation = false;
     this.titleStartReady = false;
@@ -159,6 +159,7 @@ class Menu {
     this.drawTitle();
     this.drawPressStart();
     this.moveTitle();
+    this.drawCopyRightAndVersion();
   };
 
   updateSelector() { // animate selector and choices
@@ -197,16 +198,16 @@ class Menu {
 
   updateGameOverScreen() { // draws game over screen
     this.drawGameOver();
-    this.drawRestart();
-    this.drawMainMenu();
+    this.drawRestart(90);
+    this.drawMainMenu(90);
     this.drawGameOverSelectorTriangle();
   };
 
   updateVictoryScreen() { // draws victory screen
     this.drawVictory();
     this.drawStayTuned();
-    this.drawRestart();
-    this.drawMainMenu();
+    this.drawRestart(90);
+    this.drawMainMenu(90);
     this.drawVictorySelectorTriangle();
   };
 
@@ -282,12 +283,12 @@ class Menu {
     this.ctx.drawImage(this.resume, 0, 0, 674, 152, 360, 240, 250, 55);
   };
   
-  drawRestart() {
-    this.ctx.drawImage(this.restart, 0, 0, 436, 152, 360, 280, 170, 55);
+  drawRestart(num) {
+    this.ctx.drawImage(this.restart, 0, 0, 436, 152, 360 + num, 280, 170, 55);
   };
 
-  drawMainMenu() {
-    this.ctx.drawImage(this.mainMenu, 0, 0, 543, 152, 360, 320, 200, 55);
+  drawMainMenu(num) {
+    this.ctx.drawImage(this.mainMenu, 0, 0, 543, 152, 360 + num, 320, 200, 55);
   };
 
   drawMainMenuSelectorTriangle() {
@@ -331,7 +332,7 @@ class Menu {
   };
 
   drawGameOver() {
-    this.ctx.drawImage(this.gameOver, 0, 0, 631, 152, 420, 70, 500, 110);
+    this.ctx.drawImage(this.gameOver, 0, 0, 631, 152, 375, 70, 500, 110);
   };
 
   drawVictory() {
@@ -353,6 +354,15 @@ class Menu {
   drawControl() {
     this.ctx.drawImage(this.control, 0, 0, 485, 152, this.controlPosition.x, this.controlPosition.y, 200, 50);
   };
+
+  drawCopyRightAndVersion() {
+    // this.ctx.font = "25px bold Gill Sans";
+    this.ctx.font = "20px serif";
+    this.ctx.fillStyle = "rgba(255, 255, 255, 1)";
+    this.ctx.textAlign = "center";
+    this.ctx.fillText("© Vern Chao, 2021", 600, 650);
+    this.ctx.fillText("Version 1.0, Updated on Dec 31, 2021 ", 600, 670);
+  }
   
   drawPressStart() {
     this.ctx.save();
