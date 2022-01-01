@@ -92,8 +92,6 @@ class Wraith {
       }
     }
   }
-
-
 }
 
 export default Wraith;

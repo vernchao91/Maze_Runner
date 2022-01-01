@@ -7,7 +7,7 @@ body {
   align-items: center;
   background-color: #1f1f1f;
 }
-body .middle {
+body .context {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,14 +15,14 @@ body .middle {
   min-width: 1315px;
   width: 1200px;
 }
-body .middle .canvas-wrapper {
+body .context .canvas-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-width: 1200px;
 }
-body .middle .canvas-wrapper #mainCanvas {
+body .context .canvas-wrapper #mainCanvas {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -32,7 +32,7 @@ body .middle .canvas-wrapper #mainCanvas {
   border-radius: 10px;
   min-width: 1200px;
 }
-body .middle .canvas-wrapper #fog {
+body .context .canvas-wrapper #fog {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -41,7 +41,7 @@ body .middle .canvas-wrapper #fog {
   border-radius: 10px;
   min-width: 1200px;
 }
-body .middle .canvas-wrapper #bg {
+body .context .canvas-wrapper #bg {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -51,24 +51,27 @@ body .middle .canvas-wrapper #bg {
   height: 700px;
   opacity: 0.25;
 }
-body .middle .socials {
+body .context .socials {
+  display: flex;
+  flex-direction: row;
   margin-top: 20px;
 }
-body .middle .socials #linkedin {
+body .context .socials #linkedin {
   background-size: cover;
   border-radius: 3px;
   width: 40px;
   height: 30px;
   cursor: pointer;
 }
-body .middle .socials #github {
+body .context .socials #github {
+  color: white;
   background-size: cover;
   border-radius: 15px;
   width: 30px;
   height: 30px;
   cursor: pointer;
 }
-body .middle .socials #angellist {
+body .context .socials #angellist {
   background-size: cover;
   border-radius: 15px;
   width: 30px;

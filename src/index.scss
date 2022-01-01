@@ -8,6 +8,7 @@ body {
   // -o-background-size: cover;
   // background-size: cover;
   background-color: rgb(31, 31, 31);
+  // background-color: rgb(255, 255, 255);
   // .left {
   //   display: flex;
   //   flex-direction: column;
@@ -30,7 +31,7 @@ body {
   //   }
   // }
   
-  .middle {
+  .context {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -86,7 +87,10 @@ body {
       }
     }
     .socials {
+      display: flex;
+      flex-direction: row;
       margin-top: 20px;
+
       #linkedin {
         background-size: cover;
         border-radius: 3px;
@@ -95,6 +99,7 @@ body {
         cursor: pointer;
       }
       #github {
+        color: white;
         background-size: cover;
         border-radius: 15px;
         width: 30px;
