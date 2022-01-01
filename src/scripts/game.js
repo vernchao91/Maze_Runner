@@ -77,7 +77,7 @@ class Game {
       if (this.menu.pauseSelector.y === 285) {
         this.togglePause();
       } else if (this.menu.pauseSelector.y === 325) {
-        this.restart();
+        this.restartMaze1();
       } else if (this.menu.pauseSelector.y === 365) {
         this.goToMainMenu();
       };
@@ -107,8 +107,8 @@ class Game {
     if (this.gameRunning && !this.pause && !this.gameOver && !this.maze1Win) { // pauses
       this.togglePause();
     } else if (this.gameRunning && this.pause && !this.gameOver) { // selects pause selector
-      if ( this.menu.pauseSelector.y === 325 && ((this.mouse.y > 240) || (this.mouse.y < 130)) ) { // restart
-        this.restart();
+      if ( this.menu.pauseSelector.y === 325 && ((this.mouse.y > 240) || (this.mouse.y < 130)) ) { // restartMaze1
+        this.restartMaze1();
       } else if (this.menu.pauseSelector.y === 365 && ((this.mouse.y > 240) || (this.mouse.y < 130)) ) { // main menu
         this.goToMainMenu();
       } else if ((this.menu.pauseSelector.y === 285) && ((this.mouse.y > 240) || (this.mouse.y < 130)) ) { // unpause
@@ -164,7 +164,7 @@ class Game {
     this.animateStartMenu();
   };
 
-  restart() { // restarts maze1
+  restartMaze1() { // restartMaze1s maze1
     this.maze1 = new Maze1(this.ctx, this.fogctx);
     this.pause = false;
   };

@@ -42,6 +42,8 @@ class Menu {
     this.gameOver.src = "src/assets/game-over.png";
     this.victory = new Image();
     this.victory.src = "src/assets/victory.png";
+    this.stayTuned = new Image();
+    this.stayTuned.src = "src/assets/stay-tuned.png";
     this.htwNavigate = new Image();
     this.htwNavigate.src = "src/assets/htwnavigate.png";
     this.htwHealth = new Image();
@@ -202,6 +204,7 @@ class Menu {
 
   updateVictoryScreen() { // draws victory screen
     this.drawVictory();
+    this.drawStayTuned();
     this.drawRestart();
     this.drawMainMenu();
     this.drawVictorySelectorTriangle();
@@ -328,12 +331,16 @@ class Menu {
   };
 
   drawGameOver() {
-    this.ctx.drawImage(this.gameOver, 0, 0, 631, 152, 360, 200, 200, 50);
+    this.ctx.drawImage(this.gameOver, 0, 0, 631, 152, 420, 70, 500, 110);
   };
 
   drawVictory() {
-    this.ctx.drawImage(this.victory, 0, 0, 631, 152, 360, 200, 200, 50);
+    this.ctx.drawImage(this.victory, 0, 0, 631, 152, 420, 70, 500, 110);
   };
+
+  drawStayTuned() {
+    this.ctx.drawImage(this.stayTuned, 0, 0, 2508, 152, 140, 155, 950, 55);
+  }
 
   drawStartGame() {
     this.ctx.drawImage(this.startGame, 0, 0, 681, 152, this.startGamePosition.x, this.startGamePosition.y, 300, 50);
