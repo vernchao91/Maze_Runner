@@ -192,8 +192,8 @@ class Menu {
     this.drawVolumeIcon(muted);
     this.drawVolumeAndSlider();
     this.drawResume();
-    this.drawRestart();
-    this.drawMainMenu();
+    this.drawRestart(0);
+    this.drawMainMenu(0);
   };
 
   updateGameOverScreen() { // draws game over screen
@@ -212,9 +212,9 @@ class Menu {
   };
 
   volumeChecker(paused) { 
-    if ((this.keys[68] || this.keys[39]) && this.volumeSelectorPosition.x < 760 && this.optionsDisplay) {
+    if ((this.keys[68] || this.keys[39]) && this.volumeSelectorPosition.x < 760 && !paused && this.optionsDisplay) {
       this.volumeSelectorPosition.x += 1
-    } else if ((this.keys[65] || this.keys[37]) && this.volumeSelectorPosition.x > 560 && this.optionsDisplay) {
+    } else if ((this.keys[65] || this.keys[37]) && this.volumeSelectorPosition.x > 560 && !paused && this.optionsDisplay) {
       this.volumeSelectorPosition.x -= 1
     } else if ((this.keys[68] || this.keys[39]) && this.volumeSelectorPosition.x < 760 && paused && this.pauseSelector.y === 245) {
       this.volumeSelectorPosition.x += 1
@@ -246,21 +246,21 @@ class Menu {
   };
   
   drawHowToPlayPage() {
-    this.ctx.drawImage(this.htwNavigate, 0, 0, 1803, 152, 350, 200, 550, 50);
-    this.ctx.drawImage(this.htwHealth, 0, 0, 1220, 152, 350, 240, 400, 50);
-    this.ctx.drawImage(this.htwAvoidWraith, 0, 0, 2413, 152, 350, 280, 650, 50);
-    this.ctx.drawImage(this.htwOpenDoors, 0, 0, 1295, 152, 350, 320, 400, 50);
-    this.ctx.drawImage(this.htwWraith, 0, 0, 2388, 152, 350, 360, 650, 50);
-    this.ctx.drawImage(this.htwGameOver, 0, 0, 1706, 152, 350, 400, 500, 50);
+    this.ctx.drawImage(this.htwNavigate, 0, 0, 1803, 152, 310 + 20, 200, 550, 50);
+    this.ctx.drawImage(this.htwHealth, 0, 0, 1220, 152, 370 + 20, 240, 400, 50);
+    this.ctx.drawImage(this.htwAvoidWraith, 0, 0, 2413, 152, 250 + 20, 280, 650, 50);
+    this.ctx.drawImage(this.htwOpenDoors, 0, 0, 1295, 152, 370 + 20, 320, 400, 50);
+    this.ctx.drawImage(this.htwWraith, 0, 0, 2388, 152, 250 + 20, 360, 650, 50);
+    this.ctx.drawImage(this.htwGameOver, 0, 0, 1706, 152, 330 + 20, 400, 500, 50);
   };
   
   drawControlsPage() {
     this.ctx.drawImage(this.pressEnter, 0, 0, 1593, 152, 350, 200, 500, 50);
     this.ctx.drawImage(this.pressWASD, 0, 0, 1862, 152, 350, 240, 500, 50);
-    this.ctx.drawImage(this.pressSpacebar, 0, 0, 1806, 152, 350, 280, 500, 50);
-    this.ctx.drawImage(this.holdSpacebar, 0, 0, 1905, 152, 350, 320, 500, 50);
-    this.ctx.drawImage(this.pressP, 0, 0, 1342, 152, 350, 360, 500, 50);
-    this.ctx.drawImage(this.pressM, 0, 0, 1650, 162, 350, 400, 500, 50);
+    this.ctx.drawImage(this.pressSpacebar, 0, 0, 1806, 152, 310, 280, 600, 50);
+    this.ctx.drawImage(this.holdSpacebar, 0, 0, 1905, 152, 310, 320, 600, 50);
+    this.ctx.drawImage(this.pressP, 0, 0, 1342, 152, 410, 360, 400, 50);
+    this.ctx.drawImage(this.pressM, 0, 0, 1650, 162, 360, 400, 500, 50);
   };
 
   drawVolumeIcon(muted) {
@@ -360,8 +360,7 @@ class Menu {
     this.ctx.font = "20px serif";
     this.ctx.fillStyle = "rgba(255, 255, 255, 1)";
     this.ctx.textAlign = "center";
-    this.ctx.fillText("© Vern Chao, 2021", 600, 650);
-    this.ctx.fillText("Version 1.0, Updated on Dec 31, 2021 ", 600, 670);
+    this.ctx.fillText("© Version 1.0, Dec 31, 2021 ", 600, 650);
   }
   
   drawPressStart() {
