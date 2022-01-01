@@ -42,6 +42,18 @@ class Menu {
     this.gameOver.src = "src/assets/game-over.png";
     this.victory = new Image();
     this.victory.src = "src/assets/victory.png";
+    this.htwNavigate = new Image();
+    this.htwNavigate.src = "src/assets/htwnavigate.png";
+    this.htwHealth = new Image();
+    this.htwHealth.src = "src/assets/htwhealth.png";
+    this.htwAvoidWraith = new Image();
+    this.htwAvoidWraith.src = "src/assets/htwavoidwraith.png";
+    this.htwOpenDoors = new Image();
+    this.htwOpenDoors.src = "src/assets/htwopendoors.png";
+    this.htwWraith = new Image();
+    this.htwWraith.src ="src/assets/htwwraith.png";
+    this.htwGameOver = new Image();
+    this.htwGameOver.src ="src/assets/htwgameover.png";
     this.gameMusic = new Audio();
     this.gameMusic.src = "src/assets/the-maze-runner.mp3";
     this.gameMusic.loop = true;
@@ -54,6 +66,7 @@ class Menu {
     this.startGamePosition = { x: 450, y: 655 };
     this.selector = { x: 450, y: 590 };
     this.pauseSelector = { x: 360, y: 285 };
+    this.volumeSelectorPosition = { x: 600, y: 210 };
     this.victorySelector = { x: 360, y: 285 };
     this.gameOverSelector = { x: 360, y: 285 };
     this.titleSpeed = .85;
@@ -66,7 +79,6 @@ class Menu {
     this.resumeGameSelected = true;
     this.restartGameSelected = false;
     this.mainMenuSelected = false;
-    this.volumeSelectorPosition = { x: 600, y: 210 };
     this.canvasHeight = 700;
     this.canvasWidth = 1200;
     this.pressStartTimer = 200;
@@ -162,6 +174,7 @@ class Menu {
 
   updateControls() { // draws control page
     this.drawControlsPage();
+    
   };
 
   updateOptions(muted) { // draws options page
@@ -229,7 +242,12 @@ class Menu {
   };
   
   drawHowToPlayPage() {
-    this.ctx.drawImage(this.options, 0, 0, 401, 152, this.optionsPosition.x, this.optionsPosition.y, 200, 50);
+    this.ctx.drawImage(this.htwNavigate, 0, 0, 1803, 152, 350, 200, 550, 50);
+    this.ctx.drawImage(this.htwHealth, 0, 0, 1220, 152, 350, 240, 400, 50);
+    this.ctx.drawImage(this.htwAvoidWraith, 0, 0, 2413, 152, 350, 280, 650, 50);
+    this.ctx.drawImage(this.htwOpenDoors, 0, 0, 1295, 152, 350, 320, 400, 50);
+    this.ctx.drawImage(this.htwWraith, 0, 0, 2388, 152, 350, 360, 650, 50);
+    this.ctx.drawImage(this.htwGameOver, 0, 0, 1706, 152, 350, 400, 500, 50);
   };
   
   drawControlsPage() {
