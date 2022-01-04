@@ -8,29 +8,9 @@ body {
   // -o-background-size: cover;
   // background-size: cover;
   background-color: rgb(31, 31, 31);
-  // background-color: rgb(255, 255, 255);
-  // .left {
-  //   display: flex;
-  //   flex-direction: column;
-  //   justify-content: center;
-  //   align-items: center;
-  //   width: 18vw;
-  //   min-width: 338px;
-  //   img {
-  //     width: 314px;
-  //     height: 83px;
-  //   }
-  //   label {
-  //     border: 5px solid white;
-  //     font-size: x-large;
-  //     display: flex;
-  //     text-align: center;
-  //     // background-color: rgba(245, 245, 245, 0.589);
-  //     width: 200px;
-  //     margin-left: 45px;
-  //   }
-  // }
   
+  //  fun question what did you do for break
+
   .context {
     display: flex;
     flex-direction: column;
@@ -38,7 +18,6 @@ body {
     justify-content: center;
     min-width: 1200px;
     width: 1200px;
-    // margin: auto;
   
     .canvas-wrapper {
       display: flex;
@@ -62,10 +41,8 @@ body {
         transform: translate(-50%, -50%);
         border: 5px solid white;
         position: absolute;
-        // transform: translate(-50%, -50%);
         border-radius: 10px; 
         min-width: 1200px;
-        // height: 710px
       }
       // #ui {
       //   border: 5px solid white;
@@ -90,14 +67,12 @@ body {
       display: flex;
       flex-direction: row;
       margin-top: 20px;
-
       a {
         padding-left: 10px;
       }
       img {
         height: 100px;
       }
-
       #linkedin {
         background-size: cover;
         border-radius: 3px;
@@ -122,52 +97,4 @@ body {
       }
     }
   }
-  
-  // .right {
-  //   display: flex;
-  //   justify-content: center;
-  //   align-items: center;
-  //   width: 230px;
-  //   min-width: 12vw;
-  //   .item {
-  //     text-align: right;
-  //     // visibility: hidden;
-  //   }
-  //   .character-information {
-  //     text-align: right;
-  //     // visibility: hidden;
-  //   }
-  // }
-
 }
-
-
-// @media only screen and (max-height: 740px) {
-
-//   canvas, #bg , .instruction{
-//     width: 400px;
-//     height: 400px;
-//     position: relative;
-//     display: block;
-//     padding: .4em .4em;
-//     @include canvasborder( 4px, #EAB464, #8D98A7 );
-//   }
-
-//   canvas, .instruction {
-//     margin-top: -433px;
-//     // @include canvasborder( 4px, #EAB464, #8D98A7 );
-//   }
-
-//   .start > p.begin {
-//   color: black;
-//   position: relative;
-//   top: 140px;
-//   left: 130px;
-//   padding: 20px;
-//   background-color: rgb(163, 163, 163);
-//   @include title( 4px,#A7754D, #FED9B7 );
-//   cursor: pointer;
-//   z-index: 3;
-//   }
-
-// }
