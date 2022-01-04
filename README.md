@@ -1,5 +1,6 @@
 # MazeRunner
 https://vernchao91.github.io/Maze_Runner/ <-- live site!>
+
 ## Overview 
 MazeRunner is a one player game and the goal is to navigate through the maze and advance through the levels.
 
