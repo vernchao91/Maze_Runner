@@ -316,7 +316,6 @@ class Game {
       cancelAnimationFrame(rafID);
     };
   };
-
 };
 
 export default Game
