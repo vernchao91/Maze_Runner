@@ -1,5 +1,5 @@
 # MazeRunner
-https://vernchao91.github.io/Maze_Runner/ <-- live site!>
+<a href="https://vernchao91.github.io/Maze_Runner/" >live link! <-- </a>
 
 ## Overview 
 MazeRunner is a one player game and the goal is to navigate through the maze and advance through the levels.
@@ -35,6 +35,59 @@ During the game, users will be able to:
 * **Tuesday:** Finish up Monday's render and maze board for the game if needed. Now code out the physics of the player and the key/door before exiting the maze. If conceivable, code out an enemy/entity on the board that chases the player.
 * **Wednesday:** Apply CSS and design to the layout from the wireframe and any bugs still occuring.
 * **Thursday:** Deploy to Github Page.
+
+
+### Highlighted Features
+- This code block allows animation for a sprite sheet. This function is invoked recursively and resets the sprite if this.frameX === 5. this.frameY checks for last input to change direction of the sprite
+```
+animateFrame() {
+    if (this.moving && this.lastInput === "down") {
+      this.frameY = 0;
+      if (this.animationCount < 5) {
+        this.animationCount++;
+      } else if (this.frameX < 5) {
+        this.frameX++;
+        this.animationCount = 0;
+      } else {
+        this.frameX = 0;
+        this.animationCount = 0;
+      }
+    } else if (this.moving && this.lastInput === "right") {
+        this.frameY = 1;
+      if (this.animationCount < 5) {
+        this.animationCount++;
+      } else if (this.frameX < 5) {
+        this.frameX++;
+        this.animationCount = 0;
+      } else {
+        this.frameX = 0;
+        this.animationCount = 0;
+      }
+    } else if (this.moving && this.lastInput === "left") {
+      this.frameY = 2;
+      if (this.animationCount < 5) {
+       this.animationCount++;
+     } else if (this.frameX < 5) {
+       this.frameX++;
+       this.animationCount = 0;
+     } else {
+      this.frameX = 0;
+      this.animationCount = 0
+     }
+    } else if (this.moving && this.lastInput === "up") {
+        this.frameY = 3;
+      if (this.animationCount < 5) {
+        this.animationCount++;
+      } else if (this.frameX < 5) {
+        this.frameX++;
+        this.animationCount = 0;
+      } else {
+        this.frameX = 0;
+        this.animationCount = 0;
+      }
+    } 
+  }
+```
 
 ## Bonus Features
 * Different character selection which have unique items that can be picked up and used
