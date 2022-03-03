@@ -109,7 +109,7 @@ class Game {
         this.togglePause();
       };
     };
-    if (!this.menu.titleAnimation && !this.gameRunning && this.mainMenu && !this.gameOver) { // start screen animation
+    if (!this.menu.titleAnimation && !this.gameRunning && this.mainMenu && !this.gameOver) { // start screen animation 
       this.menu.finishAnimation();
     } else if (!this.menu.titleStartReady && this.mainMenu) { // plays music and goes to main menu
       this.menu.gameMusic.play();
@@ -118,11 +118,11 @@ class Game {
       this.menu.optionsDisplay = false;
       this.menu.controlsDisplay = false;
       this.menu.howToPlayDisplay = true;
-    } else if (this.menu.selector.y === 625 && ((this.mouse.y > 240) || (this.mouse.y < 130))) { // 625 to set howtoplay display to true
+    } else if (this.menu.selector.y === 625 && ((this.mouse.y > 240) || (this.mouse.y < 130))) { // 625 to set controls display to true
       this.menu.howToPlayDisplay = false;
       this.menu.optionsDisplay = false;
       this.menu.controlsDisplay = true;
-    } else if (this.menu.selector.y === 660 && ((this.mouse.y > 240) || (this.mouse.y < 130))) { // 660 to set howtoplay display to true
+    } else if (this.menu.selector.y === 660 && ((this.mouse.y > 240) || (this.mouse.y < 130))) { // 660 to set options display to true
       this.menu.controlsDisplay = false;
       this.menu.howToPlayDisplay = false;
       this.menu.optionsDisplay = true;
@@ -209,7 +209,7 @@ class Game {
   };
 
   maze1EscapeCheck(player) {
-    if (player.x > 1175 && player.y > 590) {
+    if (player.x > 1175 && player.y > 590) { // position check for player exiting maze
       this.maze1Win = true;
       this.pause = false;
       this.mainMenu = false;
@@ -217,7 +217,7 @@ class Game {
     }
   }
 
-  mainMenuCheck(mainMenu, rafID) {
+  mainMenuCheck(mainMenu, rafID) { // cancels maze animate and starts main menu animate
     if (mainMenu) {
       this.gameRunning = false;
       this.pause = false;
@@ -227,7 +227,6 @@ class Game {
   }
   
   animateStartMenu(time) {
-    let rafID
     const timeDelta = time - this.lastTime;
     this.pauseGameOrMusicListener();
     this.ctx.clearRect(0, 0, this.main.width, this.main.height);
@@ -244,7 +243,7 @@ class Game {
     } else if (this.menu.controlsDisplay) {
       this.menu.updateControls();
     }
-    rafID = requestAnimationFrame(this.animateStartMenu.bind(this));
+    let rafID = requestAnimationFrame(this.animateStartMenu.bind(this));
     this.lastTime = time;
     if (this.gameRunning) {
       cancelAnimationFrame(rafID);

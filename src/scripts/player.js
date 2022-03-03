@@ -30,7 +30,6 @@ class Player {
   }
   
   update() {
-    // this.ctx.clearRect(0, 0, this.ctx.width, this.ctx.height);
     this.drawPlayer();
     this.animateFrame();
   }
@@ -42,7 +41,6 @@ class Player {
   keyUp(e) {
     delete this.keys[e.keyCode];
     this.moving = false;
-    // this.keypressDetect = false; // stops teleporting bug
   }
 
   drawPlayer() {

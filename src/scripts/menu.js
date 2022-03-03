@@ -147,7 +147,7 @@ class Menu {
     if (this.volumeSelecting && this.mouse.y > 180 && this.mouse.y < 240) { // makes sure you can only move volume bar within the space in the canvas
       if (this.mouse.x > 559 && this.mouse.x < 761) {
         this.volumeSelectorPosition.x = this.mouse.x;
-      } else if (this.mouse.x < 559) {
+      } else if (this.mouse.x < 560) {
         this.volumeSelectorPosition.x = 560;
       } else if (this.mouse.x > 760) {
         this.volumeSelectorPosition.x = 760;
@@ -177,7 +177,6 @@ class Menu {
 
   updateControls() { // draws control page
     this.drawControlsPage();
-    
   };
 
   updateOptions(muted) { // draws options page
@@ -212,13 +211,13 @@ class Menu {
   };
 
   volumeChecker(paused) { 
-    if ((this.keys[68] || this.keys[39]) && this.volumeSelectorPosition.x < 760 && !paused && this.optionsDisplay) {
+    if ((this.keys[68] || this.keys[39]) && this.volumeSelectorPosition.x < 760 && !paused && this.optionsDisplay) { // volume mainmenu selector
       this.volumeSelectorPosition.x += 1
-    } else if ((this.keys[65] || this.keys[37]) && this.volumeSelectorPosition.x > 560 && !paused && this.optionsDisplay) {
+    } else if ((this.keys[65] || this.keys[37]) && this.volumeSelectorPosition.x > 560 && !paused && this.optionsDisplay) { // volume mainmenu selector
       this.volumeSelectorPosition.x -= 1
-    } else if ((this.keys[68] || this.keys[39]) && this.volumeSelectorPosition.x < 760 && paused && this.pauseSelector.y === 245) {
+    } else if ((this.keys[68] || this.keys[39]) && this.volumeSelectorPosition.x < 760 && paused && this.pauseSelector.y === 245) { // volume pause selector
       this.volumeSelectorPosition.x += 1
-    } else if ((this.keys[65] || this.keys[37]) && this.volumeSelectorPosition.x > 560 && paused && this.pauseSelector.y === 245) {
+    } else if ((this.keys[65] || this.keys[37]) && this.volumeSelectorPosition.x > 560 && paused && this.pauseSelector.y === 245) { // volume pause selector
       this.volumeSelectorPosition.x -= 1
     };
     let audioLevel = (760 - this.volumeSelectorPosition.x); // value 0 - 200

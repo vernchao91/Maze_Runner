@@ -27,9 +27,6 @@ class Maze1 {
     this.objects = [];
     this.isColliding = false;
     // ctx.drawImage(image, sourcex, sy, sWidth, sHeight, destinationx, dy, dWidth, dHeight)
-    // this.ctx.drawImage(this.wallImg, 725, 0, 50, 75, x, y, 55, 80) // top/bottom wall
-    // this.ctx.drawImage(this.wallImg, 775, 0, 50, 75, x, y, 55, 80) // side wall
-    // this.updateItems();
   };
 
   eventListeners() {
@@ -45,8 +42,6 @@ class Maze1 {
     this.drawBorder();
     this.drawWireFrame();
     this.updateItems();
-    // this.player.update();
-    // this.wraith.update();
     this.addFogOfWar(this.fogctx);
     this.activate(this.player, this.wraith);
     this.wraithChase();
@@ -56,7 +51,6 @@ class Maze1 {
     this.redDoorDistanceCheck(this.player, this.redDoor);
     this.heartDistanceCheck(this.player, this.heart);
     this.torchDistanceCheck(this.player, this.torch);
-    // this.colliding(this.player, this.objects, timeDelta);
   }
 
   updateItems() { 
@@ -187,54 +181,6 @@ class Maze1 {
     };
   };
 
-  // colliding(player, objects, timeDelta) { //util function for collision correction and movement
-  //   let playerRight = player.x + player.w;
-  //   let playerBottom = player.y + player.h;
-  //   let playerLeft = player.y;
-  //   let playerTop = player.x;
-  //   // rectOneRight < rectTwoLeft ||
-  //   //  rectOneLeft > rectTwoRight ||
-  //   //   rectOneBottom < rectTwoTop ||
-  //   //    rectOneTop > rectTwoBottom)
-  //   for (let object of objects) {
-  //     // if ((player.x + player.w < object.y ||
-  //     //   player.y > object.x + object.w ||
-  //     //   player.y + player.h < object.y ||
-  //     //   player.x > object.y + object.h )
-  //     // ) {
-  //       if (player.keys[83] && player.y < 655) {
-  //         player.moving = true;
-  //         delete player.keys[65];
-  //         delete player.keys[68];
-  //         delete player.keys[87];
-  //         player.y += (player.speed / objects.length);
-  //         player.lastInput = "down";
-  //       } else if (player.keys[87] && player.y > 40) {
-  //         player.moving = true;
-  //         delete player.keys[65];
-  //         delete player.keys[68];
-  //         delete player.keys[83];
-  //         player.y -= (player.speed / objects.length);
-  //         player.lastInput = "up";
-  //       } else if (player.keys[65] && player.x > 41) {
-  //         player.moving = true;
-  //         delete player.keys[87];
-  //         delete player.keys[68];
-  //         delete player.keys[83];
-  //         player.x -= (player.speed / objects.length);
-  //         player.lastInput = "left";
-  //       } else if (player.keys[68] && (player.x + player.w < object.x)) {
-  //         player.moving = true;
-  //         delete player.keys[65];
-  //         delete player.keys[87];
-  //         delete player.keys[83];
-  //         player.x += (player.speed / objects.length);
-  //         player.lastInput = "right";
-  //       // }
-  //     }
-  //   }
-  // }
-
   blueSwitchDistanceCheck(player, blueSwitch) {
     const distance = this.getDistance(player.x, player.y, blueSwitch.x, blueSwitch.y);
     if (distance < 25 && this.items.keys[32]) {
@@ -352,20 +298,11 @@ class Maze1 {
   };
   
   drawWireFrame() {
-    this.ctx.beginPath();
-    //x, y, width, height
+    // drawing wireframes, not needed
     // this.ctx.rect(0, 40, 1150, 0); // top wall border
     // this.ctx.rect(0, 110, 40, 550); // left wall border
     // this.ctx.rect(1155, 40, 40, 550); // right wall border
     // this.ctx.rect(40, 660, 1155, 0); // bottom wall border
-    let blueDoorCoordinates;
-    if ( this.items.blueDoor === "closed" ) {
-      // this.ctx.rect(52, 228, 248, 15); // blue door wall closed
-      blueDoorCoordinates = { x: 52, y: 223, w: 248, h: 15};
-    } else {
-      // this.ctx.rect(102, 228, 198, 15); // blue door wall opened
-      blueDoorCoordinates = { x: 102, y: 223, w: 198, h: 15};
-    };
     // this.ctx.rect(302, 40, 15, 350); // first room right wall
     // this.ctx.rect(50, 405, 155, 10); // second room second wall bottom
     // this.ctx.rect(50, 585, 195, 10); // third room third wall bottom
@@ -378,6 +315,15 @@ class Maze1 {
     // this.ctx.rect(690, 255, 380, 10); // fifth room bottom wall
     // this.ctx.rect(1055, 40, 10, 300); // fifth room top right wall
     // this.ctx.rect(905, 450, 10, 210); // last room left wall
+    this.ctx.beginPath();
+    let blueDoorCoordinates;
+    if ( this.items.blueDoor === "closed" ) {
+      // this.ctx.rect(52, 228, 248, 15); // blue door wall closed
+      blueDoorCoordinates = { x: 52, y: 223, w: 248, h: 15};
+    } else {
+      // this.ctx.rect(102, 228, 198, 15); // blue door wall opened
+      blueDoorCoordinates = { x: 102, y: 223, w: 198, h: 15};
+    };
     let redDoorCoordinates;
     if ( this.items.redDoor === "closed" ) {
       // this.ctx.rect(905, 450, 253, 10);
@@ -387,7 +333,6 @@ class Maze1 {
       redDoorCoordinates = { x: 905, y: 440, w: 185, h: 10 }
     };
     this.objects = [
-      // { x: , y: , w: , h:  },
       // { x:0, y:40, w: 1150, h: 1 }, // top wall border // this object is buggy, used player.y > 40 instead in move function
       { x: 0, y: 110, w: 40, h: 550 }, // left wall border
       { x: 1155, y: 40, w: 40, h: 550 }, // right wall border
@@ -456,9 +401,6 @@ class Maze1 {
   };
 
   drawBorder() {
-    // this.ctx.drawImage(this.wallImg, 0, 0, 950, 70)
-    // this.ctx.drawImage(this.wallImg, 100, 100)
-    // this.ctx.drawImage(this.wallImg, 482, 0, 50, 100, 50, 660, 60, 80)
     for (let x = 0; x < 1200; x += 50) {
       this.ctx.drawImage(this.wallImg, 482, 0, 50, 100, x, 660, 60, 80)
     };
@@ -473,22 +415,6 @@ class Maze1 {
       this.ctx.drawImage(this.wallImg, 638, 0, 55, 80, 0, y, 60, 83)
     };
   };
-
-    // move() {
-  //   if (this.player.keys[83]) {
-  //     this.player.y += this.player.speed;
-  //     this.player.lastInput = "down";
-  //   } else if (this.player.keys[87]) {
-  //     this.player.y -= this.player.speed;
-  //     this.player.lastInput = "up";
-  //   } else if (this.player.keys[65]) {
-  //     this.player.x -= this.player.speed;
-  //     this.player.lastInput = "left";
-  //   } else if (this.player.keys[68]) {
-  //     this.player.x += this.player.speed;
-  //     this.player.lastInput = "right";
-  //   }
-  // }
   
 };
 
