@@ -158,7 +158,7 @@ class Game {
     this.animateStartMenu();
   };
 
-  restartMaze1() { // restartMaze1 maze1
+  restartMaze1() {
     this.maze1 = new Maze1(this.ctx, this.fogctx);
     this.pause = false;
   };
