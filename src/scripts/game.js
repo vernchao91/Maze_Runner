@@ -163,7 +163,7 @@ class Game {
     this.pause = false;
   };
 
-  pauseGameOrMusicListener() { // toggles mute or pause
+  pauseGameOrMusicListener() {
     if (this.keys[80] && !this.gameOver && this.gameRunning) {
       this.togglePause();
       delete this.keys[80];
